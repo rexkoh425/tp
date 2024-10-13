@@ -4,7 +4,6 @@ import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
 import parser.Parser;
-import java.util.Scanner;
 
 public class Duke {
     /**
