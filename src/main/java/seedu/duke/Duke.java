@@ -39,8 +39,7 @@ public class Duke {
 
     public static void getName(){
         System.out.println("What is your name?");
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        System.out.println("Hello " + Parser.scanner.nextLine());
     }
 
     public static void printGreetings(){

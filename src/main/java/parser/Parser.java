@@ -16,7 +16,8 @@ public class Parser {
     public static String getAction(){
         System.out.println("What would you like to do?");
         System.out.println("_".repeat(60));
-        String userInput = scanner.nextLine().trim();
+        String userInput = scanner.nextLine();
+        userInput = userInput.trim();
         String[] words = userInput.split(" ");
         Parser.userInput = userInput;
         return words[0];
