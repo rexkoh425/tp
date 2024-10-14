@@ -1,9 +1,9 @@
-package seedu;
+package car;
 
 import java.util.ArrayList;
 
 public class CarList {
-
+    
     public static ArrayList<Car> carsList = new ArrayList<>();
 
     public static ArrayList<Car> getCarsList() {
