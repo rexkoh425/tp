@@ -1,4 +1,4 @@
-package seedu;
+package car;
 
 public class Car {
 
