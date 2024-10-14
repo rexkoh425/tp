@@ -1,11 +1,11 @@
-package seedu.duke;
+package seedu.clirental;
 
 import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
 import parser.Parser;
 
-public class Duke {
+public class CliRental {
     /**
      * Main entry-point for the java.duke.Duke application.
      */

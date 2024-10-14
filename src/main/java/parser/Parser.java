@@ -8,7 +8,7 @@ public class Parser {
 
     public static Scanner scanner = new Scanner(System.in);
     public static String userInput;
-    private static final String addCustomerCommand = "add-user";
+    private static final String ADD_CUSTOMER_COMMAND = "add-user";
 
     /**
      * Gets the first word of user input.
@@ -30,7 +30,7 @@ public class Parser {
      * @throws NumberFormatException if the age and contact content are not integer string.
      */
     public static Customer parseIntoCustomer() throws CustomerException , NumberFormatException {
-        userInput = userInput.substring(addCustomerCommand.length()).trim();
+        userInput = userInput.substring(ADD_CUSTOMER_COMMAND.length()).trim();
         String[] parameters = { "/u" , "/a" , "/c"};
         String[] parameterContents;
         if(isValidSequence(parameters)){
