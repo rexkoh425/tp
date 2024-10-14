@@ -1,42 +1,38 @@
-# User Guide
+# CliRental User Guide
 
 ## Introduction
 
-{Give a product intro}
+Clirental is a CLI-based application which allows car rental companies 
+to track their customers , cars and rental transactions.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+### Adding a user to the database: `add-user`
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Adds a customer to the list of customers tracked by the car rental application
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* `USERNAME` : `STRING`.
+* `AGE` : `INT`
+* `CONTACT_NUMBER` : `INT`
+* `/u` , `/a` , `/c` must be in sequence.
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`add-user /u John /a 18 /c 95382572`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: Is there any file saving system in place currently? 
 
-**A**: {your answer here}
+**A**: Unfortunately no , we are currently working on it. Thank you for your patience.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add todo `add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]`
