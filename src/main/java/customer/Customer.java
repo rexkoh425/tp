@@ -9,7 +9,7 @@ public class Customer {
     private int age;
     private int contactNumber;
 
-    public Customer(String username , int age , int contactNumber){
+    public Customer(String username, int age, int contactNumber){
         this.username = username;
         this.age = age;
         this.contactNumber = contactNumber;
