@@ -1,21 +1,55 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import customer.Customer;
+import customer.CustomerList;
+import exceptions.CustomerException;
+import parser.Parser;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        printGreetings();
+        getName();
+        String action = Parser.getAction();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        try {
+            switch (action) {
+            case "add-user":
+                Customer customer = Parser.parseIntoCustomer();
+                CustomerList.addCustomer(customer);
+                break;
+            case "extra":
+                System.out.println("extra case for switch");
+                break;
+            default:
+                System.out.println("Invalid Command");
+                break;
+            }
+        }catch(CustomerException exception){
+            exception.printErrorMessage();
+
+        }catch(NumberFormatException exception){
+            System.out.println("Unable to parse customer");
+        }
+
+    }
+
+    public static void getName(){
+        System.out.println("What is your name?");
+        System.out.println("Hello " + Parser.scanner.nextLine());
+    }
+
+    public static void printGreetings(){
+        String logo =
+                """
+                        ____ _ _ ____            _        _
+                        / ___| (_)  _ \\ ___ _ __ | |_ __ _| |
+                        | |   | | | |_) / _ \\ '_ \\| __/ _` | |
+                        | |___| | |  _ <  __/ | | | || (_| | |
+                        \\____|_|_|_| \\_\\___|_| |_|\\__\\__,_|_|
+                        """;
+        System.out.println("Hello from\n" + logo);
     }
 }
