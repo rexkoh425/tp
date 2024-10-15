@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import exceptions.CarException;
+import parser.Parser;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -7,15 +10,30 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        boolean isExit = false;
+
+        while (!isExit) {
+            try {
+                String userInput = getUserInput();
+
+                if (Parser.parse(userInput)) {
+                    isExit = true;
+                };
+
+            } catch (CarException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+
+    public static String getUserInput() {
+        System.out.print("Enter command: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().trim();
+
+        return userInput;
     }
 }
