@@ -5,10 +5,23 @@ import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
 
+import java.util.Scanner;
+
 public class Parser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
+
+    public static Scanner scanner = new Scanner(System.in);
+
+    public static String getUserInput(){
+        System.out.println("What would you like to do?");
+        System.out.println("_".repeat(60));
+
+        String userInput = scanner.nextLine().trim();
+
+        return userInput;
+    }
 
     public static boolean parse(String userInput) {
         String[] words = userInput.split(" ");

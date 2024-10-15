@@ -18,7 +18,7 @@ public class CliRental {
 
         while (!isExit) {
             try {
-                String action = getUserInput();
+                String action = Parser.getUserInput();
 
                 if (Parser.parse(action)) {
                     isExit = true;
@@ -38,8 +38,7 @@ public class CliRental {
 
     public static void getName(){
         System.out.println("What is your name?");
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello " + scanner.nextLine());
+        System.out.println("Hello " + Parser.scanner.nextLine());
     }
 
     public static void printGreetings(){
@@ -52,16 +51,5 @@ public class CliRental {
                         \\____|_|_|_| \\_\\___|_| |_|\\__\\__,_|_|
                         """;
         System.out.println("Hello from\n" + logo);
-    }
-
-    public static String getUserInput(){
-        System.out.println("What would you like to do?");
-        System.out.println("_".repeat(60));
-
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
-        userInput = userInput.trim();
-
-        return userInput;
     }
 }
