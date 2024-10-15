@@ -9,7 +9,7 @@ public class Car {
     public Car(String model, String licensePlateNumber, double price) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
-        this.price = price;
+        this.price = Double.parseDouble(String.format("%.2f", price));
     }
 
     public void setModel(String model) {
