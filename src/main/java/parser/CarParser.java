@@ -1,6 +1,29 @@
 package parser;
 
+import car.Car;
+import exceptions.CarException;
+
 public class CarParser {
+
+    private static final String[] ADD_CAR_PARAMETERS = {"/n", "/c", "/p"};
+    private static final int ADD_CAR_PARAMETERS_OFFSET = 2;
+
+    public static Car parseIntoCar(String userInput) throws CarException {
+        userInput = userInput.trim();
+
+        if (!isValidFormat(userInput)) {
+            throw CarException.addCarException();
+        }
+
+        String carModel = extractCarModel(userInput).trim();
+        String carLicensePlateNumber = extractCarLicensePlateNumber(userInput).trim();
+        String carPriceString = extractCarPrice(userInput).trim();
+        double carPrice = Double.parseDouble(carPriceString);
+        //double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
+
+        return new Car(carModel, carLicensePlateNumber, carPrice);
+    }
+
     private static String extractCarModel(String userInput) {
         int startIndexOfCarModel = userInput.indexOf(ADD_CAR_PARAMETERS[0]) + ADD_CAR_PARAMETERS_OFFSET;
         int endIndexOfCarModel = userInput.indexOf(ADD_CAR_PARAMETERS[1]);
