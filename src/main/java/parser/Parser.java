@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class Parser {
 
+    public static Scanner scanner = new Scanner(System.in);
+
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
-
-    public static Scanner scanner = new Scanner(System.in);
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");

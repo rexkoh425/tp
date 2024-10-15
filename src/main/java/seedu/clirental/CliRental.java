@@ -4,8 +4,6 @@ import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.Parser;
 
-import java.util.Scanner;
-
 public class CliRental {
     /**
      * Main entry-point for the java.clirental.CliRental application.
