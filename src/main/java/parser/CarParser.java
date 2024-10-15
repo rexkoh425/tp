@@ -27,6 +27,17 @@ public class CarParser {
         return carLicensePlateNumber;
     }
 
+    private static String extractCarPrice(String userInput) {
+        int startIndexOfPrice = userInput.indexOf(ADD_CAR_PARAMETERS[2]) + ADD_CAR_PARAMETERS_OFFSET;
+
+        String carPrice = userInput.substring(startIndexOfPrice);
+        if (carPrice.trim().isEmpty()) {
+            throw new CarException("Car price missing!!");
+        }
+
+        return carPrice;
+    }
+
     public static boolean isValidFormat(String userInput) {
         for (String param : ADD_CAR_PARAMETERS) {
             if (!userInput.contains(param)) {
