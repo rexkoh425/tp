@@ -1,12 +1,9 @@
 package seedu.clirental;
 
-import customer.Customer;
-import customer.CustomerList;
 import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.Parser;
 
-import java.awt.desktop.SystemEventListener;
 import java.util.Scanner;
 
 public class CliRental {
