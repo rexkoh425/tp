@@ -73,6 +73,7 @@ public class TransactionList {
 
         } catch (Exception e) {
             System.out.println("Error adding transaction: " + e.getMessage());
+        }
           
     public static void printAllTransactions() {
         int index = 1;
