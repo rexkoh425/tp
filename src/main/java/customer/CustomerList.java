@@ -12,10 +12,19 @@ public class CustomerList {
         System.out.println(customer.toString());
     }
 
+    public static boolean removeCustomer(String Username){
+        for(Customer customer : customers){
+            if(customer.getUsername().equals(Username)){
+                customers.remove(customer);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<Customer> getCustomers() {
         return customers;
     }
-
 
     public static void printCustomers() {
         System.out.println("_".repeat(60));
@@ -26,6 +35,5 @@ public class CustomerList {
             System.out.println("_".repeat(60));
         }
     }
-
 }
 
