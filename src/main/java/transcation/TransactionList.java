@@ -9,9 +9,7 @@ public class TransactionList {
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");
-        if (
-                (words.length < 2) || (!words[1].equals("/t"))
-        ) {
+        if ( (words.length < 2) || (!words[1].equals("/t")) ) {
             throw new IllegalStateException("Unable to add customer. Please follow : " + REMOVE_TRANSACTION_FORMAT);
         }
         if(!removeTransactionById(words[3])) {
