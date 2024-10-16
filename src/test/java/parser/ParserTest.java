@@ -2,6 +2,7 @@ package parser;
 
 import car.CarList;
 import customer.CustomerList;
+import exceptions.CliRentalException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void parse_validUserInput_commandActionExecuted() {
+    public void parse_validUserInput_commandActionExecuted() throws CliRentalException {
         String userInput = "add-user /u user1234 /a 18 /c 92750174";
         Parser.parse(userInput);
 
