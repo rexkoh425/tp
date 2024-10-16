@@ -11,7 +11,6 @@ public class ParserTest {
     @Test
     public void parse_validUserInput_commandActionExecuted() {
         String userInput = "add-user /u user1234 /a 18 /c 92750174";
-
         Parser.parse(userInput);
 
         assertEquals(1, CustomerList.getCustomers().size());
@@ -19,7 +18,6 @@ public class ParserTest {
         assertEquals(false, Parser.parse(userInput));
 
         String userInput1 = "add-car /n Honda Civic /c SGE1234T /p 123";
-
         Parser.parse(userInput1);
 
         assertEquals(1, CarList.getCarsList().size());
@@ -28,6 +26,7 @@ public class ParserTest {
 
 
         String userInput2 = "exit";
+        Parser.parse(userInput2);
         assertEquals(true, Parser.parse(userInput2));
     }
 }
