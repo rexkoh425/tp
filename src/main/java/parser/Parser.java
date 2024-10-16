@@ -4,6 +4,7 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
+import transcation.TransactionList;
 
 import java.util.Scanner;
 
@@ -42,7 +43,7 @@ public class Parser {
             CustomerList.printCustomers();
             return false;
         case REMOVE_TRANSACTION_COMMAND:
-            //todo
+            TransactionList.removeTransaction(userInput);
             return false;
         case "exit":
             return true;
