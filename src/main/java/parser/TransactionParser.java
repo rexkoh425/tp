@@ -25,7 +25,8 @@ public class TransactionParser {
         LocalDate startDate = LocalDate.parse(parameterContents[3]);
         String transactionId = Transaction.getTransactionId();
 
-        return new Transaction(carLicensePlate, borrowerName, String.valueOf(duration), startDate.toString(), transactionId);
+        return new Transaction(carLicensePlate, borrowerName, String.valueOf(duration), 
+                startDate.toString(), transactionId);
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {
