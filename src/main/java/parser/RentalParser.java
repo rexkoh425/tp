@@ -13,6 +13,11 @@ public class RentalParser {
         int duration = 0;
         LocalDate startDate = null;
 
+        if (userInput.trim().isEmpty()) {
+            throw new IllegalArgumentException("Please provide a command.");
+        }
+
+
         try {
             for (int i = 1; i < words.length; i++) {
                 switch (words[i]) {
