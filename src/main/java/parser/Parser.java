@@ -33,35 +33,35 @@ public class Parser {
         String command = words[0].toLowerCase();
 
         switch (command) {
-            case HELP_COMMAND:
-                HelpParser.parseHelpCommand();
-                return false;
-            case ADD_CUSTOMER_COMMAND:
-                Customer customer = CustomerParser.parseIntoCustomer(userInput);
-                CustomerList.addCustomer(customer);
-                return false;
-            case ADD_CAR_COMMAND:
-                Car car = CarParser.parseIntoCar(userInput);
-                CarList.addCar(car);
-                return false;
-            case REMOVE_CAR_COMMAND:
-                try {
-                    String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
-                    CarList.removeCar(carLicensePlateNumber);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                return false;
-            case LIST_USERS_COMMAND:
-                CustomerList.printCustomers();
-                return false;
-            case REMOVE_TRANSACTION_COMMAND:
-                TransactionList.removeTransaction(userInput);
-                return false;
-            case "exit":
-                return true;
-            default:
-                throw CliRentalException.unknownCommand();
+        case HELP_COMMAND:
+            HelpParser.parseHelpCommand();
+            return false;
+        case ADD_CUSTOMER_COMMAND:
+            Customer customer = CustomerParser.parseIntoCustomer(userInput);
+            CustomerList.addCustomer(customer);
+            return false;
+        case ADD_CAR_COMMAND:
+            Car car = CarParser.parseIntoCar(userInput);
+            CarList.addCar(car);
+            return false;
+        case REMOVE_CAR_COMMAND:
+            try {
+                String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
+                CarList.removeCar(carLicensePlateNumber);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+            return false;
+        case LIST_USERS_COMMAND:
+            CustomerList.printCustomers();
+            return false;
+        case REMOVE_TRANSACTION_COMMAND:
+            TransactionList.removeTransaction(userInput);
+            return false;
+        case "exit":
+            return true;
+        default:
+            throw CliRentalException.unknownCommand();
+        }
     }
 }
