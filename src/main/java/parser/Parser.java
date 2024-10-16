@@ -20,7 +20,10 @@ public class Parser {
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String ADD_TRANSACTION_COMMAND = "add-tx";
+    private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
+    private static final String LIST_ALL_TRANSACTIONS = "list-tx";
+    private static final String EXIT_COMMAND = "exit";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -46,6 +49,9 @@ public class Parser {
         case ADD_CAR_COMMAND:
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
+            return false;
+        case LIST_CARS_COMMAND:
+            CarList.printCarList();
             return false;
         case ADD_TRANSACTION_COMMAND:
             try {
@@ -81,7 +87,10 @@ public class Parser {
         case REMOVE_TRANSACTION_COMMAND:
             TransactionList.removeTransaction(userInput);
             return false;
-        case "exit":
+        case LIST_ALL_TRANSACTIONS:
+            TransactionList.printAllTransactions();
+            return false;
+        case EXIT_COMMAND:
             return true;
         default:
             throw CliRentalException.unknownCommand();
