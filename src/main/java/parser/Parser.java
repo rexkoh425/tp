@@ -52,10 +52,6 @@ public class Parser {
                     System.out.println(e.getMessage());
                 }
                 return false;
-            case ADD_CAR_COMMAND:
-                Car car = CarParser.parseIntoCar(userInput);
-                CarList.addCar(car);
-                return false;
             case LIST_USERS_COMMAND:
                 CustomerList.printCustomers();
                 return false;
