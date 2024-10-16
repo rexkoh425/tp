@@ -4,17 +4,22 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
-import rental.RentalTransaction;
+import transaction.Transaction;
+import exceptions.CliRentalException;
+import transaction.TransactionList;
 
 import java.util.Scanner;
 
 public class Parser {
 
     public static Scanner scanner = new Scanner(System.in);
-
+    private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
-    private static final String ADD_RENTAL_COMMAND = "add-tx";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
+    private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -25,11 +30,14 @@ public class Parser {
         return userInput;
     }
 
-    public static boolean parse(String userInput) {
+    public static boolean parse(String userInput) throws CliRentalException {
         String[] words = userInput.split(" ");
         String command = words[0].toLowerCase();
 
         switch (command) {
+        case HELP_COMMAND:
+            HelpParser.parseHelpCommand();
+            return false;
         case ADD_CUSTOMER_COMMAND:
             Customer customer = CustomerParser.parseIntoCustomer(userInput);
             CustomerList.addCustomer(customer);
@@ -38,19 +46,32 @@ public class Parser {
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
             return false;
-        case ADD_RENTAL_COMMAND:
+        case ADD_TRANSACTION_COMMAND:
             try {
-                RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction);
+                Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
+                System.out.println("Rental transaction added: " + transaction.toString());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
             return false;
+        case REMOVE_CAR_COMMAND:
+            try {
+                String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
+                CarList.removeCar(carLicensePlateNumber);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return false;
+        case LIST_USERS_COMMAND:
+            CustomerList.printCustomers();
+            return false;
+        case REMOVE_TRANSACTION_COMMAND:
+            TransactionList.removeTransaction(userInput);
+            return false;
         case "exit":
             return true;
         default:
-            System.out.println("Invalid command");
-            return false;
+            throw CliRentalException.unknownCommand();
         }
     }
 }
