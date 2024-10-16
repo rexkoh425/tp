@@ -15,4 +15,5 @@ public class CustomerListTest {
         assertEquals(customer1, CustomerList.getCustomers().get(0));
         assertEquals(customer2, CustomerList.getCustomers().get(1));
     }
+
 }
