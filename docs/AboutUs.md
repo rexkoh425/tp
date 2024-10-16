@@ -3,8 +3,7 @@
 
 Display | Name  |            Github Profile            | Portfolio 
 --------|:-----:|:------------------------------------:|:---------:
-![](./team/Khanh.png) | Khanh | [Github](https://github.com/tkhahns) | [Portfolio](docs/team/johndoe.md)
-
+![](/docs/team/Khanh.png) | Khanh | [Github](https://github.com/tkhahns) | [Portfolio](docs/team/johndoe.md)
 
 Display |   Name   |             Github Profile             | Portfolio 
 --------|:--------:|:--------------------------------------:|:---------:

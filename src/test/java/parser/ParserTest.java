@@ -8,9 +8,9 @@ public class ParserTest {
 
     @Test
     void parseParameterContents() {
-        Parser.userInput = "add-user /u test /a 18 /c 92750174";
+        String userInput = "add-user /u test /a 18 /c 92750174";
         String[] parameters = { "/u" , "/a" , "/c"};
-        String[] contents = Parser.parseParameterContents(parameters);
+        String[] contents = CustomerParser.parseParameterContents(parameters, userInput);
         assert contents[0].equals("test");
         assert contents[1].equals("18");
         assert contents[2].equals("92750174");
@@ -18,8 +18,8 @@ public class ParserTest {
 
     @Test
     void parseIntoCustomer() {
-        Parser.userInput = "add-user /u test /a 18 /c 92750174";
-        Customer customer = Parser.parseIntoCustomer();
+        String userInput = "add-user /u test /a 18 /c 92750174";
+        Customer customer = CustomerParser.parseIntoCustomer(userInput);
         assertEquals("test" , customer.getUsername());
         assertEquals(18 , customer.getAge());
         assertEquals( 92750174 , customer.getContactNumber());

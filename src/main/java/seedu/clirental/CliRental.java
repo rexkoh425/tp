@@ -1,39 +1,37 @@
 package seedu.clirental;
 
-import customer.Customer;
-import customer.CustomerList;
+import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.Parser;
 
 public class CliRental {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.clirental.CliRental application.
      */
     public static void main(String[] args) {
         printGreetings();
         getName();
-        String action = Parser.getAction();
 
-        try {
-            switch (action) {
-            case "add-user":
-                Customer customer = Parser.parseIntoCustomer();
-                CustomerList.addCustomer(customer);
-                break;
-            case "extra":
-                System.out.println("extra case for switch");
-                break;
-            default:
-                System.out.println("Invalid Command");
-                break;
+        boolean isExit = false;
+
+        while (!isExit) {
+            try {
+                String action = Parser.getUserInput();
+
+                if (Parser.parse(action)) {
+                    isExit = true;
+                }
+
+            } catch(CustomerException exception){
+                exception.printErrorMessage();
+            } catch(NumberFormatException exception){
+                System.out.println("Unable to parse customer");
+            } catch (CarException e) {
+                System.out.println(e.getMessage());
             }
-        }catch(CustomerException exception){
-            exception.printErrorMessage();
-
-        }catch(NumberFormatException exception){
-            System.out.println("Unable to parse customer");
         }
 
+        System.out.println("Goodbye!");
     }
 
     public static void getName(){
