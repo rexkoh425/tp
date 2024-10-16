@@ -5,6 +5,7 @@ import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
 import exceptions.CliRentalException;
+import transcation.TransactionList;
 
 import java.util.Scanner;
 
@@ -15,6 +16,8 @@ public class Parser {
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -49,11 +52,24 @@ public class Parser {
                     System.out.println(e.getMessage());
                 }
                 return false;
-
+            case ADD_CUSTOMER_COMMAND:
+                Customer customer = CustomerParser.parseIntoCustomer(userInput);
+                CustomerList.addCustomer(customer);
+                return false;
+            case ADD_CAR_COMMAND:
+                Car car = CarParser.parseIntoCar(userInput);
+                CarList.addCar(car);
+                return false;
+            case LIST_USERS_COMMAND:
+                CustomerList.printCustomers();
+                return false;
+            case REMOVE_TRANSACTION_COMMAND:
+                TransactionList.removeTransaction(userInput);
+                return false;
             case "exit":
                 return true;
             default:
                 throw CliRentalException.unknownCommand();
-        }
+            }
     }
 }
