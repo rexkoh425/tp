@@ -14,4 +14,9 @@ public class CarException extends RuntimeException{
         return new CarException(message);
     }
 
+    public static CarException invalidPrice() {
+        String message = "Unable to add car.. Price cannot be negative!!";
+        return new CarException(message);
+    }
+
 }

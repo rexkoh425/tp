@@ -23,10 +23,10 @@ public class CliRental {
                     isExit = true;
                 }
 
-            } catch(CustomerException exception){
+            } catch (CustomerException exception){
                 exception.printErrorMessage();
-            } catch(NumberFormatException exception){
-                System.out.println("Unable to parse customer");
+            } catch (NumberFormatException exception){
+                System.out.println("Unable to parse input");
             } catch (CarException e) {
                 System.out.println(e.getMessage());
             } catch (CliRentalException e) {
