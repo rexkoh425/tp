@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class TransactionList {
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
-    public static final String ADD_TRANSACTION_FORMAT = "add-tx /l [CAR_LICENSE_PLATE] /b [BORROWER_NAME] /d [DURATION] /c [START_DATE]";
+    public static final String ADD_TRANSACTION_FORMAT = "add-tx /l [CAR_LICENSE_PLATE]" + 
+            "/b [BORROWER_NAME] /d [DURATION] /c [START_DATE]";
     private static int transactionCounter = 1;
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
@@ -64,7 +65,8 @@ public class TransactionList {
             if (carLicensePlate != null && borrowerName != null && duration > 0 && startDate != null) {
                 String transactionId = "TX" + (++transactionCounter);
                 String createdAt = startDate.toString();
-                Transaction transaction = new Transaction(carLicensePlate, borrowerName, String.valueOf(duration), createdAt, transactionId);
+                Transaction transaction = new Transaction(carLicensePlate, 
+                        borrowerName, String.valueOf(duration), createdAt, transactionId);
                 transactionList.add(transaction);
                 System.out.println("Transaction added successfully: " + transaction);
             } else {
