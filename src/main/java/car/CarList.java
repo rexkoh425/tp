@@ -18,6 +18,7 @@ public class CarList {
                 + " | $" + car.getPrice());
     }
 
+
     public static void removeCar(String carLicensePlateNumber) {
         Car carToRemove = null;
 
@@ -35,6 +36,17 @@ public class CarList {
             System.out.println("Car with license plate " + carLicensePlateNumber + " removed from list.");
         } else {
             System.out.println("No car found with license plate " + carLicensePlateNumber);
+
+    /**
+     * Lists all cars in the current array list.
+     */
+    public static void printCarList(){
+        System.out.println("Here are the current cars in the company");
+        for(int i = 0 ; i < carsList.size(); i++){
+            Car car = carsList.get(i);
+            System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" +car.getPrice());
+
         }
     }
 }
