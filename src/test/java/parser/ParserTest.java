@@ -1,6 +1,5 @@
 package parser;
 
-import car.CarList;
 import customer.CustomerList;
 import exceptions.CliRentalException;
 import org.junit.jupiter.api.Test;
