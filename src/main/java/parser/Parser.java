@@ -19,6 +19,7 @@ public class Parser {
     private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
     private static final String LIST_ALL_TRANSACTIONS = "list-tx";
     private static final String EXIT_COMMAND = "exit";
@@ -47,6 +48,9 @@ public class Parser {
         case ADD_CAR_COMMAND:
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
+            return false;
+        case LIST_CARS_COMMAND:
+            CarList.printCarList();
             return false;
         case ADD_TRANSACTION_COMMAND:
             try {
