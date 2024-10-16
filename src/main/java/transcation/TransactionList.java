@@ -21,7 +21,7 @@ public class TransactionList {
 
     public static boolean removeTransactionById(String transactionId) {
         for (Transaction transaction : transactionList) {
-            if (transaction.getTranscationId().equals(transactionId)) {
+            if (transaction.getTransactionId().equals(transactionId)) {
                 transactionList.remove(transaction);
                 return true;
             }
