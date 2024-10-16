@@ -15,7 +15,7 @@ public class Parser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
-    private static final String ADD_RENTAL_COMMAND = "add-tx";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
@@ -41,7 +41,7 @@ public class Parser {
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
             return false;
-        case ADD_RENTAL_COMMAND:
+        case ADD_TRANSACTION_COMMAND:
             try {
                 RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
                 System.out.println("Rental transaction added: " + transaction);
