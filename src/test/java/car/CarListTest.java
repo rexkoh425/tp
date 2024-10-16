@@ -10,8 +10,8 @@ public class CarListTest {
 
     @Test
     public void addCar_validCarObject() {
-        Car car = new Car("ABC", "DEF", 180);
-        Car car1 = new Car("XYZ", "456", 250);
+        Car car = new Car("Toyota Camry", "SLK1222D", 180);
+        Car car1 = new Car("Nissan Qashqai", "SKA8898X", 250);
 
         CarList.addCar(car);
         CarList.addCar(car1);
