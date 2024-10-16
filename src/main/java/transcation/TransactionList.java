@@ -6,6 +6,7 @@ public class TransactionList {
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
 
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
+
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");
@@ -25,5 +26,19 @@ public class TransactionList {
             }
         }
         return false;
+    }
+
+    public static void printAllTransactions() {
+        int index = 1;
+
+        System.out.println("Here are all the transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            System.out.println(index + ") " + transaction.getCarLicensePlate()
+                    + " | " + transaction.getBorrowerName()
+                    + " | " + transaction.getDuration()
+                    + " | " + transaction.getCreatedAt());
+            index++;
+        }
     }
 }
