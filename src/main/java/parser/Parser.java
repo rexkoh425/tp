@@ -39,12 +39,8 @@ public class Parser {
             CarList.addCar(car);
             return false;
         case ADD_RENTAL_COMMAND:
-            try {
-                RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
+            System.out.println("Rental transaction added: " + transaction);
             return false;
         case "exit":
             return true;
