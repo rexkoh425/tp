@@ -19,6 +19,9 @@ public class CarListTest {
         assertEquals(2, CarList.getCarsList().size());
         assertEquals(car, CarList.getCarsList().get(0));
         assertEquals(car1, CarList.getCarsList().get(1));
+
+        CarList.getCarsList().remove(car);
+        CarList.getCarsList().remove(car1);
     }
 
     @Test
