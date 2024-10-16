@@ -28,19 +28,19 @@ public class Parser {
         String command = words[0].toLowerCase();
 
         switch (command) {
-        case ADD_CUSTOMER_COMMAND:
-            Customer customer = CustomerParser.parseIntoCustomer(userInput);
-            CustomerList.addCustomer(customer);
-            return false;
-        case ADD_CAR_COMMAND:
-            Car car = CarParser.parseIntoCar(userInput);
-            CarList.addCar(car);
-            return false;
-        case "exit":
-            return true;
-        default:
-            System.out.println("Invalid command");
-            return false;
+            case ADD_CUSTOMER_COMMAND:
+                Customer customer = CustomerParser.parseIntoCustomer(userInput);
+                CustomerList.addCustomer(customer);
+                return false;
+            case ADD_CAR_COMMAND:
+                Car car = CarParser.parseIntoCar(userInput);
+                CarList.addCar(car);
+                return false;
+            case "exit":
+                return true;
+            default:
+                System.out.println("Invalid command");
+                return false;
         }
     }
 }
