@@ -4,13 +4,14 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
+import exceptions.CliRentalException;
 
 import java.util.Scanner;
 
 public class Parser {
 
     public static Scanner scanner = new Scanner(System.in);
-
+    private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
 
@@ -23,11 +24,14 @@ public class Parser {
         return userInput;
     }
 
-    public static boolean parse(String userInput) {
+    public static boolean parse(String userInput) throws CliRentalException {
         String[] words = userInput.split(" ");
         String command = words[0].toLowerCase();
 
         switch (command) {
+            case HELP_COMMAND:
+                HelpParser.parseHelpCommand();
+                return false;
             case ADD_CUSTOMER_COMMAND:
                 Customer customer = CustomerParser.parseIntoCustomer(userInput);
                 CustomerList.addCustomer(customer);
@@ -39,8 +43,7 @@ public class Parser {
             case "exit":
                 return true;
             default:
-                System.out.println("Invalid command");
-                return false;
+                throw CliRentalException.unknownCommand();
         }
     }
 }

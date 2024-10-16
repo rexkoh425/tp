@@ -1,6 +1,7 @@
 package seedu.clirental;
 
 import exceptions.CarException;
+import exceptions.CliRentalException;
 import exceptions.CustomerException;
 import parser.Parser;
 
@@ -27,6 +28,8 @@ public class CliRental {
             } catch(NumberFormatException exception){
                 System.out.println("Unable to parse customer");
             } catch (CarException e) {
+                System.out.println(e.getMessage());
+            } catch (CliRentalException e) {
                 System.out.println(e.getMessage());
             }
         }
