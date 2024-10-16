@@ -74,6 +74,26 @@ public class CarParser {
             }
         }
 
+
+
         return true;
+    }
+    public static String parseCarLicenseForRemoval(String userInput) throws CarException {
+        userInput = userInput.trim();
+
+        String licensePlateNumber = extractLicensePlateForRemoval(userInput).trim();
+        if (licensePlateNumber.isEmpty()) {
+            throw new CarException("License plate number missing!!");
+        }
+
+        return licensePlateNumber;
+    }
+
+    private static String extractLicensePlateForRemoval(String userInput) {
+        String[] splitInput = userInput.split(" ");
+        if (splitInput.length < 2) {
+            throw new CarException("Invalid format for removing a car. Use: remove-car /i [CAR_ID]");
+        }
+        return splitInput[1];  // Expecting the license plate number to be the second argument
     }
 }
