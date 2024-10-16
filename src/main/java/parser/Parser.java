@@ -5,6 +5,7 @@ import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
 import rental.RentalTransaction;
+import transcation.TransactionList;
 
 import java.util.Scanner;
 
@@ -15,6 +16,8 @@ public class Parser {
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String ADD_RENTAL_COMMAND = "add-tx";
+    private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -45,6 +48,11 @@ public class Parser {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
+        case LIST_USERS_COMMAND:
+            CustomerList.printCustomers();
+            return false;
+        case REMOVE_TRANSACTION_COMMAND:
+            TransactionList.removeTransaction(userInput);
             return false;
         case "exit":
             return true;

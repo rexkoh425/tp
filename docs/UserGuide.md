@@ -27,6 +27,12 @@ Example of usage:
 
 `add-user /u John /a 18 /c 95382572`
 
+### List all cars in the database: `list-cars`
+
+Lists all the car which the company owns.
+
+Format: `list-cars`
+
 ## FAQ
 
 **Q**: Is there any file saving system in place currently? 
