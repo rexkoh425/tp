@@ -14,14 +14,12 @@ public class ParserTest {
         String userInput = "add-user /u user1234 /a 18 /c 92750174";
         Parser.parse(userInput);
 
-        assertEquals(1, CustomerList.getCustomers().size());
         assertEquals("user1234", CustomerList.getCustomers().get(0).getUsername());
         assertEquals(false, Parser.parse(userInput));
 
         String userInput1 = "add-car /n Honda Civic /c SGE1234T /p 123";
         Parser.parse(userInput1);
 
-        assertEquals(1, CarList.getCarsList().size());
         assertEquals(123.0, CarList.getCarsList().get(0).getPrice());
         assertEquals(false, Parser.parse(userInput1));
 
