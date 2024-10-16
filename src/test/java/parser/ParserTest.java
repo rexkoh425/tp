@@ -1,5 +1,6 @@
 package parser;
 
+import car.CarList;
 import customer.CustomerList;
 import exceptions.CliRentalException;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,8 @@ public class ParserTest {
         assertEquals("user1234", CustomerList.getCustomers().get(0).getUsername());
         assertEquals(false, Parser.parse(userInput));
 
-        /*String userInput1 = "add-car /n Honda Civic /c SGE1234T /p 123";
+        String userInput1 = "add-car /n Honda Civic /c SGE1234T /p 123";
+        CarList.getCarsList().clear();
         Parser.parse(userInput1);
 
         assertEquals(1, CarList.getCarsList().size());
@@ -28,6 +30,6 @@ public class ParserTest {
 
         String userInput2 = "exit";
         Parser.parse(userInput2);
-        assertEquals(true, Parser.parse(userInput2));*/
+        assertEquals(true, Parser.parse(userInput2));
     }
 }
