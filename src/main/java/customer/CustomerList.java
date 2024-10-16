@@ -12,8 +12,25 @@ public class CustomerList {
         System.out.println(customer.toString());
     }
 
+    public static boolean removeCustomer(String Username){
+        for(Customer customer : customers){
+            if(customer.getUsername().equals(Username)){
+                customers.remove(customer);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<Customer> getCustomers() {
         return customers;
+    }
+
+    public static void printCustomers() {
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
+            System.out.println("____________________________________________________________");
+        }
     }
 }
 
