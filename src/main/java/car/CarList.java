@@ -21,16 +21,12 @@ public class CarList {
     /**
      * Lists all cars in the current array list.
      */
-    public static void listCars(){
+    public static void printCarList(){
         System.out.println("Here are the current cars in the company");
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
-            System.out.print( (i + 1) + ") ");
-            System.out.print(car.getModel());
-            System.out.print(" | ");
-            System.out.print(car.getLicensePlateNumber());
-            System.out.print(" | $");
-            System.out.println(car.getPrice());
+            System.out.print( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" +car.getPrice());
         }
     }
 }

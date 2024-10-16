@@ -38,7 +38,7 @@ public class Parser {
             CarList.addCar(car);
             return false;
         case LIST_CAR_COMMAND:
-            CarList.listCars();
+            CarList.printCarList();
             return false;
         case "exit":
             return true;
