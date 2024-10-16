@@ -15,10 +15,11 @@ public class Parser {
     public static Scanner scanner = new Scanner(System.in);
     private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
-    private static final String ADD_CAR_COMMAND = "add-car";
-    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
-    private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String REMOVE_CUSTOMER_COMMAND = "remove-user";
     private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String ADD_CAR_COMMAND = "add-car";
+    private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
     public static String getUserInput(){
@@ -60,6 +61,18 @@ public class Parser {
                 CarList.removeCar(carLicensePlateNumber);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+            }
+            return false;
+        case REMOVE_CUSTOMER_COMMAND:
+            try {
+                String username = CustomerParser.parseUsernameForRemoval(userInput);
+                if (CustomerList.removeCustomer(username)) {
+                    System.out.println("Customer " + username + " has been removed.");
+                } else {
+                    System.out.println("Customer " + username + " not found.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
             return false;
         case LIST_USERS_COMMAND:
