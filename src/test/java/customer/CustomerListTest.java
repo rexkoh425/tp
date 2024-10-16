@@ -14,6 +14,9 @@ public class CustomerListTest {
         assertEquals(2 , CustomerList.getCustomers().size());
         assertEquals(customer1, CustomerList.getCustomers().get(0));
         assertEquals(customer2, CustomerList.getCustomers().get(1));
+
+        CustomerList.getCustomers().remove(customer1);
+        CustomerList.getCustomers().remove(customer2);
     }
 
 }

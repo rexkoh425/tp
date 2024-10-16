@@ -12,9 +12,9 @@ public class CustomerList {
         System.out.println(customer.toString());
     }
 
-    public static boolean removeCustomer(String Username){
+    public static boolean removeCustomer(String username){
         for(Customer customer : customers){
-            if(customer.getUsername().equals(Username)){
+            if(customer.getUsername().equals(username)){
                 customers.remove(customer);
                 return true;
             }

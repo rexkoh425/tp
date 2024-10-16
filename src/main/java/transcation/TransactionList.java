@@ -8,6 +8,7 @@ public class TransactionList {
     public static final String ADD_TRANSACTION_FORMAT = "add-tx /l [CAR_LICENSE_PLATE] /b [BORROWER_NAME] /d [DURATION] /c [START_DATE]";
     private static int transactionCounter = 1;
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
+
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");
@@ -72,6 +73,18 @@ public class TransactionList {
 
         } catch (Exception e) {
             System.out.println("Error adding transaction: " + e.getMessage());
+          
+    public static void printAllTransactions() {
+        int index = 1;
+
+        System.out.println("Here are all the transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            System.out.println(index + ") " + transaction.getCarLicensePlate()
+                    + " | " + transaction.getBorrowerName()
+                    + " | " + transaction.getDuration()
+                    + " | " + transaction.getCreatedAt());
+            index++;
         }
     }
 }
