@@ -1,7 +1,7 @@
-package transcation;
+package transaction;
 
 public class Transaction {
-    private final String transactionId;
+    public static String transactionId;
     private String carLicensePlate;
     private String borrowerName;
     private String duration;
@@ -15,8 +15,18 @@ public class Transaction {
         this.createdAt = createdAt;
     }
 
-    public String getTransactionId() {
+    public static String getTransactionId() {
         return transactionId;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "carLicensePlate='" + carLicensePlate + '\'' +
+                ", borrowerName='" + borrowerName + '\'' +
+                ", duration='" + duration + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
     }
 
     public String getCreatedAt() {

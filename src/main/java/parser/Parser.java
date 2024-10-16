@@ -4,9 +4,9 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
-import rental.RentalTransaction;
+import transaction.Transaction;
 import exceptions.CliRentalException;
-import transcation.TransactionList;
+import transaction.TransactionList;
 
 import java.util.Scanner;
 
@@ -48,8 +48,8 @@ public class Parser {
             return false;
         case ADD_TRANSACTION_COMMAND:
             try {
-                RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction);
+                Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
+                System.out.println("Rental transaction added: " + transaction.toString());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
