@@ -14,6 +14,7 @@ public class Parser {
     private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
+    private static final String REMOVE_CAR_COMMAND = "remove-car";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -40,6 +41,15 @@ public class Parser {
                 Car car = CarParser.parseIntoCar(userInput);
                 CarList.addCar(car);
                 return false;
+            case REMOVE_CAR_COMMAND:
+                try {
+                    String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
+                    CarList.removeCar(carLicensePlateNumber);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                return false;
+
             case "exit":
                 return true;
             default:
