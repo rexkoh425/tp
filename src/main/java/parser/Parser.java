@@ -20,6 +20,8 @@ public class Parser {
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
+    private static final String LIST_ALL_TRANSACTIONS = "list-tx";
+    private static final String EXIT_COMMAND = "exit";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -68,7 +70,10 @@ public class Parser {
         case REMOVE_TRANSACTION_COMMAND:
             TransactionList.removeTransaction(userInput);
             return false;
-        case "exit":
+        case LIST_ALL_TRANSACTIONS:
+            TransactionList.printAllTransactions();
+            return false;
+        case EXIT_COMMAND:
             return true;
         default:
             throw CliRentalException.unknownCommand();
