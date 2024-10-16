@@ -1,4 +1,4 @@
-package transaction;
+package transcation;
 
 public class Transaction {
     public static String transactionId;

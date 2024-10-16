@@ -1,7 +1,7 @@
 package parser;
 
-import transaction.Transaction;
-import transaction.TransactionList;
+import transcation.Transaction;
+
 import java.time.LocalDate;
 
 public class TransactionParser {
