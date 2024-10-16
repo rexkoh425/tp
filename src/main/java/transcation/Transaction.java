@@ -1,7 +1,7 @@
 package transcation;
 
 public class Transaction {
-    private String transactionId;
+    private final String transactionId;
     private String carLicensePlate;
     private String borrowerName;
     private String duration;

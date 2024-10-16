@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class TransactionList {
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
 
-    private static ArrayList<Transaction> transactionList = new ArrayList<>();
+    private static final ArrayList<Transaction> transactionList = new ArrayList<>();
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");
