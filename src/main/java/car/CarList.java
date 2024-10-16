@@ -25,7 +25,7 @@ public class CarList {
         System.out.println("Here are the current cars in the company");
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
-            System.out.print(i + ") ");
+            System.out.print( (i + 1) + ") ");
             System.out.print(car.getModel());
             System.out.print(" | ");
             System.out.print(car.getLicensePlateNumber());
