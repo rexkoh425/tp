@@ -13,6 +13,8 @@ public class Parser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
+    private static final String List_USERS_COMMAND = "list-users";
+    private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -35,6 +37,12 @@ public class Parser {
         case ADD_CAR_COMMAND:
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
+            return false;
+        case List_USERS_COMMAND:
+            CustomerList.printCustomers();
+            return false;
+        case REMOVE_TRANSACTION_COMMAND:
+            //todo
             return false;
         case "exit":
             return true;
