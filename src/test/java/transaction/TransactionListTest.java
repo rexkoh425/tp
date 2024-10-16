@@ -1,12 +1,7 @@
 package transaction;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import transcation.Transaction;
-import transcation.TransactionList;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class TransactionListTest {
     @Test
