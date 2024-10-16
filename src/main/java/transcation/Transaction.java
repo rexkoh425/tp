@@ -1,21 +1,22 @@
 package transcation;
 
 public class Transaction {
-    private String transcationId;
+    private String transactionId;
     private String carLicensePlate;
     private String borrowerName;
     private String duration;
     private String createdAt;
-    public Transaction(String carLicensePlate, String borrowerName, String duration, String createdAt, String transcationId) {
-        this.transcationId = transcationId  ;
+    public Transaction(String carLicensePlate, String borrowerName, String duration,
+                       String createdAt, String transactionId) {
+        this.transactionId = transactionId  ;
         this.carLicensePlate = carLicensePlate;
         this.borrowerName = borrowerName;
         this.duration = duration;
         this.createdAt = createdAt;
     }
 
-    public String getTranscationId() {
-        return transcationId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
     public String getCreatedAt() {
