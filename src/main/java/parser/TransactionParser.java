@@ -1,6 +1,6 @@
 package parser;
 
-import transcation.Transaction;
+import transaction.Transaction;
 
 import java.time.LocalDate;
 

@@ -4,9 +4,9 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
-import transcation.Transaction;
+import transaction.Transaction;
 import exceptions.CliRentalException;
-import transcation.TransactionList;
+import transaction.TransactionList;
 
 import java.util.Scanner;
 

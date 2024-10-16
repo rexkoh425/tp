@@ -1,4 +1,4 @@
-package transcation;
+package transaction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
