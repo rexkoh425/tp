@@ -28,6 +28,12 @@ public class CarListTest {
                 () -> CarList.addCar(new Car("ABC", "DEF", -125)));
 
         assertEquals(0, CarList.getCarsList().size());
+    }
 
+    @Test
+    public void testCarList() {
+        CarList.addCar(new Car("Honda Civic" , "SGE1234T" , 123));
+        CarList.addCar(new Car("Hyundai" , "SFR1224T" , 133));
+        CarList.printCarList();
     }
 }
