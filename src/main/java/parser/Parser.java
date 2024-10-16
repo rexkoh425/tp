@@ -4,6 +4,7 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
+import rental.RentalTransaction;
 import exceptions.CliRentalException;
 import transcation.TransactionList;
 
@@ -15,6 +16,7 @@ public class Parser {
     private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String ADD_CAR_COMMAND = "add-car";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
@@ -43,6 +45,14 @@ public class Parser {
         case ADD_CAR_COMMAND:
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
+            return false;
+        case ADD_TRANSACTION_COMMAND:
+            try {
+                RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
+                System.out.println("Rental transaction added: " + transaction);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             return false;
         case REMOVE_CAR_COMMAND:
             try {
