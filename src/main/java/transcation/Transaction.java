@@ -8,7 +8,7 @@ public class Transaction {
     private String createdAt;
     public Transaction(String carLicensePlate, String borrowerName, String duration,
                        String createdAt, String transactionId) {
-        this.transactionId = transactionId  ;
+        this.transactionId = transactionId;
         this.carLicensePlate = carLicensePlate;
         this.borrowerName = borrowerName;
         this.duration = duration;
