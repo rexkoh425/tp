@@ -4,7 +4,7 @@ import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
-import rental.RentalTransaction;
+import transcation.Transaction;
 import exceptions.CliRentalException;
 import transcation.TransactionList;
 
@@ -15,11 +15,15 @@ public class Parser {
     public static Scanner scanner = new Scanner(System.in);
     private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
-    private static final String ADD_CAR_COMMAND = "add-car";
-    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
-    private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String REMOVE_CUSTOMER_COMMAND = "remove-user";
     private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String ADD_CAR_COMMAND = "add-car";
+    private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
+    private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
+    private static final String LIST_ALL_TRANSACTIONS = "list-tx";
+    private static final String EXIT_COMMAND = "exit";
 
     public static String getUserInput(){
         System.out.println("What would you like to do?");
@@ -46,10 +50,13 @@ public class Parser {
             Car car = CarParser.parseIntoCar(userInput);
             CarList.addCar(car);
             return false;
+        case LIST_CARS_COMMAND:
+            CarList.printCarList();
+            return false;
         case ADD_TRANSACTION_COMMAND:
             try {
-                RentalTransaction transaction = RentalParser.parseIntoRentalTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction);
+                Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
+                System.out.println("Rental transaction added: " + transaction.toString());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -62,13 +69,28 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
             return false;
+        case REMOVE_CUSTOMER_COMMAND:
+            try {
+                String username = CustomerParser.parseUsernameForRemoval(userInput);
+                if (CustomerList.removeCustomer(username)) {
+                    System.out.println("Customer " + username + " has been removed.");
+                } else {
+                    System.out.println("Customer " + username + " not found.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();
             return false;
         case REMOVE_TRANSACTION_COMMAND:
             TransactionList.removeTransaction(userInput);
             return false;
-        case "exit":
+        case LIST_ALL_TRANSACTIONS:
+            TransactionList.printAllTransactions();
+            return false;
+        case EXIT_COMMAND:
             return true;
         default:
             throw CliRentalException.unknownCommand();

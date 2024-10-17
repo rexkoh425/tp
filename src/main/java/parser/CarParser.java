@@ -94,6 +94,6 @@ public class CarParser {
         if (splitInput.length < 2) {
             throw new CarException("Invalid format for removing a car. Use: remove-car /i [CAR_ID]");
         }
-        return splitInput[1];  // Expecting the license plate number to be the second argument
+        return splitInput[2];  // Expecting the license plate number to be the second argument
     }
 }

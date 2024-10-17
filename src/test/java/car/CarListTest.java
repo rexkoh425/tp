@@ -1,9 +1,37 @@
 package car;
 
+import exceptions.CarException;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CarListTest {
+
+    @Test
+    public void addCar_validCarObject() {
+        Car car = new Car("Toyota Camry", "SLK1222D", 180);
+        Car car1 = new Car("Nissan Qashqai", "SKA8898X", 250);
+
+        CarList.addCar(car);
+        CarList.addCar(car1);
+
+        assertEquals(2, CarList.getCarsList().size());
+        assertEquals(car, CarList.getCarsList().get(0));
+        assertEquals(car1, CarList.getCarsList().get(1));
+
+        CarList.getCarsList().remove(car);
+        CarList.getCarsList().remove(car1);
+    }
+
+    @Test
+    public void addCar_invalidCarObject_carExceptionThrown() throws CarException {
+
+        assertThrows(CarException.class,
+                () -> CarList.addCar(new Car("ABC", "DEF", -125)));
+
+        assertEquals(0, CarList.getCarsList().size());
+    }
 
     @Test
     public void testCarList() {
