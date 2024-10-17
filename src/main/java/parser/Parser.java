@@ -5,8 +5,9 @@ import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
 import transcation.Transaction;
-import exceptions.CliRentalException;
 import transcation.TransactionList;
+import exceptions.CliRentalException;
+
 
 import java.util.Scanner;
 
@@ -56,7 +57,7 @@ public class Parser {
         case ADD_TRANSACTION_COMMAND:
             try {
                 Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction.toString());
+                TransactionList.addTx(transaction);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -85,7 +86,17 @@ public class Parser {
             CustomerList.printCustomers();
             return false;
         case REMOVE_TRANSACTION_COMMAND:
-            TransactionList.removeTransaction(userInput);
+            //TransactionList.removeTransaction(userInput);
+            try {
+                String transactionID = TransactionParser.parseTransactionIDForRemoval(userInput);
+                if (TransactionList.removeTransactionById(transactionID)) {
+                    System.out.println("Transaction " + transactionID + " has been removed.");
+                } else {
+                    System.out.println("Transaction " + transactionID + " not found.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
             return false;
         case LIST_ALL_TRANSACTIONS:
             TransactionList.printAllTransactions();
