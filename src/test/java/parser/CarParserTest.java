@@ -19,8 +19,7 @@ public class CarParserTest {
     }
 
     @Test
-    public void isValidFormat_invalidUserInput_expectFalse()
-            throws CarException, NumberFormatException {
+    public void isValidFormat_invalidUserInput_expectFalse() throws CarException, NumberFormatException {
         String userInput = "add-car civic ABC123 150";
         String userInput1 = "add-car /c BCE123 /n civic /p 150";
         String userInput2 = "add-car /p 130 /c XYZ888 /n civic";
@@ -47,5 +46,46 @@ public class CarParserTest {
 
         assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput));
         assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput1));
+    }
+
+    // Additional Test Cases
+
+    @Test
+    public void isValidFormat_missingRequiredFields_expectFalse() {
+        String userInput = "add-car /n civic /p 150"; // Missing license plate number
+        String userInput1 = "add-car /c 12345 /p 150"; // Missing car name
+
+        assertEquals(false, CarParser.isValidFormat(userInput));
+        assertEquals(false, CarParser.isValidFormat(userInput1));
+    }
+
+    @Test
+    public void isValidFormat_boundaryPriceValue_expectTrue() {
+        String userInput = "add-car /n civic /c 12345 /p 0"; // Boundary price value (0)
+        String userInput1 = "add-car /n civic /c 12345 /p 99999"; // Upper boundary value for price
+
+        assertEquals(true, CarParser.isValidFormat(userInput));
+        assertEquals(true, CarParser.isValidFormat(userInput1));
+    }
+
+    @Test
+    public void parseIntoCar_boundaryPriceValue_carObjectCreated() {
+        String userInput = "add-car /n civic /c 12345 /p 0"; // Minimum price
+        String userInput1 = "add-car /n civic /c 67890 /p 99999"; // Maximum valid price
+
+        Car car = CarParser.parseIntoCar(userInput);
+        assertEquals(0, car.getPrice());
+
+        Car car1 = CarParser.parseIntoCar(userInput1);
+        assertEquals(99999, car1.getPrice());
+    }
+
+    @Test
+    public void parseIntoCar_invalidPrice_expectCarException() {
+        String userInput = "add-car /n civic /c 12345 /p -100"; // Negative price
+        String userInput1 = "add-car /n civic /c 12345 /p abc"; // Non-numeric price
+
+        assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput));
+        assertThrows(NumberFormatException.class, () -> CarParser.parseIntoCar(userInput1));
     }
 }
