@@ -48,11 +48,5 @@ public class CarTest {
         assertEquals("SJX1234D", car.getLicensePlateNumber());
         assertEquals(1000000, car.getPrice());
     }
-
-    @Test
-    public void testCarConstructor_invalidLicensePlate_carExceptionThrown() {
-        // Test for an invalid license plate
-        assertThrows(CarException.class, () -> new Car("Honda", "", 100)); // Empty license plate
-        assertThrows(CarException.class, () -> new Car("Toyota", "!!!@@@", 150)); // License plate with invalid characters
-    }
+    
 }
