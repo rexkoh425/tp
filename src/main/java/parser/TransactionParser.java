@@ -1,6 +1,5 @@
 package parser;
 
-import exceptions.CliRentalException;
 import transcation.Transaction;
 import java.time.LocalDate;
 

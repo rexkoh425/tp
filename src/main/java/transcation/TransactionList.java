@@ -1,6 +1,5 @@
 package transcation;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TransactionList {
@@ -13,7 +12,8 @@ public class TransactionList {
 
         String[] words = userInput.split(" ");
         if ( (words.length < 2) || (!words[1].equals("/t")) ) {
-            throw new IllegalStateException("Unable to remove transaction. Please follow : " + REMOVE_TRANSACTION_FORMAT);
+            throw new IllegalStateException("Unable to remove transaction. " +
+                    "Please follow : " + REMOVE_TRANSACTION_FORMAT);
         }
         if(!removeTransactionById(words[3])) {
             throw new RuntimeException("Transaction ID doesn't exist");
