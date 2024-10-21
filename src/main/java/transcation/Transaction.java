@@ -1,13 +1,14 @@
 package transcation;
 
 public class Transaction {
+    private static int transactionCounter = 1;
     private final String transactionId;
     private final String carLicensePlate;
     private final String borrowerName;
     private final String duration;
     private final String startDate;
 
-    private static int transactionCounter = 1;
+
 
     public Transaction(String carLicensePlate, String borrowerName, String duration,
                        String startDate) {
