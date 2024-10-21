@@ -52,13 +52,4 @@ public class TransactionParser {
         return contents;
     }
 
-    public static String parseTransactionIDForRemoval(String userInput) throws CliRentalException {
-        String[] words = userInput.split(" ");
-        if (words.length < 2) {
-            throw new CliRentalException("Please provide the transaction ID to remove.");
-        } else if (words.length > 2) {
-            throw new CliRentalException("ERROR! PLease use remove-tx <Transaction ID)");
-        }
-        return words[1];  // assuming input format is: remove-tx <transactionId>
-    }
 }

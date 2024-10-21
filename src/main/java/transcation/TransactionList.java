@@ -47,8 +47,7 @@ public class TransactionList {
         System.out.println("Here are all the transactions: ");
 
         for (Transaction transaction : transactionList) {
-            System.out.println(index + ") " + transaction.getTransactionId()
-                    + " | " + transaction.getCarLicensePlate()
+            System.out.println(index + ") " + transaction.getCarLicensePlate()
                     + " | " + transaction.getBorrowerName()
                     + " | " + transaction.getDuration()
                     + " | " + transaction.getStartDate());

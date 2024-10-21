@@ -86,17 +86,7 @@ public class Parser {
             CustomerList.printCustomers();
             return false;
         case REMOVE_TRANSACTION_COMMAND:
-            //TransactionList.removeTransaction(userInput);
-            try {
-                String transactionID = TransactionParser.parseTransactionIDForRemoval(userInput);
-                if (TransactionList.removeTransactionById(transactionID)) {
-                    System.out.println("Transaction " + transactionID + " has been removed.");
-                } else {
-                    System.out.println("Transaction " + transactionID + " not found.");
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
+            TransactionList.removeTransaction(userInput);
             return false;
         case LIST_ALL_TRANSACTIONS:
             TransactionList.printAllTransactions();
