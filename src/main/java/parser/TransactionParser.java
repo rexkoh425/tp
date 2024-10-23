@@ -10,7 +10,7 @@ public class TransactionParser {
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
         userInput = userInput.substring(ADD_TRANSACTION_COMMAND.length()).trim();
-        String[] parameters = { "/l", "/b", "/d", "/c" };
+        String[] parameters = { "/p", "/u", "/d", "/s" };
         String[] parameterContents;
 
         if (isValidSequence(parameters, userInput)) {
@@ -20,13 +20,12 @@ public class TransactionParser {
         }
 
         String carLicensePlate = parameterContents[0];
-        String borrowerName = parameterContents[1];
+        String userName = parameterContents[1];
         int duration = Integer.parseInt(parameterContents[2]);
         LocalDate startDate = LocalDate.parse(parameterContents[3]);
-        String transactionId = Transaction.getTransactionId();
 
-        return new Transaction(carLicensePlate, borrowerName, String.valueOf(duration), 
-                startDate.toString(), transactionId);
+        return new Transaction(carLicensePlate, userName, String.valueOf(duration),
+                startDate.toString());
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {
@@ -52,4 +51,5 @@ public class TransactionParser {
         }
         return contents;
     }
+
 }
