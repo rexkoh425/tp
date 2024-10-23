@@ -3,8 +3,7 @@ package car;
 import exceptions.CarException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CarTest {
 
@@ -14,11 +13,15 @@ public class CarTest {
         assertEquals("Toyota 86", car.getModel());
         assertEquals("SJX1234D", car.getLicensePlateNumber());
         assertEquals(120, car.getPrice());
+        assertFalse(car.isRented());
+        assertEquals("Not Rented" , car.getRentedStatus());
 
         Car car1 = new Car("ABC", "DE3F", 0);
         assertEquals("ABC", car1.getModel());
         assertEquals("DE3F", car1.getLicensePlateNumber());
         assertEquals(0, car1.getPrice());
+        assertFalse(car1.isRented());
+        assertEquals("Not Rented" , car1.getRentedStatus());
     }
 
     @Test
