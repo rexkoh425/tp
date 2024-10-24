@@ -7,6 +7,7 @@ public class CarParser {
 
     private static final String[] ADD_CAR_PARAMETERS = {"/n", "/c", "/p"};
     private static final int ADD_CAR_PARAMETERS_OFFSET = 2;
+    private static final int LICENSE_PLATE_NUMBER_LENGTH = 8;
 
     public static Car parseIntoCar(String userInput) throws CarException {
         userInput = userInput.trim();
@@ -19,9 +20,18 @@ public class CarParser {
         String carLicensePlateNumber = extractCarLicensePlateNumber(userInput).trim();
         String carPriceString = extractCarPrice(userInput).trim();
         double carPrice = Double.parseDouble(carPriceString);
-        //double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
 
-        return new Car(carModel, carLicensePlateNumber, carPrice);
+        if (!isValidLicensePlateNumber(carLicensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
+
+        if (!isValidPrice(carPrice)) {
+            throw CarException.invalidPrice();
+        }
+
+        double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
+
+        return new Car(carModel, carLicensePlateNumber, formattedCarPrice);
     }
 
     private static String extractCarModel(String userInput) {
