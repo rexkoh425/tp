@@ -5,11 +5,12 @@ package customer;
  */
 public class Customer {
 
+    public static final int NUMBER_OF_PARAMETERS = 3;
     private String username;
     private int age;
-    private int contactNumber;
+    private String contactNumber;
 
-    public Customer(String username, int age, int contactNumber){
+    public Customer(String username, int age, String contactNumber){
         this.username = username;
         this.age = age;
         this.contactNumber = contactNumber;
@@ -19,7 +20,7 @@ public class Customer {
         return username;
     }
 
-    public int getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
@@ -35,7 +36,7 @@ public class Customer {
         this.age = age;
     }
 
-    public void setContactNumber(int contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -43,5 +44,9 @@ public class Customer {
         return "Username : " + this.getUsername() + "\n"
                 + "Age : " + this.getAge() + "\n"
                 + "Contact Number : " + this.getContactNumber();
+    }
+
+    public String toFileString(){
+        return this.getUsername() + " | " + this.getAge() + " | " + this.getContactNumber();
     }
 }

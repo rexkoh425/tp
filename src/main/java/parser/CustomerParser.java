@@ -29,7 +29,7 @@ public class CustomerParser {
 
         String username = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
-        int contactNumber = Integer.parseInt(parameterContents[2]);
+        String contactNumber = parameterContents[2];
         return new Customer(username , age, contactNumber );
     }
 

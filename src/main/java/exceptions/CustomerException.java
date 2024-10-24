@@ -1,5 +1,7 @@
 package exceptions;
 
+import java.util.ArrayList;
+
 /**
  * Customer related exceptions
  */
@@ -20,5 +22,13 @@ public class CustomerException extends RuntimeException {
      */
     public static CustomerException addCustomerException(){
         return new CustomerException("Unable to add customer. Please follow : " + ADD_FORMAT);
+    }
+
+    public static CustomerException invalidParameters(ArrayList<Integer> errorLines){
+        String message = "Customer data do not match number of parameters in " + errorLines.size() + " rows of data\n";
+        message += "Rows are : ";
+        message += errorLines.toString();
+        message = message + "\n";
+        return new CustomerException(message);
     }
 }

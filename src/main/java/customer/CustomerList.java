@@ -12,6 +12,10 @@ public class CustomerList {
         System.out.println(customer.toString());
     }
 
+    public static void addCustomerWithoutPrintingInfo(Customer customer){
+        customers.add(customer);
+    }
+
     public static boolean removeCustomer(String username){
         for(Customer customer : customers){
             if(customer.getUsername().equals(username)){
@@ -31,6 +35,15 @@ public class CustomerList {
             System.out.println(customer.toString());
             System.out.println("____________________________________________________________");
         }
+    }
+
+    public static String customerListToFileString(){
+        StringBuilder customerData = new StringBuilder();
+        for (Customer customer : customers) {
+            customerData.append(customer.toFileString());
+            customerData.append("\n");
+        }
+        return customerData.toString();
     }
 }
 

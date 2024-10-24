@@ -2,7 +2,10 @@ package file;
 
 import car.Car;
 import car.CarList;
+import customer.Customer;
+import customer.CustomerList;
 import exceptions.CarException;
+import exceptions.CustomerException;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -37,6 +40,7 @@ public class FileHandler {
         createCustomerFileIfNotExist();
         createTransactionFileIfNotExist();
         loadCarDataIfExist();
+        loadCustomerDataIfExist();
     }
     private static void createCarFileIfNotExist(){
         if(!CAR_DATA_FILE.exists()){
@@ -98,6 +102,17 @@ public class FileHandler {
             System.out.println(e.getMessage());
         }
     }
+
+    private static void loadCustomerDataIfExist(){
+        try {
+            loadCustomerData();
+        } catch (FileNotFoundException e) {
+            System.out.println("customerData.txt not found in data directory. Please try again");
+        } catch (CustomerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static void loadCarData() throws FileNotFoundException , CarException{
         if(CAR_DATA_FILE.exists()){
             Scanner scanner = new Scanner(CAR_DATA_FILE);
@@ -123,6 +138,43 @@ public class FileHandler {
         }
     }
 
+    private static void loadCustomerData() throws FileNotFoundException , CustomerException{
+        if(CUSTOMER_DATA_FILE.exists()){
+            Scanner scanner = new Scanner(CUSTOMER_DATA_FILE);
+            ArrayList<Integer> errorLines = new ArrayList<>();
+            int line = 1;
+            while (scanner.hasNext()) {
+                scanLineAndAddCustomer(scanner, errorLines, line);
+                line ++;
+            }
+            if(!errorLines.isEmpty()) {
+                throw CustomerException.invalidParameters(errorLines);
+            }
+        }
+    }
+
+    private static void scanLineAndAddCustomer(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+        String input = scanner.nextLine();
+        String[] parameters = input.split(" \\| ");
+        if(parameters.length != Customer.NUMBER_OF_PARAMETERS){
+            errorLines.add(line);
+        }else{
+            addCustomerWithParameters(parameters, errorLines ,line);
+        }
+    }
+
+    private static void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
+        String username = parameters[0];
+        try {
+            int age = Integer.parseInt(parameters[1]);
+            String contactNumber = parameters[2];
+            Customer customer = new Customer(username , age , contactNumber);
+            CustomerList.addCustomerWithoutPrintingInfo(customer);
+        }catch(NumberFormatException e) {
+            errorLines.add(line);
+        }
+    }
+
     private static void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         String model = parameters[0];
         String licensePlateNumber = parameters[1];
@@ -143,11 +195,23 @@ public class FileHandler {
         fw.close();
     }
 
+    public static void updateCustomerDataFile() throws IOException {
+        FileWriter fw = new FileWriter(CUSTOMER_DATA_FILE);
+        String textToAdd = CustomerList.customerListToFileString();
+        fw.write(textToAdd);
+        fw.close();
+    }
+
     public static void updateFiles(){
         try {
             updateCarDataFile();
         } catch (IOException e) {
             System.out.println("Unable to update " + CAR_DATA_FILENAME);
+        }
+        try {
+            updateCustomerDataFile();
+        } catch (IOException e) {
+            System.out.println("Unable to update " + CUSTOMER_DATA_FILENAME);
         }
     }
 }
