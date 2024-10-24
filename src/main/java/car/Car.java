@@ -28,15 +28,22 @@ public class Car {
         return price;
     }
 
-    public boolean getStatus() {
-        return isRented;
-    }
-
     public void markAsRented() {
         isRented = true;
     }
 
     public void markAsAvailable() {
         isRented = false;
+    }
+
+    public boolean isRented() {
+        return isRented;
+    }
+
+    public String getRentedStatus(){
+        if (isRented) {
+            return "Rented";
+        }
+        return "Available";
     }
 }
