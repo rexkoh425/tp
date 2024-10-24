@@ -8,7 +8,7 @@ to track their customers , cars and rental transactions.
 ## Quick Start
 
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
+2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 
 ## Features
 
@@ -27,11 +27,35 @@ Example of usage:
 
 `add-user /u John /a 18 /c 95382572`
 
+Sample Response:
+
+```
+____________________________________________________________
+add-user /u John /a 18 /c 95382572
+Customer added
+Username : John
+Age : 18
+Contact Number : 95382572
+What would you like to do?
+____________________________________________________________
+```
+
 ### List all cars in the database: `list-cars`
 
 Lists all the car which the company owns.
 
 Format: `list-cars`
+
+Sample Response:
+
+```
+____________________________________________________________
+list-cars
+Here are the current cars in the company
+1) Toyota Corolla | SGM4932K | $120.0 | Not Rented
+What would you like to do?
+____________________________________________________________
+```
 
 ## FAQ
 
