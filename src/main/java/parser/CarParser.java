@@ -74,14 +74,42 @@ public class CarParser {
             }
         }
 
+        return true;
+    }
 
     public static boolean isValidPrice(double price) {
         return !(price < 0.00);
     }
 
+    public static boolean isValidLicensePlateNumber(String licensePlateNumber) {
+        if (!licensePlateNumber.startsWith("S")) {
+            return false;
+        }
+
+        if (licensePlateNumber.length() != LICENSE_PLATE_NUMBER_LENGTH) {
+            return false;
+        }
+
+        char[] licensePlateNumberChars = licensePlateNumber.toCharArray();
+        // Example: SGD1234X
+        for (int i = 1; i < licensePlateNumber.length(); i++) {
+            // Checks if second, third and last char are (uppercase) letters.
+            if (i <= 2 || i > 6) {
+                if (licensePlateNumberChars[i] < 'A' || licensePlateNumberChars[i] > 'Z') {
+                    return false;
+                }
+            }
+            // Checks if middle 4 chars are numbers.
+            if (i >= 3 && i <= 6) {
+                if (licensePlateNumberChars[i] < '0' || licensePlateNumberChars[i] > '9') {
+                    return false;
+                }
+            }
+        }
 
         return true;
     }
+
     public static String parseCarLicenseForRemoval(String userInput) throws CarException {
         userInput = userInput.trim();
 
