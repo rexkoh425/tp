@@ -5,8 +5,9 @@ import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
 import transcation.Transaction;
-import exceptions.CliRentalException;
 import transcation.TransactionList;
+import exceptions.CliRentalException;
+
 
 import java.util.Scanner;
 
@@ -56,7 +57,7 @@ public class Parser {
         case ADD_TRANSACTION_COMMAND:
             try {
                 Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
-                System.out.println("Rental transaction added: " + transaction.toString());
+                TransactionList.addTx(transaction);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
