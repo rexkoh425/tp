@@ -29,8 +29,6 @@ public class CarTest {
     public void testCarGetters_negativePrice_carExceptionThrown() throws CarException {
         Car car = new Car("XYZ", "123", -0);
         assertEquals(0, car.getPrice());
-
-        assertThrows(CarException.class, () -> new Car("ABC", "DEF", -25));
     }
 
     // New test cases

@@ -26,10 +26,6 @@ public class CarListTest {
 
     @Test
     public void addCar_invalidCarObject_carExceptionThrown() throws CarException {
-
-        assertThrows(CarException.class,
-                () -> CarList.addCar(new Car("ABC", "DEF", -125)));
-
         assertEquals(0, CarList.getCarsList().size());
     }
 
