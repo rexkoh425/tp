@@ -25,9 +25,13 @@ public class Parser {
     private static final String LIST_ALL_TRANSACTIONS = "list-tx";
     private static final String EXIT_COMMAND = "exit";
 
+    public static void printDividerLine() {
+        System.out.println("_".repeat(60));
+    }
+
     public static String getUserInput(){
         System.out.println("What would you like to do?");
-        System.out.println("_".repeat(60));
+        printDividerLine();
 
         String userInput = scanner.nextLine().trim();
 
