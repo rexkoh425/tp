@@ -75,6 +75,10 @@ public class CarParser {
         }
 
 
+    public static boolean isValidPrice(double price) {
+        return !(price < 0.00);
+    }
+
 
         return true;
     }
