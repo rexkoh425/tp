@@ -4,10 +4,12 @@ import exceptions.CarException;
 
 public class Car {
 
+    public static final int NUMBER_OF_PARAMETERS = 4;
     private String model;
     private String licensePlateNumber;
     private double price;
     private boolean isRented;
+
 
     public Car(String model, String licensePlateNumber, double price) throws CarException{
         this.model = model;
@@ -18,6 +20,17 @@ public class Car {
             this.price = Double.parseDouble(String.format("%.2f", price));
         }
         this.isRented = false;
+    }
+
+    public Car(String model, String licensePlateNumber, double price , boolean rented) throws CarException{
+        this.model = model;
+        this.licensePlateNumber = licensePlateNumber;
+        if (price < 0.00) {
+            throw CarException.invalidPrice();
+        } else {
+            this.price = Double.parseDouble(String.format("%.2f", price));
+        }
+        this.isRented = rented;
     }
 
     public void setModel(String model) {
@@ -57,5 +70,10 @@ public class Car {
             return "Rented";
         }
         return "Not Rented";
+    }
+
+    public String toFileString(){
+        return this.getModel() + " | " + this.getLicensePlateNumber()
+                + " | $" + this.getPrice() + " | " + this.getRentedStatus();
     }
 }

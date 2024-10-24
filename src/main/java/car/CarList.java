@@ -18,6 +18,10 @@ public class CarList {
                 + " | $" + car.getPrice() + " | " + car.getRentedStatus());
     }
 
+    public static void addCarWithoutPrintingInfo(Car car) {
+        carsList.add(car);
+    }
+
     public static void removeCar(String carLicensePlateNumber) {
         Car carToRemove = null;
 
