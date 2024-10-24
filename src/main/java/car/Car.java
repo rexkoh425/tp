@@ -7,6 +7,7 @@ public class Car {
     private String model;
     private String licensePlateNumber;
     private double price;
+    private boolean isRented;
 
     public Car(String model, String licensePlateNumber, double price) throws CarException{
         this.model = model;
@@ -16,7 +17,7 @@ public class Car {
         } else {
             this.price = Double.parseDouble(String.format("%.2f", price));
         }
-
+        this.isRented = false;
     }
 
     public void setModel(String model) {
@@ -41,5 +42,20 @@ public class Car {
 
     public double getPrice() {
         return price;
+    }
+
+    public void setRented(boolean isRented) {
+        this.isRented = isRented;
+    }
+
+    public boolean isRented() {
+        return isRented;
+    }
+
+    public String getRentedStatus(){
+        if(isRented){
+            return "Rented";
+        }
+        return "Not Rented";
     }
 }
