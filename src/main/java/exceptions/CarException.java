@@ -23,4 +23,11 @@ public class CarException extends RuntimeException{
         String message = "Unable to add car.. License Plate number already exists!!";
         return new CarException(message);
     }
+
+    public static CarException licensePlateNumberNotFound() {
+        String message = "Car license plate number not found!!"
+                + "\nUse command <list-cars> to view list of available cars.";
+        return new CarException(message);
+    }
+
 }
