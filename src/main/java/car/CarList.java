@@ -43,6 +43,14 @@ public class CarList {
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
                     + " | $" +car.getPrice());
+    public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
+        for (Car car : carsList) {
+            if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
         }
     }
 }
