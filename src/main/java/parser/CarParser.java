@@ -47,7 +47,7 @@ public class CarParser {
             throw new CarException("License plate number missing!!");
         }
 
-        return carLicensePlateNumber;
+        return carLicensePlateNumber.toUpperCase();
     }
 
     private static String extractCarPrice(String userInput) {
