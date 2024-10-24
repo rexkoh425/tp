@@ -17,7 +17,7 @@ What would you like to do?
 ____________________________________________________________
 Car added to list
 Car details:
-Honda Civic | SGE1234T | $123.0
+Honda Civic | SGE1234T | $123.0 | Not Rented
 What would you like to do?
 ____________________________________________________________
 Goodbye!
