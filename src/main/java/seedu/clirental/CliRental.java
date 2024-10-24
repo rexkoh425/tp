@@ -3,6 +3,7 @@ package seedu.clirental;
 import exceptions.CarException;
 import exceptions.CliRentalException;
 import exceptions.CustomerException;
+import file.FileHandler;
 import parser.Parser;
 
 public class CliRental {
@@ -12,6 +13,8 @@ public class CliRental {
     public static void main(String[] args) {
         printGreetings();
         getName();
+
+        FileHandler fileHandler = new FileHandler();
 
         boolean isExit = false;
 
