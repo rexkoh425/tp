@@ -8,7 +8,7 @@ to track their customers , cars and rental transactions.
 ## Quick Start
 
 1. Ensure that you have Java 17 or above installed.
-2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
+1. Down the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 
 ## Features
 
