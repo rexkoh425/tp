@@ -19,4 +19,8 @@ public class CarException extends RuntimeException{
         return new CarException(message);
     }
 
+    public static CarException duplicateLicensePlateNumber() {
+        String message = "Unable to add car.. License Plate number already exists!!";
+        return new CarException(message);
+    }
 }
