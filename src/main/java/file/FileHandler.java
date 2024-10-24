@@ -4,19 +4,42 @@ import java.io.IOException;
 import java.io.File;
 
 public class FileHandler {
+
     private static final String DIR_NAME = "data";
     private static final String CAR_DATA_FILENAME = "carData.txt";
     private static final String CAR_DATA_FILEPATH = DIR_NAME + "/" + CAR_DATA_FILENAME;
+    private static final String CUSTOMER_DATA_FILENAME = "customerData.txt";
+    private static final String CUSTOMER_DATA_FILEPATH = DIR_NAME + "/" + CUSTOMER_DATA_FILENAME;
+    private static final String TRANSACTION_DATA_FILENAME = "transactionData.txt";
+    private static final String TRANSACTION_DATA_FILEPATH = DIR_NAME + "/" + TRANSACTION_DATA_FILENAME;
+
+    private static final File DATA_DIR = new File(DIR_NAME);
+    private static final File CAR_DATA_FILE = new File(CAR_DATA_FILEPATH);
+    private static final File CUSTOMER_DATA_FILE = new File(CUSTOMER_DATA_FILEPATH);
+    private static final File TRANSACTION_DATA_FILE = new File(TRANSACTION_DATA_FILEPATH);
 
     public FileHandler(){
         createFolderIfNotExist();
         createCarFileIfNotExist();
+        createCustomerFileIfNotExist();
+        createTransactionFileIfNotExist();
     }
 
-    public static void createCarFileIfNotExist(){
-        File file = new File(CAR_DATA_FILEPATH);
-        if(!file.exists()){
-            createNewFile(file);
+    private static void createCarFileIfNotExist(){
+        if(!CAR_DATA_FILE.exists()){
+            createNewFile(CAR_DATA_FILE);
+        }
+    }
+
+    private static void createCustomerFileIfNotExist(){
+        if(!CUSTOMER_DATA_FILE.exists()){
+            createNewFile(CUSTOMER_DATA_FILE);
+        }
+    }
+
+    private static void createTransactionFileIfNotExist(){
+        if(!TRANSACTION_DATA_FILE.exists()){
+            createNewFile(TRANSACTION_DATA_FILE);
         }
     }
 
@@ -36,22 +59,21 @@ public class FileHandler {
 
     private static void createFolderIfNotExist(){
 
-        File dataDirectory = new File(DIR_NAME);
-
-        if (!dataDirectory.isDirectory()) {
+        if (!DATA_DIR.isDirectory()) {
             System.out.println(DIR_NAME + " does not exist. Creating it now.......");
-            createFolder(dataDirectory);
+            createFolder();
         }
     }
 
-    private static void createFolder(File directoryName) {
+    private static void createFolder() {
 
-        boolean isCreated = directoryName.mkdirs();
+        boolean isCreated = DATA_DIR.mkdirs();
 
         if (isCreated) {
-            System.out.println(directoryName + " directory created successfully.");
+            System.out.println(DIR_NAME + " directory created successfully.");
         } else {
-            System.out.println(directoryName + " directory already exists or failed to create.");
+            System.out.println(DIR_NAME + " directory already exists or failed to create.");
         }
     }
+
 }
