@@ -74,6 +74,6 @@ public class Car {
 
     public String toFileString(){
         return this.getModel() + " | " + this.getLicensePlateNumber()
-                + " | $" + this.getPrice() + " | " + this.getRentedStatus();
+                + " | " + this.getPrice() + " | " + this.isRented();
     }
 }

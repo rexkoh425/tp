@@ -41,6 +41,7 @@ public class CarList {
             System.out.println("No car found with license plate " + carLicensePlateNumber);
         }
     }
+
     public static void printCarList(){
         System.out.println("Here are the current cars in the company");
         for(int i = 0 ; i < carsList.size(); i++){
@@ -48,5 +49,14 @@ public class CarList {
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
                     + " | $" +car.getPrice() + " | " + car.getRentedStatus());
         }
+    }
+
+    public static String carListToFileString(){
+        StringBuilder carData = new StringBuilder();
+        for (Car car : carsList) {
+            carData.append(car.toFileString());
+            carData.append("\n");
+        }
+        return carData.toString();
     }
 }

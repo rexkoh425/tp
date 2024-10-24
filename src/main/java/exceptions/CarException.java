@@ -21,7 +21,7 @@ public class CarException extends RuntimeException{
         return new CarException(message);
     }
 
-    public static CarException invalidParameters(ArrayList<Integer> errorLines) {
+    public static CarException invalidParameters(ArrayList<Integer> errorLines){
         String message = "Car data do not match number of parameters in " + errorLines.size() + " rows of data\n";
         message += "Rows are : ";
         message += errorLines.toString();

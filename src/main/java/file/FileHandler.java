@@ -5,10 +5,12 @@ import car.CarList;
 import exceptions.CarException;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class FileHandler {
 
@@ -26,13 +28,16 @@ public class FileHandler {
     private static final File TRANSACTION_DATA_FILE = new File(TRANSACTION_DATA_FILEPATH);
 
     public FileHandler(){
+
+    }
+
+    public static void createAndLoadFiles(){
         createFolderIfNotExist();
         createCarFileIfNotExist();
         createCustomerFileIfNotExist();
         createTransactionFileIfNotExist();
         loadCarDataIfExist();
     }
-
     private static void createCarFileIfNotExist(){
         if(!CAR_DATA_FILE.exists()){
             createNewFile(CAR_DATA_FILE);
@@ -131,4 +136,18 @@ public class FileHandler {
         }
     }
 
+    public static void updateCarDataFile() throws IOException {
+        FileWriter fw = new FileWriter(CAR_DATA_FILE);
+        String textToAdd = CarList.carListToFileString();
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void updateFiles(){
+        try {
+            updateCarDataFile();
+        } catch (IOException e) {
+            System.out.println("Unable to update " + CAR_DATA_FILENAME);
+        }
+    }
 }

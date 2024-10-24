@@ -12,9 +12,8 @@ public class CliRental {
      */
     public static void main(String[] args) {
         printGreetings();
+        FileHandler.createAndLoadFiles();
         getName();
-
-        FileHandler fileHandler = new FileHandler();
 
         boolean isExit = false;
 
@@ -25,7 +24,7 @@ public class CliRental {
                 if (Parser.parse(action)) {
                     isExit = true;
                 }
-
+                FileHandler.updateFiles();
             } catch (CustomerException exception){
                 exception.printErrorMessage();
             } catch (NumberFormatException exception){
