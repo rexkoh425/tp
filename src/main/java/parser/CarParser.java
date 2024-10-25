@@ -92,11 +92,8 @@ public class CarParser {
     }
 
     public static boolean isValidLicensePlateNumber(String licensePlateNumber) {
-        if (!licensePlateNumber.startsWith("S")) {
-            return false;
-        }
-
-        if (licensePlateNumber.length() != LICENSE_PLATE_NUMBER_LENGTH) {
+        if (!licensePlateNumber.startsWith("S") ||
+                licensePlateNumber.length() != LICENSE_PLATE_NUMBER_LENGTH) {
             return false;
         }
 
@@ -108,9 +105,8 @@ public class CarParser {
                 if (licensePlateNumberChars[i] < 'A' || licensePlateNumberChars[i] > 'Z') {
                     return false;
                 }
-            }
-            // Checks if middle 4 chars are numbers.
-            if (i >= 3 && i <= 6) {
+            } else {
+                // Checks if middle 4 chars are numbers.
                 if (licensePlateNumberChars[i] < '0' || licensePlateNumberChars[i] > '9') {
                     return false;
                 }
