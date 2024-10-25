@@ -22,7 +22,7 @@ public class CarException extends RuntimeException{
     }
 
     public static CarException invalidLicensePlateNumber() {
-        String message = "Unable to add car.. License Plate number is invalid."
+        String message = "Unable to add car.. License Plate number is invalid.\n"
                 + LICENSE_PLATE_NUMBER_FORMAT;
         return new CarException(message);
     }
