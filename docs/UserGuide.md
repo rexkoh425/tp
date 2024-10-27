@@ -10,6 +10,38 @@ to track their customers , cars and rental transactions.
 1. Ensure that you have Java 17 or above installed.
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 
+## File saving
+
+`Customer , Transaction and Car` data will be saved on their respective files under `data` directory. 
+
+`IMPORTANT NOTE : `
+
+1. `All wrongly formatted files would not be inputted.` 
+2. `Any additional data added will be up to the user to ensure 
+it is the right format`
+
+Filenames : 
+
+* `Car data` : `carData.txt`
+* `Customer data` : `customerData.txt`
+* `Transaction data` : `transactionData.txt`
+
+Format : 
+* `Car data` :  `CAR MODEL | LICENSE PLATE | PRICE | RENTED`
+* `Customer data` : `NAME | AGE | PHONE NUMBER`
+* `Transaction data` : `LICENSE PLATE | NAME | RENTAL DURATION(DAYS) | RENTAL START DATE`
+
+Types :
+* `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN`
+* `Customer data` : `STRING | INT | STRING`
+* `Transaction data` : `STRING | STRING | STRING | STRING`
+
+Example : 
+
+* `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false`
+* `Customer data` : `John | 22 | 90907638`
+* `Transaction data` : `SBS123B | John | 30 | 2024-10-17`
+
 ## Features
 
 ### Adding a user to the database: `add-user`
