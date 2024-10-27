@@ -83,6 +83,7 @@ public class CustomerFile {
      * @param parameters parameters of the Customer object.
      */
     private static void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
+        assert parameters.length == 3 : "Parameter for customers is wrong";
         String username = parameters[0];
         try {
             int age = Integer.parseInt(parameters[1]);
