@@ -41,9 +41,9 @@ public class Customer {
     }
 
     public String toString(){
-        return "Username : " + this.getUsername() + "\n"
-                + "Age : " + this.getAge() + "\n"
-                + "Contact Number : " + this.getContactNumber();
+        return this.getUsername() + " | "
+                + this.getAge() + " | "
+                + this.getContactNumber();
     }
 
     public String toFileString(){

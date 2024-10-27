@@ -31,10 +31,13 @@ public class CustomerList {
     }
 
     public static void printCustomers() {
-        for (Customer customer : customers) {
+        System.out.println("_".repeat(60));
+        for (int i = 0 ; i < customers.size(); i++) {
+            System.out.print((i+1) + ") ");
+            Customer customer = customers.get(i);
             System.out.println(customer.toString());
-            System.out.println("____________________________________________________________");
         }
+        System.out.println("_".repeat(60));
     }
 
     public static String customerListToFileString(){

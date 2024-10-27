@@ -6,6 +6,9 @@ import customer.Customer;
 import customer.CustomerList;
 import exceptions.CarException;
 import exceptions.CustomerException;
+import exceptions.TransactionException;
+import transcation.Transaction;
+import transcation.TransactionList;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,6 +44,7 @@ public class FileHandler {
         createTransactionFileIfNotExist();
         loadCarDataIfExist();
         loadCustomerDataIfExist();
+        loadTransactionDataIfExist();
     }
     private static void createCarFileIfNotExist(){
         if(!CAR_DATA_FILE.exists()){
@@ -113,6 +117,16 @@ public class FileHandler {
         }
     }
 
+    private static void loadTransactionDataIfExist(){
+        try {
+            loadTransactionData();
+        } catch (FileNotFoundException e) {
+            System.out.println("transactionData.txt not found in data directory. Please try again");
+        } catch (TransactionException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private static void loadCarData() throws FileNotFoundException , CarException{
         if(CAR_DATA_FILE.exists()){
             Scanner scanner = new Scanner(CAR_DATA_FILE);
@@ -128,16 +142,6 @@ public class FileHandler {
         }
     }
 
-    private static void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
-        String input = scanner.nextLine();
-        String[] parameters = input.split(" \\| ");
-        if(parameters.length != Car.NUMBER_OF_PARAMETERS){
-            errorLines.add(line);
-        }else{
-            addCarWithParameters(parameters, errorLines, line);
-        }
-    }
-
     private static void loadCustomerData() throws FileNotFoundException , CustomerException{
         if(CUSTOMER_DATA_FILE.exists()){
             Scanner scanner = new Scanner(CUSTOMER_DATA_FILE);
@@ -150,6 +154,41 @@ public class FileHandler {
             if(!errorLines.isEmpty()) {
                 throw CustomerException.invalidParameters(errorLines);
             }
+        }
+    }
+
+    private static void loadTransactionData() throws FileNotFoundException , TransactionException{
+        if(TRANSACTION_DATA_FILE.exists()){
+            Scanner scanner = new Scanner(TRANSACTION_DATA_FILE);
+            ArrayList<Integer> errorLines = new ArrayList<>();
+            int line = 1;
+            while (scanner.hasNext()) {
+                scanLineAndAddTransaction(scanner, errorLines, line);
+                line ++;
+            }
+            if(!errorLines.isEmpty()) {
+                throw TransactionException.invalidParameters(errorLines);
+            }
+        }
+    }
+
+    private static void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+        String input = scanner.nextLine();
+        String[] parameters = input.split(" \\| ");
+        if(parameters.length != Car.NUMBER_OF_PARAMETERS){
+            errorLines.add(line);
+        }else{
+            addCarWithParameters(parameters, errorLines, line);
+        }
+    }
+
+    private static void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+        String input = scanner.nextLine();
+        String[] parameters = input.split(" \\| ");
+        if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
+            errorLines.add(line);
+        }else{
+            addTransactionWithParameters(parameters);
         }
     }
 
@@ -188,6 +227,15 @@ public class FileHandler {
         }
     }
 
+    private static void addTransactionWithParameters(String[] parameters) {
+        String carLicensePlate = parameters[0];
+        String borrowerName = parameters[1];
+        String duration = parameters[2];
+        String startDate = parameters[3];
+        Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate);
+        TransactionList.addTxWithoutPrintingInfo(transaction);
+    }
+
     public static void updateCarDataFile() throws IOException {
         FileWriter fw = new FileWriter(CAR_DATA_FILE);
         String textToAdd = CarList.carListToFileString();
@@ -202,6 +250,13 @@ public class FileHandler {
         fw.close();
     }
 
+    public static void updateTransactionDataFile() throws IOException {
+        FileWriter fw = new FileWriter(TRANSACTION_DATA_FILE);
+        String textToAdd = TransactionList.transactionListToFileString();
+        fw.write(textToAdd);
+        fw.close();
+    }
+
     public static void updateFiles(){
         try {
             updateCarDataFile();
@@ -212,6 +267,11 @@ public class FileHandler {
             updateCustomerDataFile();
         } catch (IOException e) {
             System.out.println("Unable to update " + CUSTOMER_DATA_FILENAME);
+        }
+        try {
+            updateTransactionDataFile();
+        } catch (IOException e) {
+            System.out.println("Unable to update " + TRANSACTION_DATA_FILENAME);
         }
     }
 }

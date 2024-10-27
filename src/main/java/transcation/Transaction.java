@@ -1,6 +1,7 @@
 package transcation;
 
 public class Transaction {
+    public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
     private final String transactionId;
     private final String carLicensePlate;
@@ -43,5 +44,10 @@ public class Transaction {
 
     public String getCarLicensePlate() {
         return carLicensePlate;
+    }
+
+    public String toFileString(){
+        return this.getCarLicensePlate() + " | " + this.getBorrowerName()
+                + " | " + this.getDuration() + " | " + this.getStartDate();
     }
 }

@@ -35,6 +35,10 @@ public class TransactionList {
         System.out.println("Transaction added: ");
         System.out.println(transaction.toString());
     }
+
+    public static void addTxWithoutPrintingInfo(Transaction transaction) {
+        transactionList.add(transaction);
+    }
           
     public static void printAllTransactions() {
         int index = 1;
@@ -53,5 +57,14 @@ public class TransactionList {
                     + " | " + transaction.getStartDate());
             index++;
         }
+    }
+
+    public static String transactionListToFileString(){
+        StringBuilder transactionData = new StringBuilder();
+        for (Transaction transaction : transactionList) {
+            transactionData.append(transaction.toFileString());
+            transactionData.append("\n");
+        }
+        return transactionData.toString();
     }
 }
