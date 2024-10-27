@@ -21,6 +21,12 @@ public class CarException extends RuntimeException{
         return new CarException(message);
     }
 
+    /**
+     * Exception thrown if data in carData.txt does not fit pre-determined format.
+     *
+     * @param errorLines List of row numbers in the carData.txt file which the data format is wrong.
+     * @return Exception with message of which the row of data which are wrong.
+     */
     public static CarException invalidParameters(ArrayList<Integer> errorLines){
         String message = "Car data do not match number of parameters in " + errorLines.size() + " rows of data\n";
         message += "Rows are : ";

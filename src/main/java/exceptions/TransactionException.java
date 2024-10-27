@@ -11,6 +11,12 @@ public class TransactionException extends RuntimeException {
         System.out.println(getMessage());
     }
 
+    /**
+     * Exception thrown if data in transactionData.txt does not fit pre-determined format.
+     *
+     * @param errorLines List of row numbers in the transactionData.txt file which the data format is wrong.
+     * @return Exception with message of which the row of data which are wrong.
+     */
     public static TransactionException invalidParameters(ArrayList<Integer> errorLines){
         String message = "Transaction data do not match number of parameters in "
                 + errorLines.size() + " rows of data\n";
