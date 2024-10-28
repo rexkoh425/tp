@@ -74,8 +74,6 @@ public class CarParser {
             }
         }
 
-
-
         return true;
     }
     public static String parseCarLicenseForRemoval(String userInput) throws CarException {

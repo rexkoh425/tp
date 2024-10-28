@@ -1,6 +1,5 @@
 package parser;
 
-
 import customer.Customer;
 import exceptions.CustomerException;
 import exceptions.CliRentalException;
@@ -16,8 +15,7 @@ public class CustomerParser {
      * @throws CustomerException if input is not compliant with format.
      * @throws NumberFormatException if the age and contact content are not integer string.
      */
-    public static Customer parseIntoCustomer(String userInput) throws CustomerException,
-            NumberFormatException {
+    public static Customer parseIntoCustomer(String userInput) throws CustomerException, NumberFormatException {
         userInput = userInput.substring(ADD_CUSTOMER_COMMAND.length()).trim();
         String[] parameters = { "/u" , "/a" , "/c"};
         String[] parameterContents;
