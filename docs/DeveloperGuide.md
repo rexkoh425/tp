@@ -7,6 +7,8 @@ to the original source as well}
 
 ## Design & implementation
 
+The following is our class diagram for our whole project.
+
 ![Local Image](UML/CLiRental.png)
 
 ### Sequence diagrams
