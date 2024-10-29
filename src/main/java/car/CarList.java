@@ -97,6 +97,17 @@ public class CarList {
         }
     }
 
+    private static ArrayList<Car> getRentedCarsList() {
+        ArrayList<Car> rentedCars = new ArrayList<>();
+
+        for (Car car : carsList) {
+            if (car.isRented()) {
+                rentedCars.add(car);
+            }
+        }
+        return rentedCars;
+    }
+
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
