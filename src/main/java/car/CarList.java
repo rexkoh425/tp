@@ -61,6 +61,24 @@ public class CarList {
         }
     }
 
+    public static void printRentedCarsList() {
+        ArrayList<Car> rentedCarsList = getRentedCarsList();
+
+        if (rentedCarsList.isEmpty()) {
+            System.out.println("No cars currently rented out...");
+            return;
+        }
+
+        System.out.println("Here are all the rented out cars:");
+
+        int index = 1;
+        for (Car car : rentedCarsList) {
+            System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" + car.getPrice());
+            index++;
+        }
+    }
+
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
