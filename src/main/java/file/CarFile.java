@@ -54,17 +54,15 @@ public class CarFile {
     }
 
     private static void loadCarData() throws FileNotFoundException, CarException {
-        if(CAR_DATA_FILE.exists()){
-            Scanner scanner = new Scanner(CAR_DATA_FILE);
-            ArrayList<Integer> errorLines = new ArrayList<>();
-            int line = 1;
-            while (scanner.hasNext()) {
-                scanLineAndAddCar(scanner, errorLines, line);
-                line ++;
-            }
-            if(!errorLines.isEmpty()) {
-                throw CarException.invalidParameters(errorLines);
-            }
+        Scanner scanner = new Scanner(CAR_DATA_FILE);
+        ArrayList<Integer> errorLines = new ArrayList<>();
+        int line = 1;
+        while (scanner.hasNext()) {
+            scanLineAndAddCar(scanner, errorLines, line);
+            line ++;
+        }
+        if(!errorLines.isEmpty()) {
+            throw CarException.invalidParameters(errorLines);
         }
     }
 
