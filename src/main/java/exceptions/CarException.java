@@ -20,12 +20,12 @@ public class CarException extends RuntimeException{
     }
 
     public static CarException invalidPrice() {
-        String message = "Unable to add car.. Price cannot be negative!!";
+        String message = "Price cannot be negative!! Try again...";
         return new CarException(message);
     }
 
     public static CarException invalidLicensePlateNumber() {
-        String message = "Unable to add car.. License Plate number is invalid.\n"
+        String message = "Oops!! License Plate number is invalid...\n"
                 + LICENSE_PLATE_NUMBER_FORMAT;
         return new CarException(message);
     }

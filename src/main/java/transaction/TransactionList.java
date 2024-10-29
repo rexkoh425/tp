@@ -2,6 +2,7 @@ package transaction;
 
 import car.CarList;
 import exceptions.CarException;
+import parser.CarParser;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,11 @@ public class TransactionList {
 
     public static void addTx(Transaction transaction) {
         String licensePlateNumber = transaction.getCarLicensePlate();
+
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
+
         if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)){
             throw CarException.licensePlateNumberNotFound();
         }
