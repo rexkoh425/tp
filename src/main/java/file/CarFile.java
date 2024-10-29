@@ -3,6 +3,8 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
+import exceptions.CustomerException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,10 +25,11 @@ public class CarFile {
         return CAR_DATA_FILENAME;
     }
 
-    public static String getCarDataFilepath() {
-        return CAR_DATA_FILEPATH;
-    }
-
+    /**
+     * Add car object to the list according to the parameters.
+     *
+     * @param parameters parameters of the Car object.
+     */
     private static void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         String model = parameters[0];
         String licensePlateNumber = parameters[1];
@@ -40,6 +43,11 @@ public class CarFile {
         }
     }
 
+    /**
+     * Reads the current car list and updates carData.txt file.
+     *
+     * @throws IOException File does not exist.
+     */
     public static void updateCarDataFile() throws IOException {
         FileWriter fw = new FileWriter(CAR_DATA_FILE);
         String textToAdd = CarList.carListToFileString();
@@ -53,6 +61,12 @@ public class CarFile {
         }
     }
 
+    /**
+     * Reads every line in the carData.txt file and add it to the current car list.
+     *
+     * @throws FileNotFoundException if carData.txt does not exist.
+     * @throws CarException if there is corruption in file data.
+     */
     private static void loadCarData() throws FileNotFoundException, CarException {
         Scanner scanner = new Scanner(CAR_DATA_FILE);
         ArrayList<Integer> errorLines = new ArrayList<>();
@@ -66,6 +80,12 @@ public class CarFile {
         }
     }
 
+    /**
+     * Scans the current line and add data to current car list.
+     *
+     * @param errorLines List of line number which the data were wrongly formatted.
+     * @param line the current line number.
+     */
     private static void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
@@ -76,6 +96,9 @@ public class CarFile {
         }
     }
 
+    /**
+     * Loads data from carData.txt if the file exist.
+     */
     public static void loadCarDataIfExist(){
         try {
             CarFile.loadCarData();
