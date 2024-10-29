@@ -53,7 +53,7 @@ public class Car {
             return "Expensive";
         }
         else {
-            return "Cheap";
+            return "Affordable";
         }
     }
 
