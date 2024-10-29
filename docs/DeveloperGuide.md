@@ -11,7 +11,13 @@ to the original source as well}
 
 ### Sequence diagrams
 
-1. `Creating Car file and loading file`
+1. `Adding a customer`
+
+The following sequence diagram will explain the sequence of events after the user inputs an add-user command.
+
+![Local Image](UML/AddCustomerSequence.png)
+
+2. `Creating Car file and loading file`
 
 The following sequence diagram will explain the sequence of events for loading of the carData.txt which happens at the
 start of the program. The carData.txt will be created if it does not exist at the start of program and its data will be
