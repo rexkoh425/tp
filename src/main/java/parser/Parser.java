@@ -39,7 +39,7 @@ public class Parser {
     }
 
     public static boolean parse(String userInput) throws CliRentalException {
-        String[] words = userInput.split(" ");
+        String[] words = userInput.split(" ",2);
         String command = words[0].toLowerCase();
 
         switch (command) {
@@ -89,7 +89,7 @@ public class Parser {
             CustomerList.printCustomers();
             return false;
         case REMOVE_TRANSACTION_COMMAND:
-            TransactionList.removeTransaction(userInput);
+            TransactionList.removeTx(userInput);
             return false;
         case LIST_ALL_TRANSACTIONS:
             TransactionList.printAllTransactions();

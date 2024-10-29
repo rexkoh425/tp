@@ -11,7 +11,7 @@ public class CarException extends RuntimeException{
     }
 
     public static CarException addCarException() {
-        String message = "Unable to add car.. Refer to correct format below:\n" +
+        String message = "Unable to add car. Refer to correct format below:\n" +
                 ADD_CAR_FORMAT;
         return new CarException(message);
     }
