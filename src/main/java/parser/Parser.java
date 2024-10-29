@@ -32,7 +32,6 @@ public class Parser {
     public static String getUserInput(){
         System.out.println("What would you like to do?");
         printDividerLine();
-        CarList.sortCarsByPrice();
         String userInput = scanner.nextLine().trim();
         return userInput;
     }
