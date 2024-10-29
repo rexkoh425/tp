@@ -79,6 +79,24 @@ public class CarList {
         }
     }
 
+    public static void printAvailableCarsList() {
+        ArrayList<Car> availableCarsList = getAvailableCarsList();
+
+        if (availableCarsList.isEmpty()) {
+            System.out.println("There are no available cars at the moment...");
+            return;
+        }
+
+        System.out.println("Here are all the available cars:");
+
+        int index = 1;
+        for (Car car : availableCarsList) {
+            System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" + car.getPrice());
+            index++;
+        }
+    }
+
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
