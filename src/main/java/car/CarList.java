@@ -26,7 +26,7 @@ public class CarList {
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
-                + " | $" + car.getPrice() + " | " + car.getRentedStatus());
+                + " | $" + car.getPrice() + " | " + car.getRentedStatus() + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
     }
 
     public static void removeCar(String carLicensePlateNumber) {
@@ -51,7 +51,6 @@ public class CarList {
 
     public static void printCarList(){
         System.out.println("Here are the current cars in the company");
-        markCarAsExpensive(); // This can be optimized by putting the if-else statements in the below for-loop, but I think we should keep it this way
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
