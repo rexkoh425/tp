@@ -4,19 +4,21 @@ public class Transaction {
     private static int transactionCounter = 1;
     private final String transactionId;
     private final String carLicensePlate;
-    private final String borrowerName;
+    private final String Customer;
     private final String duration;
     private final String startDate;
+    private boolean isCompleted;
 
 
 
-    public Transaction(String carLicensePlate, String borrowerName, String duration,
+    public Transaction(String carLicensePlate, String Customer, String duration,
                        String startDate) {
-        this.transactionId = "TX" + String.valueOf(transactionCounter++);
+        this.transactionId = "TX" + transactionCounter++;
         this.carLicensePlate = carLicensePlate;
-        this.borrowerName = borrowerName;
+        this.Customer = Customer;
         this.duration = duration;
         this.startDate = startDate;
+        this.isCompleted = false;
     }
 
     public String getTransactionId() {
@@ -25,23 +27,27 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return transactionId + " | " + carLicensePlate + " | " + borrowerName + " | " +
+        if (this.isCompleted) {
+            return "[X] " + transactionId + " | " + carLicensePlate + " | " + Customer + " | " +
+                    duration + "day(s) " + '\n' + "Start Date: " + startDate;
+        } else return "[ ] " + transactionId + " | " + carLicensePlate + " | " + Customer + " | " +
                 duration + "day(s) " + '\n' + "Start Date: " + startDate;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public String getBorrowerName() {
-        return borrowerName;
+    public String getCustomer() {
+        return Customer;
     }
 
     public String getCarLicensePlate() {
         return carLicensePlate;
     }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
 }
