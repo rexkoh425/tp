@@ -38,15 +38,21 @@ public class Car {
         isRented = false;
     }
 
-    public void markAsExpensive() { isExpensive = true; }
+    public void markAsExpensive() {
+        isExpensive = true;
+    }
 
-    public void markAsCheap() { isExpensive = false; }
+    public void markAsCheap() {
+        isExpensive = false;
+    }
 
     public boolean isRented() {
         return isRented;
     }
 
-    public boolean isExpensive() { return isExpensive; }
+    public boolean isExpensive() {
+        return isExpensive;
+    }
 
     public String getExpensiveStatus(){
         if (isExpensive) {
