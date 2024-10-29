@@ -21,6 +21,9 @@ public class Parser {
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String LIST_CARS_COMMAND = "list-cars";
+    private static final String LIST_RENTED_CARS_COMMAND = "list-rented";
+    private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
+    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
     private static final String LIST_ALL_TRANSACTIONS = "list-tx";
     private static final String EXIT_COMMAND = "exit";
