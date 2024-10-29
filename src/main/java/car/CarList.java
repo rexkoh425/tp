@@ -4,6 +4,11 @@ import exceptions.CarException;
 
 import java.util.ArrayList;
 
+import java.util.Collections;
+
+import java.util.Comparator;
+
+
 public class CarList {
 
     public static ArrayList<Car> carsList = new ArrayList<>();
@@ -46,10 +51,11 @@ public class CarList {
 
     public static void printCarList(){
         System.out.println("Here are the current cars in the company");
+        markCarAsExpensive(); // This can be optimized by putting the if-else statements in the below for-loop, but I think we should keep it this way
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" +car.getPrice() + " | " + car.getRentedStatus());
+                    + " | $" +car.getPrice() + " | " + car.getRentedStatus() + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
         }
     }
 
@@ -76,6 +82,32 @@ public class CarList {
             if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {
                 car.markAsAvailable();
                 break;
+            }
+        }
+    }
+
+    public static void sortCarsByPrice() {
+        Collections.sort(carsList, Comparator.comparingDouble(Car::getPrice));
+    }
+
+    public static double getMedianPrice() {
+        if (carsList.isEmpty()) {
+            return Integer.parseInt(null);
+        }
+        int middleIndex = carsList.size() / 2;
+        if (carsList.size() % 2 == 0) {
+            // For even-sized lists, choose the lower middle element
+            middleIndex--;
+        }
+        return carsList.get(middleIndex).getPrice();
+    }
+    public static void markCarAsExpensive() {
+        for (Car car : carsList) {
+            if (car.getPrice() > getMedianPrice()) {
+                car.markAsExpensive();
+            }
+            else {
+                car.markAsCheap();
             }
         }
     }
