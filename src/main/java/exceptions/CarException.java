@@ -3,8 +3,11 @@ package exceptions;
 public class CarException extends RuntimeException{
 
     private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]";
-    private static final String LICENSE_PLATE_NUMBER_FORMAT = "\nLicense Plate number format: SXX####X"
-            + "\nX -> Letters [A - Z], # -> Numbers [0 - 9]";
+    private static final String LICENSE_PLATE_NUMBER_FORMAT = """
+
+            License Plate number format: SXX####X\
+
+            X -> Letters [A - Z], # -> Numbers [0 - 9]""";
 
     public CarException(String message) {
         super(message);

@@ -30,8 +30,10 @@ public class Transaction {
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + Customer + " | " +
                     duration + "day(s) " + '\n' + "Start Date: " + startDate;
-        } else return "[ ] " + transactionId + " | " + carLicensePlate + " | " + Customer + " | " +
-                duration + "day(s) " + '\n' + "Start Date: " + startDate;
+        } else {
+            return "[ ] " + transactionId + " | " + carLicensePlate + " | " + Customer + " | " +
+                    duration + "day(s) " + '\n' + "Start Date: " + startDate;
+        }
     }
 
     public void setCompleted(boolean completed) {
