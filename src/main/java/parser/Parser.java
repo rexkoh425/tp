@@ -19,7 +19,6 @@ public class Parser {
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
-    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String LIST_RENTED_CARS_COMMAND = "list-rented";
     private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
@@ -53,29 +52,6 @@ public class Parser {
             Customer customer = CustomerParser.parseIntoCustomer(userInput);
             CustomerList.addCustomer(customer);
             return false;
-        case ADD_CAR_COMMAND:
-            Car car = CarParser.parseIntoCar(userInput);
-            CarList.addCar(car);
-            return false;
-        case LIST_CARS_COMMAND:
-            CarList.printCarList();
-            return false;
-        case ADD_TRANSACTION_COMMAND:
-            try {
-                Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
-                TransactionList.addTx(transaction);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-            return false;
-        case REMOVE_CAR_COMMAND:
-            try {
-                String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
-                CarList.removeCar(carLicensePlateNumber);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            return false;
         case REMOVE_CUSTOMER_COMMAND:
             try {
                 String username = CustomerParser.parseUsernameForRemoval(userInput);
@@ -90,6 +66,35 @@ public class Parser {
             return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();
+            return false;
+        case ADD_CAR_COMMAND:
+            Car car = CarParser.parseIntoCar(userInput);
+            CarList.addCar(car);
+            return false;
+        case REMOVE_CAR_COMMAND:
+            try {
+                String carLicensePlateNumber = CarParser.parseCarLicenseForRemoval(userInput);
+                CarList.removeCar(carLicensePlateNumber);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return false;
+        case LIST_CARS_COMMAND:
+            CarList.printCarList();
+            return false;
+        case LIST_RENTED_CARS_COMMAND:
+            CarList.printRentedCarsList();
+            return false;
+        case LIST_AVAILABLE_CARS_COMMAND:
+            CarList.printAvailableCarsList();
+            return false;
+        case ADD_TRANSACTION_COMMAND:
+            try {
+                Transaction transaction = TransactionParser.parseIntoTransaction(userInput);
+                TransactionList.addTx(transaction);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
             return false;
         case REMOVE_TRANSACTION_COMMAND:
             TransactionList.removeTransaction(userInput);
