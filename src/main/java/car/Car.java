@@ -57,8 +57,7 @@ public class Car {
     public String getExpensiveStatus(){
         if (isExpensive) {
             return "Expensive";
-        }
-        else {
+        } else {
             return "Affordable";
         }
     }

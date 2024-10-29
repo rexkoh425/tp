@@ -104,8 +104,7 @@ public class CarList {
         for (Car car : carsList) {
             if (car.getPrice() > getMedianPrice()) {
                 car.markAsExpensive();
-            }
-            else {
+            } else {
                 car.markAsCheap();
             }
         }
