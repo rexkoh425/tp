@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Parser {
 
     public static Scanner scanner = new Scanner(System.in);
+    public static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String HELP_COMMAND = "help";
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String REMOVE_CUSTOMER_COMMAND = "remove-user";
@@ -22,7 +23,6 @@ public class Parser {
     private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String LIST_RENTED_CARS_COMMAND = "list-rented";
     private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
-    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
     private static final String MARK_TRANSACTION_COMMAND = "mark-tx";
     private static final String UNMARK_TRANSACTION_COMMAND = "unmark-tx";
