@@ -3,8 +3,6 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
-import exceptions.CustomerException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,12 +15,24 @@ import java.util.Scanner;
  */
 public class CarFile {
 
-    private static final String CAR_DATA_FILENAME = "carData.txt";
-    private static final String CAR_DATA_FILEPATH = FileHandler.getDirName() + "/" + CAR_DATA_FILENAME;
-    private static final File CAR_DATA_FILE = new File(CAR_DATA_FILEPATH);
+    private final String carDataFileName;
+    private final String carDataFilePath;
+    private final File carDataFile;
 
-    public static String getCarDataFilename() {
-        return CAR_DATA_FILENAME;
+    public CarFile(){
+        this.carDataFileName = "carData.txt";
+        this.carDataFilePath = FileHandler.getDirName() + "/" + carDataFileName;
+        this.carDataFile = new File(carDataFilePath);
+    }
+
+    public CarFile(String filename){
+        this.carDataFileName = filename;
+        this.carDataFilePath = FileHandler.getDirName() + "/" + carDataFileName;
+        this.carDataFile = new File(carDataFilePath);
+    }
+
+    public String getCarDataFilename() {
+        return this.carDataFileName;
     }
 
     /**
@@ -30,7 +40,7 @@ public class CarFile {
      *
      * @param parameters parameters of the Car object.
      */
-    private static void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
+    public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         String model = parameters[0];
         String licensePlateNumber = parameters[1];
         try {
@@ -48,16 +58,16 @@ public class CarFile {
      *
      * @throws IOException File does not exist.
      */
-    public static void updateCarDataFile() throws IOException {
-        FileWriter fw = new FileWriter(CAR_DATA_FILE);
+    public void updateCarDataFile() throws IOException {
+        FileWriter fw = new FileWriter(carDataFile);
         String textToAdd = CarList.carListToFileString();
         fw.write(textToAdd);
         fw.close();
     }
 
-    public static void createCarFileIfNotExist(){
-        if(!CAR_DATA_FILE.exists()){
-            FileHandler.createNewFile(CAR_DATA_FILE);
+    public void createCarFileIfNotExist(){
+        if(!carDataFile.exists()){
+            FileHandler.createNewFile(carDataFile);
         }
     }
 
@@ -67,8 +77,8 @@ public class CarFile {
      * @throws FileNotFoundException if carData.txt does not exist.
      * @throws CarException if there is corruption in file data.
      */
-    private static void loadCarData() throws FileNotFoundException, CarException {
-        Scanner scanner = new Scanner(CAR_DATA_FILE);
+    public void loadCarData() throws FileNotFoundException, CarException {
+        Scanner scanner = new Scanner(carDataFile);
         ArrayList<Integer> errorLines = new ArrayList<>();
         int line = 1;
         while (scanner.hasNext()) {
@@ -86,7 +96,7 @@ public class CarFile {
      * @param errorLines List of line number which the data were wrongly formatted.
      * @param line the current line number.
      */
-    private static void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+    public void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
         if(parameters.length != Car.NUMBER_OF_PARAMETERS){
@@ -99,13 +109,17 @@ public class CarFile {
     /**
      * Loads data from carData.txt if the file exist.
      */
-    public static void loadCarDataIfExist(){
+    public void loadCarDataIfExist(){
         try {
-            CarFile.loadCarData();
+            this.loadCarData();
         } catch (FileNotFoundException e) {
             System.out.println("carData.txt not found in data directory. Please try again");
         } catch (CarException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String getAbsolutePath(){
+        return carDataFile.getAbsolutePath();
     }
 }

@@ -14,17 +14,29 @@ import java.util.Scanner;
  * Handles file operation for the customer.
  */
 public class CustomerFile {
-    private static final String CUSTOMER_DATA_FILENAME = "customerData.txt";
-    private static final String CUSTOMER_DATA_FILEPATH = FileHandler.getDirName() + "/" + CUSTOMER_DATA_FILENAME;
-    private static final File CUSTOMER_DATA_FILE = new File(CUSTOMER_DATA_FILEPATH);
+    private final String customerDataFileName;
+    private final String customerDataFilePath ;
+    private final File customerDataFile;
 
-    public static String getCustomerDataFilename() {
-        return CUSTOMER_DATA_FILENAME;
+    public CustomerFile(){
+        this.customerDataFileName = "customerData.txt";
+        this.customerDataFilePath = FileHandler.getDirName() + "/" + customerDataFileName;
+        this.customerDataFile = new File(customerDataFilePath);
     }
 
-    public static void createCustomerFileIfNotExist(){
-        if(!CUSTOMER_DATA_FILE.exists()){
-            FileHandler.createNewFile(CUSTOMER_DATA_FILE);
+    public CustomerFile(String filename){
+        this.customerDataFileName = filename;
+        this.customerDataFilePath = FileHandler.getDirName() + "/" + customerDataFileName;
+        this.customerDataFile = new File(customerDataFilePath);
+    }
+
+    public String getCustomerDataFilename() {
+        return this.customerDataFileName;
+    }
+
+    public void createCustomerFileIfNotExist(){
+        if(!this.customerDataFile.exists()){
+            FileHandler.createNewFile(this.customerDataFile);
         }
     }
 
@@ -34,9 +46,9 @@ public class CustomerFile {
      * @throws FileNotFoundException if customerData.txt does not exist.
      * @throws CustomerException if there is corruption in file data.
      */
-    private static void loadCustomerData() throws FileNotFoundException, CustomerException {
-        if(CUSTOMER_DATA_FILE.exists()){
-            Scanner scanner = new Scanner(CUSTOMER_DATA_FILE);
+    public void loadCustomerData() throws FileNotFoundException, CustomerException {
+        if(this.customerDataFile.exists()){
+            Scanner scanner = new Scanner(this.customerDataFile);
             ArrayList<Integer> errorLines = new ArrayList<>();
             int line = 1;
             while (scanner.hasNext()) {
@@ -55,7 +67,7 @@ public class CustomerFile {
      * @param errorLines List of line number which the data were wrongly formatted.
      * @param line the current line number.
      */
-    private static void scanLineAndAddCustomer(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+    public void scanLineAndAddCustomer(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
         if(parameters.length != Customer.NUMBER_OF_PARAMETERS){
@@ -70,8 +82,8 @@ public class CustomerFile {
      *
      * @throws IOException File does not exist.
      */
-    public static void updateCustomerDataFile() throws IOException {
-        FileWriter fw = new FileWriter(CUSTOMER_DATA_FILE);
+    public void updateCustomerDataFile() throws IOException {
+        FileWriter fw = new FileWriter(this.customerDataFile);
         String textToAdd = CustomerList.customerListToFileString();
         fw.write(textToAdd);
         fw.close();
@@ -82,7 +94,7 @@ public class CustomerFile {
      *
      * @param parameters parameters of the Customer object.
      */
-    private static void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
+    public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
         assert parameters.length == 3 : "Parameter for customers is wrong";
         String username = parameters[0];
         try {
@@ -98,7 +110,7 @@ public class CustomerFile {
     /**
      * Loads data from customerData.txt if the file exist.
      */
-    public static void loadCustomerDataIfExist(){
+    public void loadCustomerDataIfExist(){
         try {
             loadCustomerData();
         } catch (FileNotFoundException e) {
@@ -106,5 +118,9 @@ public class CustomerFile {
         } catch (CustomerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String getAbsolutePath(){
+        return this.customerDataFile.getAbsolutePath();
     }
 }

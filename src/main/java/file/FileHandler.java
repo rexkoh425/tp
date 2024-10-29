@@ -10,6 +10,9 @@ public class FileHandler {
 
     private static final String DIR_NAME = "data";
     private static final File DATA_DIR = new File(DIR_NAME);
+    private static final CarFile carFile = new CarFile();
+    private static final CustomerFile customerFile = new CustomerFile();
+    private static final TransactionFile transactionFile = new TransactionFile();
 
     public FileHandler(){
 
@@ -24,12 +27,12 @@ public class FileHandler {
      */
     public static void createAndLoadFiles(){
         createFolderIfNotExist();
-        CarFile.createCarFileIfNotExist();
-        CustomerFile.createCustomerFileIfNotExist();
-        TransactionFile.createTransactionFileIfNotExist();
-        CarFile.loadCarDataIfExist();
-        CustomerFile.loadCustomerDataIfExist();
-        TransactionFile.loadTransactionDataIfExist();
+        carFile.createCarFileIfNotExist();
+        customerFile.createCustomerFileIfNotExist();
+        transactionFile.createTransactionFileIfNotExist();
+        carFile.loadCarDataIfExist();
+        customerFile.loadCustomerDataIfExist();
+        transactionFile.loadTransactionDataIfExist();
     }
 
     /**
@@ -81,19 +84,19 @@ public class FileHandler {
      */
     public static void updateFiles(){
         try {
-            CarFile.updateCarDataFile();
+            carFile.updateCarDataFile();
         } catch (IOException e) {
-            System.out.println("Unable to update " + CarFile.getCarDataFilename());
+            System.out.println("Unable to update " + carFile.getCarDataFilename());
         }
         try {
-            CustomerFile.updateCustomerDataFile();
+            customerFile.updateCustomerDataFile();
         } catch (IOException e) {
-            System.out.println("Unable to update " + CustomerFile.getCustomerDataFilename());
+            System.out.println("Unable to update " + customerFile.getCustomerDataFilename());
         }
         try {
-            TransactionFile.updateTransactionDataFile();
+            transactionFile.updateTransactionDataFile();
         } catch (IOException e) {
-            System.out.println("Unable to update " + TransactionFile.getTransactionDataFilename());
+            System.out.println("Unable to update " + transactionFile.getTransactionDataFilename());
         }
     }
 }

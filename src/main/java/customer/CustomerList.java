@@ -12,6 +12,9 @@ public class CustomerList {
         System.out.println(customer.toString());
     }
 
+    public static ArrayList<Customer> getCustomerList(){
+        return customers;
+    }
     public static void addCustomerWithoutPrintingInfo(Customer customer){
         customers.add(customer);
     }

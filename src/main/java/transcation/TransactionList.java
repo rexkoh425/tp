@@ -8,6 +8,10 @@ public class TransactionList {
             "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE]";
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
+    public static ArrayList<Transaction> getTransactionList(){
+        return transactionList;
+    }
+
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");

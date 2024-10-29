@@ -15,17 +15,29 @@ import java.util.Scanner;
  */
 public class TransactionFile {
 
-    private static final String TRANSACTION_DATA_FILENAME = "transactionData.txt";
-    private static final String TRANSACTION_DATA_FILEPATH = FileHandler.getDirName() + "/" + TRANSACTION_DATA_FILENAME;
-    private static final File TRANSACTION_DATA_FILE = new File(TRANSACTION_DATA_FILEPATH);
+    private final String transactionDataFileName;
+    private final String transactionDataFilePath ;
+    private final File transactionDataFile;
 
-    public static String getTransactionDataFilename() {
-        return TRANSACTION_DATA_FILENAME;
+    public TransactionFile(){
+        this.transactionDataFileName = "transactionData.txt";
+        this.transactionDataFilePath = FileHandler.getDirName() + "/" + transactionDataFileName;
+        this.transactionDataFile = new File(transactionDataFilePath);
     }
 
-    public static void createTransactionFileIfNotExist(){
-        if(!TRANSACTION_DATA_FILE.exists()){
-            FileHandler.createNewFile(TRANSACTION_DATA_FILE);
+    public TransactionFile(String filename){
+        this.transactionDataFileName = filename;
+        this.transactionDataFilePath = FileHandler.getDirName() + "/" + transactionDataFileName;
+        this.transactionDataFile = new File(transactionDataFilePath);
+    }
+
+    public String getTransactionDataFilename() {
+        return transactionDataFileName;
+    }
+
+    public void createTransactionFileIfNotExist(){
+        if(!transactionDataFile.exists()){
+            FileHandler.createNewFile(transactionDataFile);
         }
     }
 
@@ -35,9 +47,9 @@ public class TransactionFile {
      * @throws FileNotFoundException if transactionData.txt does not exist.
      * @throws TransactionException if there is corruption in file data.
      */
-    private static void loadTransactionData() throws FileNotFoundException, TransactionException {
-        if(TRANSACTION_DATA_FILE.exists()){
-            Scanner scanner = new Scanner(TRANSACTION_DATA_FILE);
+    public void loadTransactionData() throws FileNotFoundException, TransactionException {
+        if(transactionDataFile.exists()){
+            Scanner scanner = new Scanner(transactionDataFile);
             ArrayList<Integer> errorLines = new ArrayList<>();
             int line = 1;
             while (scanner.hasNext()) {
@@ -53,7 +65,7 @@ public class TransactionFile {
     /**
      * Loads data from transactionData.txt if the file exist.
      */
-    public static void loadTransactionDataIfExist(){
+    public void loadTransactionDataIfExist(){
         try {
             loadTransactionData();
         } catch (FileNotFoundException e) {
@@ -69,7 +81,7 @@ public class TransactionFile {
      * @param errorLines List of line number which the data were wrongly formatted.
      * @param line the current line number.
      */
-    private static void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
+    public void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
         if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
@@ -84,7 +96,7 @@ public class TransactionFile {
      *
      * @param parameters parameters of the Transaction object
      */
-    private static void addTransactionWithParameters(String[] parameters) {
+    public void addTransactionWithParameters(String[] parameters) {
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
         String duration = parameters[2];
@@ -98,10 +110,14 @@ public class TransactionFile {
      *
      * @throws IOException File does not exist.
      */
-    public static void updateTransactionDataFile() throws IOException {
-        FileWriter fw = new FileWriter(TRANSACTION_DATA_FILE);
+    public void updateTransactionDataFile() throws IOException {
+        FileWriter fw = new FileWriter(transactionDataFile);
         String textToAdd = TransactionList.transactionListToFileString();
         fw.write(textToAdd);
         fw.close();
+    }
+
+    public String getAbsolutePath(){
+        return transactionDataFile.getAbsolutePath();
     }
 }
