@@ -1,11 +1,14 @@
 package parser;
 
-import transcation.Transaction;
+import transaction.Transaction;
+
 import java.time.LocalDate;
 
 public class TransactionParser {
 
     private static final String ADD_TRANSACTION_COMMAND = "add-tx";
+    public static final String ADD_TRANSACTION_FORMAT = "add-tx /p [CAR_LICENSE_PLATE]" +
+            "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE]";
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
         userInput = userInput.substring(ADD_TRANSACTION_COMMAND.length()).trim();
@@ -15,7 +18,7 @@ public class TransactionParser {
         if (isValidSequence(parameters, userInput)) {
             parameterContents = parseParameterContents(parameters, userInput);
         } else {
-            throw new IllegalArgumentException("Invalid command format for adding a transaction.");
+            throw new IllegalArgumentException("Invalid command format for adding a transaction. Refer to the format below: " + "\n" + ADD_TRANSACTION_COMMAND);
         }
 
         String carLicensePlate = parameterContents[0];
@@ -23,7 +26,7 @@ public class TransactionParser {
         int duration = Integer.parseInt(parameterContents[2]);
         LocalDate startDate = LocalDate.parse(parameterContents[3]);
 
-        return new Transaction(carLicensePlate, userName, String.valueOf(duration),
+        return new Transaction(carLicensePlate.toUpperCase(), userName, String.valueOf(duration),
                 startDate.toString());
     }
 
