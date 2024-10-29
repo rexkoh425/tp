@@ -1,14 +1,19 @@
 package parser;
 
 import transaction.Transaction;
-
+import transaction.TransactionList;
 import java.time.LocalDate;
+import static parser.Parser.ADD_TRANSACTION_COMMAND;
 
 public class TransactionParser {
 
+
     public static final String ADD_TRANSACTION_FORMAT = "add-tx /p [CAR_LICENSE_PLATE]" +
             "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE]";
-    private static final String ADD_TRANSACTION_COMMAND = "add-tx";
+    public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-tx-by-customer /u [CUSTOMER_NAME]";
+    public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
+    public static final String MARK_TRANSACTION_FORMAT = "mark-tx /t [TRANSACTION_ID]";
+    public static final String UNMARK_TRANSACTION_FORMAT = "unmark-tx /t [TRANSACTION_ID]";
 
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
@@ -54,6 +59,46 @@ public class TransactionParser {
             }
         }
         return contents;
+    }
+
+    public static void parseFindTxsByCustomer(String userInput) {
+        String[] words = userInput.split(" ",3);
+        if (words.length < 3 || !words[1].equals("/u")) {
+            System.out.println("Unable to search for transaction. Refer to correct format below:");
+            System.out.println(FIND_TRANSACTION_BY_CUSTOMER_FORMAT);
+            return;
+        }
+        TransactionList.findTxsByCustomer(words[2].toLowerCase());
+    }
+
+    public static void parseRemoveTx(String userInput){
+        String[] words = userInput.split(" ",3);
+        if (words.length < 3 || !words[1].equals("/t") || !words[2].toLowerCase().startsWith("tx")) {
+            System.out.println("Unable to remove transaction. Refer to correct format below:");
+            System.out.println(REMOVE_TRANSACTION_FORMAT);
+            return;
+        }
+        TransactionList.removeTxByTxId(words[2].toLowerCase());
+    }
+
+    public static void parseMarkCompleted(String userInput){
+        String[] words = userInput.split(" ",3);
+        if (words.length < 3 || !words[1].equals("/t") || !words[2].toLowerCase().startsWith("tx")) {
+            System.out.println("Unable to mark transaction. Refer to correct format below:");
+            System.out.println(MARK_TRANSACTION_FORMAT);
+            return;
+        }
+        TransactionList.markCompletedByTxId(words[2].toLowerCase());
+    }
+
+    public static void parseUnmarkCompleted(String userInput){
+        String[] words = userInput.split(" ",3);
+        if (words.length < 3 || !words[1].equals("/t") || !words[2].toLowerCase().startsWith("tx")) {
+            System.out.println("Unable to unmark transaction. Refer to correct format below:");
+            System.out.println(UNMARK_TRANSACTION_FORMAT);
+            return;
+        }
+        TransactionList.unmarkCompletedByTxId(words[2].toLowerCase());
     }
 
 }

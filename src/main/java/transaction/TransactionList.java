@@ -6,7 +6,6 @@ import exceptions.CarException;
 import java.util.ArrayList;
 
 public class TransactionList {
-    public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
     public static void addTx(Transaction transaction) {
@@ -31,30 +30,84 @@ public class TransactionList {
         System.out.println("Here are all the transactions: ");
 
         for (Transaction transaction : transactionList) {
-            System.out.println(index + ") " + transaction.getTransactionId()
-                    + " | " + transaction.getCarLicensePlate()
-                    + " | " + transaction.getBorrowerName()
-                    + " | " + transaction.getDuration()
-                    + " | " + transaction.getStartDate());
+            System.out.println(index + ") " + transaction);
             index++;
         }
     }
 
-    public static void removeTx(String userInput){
-        String[] words = userInput.split(" ",3);
-        if (words.length < 3 || words[1] != "/t" || !words[2].toLowerCase().startsWith("tx")) {
-            System.out.println("Unable to remove transaction. Refer to correct format below:");
-            System.out.println(REMOVE_TRANSACTION_FORMAT);
+    public static void printCompletedTransactions() {
+        int index = 1;
+
+        if (transactionList.isEmpty()) {
+            System.out.println("No transaction available.");
             return;
         }
-        removeTxByTxId(words[2].toLowerCase());
+
+        System.out.println("Here are all the completed transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            if(transaction.isCompleted()) {
+                System.out.println(index + ") " + transaction);
+                index++;
+            }
+        }
+    }
+
+    public static void printUncompletedTransactions() {
+        int index = 1;
+
+        if (transactionList.isEmpty()) {
+            System.out.println("No transaction available.");
+            return;
+        }
+
+        System.out.println("Here are all the uncompleted transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            if(!transaction.isCompleted()) {
+                System.out.println(index + ") " + transaction);
+                index++;
+            }
+        }
     }
 
     public static void removeTxByTxId(String txId) {
         for (Transaction transaction : transactionList) {
             if (transaction.getTransactionId().toLowerCase().equals(txId)) {
-                System.out.println(new StringBuilder().append("Transaction deleted: ").append(transaction).toString());
+                System.out.println("Transaction deleted: " + transaction);
                 transactionList.remove(transaction);
+                return;
+            }
+        }
+        System.out.println("Transaction not found");
+    }
+
+    public static void findTxsByCustomer(String customer) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCustomer().toLowerCase().equals(customer)) {
+                System.out.println("Transaction(s) by " + customer + " found:");
+                System.out.println(transaction);
+            }
+        }
+        System.out.println("Transaction not found");
+    }
+    
+    public static void markCompletedByTxId(String txId) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getTransactionId().toLowerCase().equals(txId)) {
+                transaction.setCompleted(true);
+                System.out.println("Transaction completed: " + transaction);
+                return;
+            }
+        }
+        System.out.println("Transaction not found");
+    }
+
+    public static void unmarkCompletedByTxId(String txId) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getTransactionId().toLowerCase().equals(txId)) {
+                transaction.setCompleted(false);
+                System.out.println("Transaction set uncompleted: " + transaction);
                 return;
             }
         }
