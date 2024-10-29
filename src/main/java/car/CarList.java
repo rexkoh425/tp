@@ -45,7 +45,6 @@ public class CarList {
     }
 
     public static void printCarList(){
-        System.out.println("Here are the current cars in the company");
         if (carsList.isEmpty()) {
             System.out.println("Oops!! Car list is empty..."
                     + "\nUse command <add-car> to add a new car.");
@@ -106,6 +105,17 @@ public class CarList {
             }
         }
         return rentedCars;
+    }
+
+    private static ArrayList<Car> getAvailableCarsList() {
+        ArrayList<Car> availableCars = new ArrayList<>();
+
+        for (Car car : carsList) {
+            if (!car.isRented()) {
+                availableCars.add(car);
+            }
+        }
+        return availableCars;
     }
 
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
