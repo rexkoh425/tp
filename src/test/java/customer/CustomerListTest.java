@@ -3,10 +3,12 @@ package customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+
 public class CustomerListTest {
 
     @Test
     public void testAddCustomer() {
+        CustomerList.getCustomers().clear();
         Customer customer1 = new Customer("John" , 18 , 98414916);
         Customer customer2 = new Customer("Mary" , 20 , 98411416);
         CustomerList.addCustomer(customer1);
@@ -18,5 +20,4 @@ public class CustomerListTest {
         CustomerList.getCustomers().remove(customer1);
         CustomerList.getCustomers().remove(customer2);
     }
-
 }

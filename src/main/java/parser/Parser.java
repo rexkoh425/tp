@@ -24,7 +24,12 @@ public class Parser {
     private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
     private static final String ADD_TRANSACTION_COMMAND = "add-tx";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
+    private static final String MARK_TRANSACTION_COMMAND = "mark-tx";
+    private static final String UNMARK_TRANSACTION_COMMAND = "unmark-tx";
     private static final String LIST_ALL_TRANSACTIONS = "list-tx";
+    private static final String LIST_COMPLETED_TRANSACTIONS = "list-tx-completed";
+    private static final String LIST_UNCOMPLETED_TRANSACTIONS = "list-tx-uncompleted";
+    private static final String FIND_TRANSACTION_BY_CUSTOMER_COMMAND = "find-tx-by-customer";
     private static final String EXIT_COMMAND = "exit";
 
     public static void printDividerLine() {
@@ -35,13 +40,11 @@ public class Parser {
         System.out.println("What would you like to do?");
         printDividerLine();
 
-        String userInput = scanner.nextLine().trim();
-
-        return userInput;
+        return scanner.nextLine().trim();
     }
 
     public static boolean parse(String userInput) throws CliRentalException {
-        String[] words = userInput.split(" ");
+        String[] words = userInput.split(" ",2);
         String command = words[0].toLowerCase();
 
         switch (command) {
@@ -97,10 +100,25 @@ public class Parser {
             }
             return false;
         case REMOVE_TRANSACTION_COMMAND:
-            TransactionList.removeTransaction(userInput);
+            TransactionParser.parseRemoveTx(userInput);
+            return false;
+        case MARK_TRANSACTION_COMMAND:
+            TransactionParser.parseMarkCompleted(userInput);
+            return false;
+        case UNMARK_TRANSACTION_COMMAND:
+            TransactionParser.parseUnmarkCompleted(userInput);
             return false;
         case LIST_ALL_TRANSACTIONS:
             TransactionList.printAllTransactions();
+            return false;
+        case LIST_COMPLETED_TRANSACTIONS:
+            TransactionList.printCompletedTransactions();
+            return false;
+        case LIST_UNCOMPLETED_TRANSACTIONS:
+            TransactionList.printUncompletedTransactions();
+            return false;
+        case FIND_TRANSACTION_BY_CUSTOMER_COMMAND:
+            TransactionParser.parseFindTxsByCustomer(userInput);
             return false;
         case EXIT_COMMAND:
             return true;
