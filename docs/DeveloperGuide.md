@@ -7,7 +7,7 @@ to the original source as well}
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+![Local Image](UML/CLiRental.png)
 
 ### Sequence diagrams
 

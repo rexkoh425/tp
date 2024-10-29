@@ -4,7 +4,6 @@ import customer.Customer;
 import exceptions.CustomerException;
 import exceptions.CliRentalException;
 
-
 public class CustomerParser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
