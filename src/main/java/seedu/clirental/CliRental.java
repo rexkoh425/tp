@@ -7,7 +7,6 @@ import parser.HelpParser;
 import parser.Parser;
 
 public class CliRental {
-    public static final String line = "____________________________________________________________";
     /**
      * Main entry-point for the java.clirental.CliRental application.
      */
@@ -49,8 +48,8 @@ public class CliRental {
                 """;
         System.out.println(logo);
         System.out.println("Hello, thank you for choosing our car rental management program CliRental");
-        System.out.println(line);
+        Parser.printDividerLine();
         HelpParser.parseHelpCommand();
-        System.out.println(line);
+        Parser.printDividerLine();
     }
 }
