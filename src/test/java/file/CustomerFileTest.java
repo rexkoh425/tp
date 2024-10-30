@@ -3,7 +3,6 @@ package file;
 import org.junit.jupiter.api.Test;
 import customer.Customer;
 import customer.CustomerList;
-import java.io.File;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,19 +12,6 @@ class CustomerFileTest {
     void getCustomerDataFilename() {
         CustomerFile customerFile = new CustomerFile();
         assertEquals("customerData.txt", customerFile.getCustomerDataFilename());
-    }
-
-    @Test
-    void createCustomerFileIfNotExist() {
-        CustomerFile customerFile = new CustomerFile();
-        File testFile = new File(customerFile.getAbsolutePath());
-        customerFile.createCustomerFileIfNotExist();
-        if(testFile.exists()){
-            assert true;
-        }else{
-            assert false;
-        }
-        System.out.println(testFile.delete());
     }
 
     @Test

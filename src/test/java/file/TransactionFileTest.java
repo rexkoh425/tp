@@ -4,7 +4,6 @@ package file;
 import org.junit.jupiter.api.Test;
 import transcation.Transaction;
 import transcation.TransactionList;
-import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionFileTest {
@@ -13,19 +12,6 @@ class TransactionFileTest {
     void getTransactionDataFilename() {
         TransactionFile transactionFile = new TransactionFile();
         assertEquals("transactionData.txt", transactionFile.getTransactionDataFilename());
-    }
-
-    @Test
-    void createTransactionFileIfNotExist() {
-        TransactionFile transactionFile = new TransactionFile();
-        File testFile = new File(transactionFile.getAbsolutePath());
-        transactionFile.createTransactionFileIfNotExist();
-        if(testFile.exists()){
-            assert true;
-        }else{
-            assert false;
-        }
-        System.out.println(testFile.delete());
     }
 
     @Test

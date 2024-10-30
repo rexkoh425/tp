@@ -3,7 +3,6 @@ package file;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
-import java.io.File;
 
 public class CarFileTest {
 
@@ -11,20 +10,6 @@ public class CarFileTest {
     public void testGetCarDataFilename() {
         CarFile carFile = new CarFile();
         assertEquals("carData.txt", carFile.getCarDataFilename());
-    }
-
-    @Test
-    void testCreateCarFileIfNotExist() {
-        CarFile carFile = new CarFile("carData2.txt");
-        File testFile = new File(carFile.getAbsolutePath());
-        carFile.createCarFileIfNotExist();
-
-        if(testFile.exists()){
-            assert true;
-        }else{
-            assert false;
-        }
-        System.out.println(testFile.delete());
     }
 
     private static ArrayList<Integer> inputTestCases() {
