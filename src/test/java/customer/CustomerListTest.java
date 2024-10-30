@@ -18,5 +18,4 @@ public class CustomerListTest {
         CustomerList.getCustomers().remove(customer1);
         CustomerList.getCustomers().remove(customer2);
     }
-
 }
