@@ -52,7 +52,7 @@ public class Car {
         if (isRented) {
             return "Rented";
         }
-        return "Not Rented";
+        return "Available";
     }
 
     public String toFileString(){

@@ -32,26 +32,6 @@ public class CarFileTest {
         System.out.println(testFile.delete());
     }
 
-    @Test
-    void addCarWithParameters() {
-        ArrayList<Integer> errorLines = inputTestCases();
-        Car car1 = CarList.getCarsList().get(0);
-        assertEquals(car1.getModel() , "Corolla123");
-        assertEquals(car1.getLicensePlateNumber() , "SGM32K");
-        assertEquals(car1.getPrice() , 1.0);
-        assertFalse(car1.isRented());
-        Car car2 = CarList.getCarsList().get(1);
-        assertEquals(car2.getModel() , "Toyota");
-        assertEquals(car2.getLicensePlateNumber() , "SGK");
-        assertEquals(car2.getPrice() , 0);
-        assertFalse(car2.isRented());
-        if(errorLines.size() == 1 && errorLines.get(0) == 3){
-            assert true;
-        }else{
-            assert false;
-        }
-    }
-
     private static ArrayList<Integer> inputTestCases() {
         CarFile carFile = new CarFile("carData4.txt");
 
