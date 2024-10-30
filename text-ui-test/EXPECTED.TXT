@@ -26,9 +26,9 @@ exit - Exits the program.
 ____________________________________________________________
 data does not exist. Creating it now.......
 data directory created successfully.
-File created successfully: C:\NUS\CS2113\tp\build\libs\data\carData.txt
-File created successfully: C:\NUS\CS2113\tp\build\libs\data\customerData.txt
-File created successfully: C:\NUS\CS2113\tp\build\libs\data\transactionData.txt
+File created successfully: carData.txt
+File created successfully: customerData.txt
+File created successfully: transactionData.txt
 What would you like to do?
 ____________________________________________________________
 Customer added

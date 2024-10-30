@@ -44,7 +44,7 @@ public class FileHandler {
 
         try {
             if (filename.createNewFile()) {
-                System.out.println("File created successfully: " + filename.getAbsolutePath());
+                System.out.println("File created successfully: " + filename.getName());
             } else {
                 System.out.println("File already exists.");
             }
