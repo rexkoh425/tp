@@ -13,8 +13,6 @@ public class CarFileTest {
         assertEquals("carData.txt", carFile.getCarDataFilename());
     }
 
-
-
     @Test
     void testCreateCarFileIfNotExist() {
         CarFile carFile = new CarFile("carData2.txt");
