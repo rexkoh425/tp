@@ -6,6 +6,7 @@ import parser.CarParser;
 import java.util.ArrayList;
 
 public class TransactionList {
+
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
     public static void addTx(Transaction transaction) {
