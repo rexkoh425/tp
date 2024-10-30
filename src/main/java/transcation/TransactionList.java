@@ -8,10 +8,6 @@ public class TransactionList {
             "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE]";
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
-    public static ArrayList<Transaction> getTransactionList(){
-        return transactionList;
-    }
-
     public static void removeTransaction(String userInput) {
 
         String[] words = userInput.split(" ");
@@ -43,7 +39,7 @@ public class TransactionList {
     public static void addTxWithoutPrintingInfo(Transaction transaction) {
         transactionList.add(transaction);
     }
-          
+
     public static void printAllTransactions() {
         int index = 1;
 
@@ -61,14 +57,5 @@ public class TransactionList {
                     + " | " + transaction.getStartDate());
             index++;
         }
-    }
-
-    public static String transactionListToFileString(){
-        StringBuilder transactionData = new StringBuilder();
-        for (Transaction transaction : transactionList) {
-            transactionData.append(transaction.toFileString());
-            transactionData.append("\n");
-        }
-        return transactionData.toString();
     }
 }

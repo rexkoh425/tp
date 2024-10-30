@@ -1,8 +1,8 @@
 package file;
 
 import exceptions.TransactionException;
-import transcation.Transaction;
-import transcation.TransactionList;
+import transaction.Transaction;
+import transaction.TransactionList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

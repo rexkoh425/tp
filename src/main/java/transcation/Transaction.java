@@ -45,9 +45,4 @@ public class Transaction {
     public String getCarLicensePlate() {
         return carLicensePlate;
     }
-
-    public String toFileString(){
-        return this.getCarLicensePlate() + " | " + this.getBorrowerName()
-                + " | " + this.getDuration() + " | " + this.getStartDate();
-    }
 }
