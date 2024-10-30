@@ -5,9 +5,9 @@ import exceptions.CarException;
 public class Car {
 
     public static final int NUMBER_OF_PARAMETERS = 4;
-    private String model;
-    private String licensePlateNumber;
-    private double price;
+    private final String model;
+    private final String licensePlateNumber;
+    private final double price;
     private boolean isRented;
 
     public Car(String model, String licensePlateNumber, double price) throws CarException{
