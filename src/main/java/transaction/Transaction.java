@@ -1,7 +1,5 @@
 package transaction;
 
-import java.util.ArrayList;
-
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
