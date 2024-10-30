@@ -17,6 +17,13 @@ public class Car {
         isRented = false;
     }
 
+    public Car(String model, String licensePlateNumber, double price , boolean isRented) throws CarException{
+        this.model = model;
+        this.licensePlateNumber = licensePlateNumber;
+        this.price = price;
+        this.isRented = isRented;
+    }
+
     public String getModel() {
         return model;
     }
