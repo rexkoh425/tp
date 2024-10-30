@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import transcation.Transaction;
 import transcation.TransactionList;
 import java.io.File;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransactionFileTest {
 

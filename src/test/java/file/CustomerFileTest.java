@@ -5,8 +5,7 @@ import customer.Customer;
 import customer.CustomerList;
 import java.io.File;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerFileTest {
 
