@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+-> Parser : parse(user input)
+activate Parser
+
+    Parser -> CustomerParser : parseIntoCustomer(user input)
+    activate CustomerParser
+        CustomerParser -> CustomerParser : isValidSequence(parameters, userInput)
+        activate CustomerParser
+            loop parameter of parameters
+                opt userInput does not contain parameter
+                    <-- CustomerParser : false
+                end opt
+            end loop
+
+            loop iterate from 1 to (length of parameters - 1)
+                opt parameters not in sequence
+                    <-- CustomerParser : false
+                end opt
+            end loop
+
+            CustomerParser --> CustomerParser : true
+        deactivate CustomerParser
+
+        alt isValidSequence
+            CustomerParser -> CustomerParser : parseParameterContents(parameters, userInput)
+            activate CustomerParser
+                CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
+                activate CustomerParser
+                    CustomerParser -> CustomerParser : contents
+                deactivate CustomerParser
+                CustomerParser -> CustomerParser : Customer()
+            deactivate CustomerParser
+        else
+            CustomerParser -> CustomerException : CustomerException()
+            activate CustomerException
+                CustomerException -> CustomerException : addCustomerException()
+                activate CustomerException
+                    CustomerException -> CustomerException
+                deactivate CustomerException
+                CustomerException -> CustomerParser
+            deactivate CustomerException
+            <- Parser : CustomerException
+        end alt
+        Parser <- CustomerParser : Customer
+    deactivate CustomerParser
+
+    Parser -> CustomerList : addCustomer(Customer)
+    activate CustomerList
+        participant "customer : ArrayList" as CustomerArrayList
+        CustomerList -> CustomerArrayList : add(Customer)
+        activate CustomerArrayList
+            CustomerArrayList -> CustomerList
+        deactivate CustomerArrayList
+
+        CustomerList -> System.out : println("Customer added")
+        activate System.out
+            System.out <- CustomerList
+        deactivate System.out
+        CustomerList -> System.out : println(Customer)
+        activate System.out
+            System.out -> Customer : toString()
+            activate Customer
+                Customer -> System.out
+            deactivate Customer
+        CustomerList <- System.out
+        deactivate System.out
+    Parser <- CustomerList
+    deactivate CustomerList
+deactivate Parser
+<- Parser
+@enduml

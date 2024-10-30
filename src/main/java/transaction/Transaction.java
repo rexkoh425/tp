@@ -1,6 +1,7 @@
 package transaction;
 
 public class Transaction {
+    public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
     private final String transactionId;
     private final String carLicensePlate;
@@ -8,8 +9,6 @@ public class Transaction {
     private final String duration;
     private final String startDate;
     private boolean isCompleted;
-
-
 
     public Transaction(String carLicensePlate, String customer, String duration,
                        String startDate) {
@@ -19,6 +18,14 @@ public class Transaction {
         this.duration = duration;
         this.startDate = startDate;
         this.isCompleted = false;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public String getStartDate() {
+        return startDate;
     }
 
     public String getTransactionId() {
@@ -52,4 +59,8 @@ public class Transaction {
         return isCompleted;
     }
 
+    public String toFileString(){
+        return this.getCarLicensePlate() + " | " + this.getCustomer()
+                + " | " + this.getDuration() + " | " + this.getStartDate();
+    }
 }
