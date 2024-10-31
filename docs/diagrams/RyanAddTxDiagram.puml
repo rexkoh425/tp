@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!define ADD_TX_COLOR #db4f4f
+
+skinparam {
+sequenceMessageAlign center
+}
+
+skinparam sequence {
+ParticipantBackgroundColor #780d0d
+ParticipantFontColor white
+}
+
+box <font size=14>add-tx\n ADD_TX_COLOR
+participant "CliRental" as CliRental
+participant "<<class>>\nParser" as Parser
+participant "<<class>>\nTransactionParser" as TransactionParser
+participant "transaction :Transaction" as Transaction
+participant "<<class>>\nTransactionList" as TransactionList
+end box
+
+CliRental -> Parser ++ : parse user input
+Parser -> TransactionParser ++ : parse into Transaction object
+
+create Transaction
+TransactionParser -> Transaction ++
+Transaction --> TransactionParser --
+TransactionParser --> Parser -- : transaction : Transaction
+
+Parser -> TransactionList ++ : addTx(transaction)
+
+TransactionList --> Parser --: transaction added to list and <b>car mark as "rented"</b>
+
+
+
+Parser --> CliRental --: exit status
+
+@enduml
