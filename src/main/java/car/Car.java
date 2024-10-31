@@ -4,9 +4,9 @@ import exceptions.CarException;
 
 public class Car {
 
-    private String model;
-    private String licensePlateNumber;
-    private double price;
+    private final String model;
+    private final String licensePlateNumber;
+    private final double price;
     private boolean isRented;
     private boolean isExpensive;
 

@@ -50,6 +50,7 @@ public class CarParser {
     }
 
     private static String extractCarLicensePlateNumber(String userInput) {
+        //dsa
         int startIndexOfLicensePlateNumber = userInput.indexOf(ADD_CAR_PARAMETERS[1])
                 + ADD_CAR_PARAMETERS_OFFSET;
         int endIndexOfLicensePlateNumber = userInput.indexOf(ADD_CAR_PARAMETERS[2]);
