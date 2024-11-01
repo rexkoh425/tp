@@ -6,8 +6,6 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Auto updating of car rental status feature
 
 ### Implementation:
@@ -19,33 +17,44 @@ marked as **'Rented'**.
 
 Given below is a step-by-step execution of the implementation:
 
-Step 1: The user launches the application and enters the `add-car` command to add a new
+Step 1: The user launches the application and enters the `add-car ...` command to add a new
 car to the list, specifying the model name, car license plate number and price of the car.
 
 > **Note**: If the command fails due to invalid parameters or format,
 the car will not be added to the list.
 
--> add-car sequence diagram here
+The following sequence diagram illustrates a **valid** `add-car` operation:
+
+![](./images/RyanAddCarDiagram.png)
 
 Step 2: The user enters the `list-cars` command to verify that the car has been successfully added
 to the car list.
 
 -> show code output
 
+Example:
+
+![](./images/list-cars-output-before.png)
+
+
 Step 3: A customer decides to rent a car from the company. The user then uses the application to track
-and record the transaction details. The user executes the `add-tx` command to add
+and record the transaction details. The user executes the `add-tx ...` command to add
 a new transaction record, specifying details like the car license plate number.
 
 > **Note**: If the command fails due to invalid parameters or format,
 the transaction will not be added to the list and the car rental status remains as **'Available'**.
 
--> add-tx sequence diagram here
+The following sequence diagram illustrates a **valid** `add-tx` operation:
+
+![](./images/RyanAddTxDiagram.png)
 
 Step 4: After adding the transaction, the rental status of the selected car will now be updated to **'Rented'**.
 The user finally executes the `list-rented` command to list all rented out cars. The car that
 was just rented out should appear in the list, together with other rented out cars (if any).
 
--> show code output
+Example:
+
+![](./images/list-rented-output.png)
 
 Step 5: **Optionally**, the user can also execute 
 the `list-cars` command to view the rental status of all
@@ -53,6 +62,17 @@ the cars. By doing so, the rental status of the car that was just rented out,
 should now have a rental status of **'Rented'** instead of **'Available'**.
 
 -> show code output
+
+Example:
+
+![](./images/list-cars-output-after.png)
+
+> **Note**: The rental status is now updated to **'Rented'**.
+> (compare with output in **Step 2**)
+
+The following class diagram shows the interaction between the classes:
+
+![](./images/RyanClassDiagram.png)
 
 ### Rationale behind way of implementation:
 Modelled after the real world, the car is only rented out once the transaction (payment) is complete.
@@ -65,6 +85,7 @@ the car's rental status is automatically updated once a new transaction record i
   - Pros: 
     - Improve effectiveness and efficiency (E&E)
     - Easy to implement
+    - No need for additional commands
   - Cons: 
     - Does not adhere to software design principles like Single 
 Responsibility principle (SRP) or Separation of Concerns principle (SOC).
