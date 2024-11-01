@@ -4,9 +4,10 @@ import exceptions.CarException;
 
 public class Car {
 
-    private String model;
-    private String licensePlateNumber;
-    private double price;
+    public static final int NUMBER_OF_PARAMETERS = 4;
+    private final String model;
+    private final String licensePlateNumber;
+    private final double price;
     private boolean isRented;
 
     public Car(String model, String licensePlateNumber, double price) throws CarException{
@@ -14,6 +15,13 @@ public class Car {
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
         isRented = false;
+    }
+
+    public Car(String model, String licensePlateNumber, double price , boolean isRented) throws CarException{
+        this.model = model;
+        this.licensePlateNumber = licensePlateNumber;
+        this.price = price;
+        this.isRented = isRented;
     }
 
     public String getModel() {
@@ -45,5 +53,10 @@ public class Car {
             return "Rented";
         }
         return "Available";
+    }
+
+    public String toFileString(){
+        return this.getModel() + " | " + this.getLicensePlateNumber()
+                + " | " + this.getPrice() + " | " + this.isRented();
     }
 }

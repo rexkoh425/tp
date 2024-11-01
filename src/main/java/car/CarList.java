@@ -1,7 +1,6 @@
 package car;
 
 import exceptions.CarException;
-
 import java.util.ArrayList;
 
 public class CarList {
@@ -22,6 +21,10 @@ public class CarList {
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
                 + " | $" + car.getPrice() + " | " + car.getRentedStatus());
+    }
+
+    public static void addCarWithoutPrintingInfo(Car car) {
+        carsList.add(car);
     }
 
     public static void removeCar(String carLicensePlateNumber) {
@@ -45,12 +48,86 @@ public class CarList {
     }
 
     public static void printCarList(){
-        System.out.println("Here are the current cars in the company");
+        if (carsList.isEmpty()) {
+            System.out.println("Oops!! Car list is empty..."
+                    + "\nUse command <add-car> to add a new car.");
+            return;
+        }
+
+        System.out.println("Here are the current cars in the company:");
+
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
                     + " | $" +car.getPrice() + " | " + car.getRentedStatus());
         }
+    }
+
+    public static String carListToFileString(){
+        StringBuilder carData = new StringBuilder();
+        for (Car car : carsList) {
+            carData.append(car.toFileString());
+            carData.append("\n");
+        }
+        return carData.toString();
+    }
+
+    public static void printRentedCarsList() {
+        ArrayList<Car> rentedCarsList = getRentedCarsList();
+
+        if (rentedCarsList.isEmpty()) {
+            System.out.println("No cars currently rented out...");
+            return;
+        }
+
+        System.out.println("Here are all the rented out cars:");
+
+        int index = 1;
+        for (Car car : rentedCarsList) {
+            System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" + car.getPrice());
+            index++;
+        }
+    }
+
+    public static void printAvailableCarsList() {
+        ArrayList<Car> availableCarsList = getAvailableCarsList();
+
+        if (availableCarsList.isEmpty()) {
+            System.out.println("There are no available cars at the moment...");
+            return;
+        }
+
+        System.out.println("Here are all the available cars:");
+
+        int index = 1;
+        for (Car car : availableCarsList) {
+            System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
+                    + " | $" + car.getPrice());
+            index++;
+        }
+    }
+
+    private static ArrayList<Car> getRentedCarsList() {
+        ArrayList<Car> rentedCars = new ArrayList<>();
+
+        for (Car car : carsList) {
+            if (car.isRented()) {
+                rentedCars.add(car);
+            }
+        }
+        return rentedCars;
+    }
+
+    private static ArrayList<Car> getAvailableCarsList() {
+        ArrayList<Car> availableCars = new ArrayList<>();
+
+        for (Car car : carsList) {
+            if (!car.isRented()) {
+                availableCars.add(car);
+            }
+        }
+        return availableCars;
     }
 
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {

@@ -22,6 +22,6 @@ public class CustomerParserTest {
         Customer customer = CustomerParser.parseIntoCustomer(userInput);
         assertEquals("test" , customer.getUsername());
         assertEquals(18 , customer.getAge());
-        assertEquals( 92750174 , customer.getContactNumber());
+        assertEquals( "92750174" , customer.getContactNumber());
     }
 }

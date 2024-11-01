@@ -3,6 +3,8 @@ package seedu.clirental;
 import exceptions.CarException;
 import exceptions.CliRentalException;
 import exceptions.CustomerException;
+import parser.HelpParser;
+import file.FileHandler;
 import parser.Parser;
 
 public class CliRental {
@@ -11,7 +13,7 @@ public class CliRental {
      */
     public static void main(String[] args) {
         printGreetings();
-        getName();
+        FileHandler.createAndLoadFiles();
 
         boolean isExit = false;
 
@@ -23,6 +25,7 @@ public class CliRental {
                     isExit = true;
                 }
 
+                FileHandler.updateFiles();
                 Parser.printDividerLine();
 
             } catch (CustomerException exception){
@@ -37,20 +40,19 @@ public class CliRental {
         System.out.println("Goodbye!");
     }
 
-    public static void getName(){
-        System.out.println("What is your name?");
-        System.out.println("Hello " + Parser.scanner.nextLine());
-    }
-
     public static void printGreetings(){
         String logo =
                 """
-                        ____ _ _ ____            _        _
-                        / ___| (_)  _ \\ ___ _ __ | |_ __ _| |
-                        | |   | | | |_) / _ \\ '_ \\| __/ _` | |
-                        | |___| | |  _ <  __/ | | | || (_| | |
-                        \\____|_|_|_| \\_\\___|_| |_|\\__\\__,_|_|
-                        """;
-        System.out.println("Hello from\n" + logo);
+                ____ _ _ ____            _        _
+                / ___| (_)  _ \\ ___ _ __ | |_ __ _| |
+                | |   | | | |_) / _ \\ '_ \\| __/ _` | |
+                | |___| | |  _ <  __/ | | | || (_| | |
+                \\____|_|_|_| \\_\\___|_| |_|\\__\\__,_|_|
+                """;
+        System.out.println(logo);
+        System.out.println("Hello, thank you for choosing our car rental management program CliRental");
+        Parser.printDividerLine();
+        HelpParser.parseHelpCommand();
+        Parser.printDividerLine();
     }
 }

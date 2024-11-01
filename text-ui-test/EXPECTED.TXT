@@ -1,18 +1,38 @@
-Hello from
 ____ _ _ ____            _        _
 / ___| (_)  _ \ ___ _ __ | |_ __ _| |
 | |   | | | |_) / _ \ '_ \| __/ _` | |
 | |___| | |  _ <  __/ | | | || (_| | |
 \____|_|_|_| \_\___|_| |_|\__\__,_|_|
 
-What is your name?
-Hello James Gosling
+Hello, thank you for choosing our car rental management program CliRental
+____________________________________________________________
+Available Commands:
+help - Provides a list of all commands and their descriptions.
+add-user - Adds a new customer to the system.
+remove-user - Removes a customer from the system.
+list-users - Lists all customers.
+add-car - Adds a new car to the fleet.
+remove-car - Removes a car from the fleet.
+list-cars - Lists all rented-out cars.
+add-tx /p [CAR_LICENSE_PLATE] /u [BORROWER_NAME] /d [DURATION] /s [START_DATE] - Adds a new rental transaction.
+mark-tx /t [Transaction ID] - Marks a rental transaction completed.
+unmark-tx /t [Transaction ID] - Unmarks a rental transaction.
+remove-tx /t [Transaction ID] - Removes an existing rental transaction.
+list-tx - Lists all transactions.
+list-tx-completed - Lists all completed transactions.
+list-tx-uncompleted - Lists all uncompleted transactions.
+find-tx-by-customer /u [CUSTOMER_NAME] - Finds transactions by a customer's name.
+exit - Exits the program.
+____________________________________________________________
+data does not exist. Creating it now.......
+data directory created successfully.
+File created successfully: carData.txt
+File created successfully: customerData.txt
+File created successfully: transactionData.txt
 What would you like to do?
 ____________________________________________________________
 Customer added
-Username : user1234
-Age : 18
-Contact Number : 92750174
+user1234 | 18 | 92750174
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
