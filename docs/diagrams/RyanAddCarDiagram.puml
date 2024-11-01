@@ -3,6 +3,7 @@
 
 !define ADD_CAR_COLOR #759bc7
 
+hide footbox
 skinparam sequenceMessageAlign center
 skinparam sequence {
 ParticipantBackgroundColor #1e4a7d

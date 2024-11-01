@@ -3,6 +3,7 @@
 
 !define ADD_TX_COLOR #db4f4f
 
+hide footbox
 skinparam {
 sequenceMessageAlign center
 }
