@@ -1,77 +1,140 @@
 package transaction;
 
-import java.time.LocalDate;
+import car.CarList;
+import exceptions.CarException;
+import parser.CarParser;
 import java.util.ArrayList;
 
 public class TransactionList {
-    public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
-    public static final String ADD_TRANSACTION_FORMAT = "add-tx /l [CAR_LICENSE_PLATE] /b [BORROWER_NAME] /d [DURATION] /c [START_DATE]";
-    private static int transactionCounter = 1;
+
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
-    public static void removeTransaction(String userInput) {
 
-        String[] words = userInput.split(" ");
-        if ( (words.length < 2) || (!words[1].equals("/t")) ) {
-            throw new IllegalStateException("Unable to add customer. Please follow : " + REMOVE_TRANSACTION_FORMAT);
+    public static void addTx(Transaction transaction) {
+        String licensePlateNumber = transaction.getCarLicensePlate();
+
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
         }
-        if(!removeTransactionById(words[3])) {
-            throw new RuntimeException("Transaction ID doesn't exist");
+
+        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)){
+            throw CarException.licensePlateNumberNotFound();
         }
+        transactionList.add(transaction);
+        CarList.markCarAsRented(licensePlateNumber);
+        System.out.println("Transaction added: ");
+        System.out.println(transaction);
     }
 
-    public static boolean removeTransactionById(String transactionId) {
+    public static void addTxWithoutPrintingInfo(Transaction transaction) {
+        transactionList.add(transaction);
+    }
+
+    public static void printAllTransactions() {
+        int index = 1;
+
+        if (transactionList.isEmpty()) {
+            System.out.println("No transaction available.");
+            return;
+        }
+
+        System.out.println("Here are all the transactions: ");
+
         for (Transaction transaction : transactionList) {
-            if (transaction.getTransactionId().equals(transactionId)) {
+            System.out.println(index + ") " + transaction);
+            index++;
+        }
+    }
+
+    public static void printCompletedTransactions() {
+        int index = 1;
+
+        if (transactionList.isEmpty()) {
+            System.out.println("No transaction available.");
+            return;
+        }
+
+        System.out.println("Here are all the completed transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            if(transaction.isCompleted()) {
+                System.out.println(index + ") " + transaction);
+                index++;
+            }
+        }
+    }
+
+    public static void printUncompletedTransactions() {
+        int index = 1;
+
+        if (transactionList.isEmpty()) {
+            System.out.println("No transaction available.");
+            return;
+        }
+
+        System.out.println("Here are all the uncompleted transactions: ");
+
+        for (Transaction transaction : transactionList) {
+            if(!transaction.isCompleted()) {
+                System.out.println(index + ") " + transaction);
+                index++;
+            }
+        }
+    }
+
+    public static void removeTxByTxId(String txId) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getTransactionId().toLowerCase().equals(txId)) {
+                System.out.println("Transaction deleted: " + transaction);
                 transactionList.remove(transaction);
-                return true;
+                return;
             }
         }
-        return false;
+        System.out.println("Transaction not found");
     }
 
-    public static void addTransaction(String[] args) {
-        String carLicensePlate = null;
-        String borrowerName = null;
-        int duration = 0;
-        LocalDate startDate = null;
-
-        try {
-            for (int i = 1; i < args.length; i++) {
-                switch (args[i]) {
-                case "/l":
-                    carLicensePlate = args[++i];
-                    break;
-                case "/b":
-                    StringBuilder borrowerNameBuilder = new StringBuilder();
-                    while (i + 1 < args.length && !args[i + 1].startsWith("/")) {
-                        borrowerNameBuilder.append(args[++i]).append(" ");
-                    }
-                    borrowerName = borrowerNameBuilder.toString().trim();
-                    break;
-                case "/d":
-                    duration = Integer.parseInt(args[++i]);
-                    break;
-                case "/c":
-                    String startDateStr = args[++i];
-                    startDate = LocalDate.parse(startDateStr.replace("\"", "")); // Remove quotes if present
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid parameter: " + args[i]);
-                }
+    public static void findTxsByCustomer(String customer) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCustomer().toLowerCase().equals(customer)) {
+                System.out.println("Transaction(s) by " + customer + " found:");
+                System.out.println(transaction);
             }
-
-            if (carLicensePlate != null && borrowerName != null && duration > 0 && startDate != null) {
-                String transactionId = "TX" + (++transactionCounter);
-                String createdAt = startDate.toString();
-                Transaction transaction = new Transaction(carLicensePlate, borrowerName, String.valueOf(duration), createdAt, transactionId);
-                transactionList.add(transaction);
-                System.out.println("Transaction added successfully: " + transaction);
-            } else {
-                throw new IllegalArgumentException("Missing or incorrect transaction data.");
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error adding transaction: " + e.getMessage());
         }
+        System.out.println("Transaction not found");
     }
+    
+    public static void markCompletedByTxId(String txId) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getTransactionId().toLowerCase().equals(txId)) {
+                transaction.setCompleted(true);
+                System.out.println("Transaction completed: " + transaction);
+                return;
+            }
+        }
+        System.out.println("Transaction not found");
+    }
+
+    public static void unmarkCompletedByTxId(String txId) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getTransactionId().toLowerCase().equals(txId)) {
+                transaction.setCompleted(false);
+                System.out.println("Transaction set uncompleted: " + transaction);
+                return;
+            }
+        }
+        System.out.println("Transaction not found");
+    }
+
+    public static String transactionListToFileString(){
+        StringBuilder transactionData = new StringBuilder();
+        for (Transaction transaction : transactionList) {
+            transactionData.append(transaction.toFileString());
+            transactionData.append("\n");
+        }
+        return transactionData.toString();
+    }
+
+    public static ArrayList<Transaction> getTransactionList(){
+        return transactionList;
+    }
+
 }

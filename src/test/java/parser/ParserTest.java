@@ -1,27 +1,32 @@
 package parser;
 
-import customer.Customer;
+import car.CarList;
+import customer.CustomerList;
+import exceptions.CliRentalException;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
     @Test
-    void parseParameterContents() {
-        String userInput = "add-user /u test /a 18 /c 92750174";
-        String[] parameters = { "/u" , "/a" , "/c"};
-        String[] contents = CustomerParser.parseParameterContents(parameters, userInput);
-        assert contents[0].equals("test");
-        assert contents[1].equals("18");
-        assert contents[2].equals("92750174");
-    }
+    public void parse_validUserInput_commandActionExecuted() throws CliRentalException {
+        String userInput = "add-user /u user1234 /a 18 /c 92750174";
+        CustomerList.getCustomers().clear();
 
-    @Test
-    void parseIntoCustomer() {
-        String userInput = "add-user /u test /a 18 /c 92750174";
-        Customer customer = CustomerParser.parseIntoCustomer(userInput);
-        assertEquals("test" , customer.getUsername());
-        assertEquals(18 , customer.getAge());
-        assertEquals( 92750174 , customer.getContactNumber());
+        assertEquals(false, Parser.parse(userInput));
+        assertEquals(1, CustomerList.getCustomers().size());
+        assertEquals("user1234", CustomerList.getCustomers().get(0).getUsername());
+
+        String userInput1 = "add-car /n Honda Civic /c SGE4966P /p 123";
+        CarList.getCarsList().clear();
+
+        assertEquals(false, Parser.parse(userInput1));
+        assertEquals(1, CarList.getCarsList().size());
+        assertEquals(123.0, CarList.getCarsList().get(0).getPrice());
+
+
+        String userInput2 = "exit";
+        assertEquals(true, Parser.parse(userInput2));
     }
 }

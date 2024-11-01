@@ -1,8 +1,8 @@
 package parser;
 
-
 import customer.Customer;
 import exceptions.CustomerException;
+import exceptions.CliRentalException;
 
 public class CustomerParser {
 
@@ -14,8 +14,7 @@ public class CustomerParser {
      * @throws CustomerException if input is not compliant with format.
      * @throws NumberFormatException if the age and contact content are not integer string.
      */
-    public static Customer parseIntoCustomer(String userInput) throws CustomerException,
-            NumberFormatException {
+    public static Customer parseIntoCustomer(String userInput) throws CustomerException, NumberFormatException {
         userInput = userInput.substring(ADD_CUSTOMER_COMMAND.length()).trim();
         String[] parameters = { "/u" , "/a" , "/c"};
         String[] parameterContents;
@@ -27,7 +26,7 @@ public class CustomerParser {
 
         String username = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
-        int contactNumber = Integer.parseInt(parameterContents[2]);
+        String contactNumber = parameterContents[2];
         return new Customer(username , age, contactNumber );
     }
 
@@ -72,5 +71,13 @@ public class CustomerParser {
         }
 
         return true;
+    }
+
+    public static String parseUsernameForRemoval(String userInput) throws CliRentalException {
+        String[] words = userInput.split(" ");
+        if (words.length < 2) {
+            throw new CliRentalException("Please provide the username to remove.");
+        }
+        return words[2];  // assuming input format is: remove-user <username>
     }
 }
