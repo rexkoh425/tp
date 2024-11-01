@@ -1,0 +1,81 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+ -> FileHandler: createAndLoadFiles()
+activate FileHandler
+    FileHandler -> CarFile : createCarFileIfNotExist()
+    activate CarFile
+        opt File does not exist
+            CarFile -> FileHandler : createNewFile()
+            FileHandler -> CarFile
+        end opt
+    CarFile -> FileHandler
+    deactivate CarFile
+
+FileHandler -> CarFile: loadCarDataIfExist()
+activate CarFile
+    opt File exists
+        CarFile -> CarFile : loadCarData()
+        activate CarFile
+
+            CarFile -> scanner : scanner()
+            activate scanner
+                scanner -> CarFile
+            deactivate scanner
+
+            CarFile -> ArrayList: ArrayList<>()
+            activate ArrayList
+                ArrayList -> CarFile
+            deactivate ArrayList
+
+            loop For each line in file
+                CarFile -> scanner : hasNext()
+                activate scanner
+                    opt next line exists
+                        CarFile -> CarFile: scanLineAndAddCar()
+                        activate CarFile
+                            CarFile -> scanner : nextLine()
+                            activate scanner
+                                alt parameters.length != Car.NUMBER_OF_PARAMETER
+                                    CarFile -> ArrayList : add(line)
+                                    activate ArrayList
+                                    ArrayList -> CarFile
+                                    deactivate ArrayList
+                                else
+                                    CarFile -> CarFile : addCarWithParameters()
+                                    activate CarFile
+                                        CarFile -> Car : Car()
+                                        activate Car
+                                        Car -> CarFile
+                                        deactivate Car
+                                        CarFile -> CarList : addCarWithoutPrintingInfo()
+                                        activate CarList
+                                            CarList -> CarList : add()
+                                            activate CarList
+                                                CarList -> CarList
+                                            deactivate CarList
+                                        CarList -> CarFile
+                                        deactivate CarList
+                                    CarFile -> CarFile
+                                    deactivate CarFile
+                                end alt
+                            scanner -> CarFile
+                            deactivate scanner
+                        CarFile -> CarFile
+                        deactivate CarFile
+                    end opt
+                scanner -> CarFile
+                deactivate scanner
+            end loop
+
+        CarFile -> CarFile
+        deactivate CarFile
+    end opt
+CarFile -> FileHandler
+deactivate CarFile
+
+<- FileHandler
+deactivate FileHandler
+@enduml
