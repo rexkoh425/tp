@@ -1,7 +1,6 @@
 package car;
 
 import exceptions.CarException;
-
 import java.util.ArrayList;
 
 public class CarList {
@@ -22,6 +21,10 @@ public class CarList {
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
                 + " | $" + car.getPrice() + " | " + car.getRentedStatus());
+    }
+
+    public static void addCarWithoutPrintingInfo(Car car) {
+        carsList.add(car);
     }
 
     public static void removeCar(String carLicensePlateNumber) {
@@ -58,6 +61,15 @@ public class CarList {
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
                     + " | $" +car.getPrice() + " | " + car.getRentedStatus());
         }
+    }
+
+    public static String carListToFileString(){
+        StringBuilder carData = new StringBuilder();
+        for (Car car : carsList) {
+            carData.append(car.toFileString());
+            carData.append("\n");
+        }
+        return carData.toString();
     }
 
     public static void printRentedCarsList() {

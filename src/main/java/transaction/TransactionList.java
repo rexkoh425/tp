@@ -3,10 +3,10 @@ package transaction;
 import car.CarList;
 import exceptions.CarException;
 import parser.CarParser;
-
 import java.util.ArrayList;
 
 public class TransactionList {
+
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
     public static void addTx(Transaction transaction) {
@@ -24,7 +24,11 @@ public class TransactionList {
         System.out.println("Transaction added: ");
         System.out.println(transaction);
     }
-          
+
+    public static void addTxWithoutPrintingInfo(Transaction transaction) {
+        transactionList.add(transaction);
+    }
+
     public static void printAllTransactions() {
         int index = 1;
 
@@ -119,4 +123,18 @@ public class TransactionList {
         }
         System.out.println("Transaction not found");
     }
+
+    public static String transactionListToFileString(){
+        StringBuilder transactionData = new StringBuilder();
+        for (Transaction transaction : transactionList) {
+            transactionData.append(transaction.toFileString());
+            transactionData.append("\n");
+        }
+        return transactionData.toString();
+    }
+
+    public static ArrayList<Transaction> getTransactionList(){
+        return transactionList;
+    }
+
 }

@@ -4,6 +4,7 @@ import exceptions.CarException;
 import exceptions.CliRentalException;
 import exceptions.CustomerException;
 import parser.HelpParser;
+import file.FileHandler;
 import parser.Parser;
 
 public class CliRental {
@@ -12,6 +13,7 @@ public class CliRental {
      */
     public static void main(String[] args) {
         printGreetings();
+        FileHandler.createAndLoadFiles();
 
         boolean isExit = false;
 
@@ -23,6 +25,7 @@ public class CliRental {
                     isExit = true;
                 }
 
+                FileHandler.updateFiles();
                 Parser.printDividerLine();
 
             } catch (CustomerException exception){
