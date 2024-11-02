@@ -507,7 +507,8 @@ class TransactionListTest {
             String licensePlate3 = "SCD9012A";
 
             // Mock the static methods to always return valid
-            carParserMock.when(() -> CarParser.isValidLicensePlateNumber(Mockito.anyString())).thenAnswer(invocation -> {
+            carParserMock.when(() -> CarParser.isValidLicensePlateNumber(Mockito.anyString())).
+                    thenAnswer(invocation -> {
                 String plate = invocation.getArgument(0);
                 return plate.matches("S[A-Z]{2}\\d{4}[A-Z]");
             });
