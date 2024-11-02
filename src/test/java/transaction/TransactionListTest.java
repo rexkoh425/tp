@@ -82,7 +82,8 @@ class TransactionListTest {
                     Mockito.times(1));
 
             // Verify the printed output
-            String expectedOutput = "Transaction added: " + System.lineSeparator() + transaction + System.lineSeparator();
+            String expectedOutput = "Transaction added: " + System.lineSeparator() + transaction +
+                    System.lineSeparator();
             assertEquals(expectedOutput, outContent.toString(), "Printed output should match expected");
         }
     }
@@ -465,7 +466,8 @@ class TransactionListTest {
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
-        String expectedFileString = tx1.toFileString() + System.lineSeparator() + tx2.toFileString() + System.lineSeparator();
+        String expectedFileString = tx1.toFileString() + System.lineSeparator() + tx2.toFileString() +
+                System.lineSeparator();
         String actualFileString = TransactionList.transactionListToFileString();
 
         assertEquals(expectedFileString, actualFileString,
