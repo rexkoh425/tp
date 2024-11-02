@@ -9,7 +9,7 @@ public class Transaction {
     private final String carLicensePlate;
     private final String customer;
     private final String duration;
-    protected LocalDate startDate;
+    private final LocalDate startDate;
     private boolean isCompleted;
 
     public Transaction(String carLicensePlate, String customer, String duration,
