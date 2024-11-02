@@ -108,7 +108,6 @@ class TransactionListTest {
 
             assertEquals("""
                     Oops!! License Plate number is invalid...
-
                     License Plate number format: SXX####X
                     X -> Letters [A - Z], # -> Numbers [0 - 9]""", exception.getMessage(),
                     "Exception message should match");
