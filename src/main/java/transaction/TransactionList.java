@@ -105,7 +105,7 @@ public class TransactionList {
             System.out.println("none");
         }
     }
-    
+
     public static void markCompletedByTxId(String txId) {
         for (Transaction transaction : transactionList) {
             if (transaction.getTransactionId().toLowerCase().equals(txId)) {
@@ -132,7 +132,7 @@ public class TransactionList {
         StringBuilder transactionData = new StringBuilder();
         for (Transaction transaction : transactionList) {
             transactionData.append(transaction.toFileString());
-            transactionData.append("\n");
+            transactionData.append(System.lineSeparator());
         }
         return transactionData.toString();
     }

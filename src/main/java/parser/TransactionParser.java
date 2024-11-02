@@ -29,7 +29,7 @@ public class TransactionParser {
             parameterContents = parseParameterContents(parameters, userInput);
         } else {
             throw new IllegalArgumentException("Invalid command format for adding a transaction. " +
-                    "Refer to the format below: " + "\n" + ADD_TRANSACTION_FORMAT);
+                    "Refer to the format below: " + System.lineSeparator() + ADD_TRANSACTION_FORMAT);
         }
 
         String carLicensePlate = parameterContents[0].toUpperCase();
@@ -42,7 +42,7 @@ public class TransactionParser {
             System.out.println("Invalid date, please follow the format: dd-MM-yyyy" );
         }
         throw new IllegalArgumentException("Invalid command. Please follow the format below: " +
-                 "\n" + ADD_TRANSACTION_FORMAT);
+                System.lineSeparator() + ADD_TRANSACTION_FORMAT);
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {

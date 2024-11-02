@@ -42,10 +42,10 @@ public class Transaction {
     public String toString() {
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + '\n' + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + '\n' + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
         }
     }
 

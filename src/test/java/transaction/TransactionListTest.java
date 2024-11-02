@@ -82,7 +82,7 @@ class TransactionListTest {
                     Mockito.times(1));
 
             // Verify the printed output
-            String expectedOutput = "Transaction added: \n" + transaction + "\n";
+            String expectedOutput = "Transaction added: " + System.lineSeparator() + transaction + System.lineSeparator();
             assertEquals(expectedOutput, outContent.toString(), "Printed output should match expected");
         }
     }
@@ -140,7 +140,7 @@ class TransactionListTest {
             CarException exception = assertThrows(CarException.class, () -> TransactionList.addTx(transaction),
                     "Adding a transaction with non-existing license plate should throw CarException");
 
-            assertEquals("Car license plate number not found!!\n" +
+            assertEquals("Car license plate number not found!!" + System.lineSeparator() +
                             "Use command <list-cars> to view list of available cars.",
                     exception.getMessage(), "Exception message should match");
 
@@ -177,7 +177,7 @@ class TransactionListTest {
     void testPrintAllTransactionsEmpty() {
         TransactionList.printAllTransactions();
 
-        String expectedOutput = "No transaction available.\n";
+        String expectedOutput = "No transaction available." + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(),
                 "Should indicate that no transactions are available");
     }
@@ -199,9 +199,9 @@ class TransactionListTest {
 
         TransactionList.printAllTransactions();
 
-        String expectedOutput = "Here are all the transactions: \n" +
-                "1) " + tx1 + "\n" +
-                "2) " + tx2 + "\n";
+        String expectedOutput = "Here are all the transactions: " + System.lineSeparator() +
+                "1) " + tx1 + System.lineSeparator() +
+                "2) " + tx2 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed transactions should match the list");
     }
@@ -224,8 +224,8 @@ class TransactionListTest {
 
         TransactionList.printCompletedTransactions();
 
-        String expectedOutput = "Here are all the completed transactions: \n" +
-                "1) " + tx1 + "\n";
+        String expectedOutput = "Here are all the completed transactions: " + System.lineSeparator() +
+                "1) " + tx1 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed completed transactions should match");
     }
@@ -248,8 +248,8 @@ class TransactionListTest {
 
         TransactionList.printUncompletedTransactions();
 
-        String expectedOutput = "Here are all the uncompleted transactions: \n" +
-                "1) " + tx1 + "\n";
+        String expectedOutput = "Here are all the uncompleted transactions: " + System.lineSeparator() +
+                "1) " + tx1 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed uncompleted transactions should match");
     }
@@ -278,7 +278,7 @@ class TransactionListTest {
         assertEquals(tx2, TransactionList.getTransactionList().get(0), "Remaining transaction should be tx2");
 
         // Verify the printed output
-        String expectedOutput = "Transaction deleted: " + tx1 + "\n";
+        String expectedOutput = "Transaction deleted: " + tx1 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Printed output should confirm deletion");
     }
 
@@ -301,7 +301,7 @@ class TransactionListTest {
                 "Transaction list should remain unchanged");
 
         // Verify the printed output
-        String expectedOutput = "Transaction not found\n";
+        String expectedOutput = "Transaction not found" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that transaction was not found");
     }
 
@@ -327,9 +327,9 @@ class TransactionListTest {
         // Find transactions by "John Doe"
         TransactionList.findTxsByCustomer("john doe");
 
-        String expectedOutput = "Transaction(s) by john doe found:\n" +
-                tx1 + "\n" +
-                tx3 + "\n";
+        String expectedOutput = "Transaction(s) by john doe found:" + System.lineSeparator() +
+                tx1 + System.lineSeparator() +
+                tx3 + System.lineSeparator();
 
         String actualOutput = outContent.toString();
 
@@ -379,7 +379,7 @@ class TransactionListTest {
         assertTrue(tx1.isCompleted(), "Transaction should be marked as completed");
 
         // Verify the printed output
-        String expectedOutput = "Transaction completed: " + tx1 + "\n";
+        String expectedOutput = "Transaction completed: " + tx1 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Printed output should confirm completion");
     }
 
@@ -401,7 +401,7 @@ class TransactionListTest {
         assertFalse(tx1.isCompleted(), "Transaction should remain uncompleted");
 
         // Verify the printed output
-        String expectedOutput = "Transaction not found\n";
+        String expectedOutput = "Transaction not found" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that transaction was not found");
     }
 
@@ -424,7 +424,7 @@ class TransactionListTest {
         assertFalse(tx1.isCompleted(), "Transaction should be marked as uncompleted");
 
         // Verify the printed output
-        String expectedOutput = "Transaction set uncompleted: " + tx1 + "\n";
+        String expectedOutput = "Transaction set uncompleted: " + tx1 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Printed output should confirm un-completion");
     }
 
@@ -446,7 +446,7 @@ class TransactionListTest {
         assertFalse(tx1.isCompleted(), "Transaction should remain uncompleted");
 
         // Verify the printed output
-        String expectedOutput = "Transaction not found\n";
+        String expectedOutput = "Transaction not found" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that transaction was not found");
     }
 
@@ -465,7 +465,7 @@ class TransactionListTest {
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
-        String expectedFileString = tx1.toFileString() + "\n" + tx2.toFileString() + "\n";
+        String expectedFileString = tx1.toFileString() + System.lineSeparator() + tx2.toFileString() + System.lineSeparator();
         String actualFileString = TransactionList.transactionListToFileString();
 
         assertEquals(expectedFileString, actualFileString,
