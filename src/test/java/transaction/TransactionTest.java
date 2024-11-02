@@ -3,9 +3,12 @@ package transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static parser.TransactionParser.dateTimeFormatter;
 
 class TransactionTest {
 
@@ -15,8 +18,10 @@ class TransactionTest {
     @BeforeEach
     void setUp() {
         // Initialize two Transaction instances before each test
-        transaction1 = new Transaction("ABC-123", "John Doe", "5", "2024-10-01");
-        transaction2 = new Transaction("XYZ-789", "Jane Smith", "3", "2024-10-02");
+        LocalDate startDate1 = LocalDate.parse("01-10-2024", dateTimeFormatter);
+        LocalDate startDate2 = LocalDate.parse("02-10-2024", dateTimeFormatter);
+        transaction1 = new Transaction("ABC-123", "John Doe", "5", startDate1);
+        transaction2 = new Transaction("XYZ-789", "Jane Smith", "3", startDate2);
     }
 
     @Test
@@ -80,8 +85,10 @@ class TransactionTest {
     @Test
     void testMultipleTransactionIds() {
         // Create additional transactions to test transactionCounter increments correctly
-        Transaction transaction3 = new Transaction("LMN-456", "Alice Johnson", "2", "2024-10-03");
-        Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", "4", "2024-10-04");
+        LocalDate startDate3 = LocalDate.parse("03-10-2024", dateTimeFormatter);
+        LocalDate startDate4 = LocalDate.parse("04-10-2024", dateTimeFormatter);
+        Transaction transaction3 = new Transaction("LMN-456", "Alice Johnson", "2", startDate3);
+        Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", "4", startDate4);
 
         assertEquals("TX15", transaction3.getTransactionId(), "Third transaction ID should be TX3");
         assertEquals("TX16", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");

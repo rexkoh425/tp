@@ -1,5 +1,7 @@
 package transaction;
 
+import java.time.LocalDate;
+
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
@@ -7,24 +9,26 @@ public class Transaction {
     private final String carLicensePlate;
     private final String customer;
     private final String duration;
-    private final String startDate;
+    protected LocalDate startDate;
     private boolean isCompleted;
 
     public Transaction(String carLicensePlate, String customer, String duration,
-                       String startDate) {
-        this.transactionId = "TX" + transactionCounter++;
-        this.carLicensePlate = carLicensePlate;
-        this.customer = customer;
-        this.duration = duration;
-        this.startDate = startDate;
-        this.isCompleted = false;
+                       LocalDate startDate) {
+        {
+            this.transactionId = "TX" + transactionCounter++;
+            this.carLicensePlate = carLicensePlate;
+            this.customer = customer;
+            this.duration = duration;
+            this.startDate = startDate;
+            this.isCompleted = false;
+        }
     }
 
     public String getDuration() {
         return duration;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
