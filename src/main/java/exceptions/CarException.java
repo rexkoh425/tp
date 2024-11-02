@@ -37,7 +37,7 @@ public class CarException extends RuntimeException{
 
     public static CarException licensePlateNumberNotFound() {
         String message = "Car license plate number not found!!"
-                + "\nUse command <list-cars> to view list of available cars.";
+                + System.lineSeparator() + "Use command <list-cars> to view list of available cars.";
         return new CarException(message);
     }
 

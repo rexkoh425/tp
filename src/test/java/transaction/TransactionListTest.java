@@ -356,10 +356,8 @@ class TransactionListTest {
         // Attempt to find transactions by a non-existing customer
         TransactionList.findTxsByCustomer("Alice Johnson");
 
-        String expectedOutput = """
-                Transaction(s) by Alice Johnson found:
-                none
-                """;
+        String expectedOutput = " Transaction(s) by Alice Johnson found:" + System.lineSeparator() +
+                "none" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that no transactions was found");
     }
 

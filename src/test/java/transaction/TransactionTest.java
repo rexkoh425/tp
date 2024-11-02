@@ -64,9 +64,9 @@ class TransactionTest {
     @Test
     void testToStringWhenNotCompleted() {
         String expected1 = "[ ] " + transaction1.getTransactionId() +
-                " | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
+                " | ABC-123 | John Doe | 5day(s) " + System.lineSeparator() + "Start Date: 2024-10-01";
         String expected2 = "[ ] " + transaction2.getTransactionId() +
-                " | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
+                " | XYZ-789 | Jane Smith | 3day(s) " + System.lineSeparator() + "Start Date: 2024-10-02";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when not completed");
         assertEquals(expected2, transaction2.toString(), "toString should match expected format when not completed");
@@ -78,9 +78,9 @@ class TransactionTest {
         transaction2.setCompleted(true);
 
         String expected1 = "[X] " + transaction1.getTransactionId() +
-                " | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
+                " | ABC-123 | John Doe | 5day(s) " + System.lineSeparator() + "Start Date: 2024-10-01";
         String expected2 = "[X] " + transaction2.getTransactionId() +
-                " | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
+                " | XYZ-789 | Jane Smith | 3day(s) " + System.lineSeparator() + "Start Date: 2024-10-02";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when completed");
         assertEquals(expected2, transaction2.toString(), "toString should match expected format when completed");
