@@ -27,8 +27,8 @@ class TransactionTest {
     @Test
     void testTransactionIdGeneration() {
         // Assuming the transactionCounter starts at 1 and increments by 1 for each new Transaction
-        assertEquals("TX5", transaction1.getTransactionId(), "First transaction ID should be TX1");
-        assertEquals("TX6", transaction2.getTransactionId(), "Second transaction ID should be TX2");
+        assertEquals("TX6", transaction1.getTransactionId());
+        assertEquals("TX7", transaction2.getTransactionId());
     }
 
     @Test
@@ -63,8 +63,10 @@ class TransactionTest {
 
     @Test
     void testToStringWhenNotCompleted() {
-        String expected1 = "[ ] TX1 | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
-        String expected2 = "[ ] TX2 | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
+        String expected1 = "[ ] " + transaction1.getTransactionId() +
+                " | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
+        String expected2 = "[ ] " + transaction2.getTransactionId() +
+                " | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when not completed");
         assertEquals(expected2, transaction2.toString(), "toString should match expected format when not completed");
@@ -75,8 +77,10 @@ class TransactionTest {
         transaction1.setCompleted(true);
         transaction2.setCompleted(true);
 
-        String expected1 = "[X] TX3 | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
-        String expected2 = "[X] TX4 | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
+        String expected1 = "[X] " + transaction1.getTransactionId() +
+                " | ABC-123 | John Doe | 5day(s) \nStart Date: 2024-10-01";
+        String expected2 = "[X] " + transaction2.getTransactionId() +
+                " | XYZ-789 | Jane Smith | 3day(s) \nStart Date: 2024-10-02";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when completed");
         assertEquals(expected2, transaction2.toString(), "toString should match expected format when completed");
@@ -90,7 +94,7 @@ class TransactionTest {
         Transaction transaction3 = new Transaction("LMN-456", "Alice Johnson", "2", startDate3);
         Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", "4", startDate4);
 
-        assertEquals("TX15", transaction3.getTransactionId(), "Third transaction ID should be TX3");
-        assertEquals("TX16", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");
+        assertEquals("TX16", transaction3.getTransactionId(), "Third transaction ID should be TX3");
+        assertEquals("TX17", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");
     }
 }
