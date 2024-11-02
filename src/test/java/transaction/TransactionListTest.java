@@ -509,9 +509,9 @@ class TransactionListTest {
             // Mock the static methods to always return valid
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(Mockito.anyString())).
                     thenAnswer(invocation -> {
-                String plate = invocation.getArgument(0);
-                return plate.matches("S[A-Z]{2}\\d{4}[A-Z]");
-            });
+                        String plate = invocation.getArgument(0);
+                        return plate.matches("S[A-Z]{2}\\d{4}[A-Z]");
+                    });
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(Mockito.anyString())).thenReturn(true);
 
             // Add multiple transactions
