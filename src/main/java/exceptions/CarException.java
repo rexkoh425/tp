@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CarException extends RuntimeException{
 
     private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]";
-    private static final String LICENSE_PLATE_NUMBER_FORMAT = """
+    public static final String LICENSE_PLATE_NUMBER_FORMAT = """
 
             License Plate number format: SXX####X\
 
