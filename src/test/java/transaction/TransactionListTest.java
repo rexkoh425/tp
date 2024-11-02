@@ -2,8 +2,11 @@ package transaction;
 
 import car.CarList;
 import exceptions.CarException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import parser.CarParser;
-import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
@@ -58,17 +61,21 @@ class TransactionListTest {
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(validLicensePlate)).thenReturn(true);
 
             // Create a transaction
-            Transaction transaction = new Transaction(validLicensePlate, "John Doe", "5", LocalDate.of(2024, 10, 1));
+            Transaction transaction = new Transaction(validLicensePlate, "John Doe", "5",
+                    LocalDate.of(2024, 10, 1));
 
             // Add the transaction
             TransactionList.addTx(transaction);
 
             // Verify that the transaction was added
-            assertEquals(1, TransactionList.getTransactionList().size(), "Transaction should be added to the list");
-            assertEquals(transaction, TransactionList.getTransactionList().get(0), "Added transaction should match");
+            assertEquals(1, TransactionList.getTransactionList().size(),
+                    "Transaction should be added to the list");
+            assertEquals(transaction, TransactionList.getTransactionList().get(0),
+                    "Added transaction should match");
 
             // Verify that CarList.markCarAsRented was called
-            carListMock.verify(() -> CarList.markCarAsRented(validLicensePlate), Mockito.times(1));
+            carListMock.verify(() -> CarList.markCarAsRented(validLicensePlate),
+                    Mockito.times(1));
 
             // Verify the printed output
             String expectedOutput = "Transaction added: \n" + transaction + "\n";
@@ -88,7 +95,8 @@ class TransactionListTest {
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(invalidLicensePlate)).thenReturn(false);
 
             // Create a transaction with invalid license plate
-            Transaction transaction = new Transaction(invalidLicensePlate, "Jane Doe", "3", LocalDate.of(2024, 10, 2));
+            Transaction transaction = new Transaction(invalidLicensePlate, "Jane Doe", "3",
+                    LocalDate.of(2024, 10, 2));
 
             // Attempt to add the transaction and expect an exception
             CarException exception = assertThrows(CarException.class, () -> TransactionList.addTx(transaction),
@@ -98,7 +106,8 @@ class TransactionListTest {
                     Oops!! License Plate number is invalid...
 
                     License Plate number format: SXX####X
-                    X -> Letters [A - Z], # -> Numbers [0 - 9]""", exception.getMessage(), "Exception message should match");
+                    X -> Letters [A - Z], # -> Numbers [0 - 9]""", exception.getMessage(),
+                    "Exception message should match");
 
             // Verify that no transaction was added
             assertTrue(TransactionList.getTransactionList().isEmpty(), "Transaction list should remain empty");
@@ -115,17 +124,21 @@ class TransactionListTest {
             String validButNonExistingLicensePlate = "SCD5678Z";
 
             // Mock the static methods
-            carParserMock.when(() -> CarParser.isValidLicensePlateNumber(validButNonExistingLicensePlate)).thenReturn(true);
-            carListMock.when(() -> CarList.isExistingLicensePlateNumber(validButNonExistingLicensePlate)).thenReturn(false);
+            carParserMock.when(() -> CarParser.isValidLicensePlateNumber(validButNonExistingLicensePlate)).
+                    thenReturn(true);
+            carListMock.when(() -> CarList.isExistingLicensePlateNumber(validButNonExistingLicensePlate)).
+                    thenReturn(false);
 
             // Create a transaction with a valid but non-existing license plate
-            Transaction transaction = new Transaction(validButNonExistingLicensePlate, "Alice Smith", "2", LocalDate.of(2024, 10, 3));
+            Transaction transaction = new Transaction(validButNonExistingLicensePlate, "Alice Smith",
+                    "2", LocalDate.of(2024, 10, 3));
 
             // Attempt to add the transaction and expect an exception
             CarException exception = assertThrows(CarException.class, () -> TransactionList.addTx(transaction),
                     "Adding a transaction with non-existing license plate should throw CarException");
 
-            assertEquals("Car license plate number not found!!\nUse command <list-cars> to view list of available cars.",
+            assertEquals("Car license plate number not found!!\n" +
+                            "Use command <list-cars> to view list of available cars.",
                     exception.getMessage(), "Exception message should match");
 
             // Verify that no transaction was added
@@ -140,14 +153,17 @@ class TransactionListTest {
         String validLicensePlate = "SXY9012A";
 
         // Create a transaction
-        Transaction transaction = new Transaction(validLicensePlate, "Bob Brown", "4", LocalDate.of(2024, 10, 4));
+        Transaction transaction = new Transaction(validLicensePlate, "Bob Brown", "4",
+                LocalDate.of(2024, 10, 4));
 
         // Add the transaction without printing info
         TransactionList.addTxWithoutPrintingInfo(transaction);
 
         // Verify that the transaction was added
-        assertEquals(1, TransactionList.getTransactionList().size(), "Transaction should be added to the list");
-        assertEquals(transaction, TransactionList.getTransactionList().get(0), "Added transaction should match");
+        assertEquals(1, TransactionList.getTransactionList().size(),
+                "Transaction should be added to the list");
+        assertEquals(transaction, TransactionList.getTransactionList().get(0),
+                "Added transaction should match");
 
         // Verify that nothing was printed
         assertTrue(outContent.toString().isEmpty(), "No output should be printed");
@@ -159,7 +175,8 @@ class TransactionListTest {
         TransactionList.printAllTransactions();
 
         String expectedOutput = "No transaction available.\n";
-        assertEquals(expectedOutput, outContent.toString(), "Should indicate that no transactions are available");
+        assertEquals(expectedOutput, outContent.toString(),
+                "Should indicate that no transactions are available");
     }
 
     @Test
@@ -170,8 +187,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
@@ -192,8 +211,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         tx1.setCompleted(true);
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -214,8 +235,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         tx2.setCompleted(true);
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -236,8 +259,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
@@ -245,7 +270,8 @@ class TransactionListTest {
         TransactionList.removeTxByTxId("tx1"); // Assuming case-insensitive
 
         // Verify that tx1 is removed
-        assertEquals(1, TransactionList.getTransactionList().size(), "Transaction list should have one transaction after removal");
+        assertEquals(1, TransactionList.getTransactionList().size(),
+                "Transaction list should have one transaction after removal");
         assertEquals(tx2, TransactionList.getTransactionList().get(0), "Remaining transaction should be tx2");
 
         // Verify the printed output
@@ -260,14 +286,16 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
         // Attempt to remove a non-existing transaction
         TransactionList.removeTxByTxId("tx999");
 
         // Verify that the transaction list remains unchanged
-        assertEquals(1, TransactionList.getTransactionList().size(), "Transaction list should remain unchanged");
+        assertEquals(1, TransactionList.getTransactionList().size(),
+                "Transaction list should remain unchanged");
 
         // Verify the printed output
         String expectedOutput = "Transaction not found\n";
@@ -283,9 +311,12 @@ class TransactionListTest {
         String licensePlate3 = "SCD9012A";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
-        Transaction tx3 = new Transaction(licensePlate3, "John Doe", "2", LocalDate.of(2024, 10, 3));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
+        Transaction tx3 = new Transaction(licensePlate3, "John Doe", "2",
+                LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
         TransactionList.addTxWithoutPrintingInfo(tx3);
@@ -300,7 +331,8 @@ class TransactionListTest {
         String actualOutput = outContent.toString();
 
         // Check that the found transactions are printed
-        assertTrue(actualOutput.contains("Transaction(s) by john doe found:"), "Should indicate transactions found by customer");
+        assertTrue(actualOutput.contains("Transaction(s) by john doe found:"),
+                "Should indicate transactions found by customer");
         assertTrue(actualOutput.contains(tx1.toString()), "Should contain tx1 details");
         assertTrue(actualOutput.contains(tx3.toString()), "Should contain tx3 details");
         assertEquals(expectedOutput, actualOutput, "Printed output should confirm deletion");
@@ -313,7 +345,8 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
         // Attempt to find transactions by a non-existing customer
@@ -332,7 +365,8 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
         // Mark the transaction as completed
@@ -353,7 +387,8 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
         // Attempt to mark a non-existing transaction as completed
@@ -374,7 +409,8 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction and mark it as completed
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         tx1.setCompleted(true);
 
@@ -396,7 +432,8 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
         // Attempt to unmark a non-existing transaction
@@ -418,15 +455,18 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
         String expectedFileString = tx1.toFileString() + "\n" + tx2.toFileString() + "\n";
         String actualFileString = TransactionList.transactionListToFileString();
 
-        assertEquals(expectedFileString, actualFileString, "File string representation should match expected format");
+        assertEquals(expectedFileString, actualFileString,
+                "File string representation should match expected format");
     }
 
     @Test
@@ -437,8 +477,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5", LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3", LocalDate.of(2024, 10, 2));
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+                LocalDate.of(2024, 10, 1));
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+                LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
 
@@ -468,9 +510,12 @@ class TransactionListTest {
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(Mockito.anyString())).thenReturn(true);
 
             // Add multiple transactions
-            Transaction tx1 = new Transaction(licensePlate1, "Alice", "2", LocalDate.of(2024, 10, 5));
-            Transaction tx2 = new Transaction(licensePlate2, "Bob", "3", LocalDate.of(2024, 10, 6));
-            Transaction tx3 = new Transaction(licensePlate3, "Charlie", "1", LocalDate.of(2024, 10, 7));
+            Transaction tx1 = new Transaction(licensePlate1, "Alice", "2",
+                    LocalDate.of(2024, 10, 5));
+            Transaction tx2 = new Transaction(licensePlate2, "Bob", "3",
+                    LocalDate.of(2024, 10, 6));
+            Transaction tx3 = new Transaction(licensePlate3, "Charlie", "1",
+                    LocalDate.of(2024, 10, 7));
 
             TransactionList.addTx(tx1);
             TransactionList.addTx(tx2);
@@ -482,7 +527,8 @@ class TransactionListTest {
             assertEquals("TX3", tx3.getTransactionId(), "Third transaction ID should be TX3");
 
             // Verify that all transactions are added
-            assertEquals(3, TransactionList.getTransactionList().size(), "All transactions should be added");
+            assertEquals(3, TransactionList.getTransactionList().size(),
+                    "All transactions should be added");
         }
     }
 }

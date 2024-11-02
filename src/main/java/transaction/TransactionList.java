@@ -101,7 +101,9 @@ public class TransactionList {
                 System.out.println(transaction);
             }
         }
-        if(!found) System.out.println("none");
+        if(!found) {
+            System.out.println("none");
+        }
     }
     
     public static void markCompletedByTxId(String txId) {
