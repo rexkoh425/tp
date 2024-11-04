@@ -11,6 +11,22 @@ public class CarList {
         return carsList;
     }
 
+    private static String formatPriceToTwoDp(double price) {
+        double remainder = price - (int)price;
+        String result = "";
+
+        if (remainder == 0.0) {
+            result += String.valueOf((int)price);
+            return result;
+        }
+
+        String integerPart = String.valueOf((int)price);
+        String formattedRemainder = String.format("%.2f", remainder);
+        String remainderPart = formattedRemainder.substring(1);
+        result += (integerPart + remainderPart);
+        return result;
+    }
+
     public static void addCar(Car car) throws CarException {
         if (isExistingLicensePlateNumber(car.getLicensePlateNumber())) {
             throw CarException.duplicateLicensePlateNumber();
@@ -20,7 +36,7 @@ public class CarList {
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
-                + " | $" + car.getPrice() + " | " + car.getRentedStatus());
+                + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus());
     }
 
     public static void addCarWithoutPrintingInfo(Car car) {
@@ -59,17 +75,8 @@ public class CarList {
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" +car.getPrice() + " | " + car.getRentedStatus());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus());
         }
-    }
-
-    public static String carListToFileString(){
-        StringBuilder carData = new StringBuilder();
-        for (Car car : carsList) {
-            carData.append(car.toFileString());
-            carData.append("\n");
-        }
-        return carData.toString();
     }
 
     public static void printRentedCarsList() {
@@ -85,7 +92,7 @@ public class CarList {
         int index = 1;
         for (Car car : rentedCarsList) {
             System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" + car.getPrice());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()));
             index++;
         }
     }
@@ -103,7 +110,7 @@ public class CarList {
         int index = 1;
         for (Car car : availableCarsList) {
             System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" + car.getPrice());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()));
             index++;
         }
     }
@@ -155,5 +162,14 @@ public class CarList {
                 break;
             }
         }
+    }
+
+    public static String carListToFileString(){
+        StringBuilder carData = new StringBuilder();
+        for (Car car : carsList) {
+            carData.append(car.toFileString());
+            carData.append("\n");
+        }
+        return carData.toString();
     }
 }
