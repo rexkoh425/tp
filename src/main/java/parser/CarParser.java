@@ -30,6 +30,7 @@ public class CarParser {
             throw CarException.invalidPrice();
         }
 
+        assert carPrice >= 0.00 : "ERROR.. Car price is negative!!";
         double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
 
         return new Car(carModel, carLicensePlateNumber, formattedCarPrice);
@@ -100,6 +101,8 @@ public class CarParser {
             return false;
         }
 
+        assert licensePlateNumber.startsWith("S") : "ERROR.. All license plate numbers MUST start with S";
+
         char[] licensePlateNumberChars = licensePlateNumber.toCharArray();
         int licensePlateNumberLength = licensePlateNumber.length();
         // Example: SGD1234X
@@ -121,6 +124,7 @@ public class CarParser {
             }
         }
 
+        assert licensePlateNumberChars[3] != '0' : "ERROR.. License plate number cannot start with 0";
         return true;
     }
 

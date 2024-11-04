@@ -12,6 +12,8 @@ public class CarList {
     }
 
     private static String formatPriceToTwoDp(double price) {
+        assert price >= 0.00 : "ERROR.. Price cannot be negative!!";
+
         double remainder = price - (int)price;
         String result = "";
 
@@ -32,6 +34,8 @@ public class CarList {
             throw CarException.duplicateLicensePlateNumber();
         }
 
+        assert !isExistingLicensePlateNumber(car.getLicensePlateNumber()) :
+                "ERROR.. Cannot add car with same license plate number";
         carsList.add(car);
         System.out.println("Car added to list");
         System.out.println("Car details:");
