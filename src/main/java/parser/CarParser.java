@@ -10,7 +10,7 @@ public class CarParser {
     private static final int MIN_LICENSE_PLATE_NUMBER_LENGTH = 5;
     private static final int MAX_LICENSE_PLATE_NUMBER_LENGTH = 8;
 
-    public static Car parseIntoCar(String userInput) throws CarException {
+    public static Car parseIntoCar(String userInput) throws CarException, NumberFormatException {
         userInput = userInput.trim();
 
         if (!isValidFormat(userInput)) {
