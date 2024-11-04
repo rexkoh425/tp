@@ -6,9 +6,7 @@ public class CarException extends RuntimeException{
 
     private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]";
     private static final String LICENSE_PLATE_NUMBER_FORMAT = """
-
-            License Plate number format: SXX####X\
-
+            License Plate number format: SXX####X
             X -> Letters [A - Z], # -> Numbers [0 - 9]""";
 
     public CarException(String message) {
@@ -39,7 +37,7 @@ public class CarException extends RuntimeException{
 
     public static CarException licensePlateNumberNotFound() {
         String message = "Car license plate number not found!!"
-                + "\nUse command <list-cars> to view list of available cars.";
+                + System.lineSeparator() + "Use command <list-cars> to view list of available cars.";
         return new CarException(message);
     }
 
