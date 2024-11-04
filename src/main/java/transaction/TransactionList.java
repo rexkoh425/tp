@@ -137,7 +137,7 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getCustomer().equalsIgnoreCase(customer)) {
+            if (transaction.getCustomer().toLowerCase().contains(customer)) {
                 found = true;
                 System.out.println(transaction);
             }
