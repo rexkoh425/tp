@@ -10,14 +10,14 @@ public class Car {
     private final double price;
     private boolean isRented;
 
-    public Car(String model, String licensePlateNumber, double price) throws CarException{
+    public Car(String model, String licensePlateNumber, double price) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
         isRented = false;
     }
 
-    public Car(String model, String licensePlateNumber, double price , boolean isRented) throws CarException{
+    public Car(String model, String licensePlateNumber, double price , boolean isRented) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
