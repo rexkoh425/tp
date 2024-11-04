@@ -7,7 +7,8 @@ public class CarParser {
 
     private static final String[] ADD_CAR_PARAMETERS = {"/n", "/c", "/p"};
     private static final int ADD_CAR_PARAMETERS_OFFSET = 2;
-    private static final int LICENSE_PLATE_NUMBER_LENGTH = 8;
+    private static final int MIN_LICENSE_PLATE_NUMBER_LENGTH = 5;
+    private static final int MAX_LICENSE_PLATE_NUMBER_LENGTH = 8;
 
     public static Car parseIntoCar(String userInput) throws CarException {
         userInput = userInput.trim();
@@ -94,21 +95,27 @@ public class CarParser {
 
     public static boolean isValidLicensePlateNumber(String licensePlateNumber) {
         if (!licensePlateNumber.startsWith("S") ||
-                licensePlateNumber.length() != LICENSE_PLATE_NUMBER_LENGTH) {
+            licensePlateNumber.length() < MIN_LICENSE_PLATE_NUMBER_LENGTH ||
+                licensePlateNumber.length() > MAX_LICENSE_PLATE_NUMBER_LENGTH) {
             return false;
         }
 
         char[] licensePlateNumberChars = licensePlateNumber.toCharArray();
+        int licensePlateNumberLength = licensePlateNumber.length();
         // Example: SGD1234X
-        for (int i = 1; i < licensePlateNumber.length(); i++) {
+        for (int i = 1; i < licensePlateNumberLength; i++) {
             // Checks if second, third and last char are (uppercase) letters.
-            if (i <= 2 || i > 6) {
+            if (i <= 2 || i == licensePlateNumberLength - 1) {
                 if (licensePlateNumberChars[i] < 'A' || licensePlateNumberChars[i] > 'Z') {
                     return false;
                 }
             } else {
-                // Checks if middle 4 chars are numbers.
+                // Checks if middle chars are numbers.
                 if (licensePlateNumberChars[i] < '0' || licensePlateNumberChars[i] > '9') {
+                    return false;
+                }
+                // Checks if first number is 0
+                if (licensePlateNumberChars[3] == '0') {
                     return false;
                 }
             }
