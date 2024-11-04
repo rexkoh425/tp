@@ -86,6 +86,7 @@ public class TransactionList {
             if (transaction.getTransactionId().toLowerCase().equals(txId)) {
                 System.out.println("Transaction deleted: " + transaction);
                 transactionList.remove(transaction);
+                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
                 return;
             }
         }
@@ -106,6 +107,7 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             if (transaction.getTransactionId().toLowerCase().equals(txId)) {
                 transaction.setCompleted(true);
+                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
                 System.out.println("Transaction completed: " + transaction);
                 return;
             }
@@ -117,6 +119,7 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             if (transaction.getTransactionId().toLowerCase().equals(txId)) {
                 transaction.setCompleted(false);
+                CarList.markCarAsRented(transaction.getCarLicensePlate());
                 System.out.println("Transaction set uncompleted: " + transaction);
                 return;
             }
