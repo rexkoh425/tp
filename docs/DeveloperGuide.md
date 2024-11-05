@@ -117,6 +117,47 @@ Responsibility principle (SRP) or Separation of Concerns principle (SOC).
     - Possibility that user might forget to update rental status
     - Need to add new commands to update rental status (e.g. `mark-rented`) 
 
+### Implementation of Transaction Completion Management and Retrieval Features
+
+To enhance the functionality of **CliRental**, we have implemented features that allow users to mark transactions as completed or uncompleted, list transactions based on their completion status, and find transactions by customer name. These features streamline the process of managing rental transactions, ensuring accurate tracking and easy retrieval of relevant data.
+
+#### **1. Overview of Features**
+
+- **Marking/Unmarking Transactions as Completed:**
+  - **Mark Completed:** Allows users to mark a specific transaction as completed, indicating that the rental process has been finalized.
+  - **Unmark Completed:** Enables users to revert a transaction's status from completed to uncompleted if needed.
+
+- **Listing Transactions:**
+  - **List Completed Transactions:** Displays all transactions that have been marked as completed.
+  - **List Uncompleted Transactions:** Shows all transactions that are still pending completion.
+
+- **Finding Transactions by Customer Name:**
+  - Facilitates the retrieval of all transactions associated with a specific customer, enabling efficient management and review.
+
+#### **2. Design & Implementation**
+
+The implementation of these features is encapsulated within the `TransactionList` class, which manages all transaction-related operations. Below is a detailed breakdown of the design and implementation strategies employed.
+
+##### **a. Class-Level Design**
+
+**`TransactionList` Class:**
+
+- **Responsibilities:**
+  - Manage the list of all transactions.
+  - Provide functionalities to add, remove, update, and retrieve transactions based on various criteria.
+
+- **Key Methods:**
+  - `markCompletedByTxId(String txId)`: Marks a transaction as completed.
+  - `unmarkCompletedByTxId(String txId)`: Marks a transaction as uncompleted.
+  - `printCompletedTransactions()`: Lists all completed transactions.
+  - `printUncompletedTransactions()`: Lists all uncompleted transactions.
+  - `findTxsByCustomer(String customer)`: Retrieves transactions associated with a specific customer.
+
+**Design Considerations:**
+
+- **Encapsulation:** The `transactionList` is maintained as a private static `ArrayList<Transaction>`, ensuring controlled access through public methods.
+- **Data Integrity:** Assertions and exception handling are employed to maintain the integrity of transaction data during operations.
+
 ## Product scope
 ### Target user profile
 
