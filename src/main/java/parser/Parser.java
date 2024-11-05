@@ -39,7 +39,7 @@ public class Parser {
     public static String getUserInput(){
         System.out.println("What would you like to do?");
         printDividerLine();
-        String userInput = scanner.nextLine().trim();
+
         return scanner.nextLine().trim();
     }
 
