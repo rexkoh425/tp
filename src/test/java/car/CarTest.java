@@ -1,9 +1,9 @@
 package car;
 
-import exceptions.CarException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarTest {
 
@@ -14,20 +14,29 @@ public class CarTest {
         assertEquals("SJX1234D", car.getLicensePlateNumber());
         assertEquals(120, car.getPrice());
         assertFalse(car.isRented());
-        assertEquals("Available" , car.getRentedStatus());
+        assertEquals("Available", car.getRentedStatus());
 
-        Car car1 = new Car("ABC", "DE3F", 0);
-        assertEquals("ABC", car1.getModel());
-        assertEquals("DE3F", car1.getLicensePlateNumber());
-        assertEquals(0, car1.getPrice());
+        Car car1 = new Car("Honda Fit", "SGE1234X", 50.69);
+        assertEquals("Honda Fit", car1.getModel());
+        assertEquals("SGE1234X", car1.getLicensePlateNumber());
+        assertEquals(50.69, car1.getPrice());
         assertFalse(car1.isRented());
-        assertEquals("Available" , car1.getRentedStatus());
+        assertEquals("Available", car1.getRentedStatus());
     }
 
     @Test
-    public void testCarGetters_negativePrice_carExceptionThrown() throws CarException {
+    public void markAsRented_validCarObject_carMarkedAsRented() {
+        Car car = new Car("Subaru BRZ", "SDC443M", 123.45);
+        car.markAsRented();
+        assertTrue(car.isRented());
+        assertEquals("Rented", car.getRentedStatus());
+    }
 
-        Car car = new Car("XYZ", "123", -0);
-        assertEquals(0, car.getPrice());
+    @Test
+    public void markAsAvailable_validCarObject_carMarkedAsAvailable() {
+        Car car = new Car("Toyota Corolla", "SNE12T", 55.99);
+        car.markAsAvailable();
+        assertFalse(car.isRented());
+        assertEquals("Available", car.getRentedStatus());
     }
 }
