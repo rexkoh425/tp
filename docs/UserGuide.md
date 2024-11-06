@@ -135,6 +135,26 @@ If the list is **empty**:
 No cars currently rented out...
 ```
 
+### Listing all available cars: `list-available`
+
+Lists all the available cars in the company.
+
+Format: `list-available`
+
+Sample output:
+
+``` 
+Here are all the available cars:
+1) Mitsubishi Attrage | SGP7877N | $150000.00
+2) Honda Vezel | SLK9945F | $345000.00
+```
+
+If the list is **empty**:
+
+``` 
+There are no available cars at the moment...
+```
+
 
 ## FAQ
 
