@@ -72,6 +72,32 @@ What would you like to do?
 ____________________________________________________________
 ```
 
+### Adding a car: `add-car`
+
+Adds a car to the car list.
+
+Format: `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]`
+
+- `/n`, `/c` and `/p` identifiers **must be** in the correct order.
+- `LICENSE_PLATE_NUMBER` **must be** unique. 
+- `LICENSE_PLATE_NUMBER` **must be** in the following format: `SXX####X`, where
+  - `LICENSE_PLATE_NUMBER` **must** start with the letter **S**.
+  - `X` is any letter from **A to Z**.
+  - `####` is any number from **1 to 9999**.
+- `PRICE` must be a **non-negative, numeric value**.
+- Extra character like `$` not required for `PRICE`.
+
+
+Example: `add-car /n Honda Civic /c SGE1234X /p 10000`
+
+Sample output:
+
+``` 
+Car added to list
+Car details:
+Honda Civic | SGE1234X | $10000.00 | Available
+```
+
 ### List all cars in the database: `list-cars`
 
 Lists all the car which the company owns.
