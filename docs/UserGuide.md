@@ -114,6 +114,27 @@ Here are the current cars in the company
 What would you like to do?
 ____________________________________________________________
 ```
+### Listing all rented out cars: `list-rented`
+
+Lists all the cars that are currently rented out.
+
+Format: `list-rented`
+
+Sample output:
+
+``` 
+Here are all the rented out cars:
+1) Honda Civic | SGE1234X | $10000.00
+2) Toyota Camry | SKL4567M | $20000.00
+3) Nissan Latio | SFT1190A | $30000.00
+```
+
+If the list is **empty**:
+
+``` 
+No cars currently rented out...
+```
+
 
 ## FAQ
 
