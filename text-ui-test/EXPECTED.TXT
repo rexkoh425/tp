@@ -14,7 +14,7 @@ list-users - Lists all customers.
 add-car - Adds a new car to the fleet.
 remove-car - Removes a car from the fleet.
 list-cars - Lists all rented-out cars.
-add-tx /p [CAR_LICENSE_PLATE] /u [BORROWER_NAME] /d [DURATION] /s [START_DATE] - Adds a new rental transaction.
+add-tx /p [CAR_LICENSE_PLATE] /u [BORROWER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy] - Adds a new rental transaction.
 mark-tx /t [Transaction ID] - Marks a rental transaction completed.
 unmark-tx /t [Transaction ID] - Unmarks a rental transaction.
 remove-tx /t [Transaction ID] - Removes an existing rental transaction.
@@ -24,11 +24,6 @@ list-tx-uncompleted - Lists all uncompleted transactions.
 find-tx-by-customer /u [CUSTOMER_NAME] - Finds transactions by a customer's name.
 exit - Exits the program.
 ____________________________________________________________
-data does not exist. Creating it now.......
-data directory created successfully.
-File created successfully: carData.txt
-File created successfully: customerData.txt
-File created successfully: transactionData.txt
 What would you like to do?
 ____________________________________________________________
 Customer added
@@ -38,7 +33,7 @@ What would you like to do?
 ____________________________________________________________
 Car added to list
 Car details:
-Honda Civic | SGE1234T | $123.0 | Available
+Honda Civic | SGE1234T | $123.00 | Available | Affordable | Median price: 123.0
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________

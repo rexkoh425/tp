@@ -89,6 +89,44 @@ What would you like to do?
 ____________________________________________________________
 ```
 
+### Adding a Transaction: `add-tx`
+
+Adds a new rental transaction to the system.
+
+**Format:** `add-transaction /tx [LICENSE_PLATE] /u [USERNAME] /d [DURATION_DAYS] /s [START_DATE]`
+
+- **`/tx`**: License plate number of the car (format: `SXX####X`).
+- **`/u`**: Username of the customer.
+- **`/d`**: Rental duration in days.
+- **`/s`**: Rental start date (format: `YYYY-MM-DD`).
+- **Parameters must be in the specified sequence.**
+
+**Example:** add-tx /p SZZ1579D /u John /d 15 /s 11-5-2025
+Sample Response:
+```
+Transaction added: 
+[ ] TX2 | SZZ1579D | John | 15day(s) 
+Start Date: 2025-05-11
+____________________________________________________________
+```
+
+
+### Listing All Transactions: `list-tx`
+
+Displays all rental transactions in the system.
+
+**Format:** `list-tx`
+
+**Sample Response:**
+```
+Here are all the transactions: 
+1) [ ] TX1 | SZZ1579D | Apple | 1day(s) 
+Start Date: 2025-12-11
+2) [ ] TX2 | SZZ1579D | John | 15day(s) 
+Start Date: 2025-05-11
+____________________________________________________________```
+```
+
 ## FAQ
 
 **Q**: Is there any file saving system in place currently? 

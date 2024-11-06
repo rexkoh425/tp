@@ -1,7 +1,10 @@
 package car;
 
 import exceptions.CarException;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Represents an <code>ArrayList</code> of cars storing <code>Car</code> objects.
@@ -54,7 +57,8 @@ public class CarList {
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
-                + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus());
+                + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus()
+                + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
     }
 
     public static void addCarWithoutPrintingInfo(Car car) {
@@ -103,7 +107,8 @@ public class CarList {
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus()
+                    + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
         }
     }
 
@@ -181,8 +186,7 @@ public class CarList {
      * Checks if the specified license plate number exists in the car list.
      *
      * @param licensePlateNumber License plate number to check.
-     * @return <code>true</code> if license plate number already exists,
-     * <code>false</code> otherwise.
+     * @return <code>true</code> if license plate number already exists, <code>false</code> otherwise.
      */
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
@@ -221,12 +225,39 @@ public class CarList {
         }
     }
 
-    public static String carListToFileString(){
+    public static String carListToFileString() {
         StringBuilder carData = new StringBuilder();
         for (Car car : carsList) {
             carData.append(car.toFileString());
             carData.append("\n");
         }
         return carData.toString();
+    }
+
+    public static void sortCarsByPrice() {
+        Collections.sort(carsList, Comparator.comparingDouble(Car::getPrice));
+    }
+
+    public static double getMedianPrice() {
+        if (carsList.isEmpty()) {
+            return Integer.parseInt(null);
+        }
+
+        int middleIndex = carsList.size() / 2;
+        if (carsList.size() % 2 == 0) {
+            // For even-sized lists, choose the lower middle element
+            middleIndex--;
+        }
+        return carsList.get(middleIndex).getPrice();
+    }
+
+    public static void markCarAsExpensive() {
+        for (Car car : carsList) {
+            if (car.getPrice() > getMedianPrice()) {
+                car.markAsExpensive();
+            } else {
+                car.markAsCheap();
+            }
+        }
     }
 }

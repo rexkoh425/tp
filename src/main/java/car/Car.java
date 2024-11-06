@@ -10,12 +10,14 @@ public class Car {
     private final String licensePlateNumber;
     private final double price;
     private boolean isRented;
+    private boolean isExpensive;
 
     public Car(String model, String licensePlateNumber, double price) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
         isRented = false;
+        isExpensive = false;
     }
 
     public Car(String model, String licensePlateNumber, double price , boolean isRented) {
@@ -45,8 +47,28 @@ public class Car {
         isRented = false;
     }
 
+    public void markAsExpensive() {
+        isExpensive = true;
+    }
+
+    public void markAsCheap() {
+        isExpensive = false;
+    }
+
     public boolean isRented() {
         return isRented;
+    }
+
+    public boolean isExpensive() {
+        return isExpensive;
+    }
+
+    public String getExpensiveStatus(){
+        if (isExpensive) {
+            return "Expensive";
+        } else {
+            return "Affordable";
+        }
     }
 
     public String getRentedStatus(){
