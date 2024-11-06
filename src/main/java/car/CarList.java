@@ -11,20 +11,22 @@ public class CarList {
         return carsList;
     }
 
-    private static String formatPriceToTwoDp(double price) {
+    /**
+     * Formats the specified price to 2 d.p.
+     *
+     * @param price Price to be formatted to 2 d.p.
+     * @return Price formatted to 2.d.p.
+     */
+    public static String formatPriceToTwoDp(double price) {
         assert price >= 0.00 : "ERROR.. Price cannot be negative!!";
 
-        double remainder = price - (int)price;
         String result = "";
-
-        if (remainder == 0.0) {
-            result += String.valueOf((int)price);
-            return result;
-        }
-
         String integerPart = String.valueOf((int)price);
+
+        double remainder = price - (int)price;
         String formattedRemainder = String.format("%.2f", remainder);
         String remainderPart = formattedRemainder.substring(1);
+
         result += (integerPart + remainderPart);
         return result;
     }
