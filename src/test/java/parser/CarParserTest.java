@@ -126,8 +126,8 @@ public class CarParserTest {
 
     @Test
     public void parseIntoCar_invalidPrice_expectCarException() {
-        String userInput = "add-car /n civic /c 12345 /p -100"; // Negative price
-        String userInput1 = "add-car /n civic /c 12345 /p abc"; // Non-numeric price
+        String userInput = "add-car /n civic /c SCT1234N /p -100"; // Negative price
+        String userInput1 = "add-car /n civic /c SBE678L /p abc"; // Non-numeric price
 
         assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput));
         assertThrows(NumberFormatException.class, () -> CarParser.parseIntoCar(userInput1));
