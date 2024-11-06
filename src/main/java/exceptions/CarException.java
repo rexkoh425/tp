@@ -2,9 +2,11 @@ package exceptions;
 
 import java.util.ArrayList;
 
+/**
+ * Represents <code>Car</code> related exceptions.
+ */
 public class CarException extends RuntimeException{
 
-    private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]";
     private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]";
     private static final String LICENSE_PLATE_NUMBER_FORMAT = """
 
@@ -15,28 +17,55 @@ public class CarException extends RuntimeException{
         super(message);
     }
 
+    /**
+     * Returns an exception when the <code>add-car</code> command is invalid.
+     *
+     * @return Exception with error message.
+     */
     public static CarException addCarException() {
         String message = "Unable to add car. Refer to correct format below:\n" +
                 ADD_CAR_FORMAT;
         return new CarException(message);
     }
 
+    /**
+     * Returns an exception when the specified price is negative.
+     *
+     * @return Exception with error message.
+     */
     public static CarException invalidPrice() {
         String message = "Price cannot be negative!! Try again...";
         return new CarException(message);
     }
 
+    /**
+     * Returns an exception when the specified license plate number is invalid.
+     *
+     * @return Exception with error message.
+     */
     public static CarException invalidLicensePlateNumber() {
         String message = "Oops!! License Plate number is invalid...\n"
                 + LICENSE_PLATE_NUMBER_FORMAT;
         return new CarException(message);
     }
 
+    /**
+     * Returns an exception when the specified license plate number in the
+     * <code>add-car</code> command already exists in the car list.
+     *
+     * @return Exception with error message.
+     */
     public static CarException duplicateLicensePlateNumber() {
         String message = "Unable to add car.. License Plate number already exists!!";
         return new CarException(message);
     }
 
+    /**
+     * Returns an exception when the specified license plate number in the
+     * <code>add-tx</code> command cannot be found in the car list.
+     *
+     * @return Exception with error message.
+     */
     public static CarException licensePlateNumberNotFound() {
         String message = "Car license plate number not found!!"
                 + "\nUse command <list-cars> to view list of available cars.";

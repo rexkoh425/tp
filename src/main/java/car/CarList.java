@@ -3,6 +3,9 @@ package car;
 import exceptions.CarException;
 import java.util.ArrayList;
 
+/**
+ * Represents an <code>ArrayList</code> of cars storing <code>Car</code> objects.
+ */
 public class CarList {
 
     public static ArrayList<Car> carsList = new ArrayList<>();
@@ -31,6 +34,15 @@ public class CarList {
         return result;
     }
 
+    /**
+     * Adds a <code>Car</code> to the car list.
+     * <p>
+     * If the license plate number of the <code>Car</code> already exists in the car list,
+     * a <code>CarException</code> is thrown instead.
+     *
+     * @param car <code>Car</code> to be added.
+     * @throws CarException If the license plate number already exists in the list.
+     */
     public static void addCar(Car car) throws CarException {
         if (isExistingLicensePlateNumber(car.getLicensePlateNumber())) {
             throw CarException.duplicateLicensePlateNumber();
@@ -49,6 +61,11 @@ public class CarList {
         carsList.add(car);
     }
 
+    /**
+     * Removes a <code>Car</code> from the car list.
+     *
+     * @param carLicensePlateNumber License plate number of <code>Car</code> to be removed.
+     */
     public static void removeCar(String carLicensePlateNumber) {
         Car carToRemove = null;
 
@@ -69,6 +86,11 @@ public class CarList {
         }
     }
 
+    /**
+     * Prints a list of all current cars in the company.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that car list is empty.
+     */
     public static void printCarList(){
         if (carsList.isEmpty()) {
             System.out.println("Oops!! Car list is empty..."
@@ -85,6 +107,12 @@ public class CarList {
         }
     }
 
+    /**
+     * Prints a list of all <b>rented out</b> cars.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that no cars
+     * are currently rented out.
+     */
     public static void printRentedCarsList() {
         ArrayList<Car> rentedCarsList = getRentedCarsList();
 
@@ -103,6 +131,12 @@ public class CarList {
         }
     }
 
+    /**
+     * Prints a list of all <b>available</b> cars.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that there
+     * are no available cars currently.
+     */
     public static void printAvailableCarsList() {
         ArrayList<Car> availableCarsList = getAvailableCarsList();
 
@@ -143,6 +177,13 @@ public class CarList {
         return availableCars;
     }
 
+    /**
+     * Checks if the specified license plate number exists in the car list.
+     *
+     * @param licensePlateNumber License plate number to check.
+     * @return <code>true</code> if license plate number already exists,
+     * <code>false</code> otherwise.
+     */
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
@@ -152,6 +193,11 @@ public class CarList {
         return false;
     }
 
+    /**
+     * Marks a <code>Car</code> as <b>rented</b>.
+     *
+     * @param carLicensePlateNumber License plate number of to-be-marked <code>Car</code>.
+     */
     public static void markCarAsRented(String carLicensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {
@@ -161,6 +207,11 @@ public class CarList {
         }
     }
 
+    /**
+     * Marks a <code>Car</code> as <b>available</b>.
+     *
+     * @param carLicensePlateNumber License plate number of to-be-marked <code>Car</code>.
+     */
     public static void markCarAsAvailable(String carLicensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {

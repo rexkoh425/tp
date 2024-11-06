@@ -1,7 +1,8 @@
 package car;
 
-import exceptions.CarException;
-
+/**
+ * Represents a class containing attributes and methods pertaining to a car.
+ */
 public class Car {
 
     public static final int NUMBER_OF_PARAMETERS = 4;
