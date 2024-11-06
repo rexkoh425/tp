@@ -3,13 +3,14 @@
 ## Introduction
 
 Clirental is a CLI-based application which allows car rental companies 
-to track their customers , cars and rental transactions.
+to track their customers, cars and rental transactions.
 
 ## Quick Start
 
 1. Ensure that you have Java 17 or above installed.
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 
+---
 ## File saving
 
 `Customer , Transaction and Car` data will be saved on their respective files under `data` directory. 
@@ -42,6 +43,7 @@ Example :
 * `Customer data` : `John | 22 | 90907638`
 * `Transaction data` : `SBS123B | John | 30 | 2024-10-17`
 
+---
 ## Features
 
 ### Adding a user to the database: `add-user`
@@ -110,7 +112,7 @@ Sample Response:
 ____________________________________________________________
 list-cars
 Here are the current cars in the company
-1) Toyota Corolla | SGM4932K | $120.0 | Not Rented
+1) Toyota Corolla | SGM4932K | $120.00 | Not Rented
 What would you like to do?
 ____________________________________________________________
 ```
