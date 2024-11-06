@@ -161,6 +161,29 @@ There is **no need to manually update** the rental status of the car. The rental
 will **automatically be updated** once a new transaction record has been added to the list.
 (i.e. after `add-tx` command is executed)
 
+### Listing all transactions: `list-tx`
+
+Lists all transactions stored in the transaction list.
+
+Format: `list-tx`
+
+Sample output:
+
+``` 
+Here are all the transactions: 
+1) [ ] TX1 | SGE1234X | john | 4day(s) 
+Start Date: 2024-12-11
+2) [ ] TX2 | SKL4567M | thomas | 6day(s) 
+Start Date: 2024-12-11
+3) [ ] TX3 | SFT1190A | matthew | 8day(s) 
+Start Date: 2024-12-11
+```
+
+If the list is **empty**:
+
+``` 
+No transaction available.
+```
 
 ## FAQ
 
