@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class CarException extends RuntimeException{
 
     private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]";
+    private static final String ADD_CAR_FORMAT = "add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]";
     private static final String LICENSE_PLATE_NUMBER_FORMAT = """
 
-            License Plate number format: SXX####X\
-
-            X -> Letters [A - Z], # -> Numbers [0 - 9]""";
+            License plate number format: SXX####X
+            X -> Letters [A - Z], #### -> Numbers [1 - 9999]""";
 
     public CarException(String message) {
         super(message);
