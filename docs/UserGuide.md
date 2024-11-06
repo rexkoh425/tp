@@ -160,8 +160,12 @@ There are no available cars at the moment...
 ### Updating rental status of car
 
 There is **no need to manually update** the rental status of the car. The rental status
-will **automatically be updated** once a new transaction record has been added to the list.
-(i.e. after `add-tx` command is executed)
+will **automatically be updated** once the transaction record has been:
+
+- **Added**
+- **Removed**
+- Marked as **completed**
+- Marked as **not completed**
 
 ### Listing all transactions: `list-tx`
 
