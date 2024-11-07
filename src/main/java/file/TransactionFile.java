@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static parser.TransactionParser.dateTimeFormatter;
+
 /**
  * Handles file operation for the transaction.
  */
@@ -101,7 +103,7 @@ public class TransactionFile {
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
         int duration = Integer.parseInt(parameters[2]);
-        LocalDate startDate = LocalDate.parse(parameters[3]);
+        LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
         Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate);
         TransactionList.addTxWithoutPrintingInfo(transaction);
     }

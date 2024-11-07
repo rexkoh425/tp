@@ -1,7 +1,5 @@
 package customer;
 
-import car.Car;
-
 import java.util.ArrayList;
 
 public class CustomerList {

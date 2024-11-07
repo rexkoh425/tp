@@ -2,6 +2,8 @@ package transaction;
 
 import java.time.LocalDate;
 
+import static parser.TransactionParser.dateTimeFormatter;
+
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
@@ -36,12 +38,13 @@ public class Transaction {
 
     @Override
     public String toString() {
+        String formattedDate = startDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         }
     }
 
@@ -63,6 +66,6 @@ public class Transaction {
 
     public String toFileString(){
         return this.getCarLicensePlate() + " | " + this.getCustomer()
-                + " | " + this.getDuration() + " | " + this.getStartDate();
+                + " | " + this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter);
     }
 }
