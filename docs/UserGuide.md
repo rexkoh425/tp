@@ -50,7 +50,7 @@ Example :
 
 Adds a customer to the list of customers tracked by the car rental application
 
-Format: `add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]`
+Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 
 * `USERNAME` : `STRING`.
 * `AGE` : `INT`

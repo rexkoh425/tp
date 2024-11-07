@@ -10,8 +10,8 @@ public class HelpParser {
 
     static {
         commands.put("help", "Provides a list of all commands and their descriptions.");
-        commands.put("add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]", "Adds a new customer to the system.");
-        commands.put("remove-user /u [USERNAME]", "Removes a customer from the system.");
+        commands.put("add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]", "Adds a new customer to the system.");
+        commands.put("remove-user /u [CUSTOMER_NAME]", "Removes a customer from the system.");
         commands.put("list-users", "Lists all customers.");
         commands.put("add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]", "Adds a new car to the fleet.");
         commands.put("remove-car", "Removes a car from the fleet.");
