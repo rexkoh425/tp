@@ -41,10 +41,10 @@ public class Transaction {
         String formattedDate = startDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
+                    duration + " day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
+                    duration + " day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         }
     }
 
