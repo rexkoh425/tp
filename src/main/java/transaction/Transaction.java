@@ -12,6 +12,7 @@ public class Transaction {
     private final String customer;
     private final int duration;
     private final LocalDate startDate;
+    private final LocalDate endDate;
     private boolean isCompleted;
 
     public Transaction(String carLicensePlate, String customer, int duration,
@@ -21,6 +22,7 @@ public class Transaction {
         this.customer = customer;
         this.duration = duration;
         this.startDate = startDate;
+        this.endDate = startDate.plusDays(duration);
         this.isCompleted = false;
     }
 
@@ -32,6 +34,10 @@ public class Transaction {
         return startDate;
     }
 
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
     public String getTransactionId() {
         return transactionId;
     }
@@ -39,12 +45,15 @@ public class Transaction {
     @Override
     public String toString() {
         String formattedDate = startDate.format(dateTimeFormatter);
+        String formattedEndDate = endDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate
+                    + " | End Date: " + formattedEndDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate
+                    + " | End Date: " + formattedEndDate;
         }
     }
 
@@ -66,6 +75,7 @@ public class Transaction {
 
     public String toFileString(){
         return this.getCarLicensePlate() + " | " + this.getCustomer()
-                + " | " + this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter);
+                + " | " + this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter)
+                + " | " + this.getEndDate().format(dateTimeFormatter);
     }
 }
