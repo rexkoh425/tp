@@ -80,13 +80,20 @@ public class TransactionList {
 
         System.out.println("Here are all the completed transactions: ");
 
+        boolean containsCompletedTx = false;
+
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
             if(transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
+                containsCompletedTx = true;
             }
+        }
+
+        if (!containsCompletedTx) {
+            System.out.println("No completed transaction available.");
         }
     }
 
@@ -98,6 +105,8 @@ public class TransactionList {
             return;
         }
 
+        boolean containsUncompletedTx = false;
+
         System.out.println("Here are all the uncompleted transactions: ");
 
         for (Transaction transaction : transactionList) {
@@ -106,7 +115,12 @@ public class TransactionList {
             if(!transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
+                containsUncompletedTx = true;
             }
+        }
+
+        if (!containsUncompletedTx) {
+            System.out.println("No uncompleted transaction available.");
         }
     }
 
