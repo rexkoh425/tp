@@ -1,1 +1,5 @@
-Honda Civic | SLC1234P | 120.0 | false
+Honda Civic | SGE1234N | 10.0 | false | false
+Honda Civic | SGE1237X | 50.0 | false | false
+Honda Civic | SGE1234K | 100.0 | false | false
+Honda Civic | SGE1234U | 1000.0 | false | true
+Honda Civic | SGE1234X | 10000.0 | true | true

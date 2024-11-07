@@ -104,7 +104,8 @@ public class TransactionFile {
         String borrowerName = parameters[1];
         int duration = Integer.parseInt(parameters[2]);
         LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
-        Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate);
+        boolean isCompleted = Boolean.parseBoolean(parameters[4]);
+        Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate , isCompleted);
         TransactionList.addTxWithoutPrintingInfo(transaction);
     }
 

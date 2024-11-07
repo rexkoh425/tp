@@ -5,7 +5,7 @@ package car;
  */
 public class Car {
 
-    public static final int NUMBER_OF_PARAMETERS = 4;
+    public static final int NUMBER_OF_PARAMETERS = 5;
     private final String model;
     private final String licensePlateNumber;
     private final double price;
@@ -20,11 +20,12 @@ public class Car {
         isExpensive = false;
     }
 
-    public Car(String model, String licensePlateNumber, double price , boolean isRented) {
+    public Car(String model, String licensePlateNumber, double price , boolean isRented , boolean isExpensive) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
         this.isRented = isRented;
+        this.isExpensive = isExpensive;
     }
 
     public String getModel() {
@@ -80,6 +81,6 @@ public class Car {
 
     public String toFileString(){
         return this.getModel() + " | " + this.getLicensePlateNumber()
-                + " | " + this.getPrice() + " | " + this.isRented();
+                + " | " + this.getPrice() + " | " + this.isRented() + " | " + this.isExpensive();
     }
 }

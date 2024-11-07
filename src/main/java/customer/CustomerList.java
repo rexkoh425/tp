@@ -9,12 +9,13 @@ public class CustomerList {
     public static void addCustomer(Customer customer){
         customers.add(customer);
         System.out.println("Customer added");
-        System.out.println(customer.toString());
+        System.out.println(customer.toDisplayString());
     }
 
     public static ArrayList<Customer> getCustomerList(){
         return customers;
     }
+
     public static void addCustomerWithoutPrintingInfo(Customer customer){
         customers.add(customer);
     }
