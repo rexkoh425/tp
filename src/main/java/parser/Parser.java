@@ -57,7 +57,12 @@ public class Parser {
             CustomerList.addCustomer(customer);
             return false;
         case REMOVE_CUSTOMER_COMMAND:
-            CustomerParser.parseUsernameForRemoval(userInput);
+            if (CustomerList.getCustomers().isEmpty()) {
+                System.out.println("Customer list is empty. No customer to remove.");
+                return false;
+            }
+            String customerName = CustomerParser.parseCustomerForRemoval(userInput);
+            CustomerList.removeCustomer(customerName);
             return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();

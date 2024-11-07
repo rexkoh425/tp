@@ -20,7 +20,7 @@ public class CustomerParserTest {
     void parseIntoCustomer() {
         String userInput = "add-user /u test /a 18 /c 92750174";
         Customer customer = CustomerParser.parseIntoCustomer(userInput);
-        assertEquals("test" , customer.getUsername());
+        assertEquals("test" , customer.getCustomerName());
         assertEquals(18 , customer.getAge());
         assertEquals( "92750174" , customer.getContactNumber());
     }

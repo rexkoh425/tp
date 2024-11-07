@@ -1,13 +1,14 @@
 package parser;
 
 import customer.Customer;
-import customer.CustomerList;
 import exceptions.CustomerException;
+
+import java.util.Objects;
 
 public class CustomerParser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
-    private static final String REMOVE_CUSTOMER_FORMAT = "remove-user /u [username]";
+    private static final String REMOVE_CUSTOMER_FORMAT = "remove-user /u [CUSTOMER_NAME]";
 
     /**
      * Creates new customer object based on user input.
@@ -25,10 +26,10 @@ public class CustomerParser {
             throw CustomerException.addCustomerException();
         }
 
-        String username = parameterContents[0];
+        String customerName = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
         String contactNumber = parameterContents[2];
-        return new Customer(username , age, contactNumber );
+        return new Customer(customerName , age, contactNumber );
     }
 
     /**
@@ -74,14 +75,14 @@ public class CustomerParser {
         return true;
     }
 
-    public static void parseUsernameForRemoval(String userInput) {
-        String[] words = userInput.split(" ", 3);
-        if (words.length < 3 || !words[1].equals("/u")) {
-            System.out.println("Unable to remove user. Refer to correct format below:");
-            System.out.println(REMOVE_CUSTOMER_FORMAT);
-            return;
+    public static String parseCustomerForRemoval(String userInput) throws CustomerException {
+        String[] words = userInput.split("\\s+", 3);
+        if (words.length < 2 || !Objects.equals(words[1], "/u")) {
+            throw CustomerException.removeCustomerException();
+        } else if (words.length != 3) {
+            throw CustomerException.missingNameWhenRemoving();
+        } else {
+            return words[2];  // assuming input format is: remove-user <customerName>
         }
-        CustomerList.removeCustomer(words[2].toLowerCase());
     }
-
 }
