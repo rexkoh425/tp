@@ -20,6 +20,8 @@ public class TransactionParser {
     public static final String MARK_TRANSACTION_FORMAT = "mark-tx /t [TRANSACTION_ID]";
     public static final String UNMARK_TRANSACTION_FORMAT = "unmark-tx /t [TRANSACTION_ID]";
 
+    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
         userInput = userInput.substring(ADD_TRANSACTION_COMMAND.length()).trim();
@@ -56,9 +58,8 @@ public class TransactionParser {
 
         LocalDate startDate;
         String dateStr = parameterContents[3];
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            formatter.parse(dateStr);
+            dateTimeFormatter.parse(dateStr);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid date format for startDate. Date format: YYYY-MM-DD.");
         }
