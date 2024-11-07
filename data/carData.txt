@@ -1,4 +1,0 @@
-Nissan Sylphy | SLC5320K | 110.0 | true
-Toyota Corolla Altis | SGB3238T | 90.0 | true
-Honda Vezel | SLV5400M | 130.0 | true
-Polestar 1 | SNG1234M | 240.0 | true
