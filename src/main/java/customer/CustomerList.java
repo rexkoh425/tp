@@ -1,5 +1,7 @@
 package customer;
 
+import car.Car;
+
 import java.util.ArrayList;
 
 public class CustomerList {
@@ -21,7 +23,7 @@ public class CustomerList {
 
     public static void removeCustomer(String customerName){
         for(Customer customer : customers){
-            if(customer.getUsername().equals(customerName)){
+            if(customer.getCustomerName().equals(customerName)){
                 customers.remove(customer);
                 System.out.println("User " + customerName + " has been removed");
                 return;
@@ -45,6 +47,15 @@ public class CustomerList {
                 System.out.println(customer.toString());
             }
         }
+    }
+
+    public static boolean isExistingCustomer(String customerName) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equals(customerName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String customerListToFileString(){

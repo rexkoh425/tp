@@ -96,11 +96,11 @@ public class CustomerFile {
      */
     public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
         assert parameters.length == 3 : "Parameter for customers is wrong";
-        String username = parameters[0];
+        String customerName = parameters[0];
         try {
             int age = Integer.parseInt(parameters[1]);
             String contactNumber = parameters[2];
-            Customer customer = new Customer(username , age , contactNumber);
+            Customer customer = new Customer(customerName , age , contactNumber);
             CustomerList.addCustomerWithoutPrintingInfo(customer);
         }catch(NumberFormatException e) {
             errorLines.add(line);

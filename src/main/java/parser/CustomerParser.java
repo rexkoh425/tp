@@ -26,10 +26,10 @@ public class CustomerParser {
             throw CustomerException.addCustomerException();
         }
 
-        String username = parameterContents[0];
+        String customerName = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
         String contactNumber = parameterContents[2];
-        return new Customer(username , age, contactNumber );
+        return new Customer(customerName , age, contactNumber );
     }
 
     /**
@@ -82,7 +82,7 @@ public class CustomerParser {
         } else if (words.length != 3) {
             throw CustomerException.missingNameWhenRemoving();
         } else {
-            return words[2];  // assuming input format is: remove-user <username>
+            return words[2];  // assuming input format is: remove-user <customerName>
         }
     }
 }

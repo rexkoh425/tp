@@ -103,7 +103,7 @@ public class TransactionFile {
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
         int duration = Integer.parseInt(parameters[2]);
-        LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
+        LocalDate startDate = LocalDate.parse(parameters[3]);
         Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate);
         TransactionList.addTxWithoutPrintingInfo(transaction);
     }

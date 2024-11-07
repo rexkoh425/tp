@@ -1,6 +1,7 @@
 package parser;
 
 import car.CarList;
+import customer.CustomerList;
 import exceptions.CarException;
 import transaction.Transaction;
 import transaction.TransactionList;
@@ -42,8 +43,10 @@ public class TransactionParser {
             throw CarException.licensePlateNumberNotFound();
         }
 
-
-        String userName = parameterContents[1];
+        String customerName = parameterContents[1];
+        if (!CustomerList.isExistingCustomer(customerName)) {
+            throw new IllegalArgumentException("Customer " + customerName + " does not exist.");
+        }
 
         int duration;
         try {
@@ -63,34 +66,49 @@ public class TransactionParser {
             throw new IllegalArgumentException("Invalid date format for startDate. Date format: dd-MM-yyyy.");
         }
         try {
-            startDate = LocalDate.parse(dateStr);
+            startDate = LocalDate.parse(dateStr, dateTimeFormatter);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("The specified startDate does not exist in the calendar.");
         }
 
-        return new Transaction(carLicensePlate.toUpperCase(), userName, duration,
+        return new Transaction(carLicensePlate.toUpperCase(), customerName, duration,
                 startDate);
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {
+        int lastIndex = -1;
         for (String parameter : parameters) {
-            if (!userInput.contains(parameter)) {
-                return false;
+            int currentIndex = userInput.indexOf(parameter);
+            if (currentIndex == -1 || currentIndex < lastIndex) {
+                return false;  // Parameter missing or out of order
             }
+            lastIndex = currentIndex;
         }
         return true;
     }
 
     private static String[] parseParameterContents(String[] parameters, String userInput) {
         String[] contents = new String[parameters.length];
-        String[] words = userInput.split(" ");
 
         for (int i = 0; i < parameters.length; i++) {
-            for (int j = 0; j < words.length; j++) {
-                if (words[j].equals(parameters[i]) && j + 1 < words.length) {
-                    contents[i] = words[j + 1];
+            int startIndex = userInput.indexOf(parameters[i]) + parameters[i].length();
+
+            // Find the end of this parameter's value by locating the next parameter or end of the string
+            int endIndex = userInput.length();
+            for (int j = i + 1; j < parameters.length; j++) {
+                int nextParamIndex = userInput.indexOf(parameters[j], startIndex);
+                if (nextParamIndex != -1) {
+                    endIndex = nextParamIndex;
                     break;
                 }
+            }
+
+            // Extract the parameter content and trim whitespace
+            contents[i] = userInput.substring(startIndex, endIndex).trim();
+
+            // Validate that content is not missing
+            if (contents[i].isEmpty()) {
+                throw new IllegalArgumentException("Missing value for parameter: " + parameters[i]);
             }
         }
         return contents;
