@@ -1,6 +1,7 @@
 package parser;
 
 import car.Car;
+import car.CarList;
 import exceptions.CarException;
 
 public class CarParser {
@@ -11,6 +12,8 @@ public class CarParser {
 
     public static Car parseIntoCar(String userInput) throws CarException {
         userInput = userInput.trim();
+        CarList.sortCarsByPrice();
+        CarList.markCarAsExpensive();
 
         if (!isValidFormat(userInput)) {
             throw CarException.addCarException();

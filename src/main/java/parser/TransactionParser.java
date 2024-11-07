@@ -4,6 +4,7 @@ import car.CarList;
 import exceptions.CarException;
 import transaction.Transaction;
 import transaction.TransactionList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,16 +12,15 @@ import java.time.format.DateTimeParseException;
 import static parser.Parser.ADD_TRANSACTION_COMMAND;
 
 public class TransactionParser {
-
+    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public static final String ADD_TRANSACTION_FORMAT = "add-tx /p [CAR_LICENSE_PLATE]" +
-            "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE]";
+            "/u [BORROWER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy]";
     public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-tx-by-customer /u [CUSTOMER_NAME]";
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
     public static final String MARK_TRANSACTION_FORMAT = "mark-tx /t [TRANSACTION_ID]";
     public static final String UNMARK_TRANSACTION_FORMAT = "unmark-tx /t [TRANSACTION_ID]";
 
-    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
@@ -31,8 +31,8 @@ public class TransactionParser {
         if (isValidSequence(parameters, userInput)) {
             parameterContents = parseParameterContents(parameters, userInput);
         } else {
-            throw new IllegalArgumentException("Invalid command format for adding a transaction." +
-                    " Refer to the format below: " + "\n" + ADD_TRANSACTION_FORMAT);
+            throw new IllegalArgumentException("Invalid command format for adding a transaction. " +
+                    "Refer to the format below: " + System.lineSeparator() + ADD_TRANSACTION_FORMAT);
         }
 
         String carLicensePlate = parameterContents[0];
