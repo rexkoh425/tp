@@ -1,7 +1,8 @@
 package car;
 
-import exceptions.CarException;
-
+/**
+ * Represents a class containing attributes and methods pertaining to a car.
+ */
 public class Car {
 
     public static final int NUMBER_OF_PARAMETERS = 4;
@@ -11,7 +12,7 @@ public class Car {
     private boolean isRented;
     private boolean isExpensive;
 
-    public Car(String model, String licensePlateNumber, double price) throws CarException{
+    public Car(String model, String licensePlateNumber, double price) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
@@ -19,7 +20,7 @@ public class Car {
         isExpensive = false;
     }
 
-    public Car(String model, String licensePlateNumber, double price , boolean isRented) throws CarException{
+    public Car(String model, String licensePlateNumber, double price , boolean isRented) {
         this.model = model;
         this.licensePlateNumber = licensePlateNumber;
         this.price = price;
