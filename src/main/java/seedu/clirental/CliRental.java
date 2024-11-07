@@ -28,9 +28,9 @@ public class CliRental {
                 FileHandler.updateFiles();
                 Parser.printDividerLine();
 
-            } catch (CustomerException exception){
+            } catch (CustomerException exception) {
                 exception.printErrorMessage();
-            } catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 System.out.println("Unable to parse input");
             } catch (CarException | CliRentalException e) {
                 System.out.println(e.getMessage());
