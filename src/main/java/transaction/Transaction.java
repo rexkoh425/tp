@@ -10,28 +10,26 @@ public class Transaction {
     private final String transactionId;
     private final String carLicensePlate;
     private final String customer;
-    private final String duration;
+    private final int duration;
     private final LocalDate startDate;
     private boolean isCompleted;
 
-    public Transaction(String carLicensePlate, String customer, String duration,
+    public Transaction(String carLicensePlate, String customer, int duration,
                        LocalDate startDate) {
-        {
-            this.transactionId = "TX" + transactionCounter++;
-            this.carLicensePlate = carLicensePlate;
-            this.customer = customer;
-            this.duration = duration;
-            this.startDate = startDate;
-            this.isCompleted = false;
-        }
+        this.transactionId = "TX" + transactionCounter++;
+        this.carLicensePlate = carLicensePlate;
+        this.customer = customer;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.isCompleted = false;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public String getStringStartDate() {
-        return startDate.format(dateTimeFormatter);
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
     public String getTransactionId() {
@@ -40,12 +38,13 @@ public class Transaction {
 
     @Override
     public String toString() {
+        String formattedDate = startDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + startDate;
+                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate;
         }
     }
 
@@ -67,6 +66,6 @@ public class Transaction {
 
     public String toFileString(){
         return this.getCarLicensePlate() + " | " + this.getCustomer()
-                + " | " + this.getDuration() + " | " + this.getStringStartDate();
+                + " | " + this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter);
     }
 }

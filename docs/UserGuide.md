@@ -50,7 +50,7 @@ Example :
 
 Adds a customer to the list of customers tracked by the car rental application
 
-Format: `add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]`
+Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 
 * `USERNAME` : `STRING`.
 * `AGE` : `INT`
@@ -195,15 +195,15 @@ No transaction available.
 
 Adds a new rental transaction to the system.
 
-**Format:** `add-transaction /tx [LICENSE_PLATE] /u [USERNAME] /d [DURATION_DAYS] /s [START_DATE]`
+**Format:** `add-transaction /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE]`
 
 - **`/tx`**: License plate number of the car (format: `SXX####X`).
 - **`/u`**: Username of the customer.
 - **`/d`**: Rental duration in days.
-- **`/s`**: Rental start date (format: `YYYY-MM-DD`).
+- **`/s`**: Rental start date (format: `dd-MM-yyyy`).
 - **Parameters must be in the specified sequence.**
 
-**Example:** add-tx /p SZZ1579D /u John /d 15 /s 11-5-2025
+**Example:** add-tx /c SZZ1579D /u John /d 15 /s 11-5-2025
 Sample Response:
 ```
 Transaction added: 

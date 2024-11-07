@@ -19,11 +19,11 @@ class CustomerFileTest {
 
         ArrayList<Integer> errorLines = inputTestCases();
         Customer customer1 = CustomerList.getCustomerList().get(0);
-        assertEquals(customer1.getUsername(), "John");
+        assertEquals(customer1.getCustomerName(), "John");
         assertEquals(customer1.getContactNumber() , "90907638");
         assertEquals(customer1.getAge(), 22);
         Customer customer2 = CustomerList.getCustomerList().get(1);
-        assertEquals(customer2.getUsername(), "John");
+        assertEquals(customer2.getCustomerName(), "John");
         assertEquals(customer2.getContactNumber(), "914109036638");
         assertEquals(customer2.getAge(), 22);
         if(errorLines.size() == 1 && errorLines.get(0) == 3){
