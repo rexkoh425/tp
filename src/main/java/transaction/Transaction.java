@@ -33,6 +33,7 @@ public class Transaction {
         this.customer = customer;
         this.duration = duration;
         this.startDate = startDate;
+        this.endDate = startDate.plusDays(duration);
         this.isCompleted = isCompleted;
     }
 
