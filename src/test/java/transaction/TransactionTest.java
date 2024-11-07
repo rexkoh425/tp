@@ -68,7 +68,7 @@ class TransactionTest {
                 + " | End Date: 06-10-2024";
         String expected2 = "[ ] " + transaction2.getTransactionId() +
                 " | XYZ-789 | Jane Smith | 3 days" + System.lineSeparator() + "Start Date: 02-10-2024"
-                + " | End Date: 07-10-2024";
+                + " | End Date: 05-10-2024";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when not completed");
         assertEquals(expected2, transaction2.toString(), "toString should match expected format when not completed");
