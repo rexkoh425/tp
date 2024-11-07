@@ -54,6 +54,9 @@ public class CarList {
         assert !isExistingLicensePlateNumber(car.getLicensePlateNumber()) :
                 "ERROR.. Cannot add car with same license plate number";
         carsList.add(car);
+        CarList.sortCarsByPrice();
+        CarList.getMedianPrice();
+        CarList.markCarAsExpensive();
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
@@ -88,6 +91,11 @@ public class CarList {
         } else {
             System.out.println("No car found with license plate " + carLicensePlateNumber);
         }
+    }
+
+    public static void removeAllCars() {
+        carsList.clear();
+        System.out.println("All cars removed!!!");
     }
 
     /**
