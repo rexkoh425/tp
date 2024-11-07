@@ -42,17 +42,25 @@ public class Transaction {
         return transactionId;
     }
 
+    private String durationtoString(){
+        if(duration == 1) {
+            return " day";
+        } else {
+            return duration + " days";
+        }
+    }
+
     @Override
     public String toString() {
         String formattedDate = startDate.format(dateTimeFormatter);
         String formattedEndDate = endDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate
+                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate 
                     + " | End Date: " + formattedEndDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    duration + "day(s) " + System.lineSeparator() + "Start Date: " + formattedDate
+                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate
                     + " | End Date: " + formattedEndDate;
         }
     }
