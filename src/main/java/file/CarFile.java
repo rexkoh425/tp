@@ -46,7 +46,8 @@ public class CarFile {
         try {
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
-            Car car = new Car(model, licensePlateNumber, price, isRented);
+            boolean isExpensive = Boolean.parseBoolean(parameters[4]);
+            Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
             CarList.sortCarsByPrice();
             CarList.getMedianPrice();
@@ -88,6 +89,8 @@ public class CarFile {
             scanLineAndAddCar(scanner, errorLines, line);
             line ++;
         }
+        CarList.sortCarsByPrice();
+        CarList.markCarAsExpensive();
         if(!errorLines.isEmpty()) {
             throw CarException.invalidParameters(errorLines);
         }

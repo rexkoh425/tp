@@ -9,7 +9,7 @@ to the original source as well}
 
 The following is our class diagram for our whole project.
 
-![Local Image](UML/CLiRental.png)
+![Local Image](images/CLiRental.png)
 
 ### Sequence diagrams
 
@@ -17,7 +17,7 @@ The following is our class diagram for our whole project.
 
 The following sequence diagram will explain the sequence of events after the user inputs an add-user command.
 
-![Local Image](UML/AddCustomerSequence.png)
+![Local Image](images/AddCustomerSequence.png)
 
 2. `Creating Car file and loading file`
 
@@ -25,7 +25,7 @@ The following sequence diagram will explain the sequence of events for loading o
 start of the program. The carData.txt will be created if it does not exist at the start of program and its data will be
 loaded if the file exist.
 
-![Local Image](UML/CarFileLoader.png)
+![Local Image](images/CarFileLoader.png)
 
 ### Auto updating of car rental status feature
 
@@ -134,6 +134,17 @@ To enhance the functionality of **CliRental**, we have implemented features that
 - **Finding Transactions by Customer Name:**
   - Facilitates the retrieval of all transactions associated with a specific customer, enabling efficient management and review.
 
+- **Add Users to the database**
+  - Allows transactions involving customers and keep track of user information.
+
+- **Listing Cars and status**
+  - Displays all the cars in the company and see if they are rented out or not.
+
+- **File saving**
+  - Saves all data regarding transactions, cars and customer preventing data loss.
+  - Real-time updates after every command.
+  - Loads file upon start of program without any hassle.
+
 #### **2. Design & Implementation**
 
 The implementation of these features is encapsulated within the `TransactionList` class, which manages all transaction-related operations. Below is a detailed breakdown of the design and implementation strategies employed.
@@ -157,6 +168,26 @@ The implementation of these features is encapsulated within the `TransactionList
 
 - **Encapsulation:** The `transactionList` is maintained as a private static `ArrayList<Transaction>`, ensuring controlled access through public methods.
 - **Data Integrity:** Assertions and exception handling are employed to maintain the integrity of transaction data during operations.
+
+
+**`TransactionFile` Class:**
+
+- **Responsibilities:**
+  - Loads transaction data from transactionData.txt upon start of program.
+  - Updates transaction data in the file after every command.
+
+- **Key Methods:**
+  - `loadTransactionData()`: Loads transaction data from transactionData.txt to TransactionList.
+  - `scanLineAndAddTransaction()`: Scans the current line in the file and add it into TransactionList.
+  - `addTransactionWithParameters` : Create a Transaction object based on a list of parameters.
+  - `updateTransactionDataFile()` : Reads TransactionList and update TransactionList.txt accordingly.
+
+- **Design Considerations** 
+  - `User Experience` : Users should not need to update the files manually after each command and should be automated 
+        instead.
+  - `Maintainability` : When new parameters are introduced, only 3 methods and less than 10 lines of code 
+      needs to be updated. 
+
 
 ## Product scope
 ### Target user profile
@@ -188,4 +219,5 @@ finding the transaction they are looking for easily with multiple filters.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+1) Download our v2.0 jar file
+2) Check out our user guide and experiment away!!

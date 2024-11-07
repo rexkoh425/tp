@@ -1,8 +1,0 @@
-Volkswagen Golf | SKL4216H | 110.0 | false
-Nissan Altima | SJE8720G | 130.0 | false
-Honda Civic | SGH8231M | 150.0 | false
-Ford Focus | SKJ2839A | 170.0 | false
-Hyundai Elantra | SJA9173C | 180.0 | false
-Mazda 3 | SJY2043B | 200.0 | false
-BMW 320i | SGD4091D | 220.0 | false
-Mercedes-Benz C200 | SGY2940F | 300.0 | false

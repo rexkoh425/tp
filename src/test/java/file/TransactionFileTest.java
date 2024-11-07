@@ -19,11 +19,11 @@ class TransactionFileTest {
     void addTransactionWithParameters() {
         TransactionFile transactionFile = new TransactionFile("transactionData1.txt");
 
-        String[] parameters = {"SBS123B" ,"John" ,"3" ,"17-10-2024"};
+        String[] parameters = {"SBS123B" ,"John" ,"3" ,"17-10-2024" , "false"};
         transactionFile.addTransactionWithParameters(parameters);
-        parameters = new String[]{"SB" ,"Jon" ,"1" ,"17-11-2024"};
+        parameters = new String[]{"SB" ,"Jon" ,"1" ,"17-11-2024" , "false"};
         transactionFile.addTransactionWithParameters(parameters);
-        parameters = new String[]{"12313" ,"ohn" ,"365" ,"29-10-2024"};
+        parameters = new String[]{"12313" ,"ohn" ,"365" ,"29-10-2024" , "false"};
         transactionFile.addTransactionWithParameters(parameters);
         Transaction transaction1 = TransactionList.getTransactionList().get(0);
         assertEquals(transaction1.getCustomer(), "John");
