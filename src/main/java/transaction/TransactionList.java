@@ -86,8 +86,6 @@ public class TransactionList {
             if(transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
-            } else {
-                System.out.println("No completed transaction.");
             }
         }
     }
@@ -108,8 +106,6 @@ public class TransactionList {
             if(!transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
-            } else {
-                System.out.println("No uncompleted transaction.");
             }
         }
     }
