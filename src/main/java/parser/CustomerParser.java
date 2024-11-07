@@ -1,7 +1,6 @@
 package parser;
 
 import customer.Customer;
-import customer.CustomerList;
 import exceptions.CustomerException;
 
 import java.util.Objects;
