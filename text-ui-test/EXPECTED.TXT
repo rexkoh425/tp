@@ -8,16 +8,16 @@ Hello, thank you for choosing our car rental management program CliRental
 ____________________________________________________________
 Available Commands:
 help - Provides a list of all commands and their descriptions.
-add-user - Adds a new customer to the system.
-remove-user - Removes a customer from the system.
+add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER] - Adds a new customer to the system.
+remove-user /u [USERNAME] - Removes a customer from the system.
 list-users - Lists all customers.
-add-car - Adds a new car to the fleet.
-remove-car - Removes a car from the fleet.
+add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE] - Adds a new car to the fleet.
+remove-car /i [CAR_ID] - Removes a car from the fleet.
 list-cars - Lists all rented-out cars.
 add-tx /p [CAR_LICENSE_PLATE] /u [BORROWER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy] - Adds a new rental transaction.
-mark-tx /t [Transaction ID] - Marks a rental transaction completed.
-unmark-tx /t [Transaction ID] - Unmarks a rental transaction.
-remove-tx /t [Transaction ID] - Removes an existing rental transaction.
+mark-tx /t [TRANSACTION_ID] - Marks a rental transaction completed.
+unmark-tx /t [TRANSACTION_ID] - Unmarks a rental transaction.
+remove-tx /t [TRANSACTION_ID] - Removes an existing rental transaction.
 list-tx - Lists all transactions.
 list-tx-completed - Lists all completed transactions.
 list-tx-uncompleted - Lists all uncompleted transactions.
