@@ -92,7 +92,7 @@ public class CarList {
 
     public static void removeAllCars() {
         carsList.clear();
-        System.out.println("All cars removed");
+        System.out.println("All cars removed!!!");
     }
 
     /**

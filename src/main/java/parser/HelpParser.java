@@ -22,6 +22,7 @@ public class HelpParser {
         commands.put("mark-tx /t [TRANSACTION_ID]", "Marks a rental transaction completed.");
         commands.put("unmark-tx /t [TRANSACTION_ID]", "Unmarks a rental transaction.");
         commands.put("remove-tx /t [TRANSACTION_ID]", "Removes an existing rental transaction.");
+        commands.put("remove-all-txs", "Removes transactions history");
         commands.put("list-tx", "Lists all transactions.");
         commands.put("list-tx-completed", "Lists all completed transactions.");
         commands.put("list-tx-uncompleted", "Lists all uncompleted transactions.");
