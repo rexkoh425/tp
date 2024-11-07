@@ -1,17 +1,19 @@
 package transaction;
 
+import java.time.LocalDate;
+
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 4;
     private static int transactionCounter = 1;
     private final String transactionId;
     private final String carLicensePlate;
     private final String customer;
-    private final String duration;
-    private final String startDate;
+    private final int duration;
+    private final LocalDate startDate;
     private boolean isCompleted;
 
-    public Transaction(String carLicensePlate, String customer, String duration,
-                       String startDate) {
+    public Transaction(String carLicensePlate, String customer, int duration,
+                       LocalDate startDate) {
         this.transactionId = "TX" + transactionCounter++;
         this.carLicensePlate = carLicensePlate;
         this.customer = customer;
@@ -20,11 +22,11 @@ public class Transaction {
         this.isCompleted = false;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 

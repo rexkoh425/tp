@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -99,8 +100,8 @@ public class TransactionFile {
     public void addTransactionWithParameters(String[] parameters) {
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
-        String duration = parameters[2];
-        String startDate = parameters[3];
+        int duration = Integer.parseInt(parameters[2]);
+        LocalDate startDate = LocalDate.parse(parameters[3]);
         Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate);
         TransactionList.addTxWithoutPrintingInfo(transaction);
     }

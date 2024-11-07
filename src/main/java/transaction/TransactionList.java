@@ -11,14 +11,6 @@ public class TransactionList {
 
     public static void addTx(Transaction transaction) {
         String licensePlateNumber = transaction.getCarLicensePlate();
-
-        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
-            throw CarException.invalidLicensePlateNumber();
-        }
-
-        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)){
-            throw CarException.licensePlateNumberNotFound();
-        }
         transactionList.add(transaction);
         CarList.markCarAsRented(licensePlateNumber);
         System.out.println("Transaction added: ");

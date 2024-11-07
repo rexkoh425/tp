@@ -13,10 +13,10 @@ public class HelpParser {
         commands.put("add-user", "Adds a new customer to the system.");
         commands.put("remove-user", "Removes a customer from the system.");
         commands.put("list-users", "Lists all customers.");
-        commands.put("add-car", "Adds a new car to the fleet.");
+        commands.put("add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]", "Adds a new car to the fleet.");
         commands.put("remove-car", "Removes a car from the fleet.");
         commands.put("list-cars", "Lists all rented-out cars.");
-        commands.put("add-tx /p [CAR_LICENSE_PLATE] /u [BORROWER_NAME] /d [DURATION] /s [START_DATE]",
+        commands.put("add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE]",
                 "Adds a new rental transaction.");
         commands.put("mark-tx /t [Transaction ID]", "Marks a rental transaction completed.");
         commands.put("unmark-tx /t [Transaction ID]", "Unmarks a rental transaction.");

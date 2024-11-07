@@ -1,8 +1,13 @@
 package parser;
 
+import car.CarList;
+import exceptions.CarException;
 import transaction.Transaction;
 import transaction.TransactionList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import static parser.Parser.ADD_TRANSACTION_COMMAND;
 
 public class TransactionParser {
@@ -18,7 +23,7 @@ public class TransactionParser {
 
     public static Transaction parseIntoTransaction(String userInput) throws IllegalArgumentException {
         userInput = userInput.substring(ADD_TRANSACTION_COMMAND.length()).trim();
-        String[] parameters = { "/p", "/u", "/d", "/s" };
+        String[] parameters = { "/c", "/u", "/d", "/s" };
         String[] parameterContents;
 
         if (isValidSequence(parameters, userInput)) {
@@ -29,12 +34,42 @@ public class TransactionParser {
         }
 
         String carLicensePlate = parameterContents[0];
-        String userName = parameterContents[1];
-        int duration = Integer.parseInt(parameterContents[2]);
-        LocalDate startDate = LocalDate.parse(parameterContents[3]);
+        if (!CarParser.isValidLicensePlateNumber(carLicensePlate)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
+        if (!CarList.isExistingLicensePlateNumber(carLicensePlate)) {
+            throw CarException.licensePlateNumberNotFound();
+        }
 
-        return new Transaction(carLicensePlate.toUpperCase(), userName, String.valueOf(duration),
-                startDate.toString());
+
+        String userName = parameterContents[1];
+
+        int duration;
+        try {
+            duration = Integer.parseInt(parameterContents[2]);
+            if (duration < 1 || duration > 365) {
+                throw new IllegalArgumentException("Invalid duration. Duration must be between 1 and 365 days.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid duration format. Duration must be an integer.");
+        }
+
+        LocalDate startDate;
+        String dateStr = parameterContents[3];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            formatter.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format for startDate. Date format: YYYY-MM-DD.");
+        }
+        try {
+            startDate = LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("The specified startDate does not exist in the calendar.");
+        }
+
+        return new Transaction(carLicensePlate.toUpperCase(), userName, duration,
+                startDate);
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {
