@@ -76,7 +76,7 @@ public class CustomerParser {
 
     public static void parseUsernameForRemoval(String userInput) {
         String[] words = userInput.split(" ", 3);
-        if (words.length < 3 || !words[1].equals("/t")) {
+        if (words.length < 3 || !words[1].equals("/u")) {
             System.out.println("Unable to remove user. Refer to correct format below:");
             System.out.println(REMOVE_CUSTOMER_FORMAT);
             return;

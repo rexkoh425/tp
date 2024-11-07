@@ -23,7 +23,7 @@ public class CustomerList {
         for(Customer customer : customers){
             if(customer.getUsername().equals(username)){
                 customers.remove(customer);
-                System.out.println("User" + username + " has been removed");
+                System.out.println("User " + username + " has been removed");
                 return;
             }
         }
