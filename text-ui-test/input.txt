@@ -1,3 +1,0 @@
-add-user /u user1234 /a 18 /c 92750174
-add-car /n Honda Civic /c SGE1234T /p 123
-exit
