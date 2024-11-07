@@ -54,6 +54,9 @@ public class CarList {
         assert !isExistingLicensePlateNumber(car.getLicensePlateNumber()) :
                 "ERROR.. Cannot add car with same license plate number";
         carsList.add(car);
+        CarList.sortCarsByPrice();
+        CarList.getMedianPrice();
+        CarList.markCarAsExpensive();
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
