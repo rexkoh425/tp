@@ -93,6 +93,6 @@ public class Transaction {
 
     public String toFileString(){
         return this.getCarLicensePlate() + " | " + this.getCustomer() + " | " + this.getDuration() + " | "
-                + this.getStartDate().format(dateTimeFormatter) + " | " + this.isCompleted()
+                + this.getStartDate().format(dateTimeFormatter) + " | " + this.isCompleted();
     }
 }
