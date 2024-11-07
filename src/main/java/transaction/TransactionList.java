@@ -130,6 +130,11 @@ public class TransactionList {
         System.out.println("Transaction not found");
     }
 
+    public static void removeAllTxs() {
+        transactionList.clear();
+        System.out.println("All transactions removed!!!");
+    }
+
     public static void findTxsByCustomer(String customer) {
         // Assert that customer is not null
         assert customer != null : "Customer name to find transactions should not be null.";

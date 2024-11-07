@@ -191,6 +191,12 @@ If the list is **empty**:
 No transaction available.
 ```
 
+### Listing all transactions: `remove-all-txs`
+
+Remove all transactions stored in the transaction list.
+
+Format: `remove-all-txs`
+
 ### Adding a Transaction: `add-tx`
 
 Adds a new rental transaction to the system.
@@ -249,13 +255,14 @@ ____________________________________________________________```
 
 **`Car` related commands:** 
 
-|          Action          | Format                                                        |
-|:------------------------:|---------------------------------------------------------------|
-|       **Add** car        | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
-|      **Remove** car      |                                                               |
-|    **List all** cars     | `list-cars`                                                   |
-|   **List rented** cars   | `list-rented`                                                 |
-| **List available** cars  | `list-available`                                              |
+|         Action          | Format                                                        |
+|:-----------------------:|---------------------------------------------------------------|
+|       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
+|     **Remove** car      |                                                               |
+|   **Remove all** cars   | `remove-all-cars`                                             |
+|    **List all** cars    | `list-cars`                                                   |
+|  **List rented** cars   | `list-rented`                                                 |
+| **List available** cars | `list-available`                                              |
 
 **`Transaction` related commands:**
 
@@ -263,6 +270,7 @@ ____________________________________________________________```
 |:---------------------------------------:|-----------------------|
 |           **Add** transaction           |                       |
 |         **Remove** transaction          |                       |
+|       **Remove all** transactions       | `remove-all-txs`      |
 |        **List all** transactions        | `list-tx`             |
 |  **Mark** transactions as **complete**  |                       |
 | **Mark** transactions as **incomplete** |                       |

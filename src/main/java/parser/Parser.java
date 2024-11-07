@@ -20,10 +20,12 @@ public class Parser {
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String REMOVE_ALL_CARS_COMMAND = "remove-all-cars";
     private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String LIST_RENTED_CARS_COMMAND = "list-rented";
     private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
     private static final String REMOVE_TRANSACTION_COMMAND = "remove-tx";
+    private static final String REMOVE_ALL_TRANSACTIONS_COMMAND = "remove-all-txs";
     private static final String MARK_TRANSACTION_COMMAND = "mark-tx";
     private static final String UNMARK_TRANSACTION_COMMAND = "unmark-tx";
     private static final String LIST_ALL_TRANSACTIONS = "list-tx";
@@ -78,6 +80,13 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
             return false;
+        case REMOVE_ALL_CARS_COMMAND:
+            try {
+                CarList.removeAllCars();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return false;
         case LIST_CARS_COMMAND:
             CarList.printCarList();
             return false;
@@ -97,6 +106,13 @@ public class Parser {
             return false;
         case REMOVE_TRANSACTION_COMMAND:
             TransactionParser.parseRemoveTx(userInput);
+            return false;
+        case REMOVE_ALL_TRANSACTIONS_COMMAND:
+            try {
+                TransactionList.removeAllTxs();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             return false;
         case MARK_TRANSACTION_COMMAND:
             TransactionParser.parseMarkCompleted(userInput);
