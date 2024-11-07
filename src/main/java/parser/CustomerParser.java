@@ -1,11 +1,13 @@
 package parser;
 
 import customer.Customer;
+import customer.CustomerList;
 import exceptions.CustomerException;
 
 public class CustomerParser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
+    private static final String REMOVE_CUSTOMER_FORMAT = "remove-user /u [username]";
 
     /**
      * Creates new customer object based on user input.
@@ -72,12 +74,14 @@ public class CustomerParser {
         return true;
     }
 
-    public static String parseUsernameForRemoval(String userInput) {
-        String[] words = userInput.split(" ");
-        if (words.length < 2) {
-            System.out.println("Please provide the username to remove.");
-            return null;
+    public static void parseUsernameForRemoval(String userInput) {
+        String[] words = userInput.split(" ", 3);
+        if (words.length < 3 || !words[1].equals("/t")) {
+            System.out.println("Unable to remove user. Refer to correct format below:");
+            System.out.println(REMOVE_CUSTOMER_FORMAT);
+            return;
         }
-        return words[2];  // assuming input format is: remove-user <username>
+        CustomerList.removeCustomer(words[2].toLowerCase());
     }
+
 }
