@@ -60,19 +60,8 @@ public class Parser {
                 System.out.println("Customer list is empty. No customer to remove.");
                 return false;
             }
-            try {
-                String username = CustomerParser.parseUsernameForRemoval(userInput);
-                if (username == null) {
-                    return false;
-                }
-                if (CustomerList.removeCustomer(username)) {
-                    System.out.println("Customer " + username + " has been removed.");
-                } else {
-                    System.out.println("Customer " + username + " not found.");
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
+            String customerName = CustomerParser.parseCustomerForRemoval(userInput);
+            CustomerList.removeCustomer(customerName);
             return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();

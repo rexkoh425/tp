@@ -19,14 +19,15 @@ public class CustomerList {
         customers.add(customer);
     }
 
-    public static boolean removeCustomer(String username){
+    public static void removeCustomer(String customerName){
         for(Customer customer : customers){
-            if(customer.getUsername().equals(username)){
+            if(customer.getUsername().equals(customerName)){
                 customers.remove(customer);
-                return true;
+                System.out.println("User " + customerName + " has been removed");
+                return;
             }
         }
-        return false;
+        System.out.println("User " + customerName + " was not found");
     }
 
     public static ArrayList<Customer> getCustomers() {

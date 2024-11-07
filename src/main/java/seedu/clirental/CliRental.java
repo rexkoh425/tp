@@ -31,7 +31,7 @@ public class CliRental {
             } catch (CustomerException exception){
                 exception.printErrorMessage();
             } catch (NumberFormatException exception){
-                System.out.println("Unable to parse input");
+                System.out.println("Unable to parse input.. 1 or more invalid parameters!!");
             } catch (CarException | CliRentalException e) {
                 System.out.println(e.getMessage());
             }
