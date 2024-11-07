@@ -1,8 +1,14 @@
 package car;
 
 import exceptions.CarException;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+/**
+ * Represents an <code>ArrayList</code> of cars storing <code>Car</code> objects.
+ */
 public class CarList {
 
     public static ArrayList<Car> carsList = new ArrayList<>();
@@ -11,22 +17,59 @@ public class CarList {
         return carsList;
     }
 
+    /**
+     * Formats the specified price to 2 d.p.
+     *
+     * @param price Price to be formatted to 2 d.p.
+     * @return Price formatted to 2.d.p.
+     */
+    public static String formatPriceToTwoDp(double price) {
+        assert price >= 0.00 : "ERROR.. Price cannot be negative!!";
+
+        String result = "";
+        String integerPart = String.valueOf((int)price);
+
+        double remainder = price - (int)price;
+        String formattedRemainder = String.format("%.2f", remainder);
+        String remainderPart = formattedRemainder.substring(1);
+
+        result += (integerPart + remainderPart);
+        return result;
+    }
+
+    /**
+     * Adds a <code>Car</code> to the car list.
+     * <p>
+     * If the license plate number of the <code>Car</code> already exists in the car list,
+     * a <code>CarException</code> is thrown instead.
+     *
+     * @param car <code>Car</code> to be added.
+     * @throws CarException If the license plate number already exists in the list.
+     */
     public static void addCar(Car car) throws CarException {
         if (isExistingLicensePlateNumber(car.getLicensePlateNumber())) {
             throw CarException.duplicateLicensePlateNumber();
         }
 
+        assert !isExistingLicensePlateNumber(car.getLicensePlateNumber()) :
+                "ERROR.. Cannot add car with same license plate number";
         carsList.add(car);
         System.out.println("Car added to list");
         System.out.println("Car details:");
         System.out.println(car.getModel() + " | " + car.getLicensePlateNumber()
-                + " | $" + car.getPrice() + " | " + car.getRentedStatus());
+                + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus()
+                + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
     }
 
     public static void addCarWithoutPrintingInfo(Car car) {
         carsList.add(car);
     }
 
+    /**
+     * Removes a <code>Car</code> from the car list.
+     *
+     * @param carLicensePlateNumber License plate number of <code>Car</code> to be removed.
+     */
     public static void removeCar(String carLicensePlateNumber) {
         Car carToRemove = null;
 
@@ -47,6 +90,11 @@ public class CarList {
         }
     }
 
+    /**
+     * Prints a list of all current cars in the company.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that car list is empty.
+     */
     public static void printCarList(){
         if (carsList.isEmpty()) {
             System.out.println("Oops!! Car list is empty..."
@@ -59,19 +107,17 @@ public class CarList {
         for(int i = 0 ; i < carsList.size(); i++){
             Car car = carsList.get(i);
             System.out.println( (i + 1) + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" +car.getPrice() + " | " + car.getRentedStatus());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()) + " | " + car.getRentedStatus()
+                    + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
         }
     }
 
-    public static String carListToFileString(){
-        StringBuilder carData = new StringBuilder();
-        for (Car car : carsList) {
-            carData.append(car.toFileString());
-            carData.append("\n");
-        }
-        return carData.toString();
-    }
-
+    /**
+     * Prints a list of all <b>rented out</b> cars.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that no cars
+     * are currently rented out.
+     */
     public static void printRentedCarsList() {
         ArrayList<Car> rentedCarsList = getRentedCarsList();
 
@@ -85,11 +131,17 @@ public class CarList {
         int index = 1;
         for (Car car : rentedCarsList) {
             System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" + car.getPrice());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()));
             index++;
         }
     }
 
+    /**
+     * Prints a list of all <b>available</b> cars.
+     * <p>
+     * If the list is empty, prints out a message instead to inform user that there
+     * are no available cars currently.
+     */
     public static void printAvailableCarsList() {
         ArrayList<Car> availableCarsList = getAvailableCarsList();
 
@@ -103,7 +155,7 @@ public class CarList {
         int index = 1;
         for (Car car : availableCarsList) {
             System.out.println(index + ") " + car.getModel() + " | " + car.getLicensePlateNumber()
-                    + " | $" + car.getPrice());
+                    + " | $" + formatPriceToTwoDp(car.getPrice()));
             index++;
         }
     }
@@ -130,6 +182,12 @@ public class CarList {
         return availableCars;
     }
 
+    /**
+     * Checks if the specified license plate number exists in the car list.
+     *
+     * @param licensePlateNumber License plate number to check.
+     * @return <code>true</code> if license plate number already exists, <code>false</code> otherwise.
+     */
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
@@ -139,6 +197,11 @@ public class CarList {
         return false;
     }
 
+    /**
+     * Marks a <code>Car</code> as <b>rented</b>.
+     *
+     * @param carLicensePlateNumber License plate number of to-be-marked <code>Car</code>.
+     */
     public static void markCarAsRented(String carLicensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {
@@ -148,11 +211,52 @@ public class CarList {
         }
     }
 
+    /**
+     * Marks a <code>Car</code> as <b>available</b>.
+     *
+     * @param carLicensePlateNumber License plate number of to-be-marked <code>Car</code>.
+     */
     public static void markCarAsAvailable(String carLicensePlateNumber) {
         for (Car car : carsList) {
             if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {
                 car.markAsAvailable();
                 break;
+            }
+        }
+    }
+
+    public static String carListToFileString() {
+        StringBuilder carData = new StringBuilder();
+        for (Car car : carsList) {
+            carData.append(car.toFileString());
+            carData.append("\n");
+        }
+        return carData.toString();
+    }
+
+    public static void sortCarsByPrice() {
+        Collections.sort(carsList, Comparator.comparingDouble(Car::getPrice));
+    }
+
+    public static double getMedianPrice() {
+        if (carsList.isEmpty()) {
+            return Integer.parseInt(null);
+        }
+
+        int middleIndex = carsList.size() / 2;
+        if (carsList.size() % 2 == 0) {
+            // For even-sized lists, choose the lower middle element
+            middleIndex--;
+        }
+        return carsList.get(middleIndex).getPrice();
+    }
+
+    public static void markCarAsExpensive() {
+        for (Car car : carsList) {
+            if (car.getPrice() > getMedianPrice()) {
+                car.markAsExpensive();
+            } else {
+                car.markAsCheap();
             }
         }
     }

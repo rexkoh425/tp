@@ -119,6 +119,7 @@ public class TransactionList {
             if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
                 System.out.println("Transaction deleted: " + transaction);
                 transactionList.remove(transaction);
+                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
 
                 // Assert that the transaction was removed successfully
                 assert !transactionList.contains(transaction) : "Transaction was not removed from the list.";
@@ -156,6 +157,7 @@ public class TransactionList {
             assert transaction != null : "Transaction in the list should not be null.";
             if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
                 transaction.setCompleted(true);
+                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
                 System.out.println("Transaction completed: " + transaction);
 
                 // Assert that the transaction is marked as completed
@@ -175,6 +177,7 @@ public class TransactionList {
             assert transaction != null : "Transaction in the list should not be null.";
             if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
                 transaction.setCompleted(false);
+                CarList.markCarAsRented(transaction.getCarLicensePlate());
                 System.out.println("Transaction set uncompleted: " + transaction);
 
                 // Assert that the transaction is marked as uncompleted

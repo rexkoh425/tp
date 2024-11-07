@@ -33,7 +33,7 @@ What would you like to do?
 ____________________________________________________________
 Car added to list
 Car details:
-Honda Civic | SGE1234T | $123.0 | Available
+Honda Civic | SGE1234T | $123.00 | Available | Affordable | Median price: 123.0
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
