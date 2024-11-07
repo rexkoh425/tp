@@ -56,16 +56,7 @@ public class Parser {
             CustomerList.addCustomer(customer);
             return false;
         case REMOVE_CUSTOMER_COMMAND:
-            try {
-                String username = CustomerParser.parseUsernameForRemoval(userInput);
-                if (CustomerList.removeCustomer(username)) {
-                    System.out.println("Customer " + username + " has been removed.");
-                } else {
-                    System.out.println("Customer " + username + " not found.");
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-            }
+            CustomerParser.parseUsernameForRemoval(userInput);
             return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();
