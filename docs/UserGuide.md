@@ -82,9 +82,9 @@ Format: `add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]`
 - `/n`, `/c` and `/p` identifiers **must be** in the correct order.
 - `CAR_ID` **must be** unique. 
 - `CAR_ID` **must be** in the following format: `SXX####X`, where
-  - `CAR_ID` **must** start with the letter **S**.
-  - `X` is any letter from **A to Z**.
-  - `####` is any number from **1 to 9999**.
+- `CAR_ID` **must** start with the letter **S**.
+- `X` is any letter from **A to Z**.
+- `####` is any number from **1 to 9999**.
 - `PRICE` must be a **non-negative, numeric value**.
 - Extra character like `$` not required for `PRICE`.
 
@@ -244,11 +244,11 @@ ____________________________________________________________```
 
 **`Customer` related commands:**
 
-|         Action         | Format |
-|:----------------------:|--------|
-|    **Add** customer    ||
-|  **Remove** customer   |        |
-| **List all** customers |        |
+|         Action         | Format                                                     |
+|:----------------------:|------------------------------------------------------------|
+|    **Add** customer    | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
+|  **Remove** customer   |                                                            |
+| **List all** customers |                                                            |
 
 
 

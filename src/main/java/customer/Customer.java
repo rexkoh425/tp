@@ -49,4 +49,9 @@ public class Customer {
     public String toFileString(){
         return this.getCustomerName() + " | " + this.getAge() + " | " + this.getContactNumber();
     }
+
+    public String toDisplayString(){
+        return "Username : " + getCustomerName() + "\nAge : " + getAge() + "\nContact Number :"
+                + getContactNumber();
+    }
 }

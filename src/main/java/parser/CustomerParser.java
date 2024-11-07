@@ -37,8 +37,9 @@ public class CustomerParser {
      *
      * @param parameters Sequence to parse the input.
      * @return content of each parameter in sequence.
+     * @throws CustomerException when any parameters are empty.
      */
-    public static String[] parseParameterContents(String[] parameters, String userInput){
+    public static String[] parseParameterContents(String[] parameters, String userInput) throws CustomerException {
         String[] contents = new String[parameters.length];
         for(int i = 0; i < parameters.length - 1; i++){
             int indexOfBeforeParameter = userInput.indexOf(parameters[i]);
@@ -50,6 +51,11 @@ public class CustomerParser {
         int endOfLastParameter = indexOfLastParameter + parameters[parameters.length - 1].length();
         contents[parameters.length - 1] = userInput.substring(endOfLastParameter).trim();
 
+        for(int i = 0; i < parameters.length; i++) {
+            if(contents[i].isEmpty()){
+                throw CustomerException.addCustomerException();
+            }
+        }
         return contents;
     }
 
