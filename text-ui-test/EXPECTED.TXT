@@ -8,8 +8,8 @@ Hello, thank you for choosing our car rental management program CliRental
 ____________________________________________________________
 Available Commands:
 help - Provides a list of all commands and their descriptions.
-add-user - Adds a new customer to the system.
-remove-user - Removes a customer from the system.
+add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER] - Adds a new customer to the system.
+remove-user /u [USERNAME] - Removes a customer from the system.
 list-users - Lists all customers.
 add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE] - Adds a new car to the fleet.
 remove-car - Removes a car from the fleet.
@@ -33,7 +33,7 @@ What would you like to do?
 ____________________________________________________________
 Car added to list
 Car details:
-Honda Civic | SGE1234T | $123.0 | Available | Affordable | Median price: 123.0
+Honda Civic | SGE1234T | $123.00 | Available | Affordable | Median price: 123.0
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________

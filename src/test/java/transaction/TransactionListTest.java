@@ -108,9 +108,10 @@ class TransactionListTest {
                     "Adding a transaction with invalid license plate should throw CarException");
 
             assertEquals("""
-                    Oops!! License Plate number is invalid...
-                    License Plate number format: SXX####X
-                    X -> Letters [A - Z], # -> Numbers [0 - 9]""", exception.getMessage(),
+                Oops!! License Plate number is invalid...
+                
+                License plate number format: SXX####X
+                X -> Letters [A - Z], #### -> Numbers [1 - 9999]""", exception.getMessage(),
                     "Exception message should match");
 
             // Verify that no transaction was added
