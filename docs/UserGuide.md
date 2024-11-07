@@ -126,9 +126,9 @@ Sample output:
 
 ``` 
 Here are all the rented out cars:
-1) Honda Civic | SGE1234X | $10000.00
-2) Toyota Camry | SKL4567M | $20000.00
-3) Nissan Latio | SFT1190A | $30000.00
+1) Honda Civic | SGE1234X | $100.00
+2) Toyota Camry | SKL4567M | $200.00
+3) Nissan Latio | SFT1190A | $300.00
 ```
 
 If the list is **empty**:
@@ -147,8 +147,8 @@ Sample output:
 
 ``` 
 Here are all the available cars:
-1) Mitsubishi Attrage | SGP7877N | $150000.00
-2) Honda Vezel | SLK9945F | $345000.00
+1) Mitsubishi Attrage | SGP7877N | $1500.00
+2) Honda Vezel | SLK9945F | $3400.00
 ```
 
 If the list is **empty**:
@@ -199,4 +199,48 @@ No transaction available.
 
 ## Command Summary
 
-* Add todo `add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]`
+**`Customer` related commands:**
+
+|         Action         | Format |
+|:----------------------:|--------|
+|    **Add** customer    ||
+|  **Remove** customer   |        |
+| **List all** customers |        |
+
+
+
+**`Car` related commands:** 
+
+|          Action          | Format                                                        |
+|:------------------------:|---------------------------------------------------------------|
+|       **Add** car        | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
+|      **Remove** car      |                                                               |
+|    **List all** cars     | `list-cars`                                                   |
+|   **List rented** cars   | `list-rented`                                                 |
+| **List available** cars  | `list-available`                                              |
+
+**`Transaction` related commands:**
+
+|                 Action                  | Format                |
+|:---------------------------------------:|-----------------------|
+|           **Add** transaction           |                       |
+|         **Remove** transaction          |                       |
+|        **List all** transactions        | `list-tx`             |
+|  **Mark** transactions as **complete**  |                       |
+| **Mark** transactions as **incomplete** |                       |
+|     **List completed** transactions     | `list-tx-completed`   |
+|    **List uncompleted** transactions    | `list-tx-uncompleted` |
+|  **Find** transactions **by customer**  |                       | 
+
+**Other useful commands:**
+
+|       Action       | Format |
+|:------------------:|--------|
+| Show **help** page | `help` |
+|  **Exit** program  | `exit` |
+
+
+
+
+
+
