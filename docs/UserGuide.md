@@ -28,20 +28,20 @@ Filenames :
 * `Transaction data` : `transactionData.txt`
 
 Format : 
-* `Car data` :  `CAR MODEL | LICENSE PLATE | PRICE | RENTED`
+* `Car data` :  `CAR MODEL | CAR ID | PRICE | RENTED`
 * `Customer data` : `NAME | AGE | PHONE NUMBER`
-* `Transaction data` : `LICENSE PLATE | NAME | RENTAL DURATION(DAYS) | RENTAL START DATE`
+* `Transaction data` : `CAR ID | NAME | RENTAL DURATION(DAYS) | RENTAL START DATE`
 
 Types :
 * `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN`
 * `Customer data` : `STRING | INT | STRING`
-* `Transaction data` : `STRING | STRING | STRING | STRING`
+* `Transaction data` : `STRING | STRING | INT | LOCALDATE`
 
 Example : 
 
 * `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false`
 * `Customer data` : `John | 22 | 90907638`
-* `Transaction data` : `SBS123B | John | 30 | 2024-10-17`
+* `Transaction data` : `SGM4932K | John | 30 | 17-10-2024`
 
 ---
 ## Features
@@ -52,7 +52,7 @@ Adds a customer to the list of customers tracked by the car rental application
 
 Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 
-* `USERNAME` : `STRING`.
+* `CUSTOMER_NAME` : `STRING`.
 * `AGE` : `INT`
 * `CONTACT_NUMBER` : `INT`
 * `/u` , `/a` , `/c` must be in sequence.
@@ -67,9 +67,8 @@ Sample Response:
 ____________________________________________________________
 add-user /u John /a 18 /c 95382572
 Customer added
-Username : John
-Age : 18
-Contact Number : 95382572
+John | 18 | 95382572
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 ```
@@ -78,12 +77,12 @@ ____________________________________________________________
 
 Adds a car to the car list.
 
-Format: `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]`
+Format: `add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]`
 
 - `/n`, `/c` and `/p` identifiers **must be** in the correct order.
-- `LICENSE_PLATE_NUMBER` **must be** unique. 
-- `LICENSE_PLATE_NUMBER` **must be** in the following format: `SXX####X`, where
-  - `LICENSE_PLATE_NUMBER` **must** start with the letter **S**.
+- `CAR_ID` **must be** unique. 
+- `CAR_ID` **must be** in the following format: `SXX####X`, where
+  - `CAR_ID` **must** start with the letter **S**.
   - `X` is any letter from **A to Z**.
   - `####` is any number from **1 to 9999**.
 - `PRICE` must be a **non-negative, numeric value**.
@@ -178,11 +177,11 @@ Sample output:
 ``` 
 Here are all the transactions: 
 1) [ ] TX1 | SGE1234X | john | 4day(s) 
-Start Date: 2024-12-11
+Start Date: 11-12-2024
 2) [ ] TX2 | SKL4567M | thomas | 6day(s) 
-Start Date: 2024-12-11
+Start Date: 11-12-2024
 3) [ ] TX3 | SFT1190A | matthew | 8day(s) 
-Start Date: 2024-12-11
+Start Date: 11-12-2024
 ```
 
 If the list is **empty**:
@@ -203,18 +202,18 @@ Adds a new rental transaction to the system.
 
 **Format:** `add-transaction /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE]`
 
-- **`/tx`**: License plate number of the car (format: `SXX####X`).
+- **`/c`**: License plate number of the car (format: `SXX####X`).
 - **`/u`**: Username of the customer.
 - **`/d`**: Rental duration in days.
 - **`/s`**: Rental start date (format: `dd-MM-yyyy`).
 - **Parameters must be in the specified sequence.**
 
-**Example:** add-tx /c SZZ1579D /u John /d 15 /s 11-5-2025
+**Example:** add-tx /c SZZ1579D /u John /d 15 /s 11-05-2025
 Sample Response:
 ```
 Transaction added: 
 [ ] TX2 | SZZ1579D | John | 15day(s) 
-Start Date: 2025-05-11
+Start Date: 11-05-2025
 ____________________________________________________________
 ```
 
@@ -229,9 +228,9 @@ Displays all rental transactions in the system.
 ```
 Here are all the transactions: 
 1) [ ] TX1 | SZZ1579D | Apple | 1day(s) 
-Start Date: 2025-12-11
+Start Date: 11-12-2025
 2) [ ] TX2 | SZZ1579D | John | 15day(s) 
-Start Date: 2025-05-11
+Start Date: 11-05-2025
 ____________________________________________________________```
 ```
 
