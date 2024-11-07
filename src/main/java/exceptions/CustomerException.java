@@ -7,7 +7,8 @@ import java.util.ArrayList;
  */
 public class CustomerException extends RuntimeException {
 
-    public static final String ADD_FORMAT = "add-user /u [USERNAME] /a [AGE] /c [CONTACT_NUMBER]";
+    public static final String ADD_FORMAT = "add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]";
+    public static final String REMOVE_FORMAT = "remove-user /u [CUSTOMER_NAME]";
 
     public CustomerException(String message) {
         super(message);
@@ -36,5 +37,13 @@ public class CustomerException extends RuntimeException {
         message += errorLines.toString();
         message = message + "\n";
         return new CustomerException(message);
+    }
+
+    public static CustomerException removeCustomerException(){
+        return new CustomerException("Unable to remove customer. PLease follow : " + REMOVE_FORMAT);
+    }
+
+    public static CustomerException missingNameWhenRemoving(){
+        return new CustomerException("Please enter customer name for removal.");
     }
 }

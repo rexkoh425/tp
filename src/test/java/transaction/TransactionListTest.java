@@ -65,7 +65,7 @@ class TransactionListTest {
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(validLicensePlate)).thenReturn(true);
 
             // Create a transaction
-            Transaction transaction = new Transaction(validLicensePlate, "John Doe", "5",
+            Transaction transaction = new Transaction(validLicensePlate, "John Doe", 5,
                     LocalDate.of(2024, 10, 1));
 
             // Add the transaction
@@ -100,7 +100,7 @@ class TransactionListTest {
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(invalidLicensePlate)).thenReturn(false);
 
             // Create a transaction with invalid license plate
-            Transaction transaction = new Transaction(invalidLicensePlate, "Jane Doe", "3",
+            Transaction transaction = new Transaction(invalidLicensePlate, "Jane Doe", 3,
                     LocalDate.of(2024, 10, 2));
 
             // Attempt to add the transaction and expect an exception
@@ -136,7 +136,7 @@ class TransactionListTest {
 
             // Create a transaction with a valid but non-existing license plate
             Transaction transaction = new Transaction(validButNonExistingLicensePlate, "Alice Smith",
-                    "2", LocalDate.of(2024, 10, 3));
+                    2, LocalDate.of(2024, 10, 3));
 
             // Attempt to add the transaction and expect an exception
             CarException exception = assertThrows(CarException.class, () -> TransactionList.addTx(transaction),
@@ -158,7 +158,7 @@ class TransactionListTest {
         String validLicensePlate = "SXY9012A";
 
         // Create a transaction
-        Transaction transaction = new Transaction(validLicensePlate, "Bob Brown", "4",
+        Transaction transaction = new Transaction(validLicensePlate, "Bob Brown", 4,
                 LocalDate.of(2024, 10, 4));
 
         // Add the transaction without printing info
@@ -192,9 +192,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -216,9 +216,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         tx1.setCompleted(true);
         TransactionList.addTxWithoutPrintingInfo(tx1);
@@ -240,9 +240,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         tx2.setCompleted(true);
         TransactionList.addTxWithoutPrintingInfo(tx1);
@@ -264,9 +264,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -291,7 +291,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
@@ -316,11 +316,11 @@ class TransactionListTest {
         String licensePlate3 = "SCD9012A";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
-        Transaction tx3 = new Transaction(licensePlate3, "John Doe", "2",
+        Transaction tx3 = new Transaction(licensePlate3, "John Doe", 2,
                 LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -350,7 +350,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
@@ -368,7 +368,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
@@ -390,7 +390,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
@@ -412,7 +412,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction and mark it as completed
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         tx1.setCompleted(true);
@@ -435,7 +435,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
 
         // Add a transaction
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
 
@@ -458,9 +458,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -481,9 +481,9 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
 
         // Add transactions without printing info
-        Transaction tx1 = new Transaction(licensePlate1, "John Doe", "5",
+        Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
-        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", "3",
+        Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
@@ -515,11 +515,11 @@ class TransactionListTest {
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(Mockito.anyString())).thenReturn(true);
 
             // Add multiple transactions
-            Transaction tx1 = new Transaction(licensePlate1, "Alice", "2",
+            Transaction tx1 = new Transaction(licensePlate1, "Alice", 2,
                     LocalDate.of(2024, 10, 5));
-            Transaction tx2 = new Transaction(licensePlate2, "Bob", "3",
+            Transaction tx2 = new Transaction(licensePlate2, "Bob", 3,
                     LocalDate.of(2024, 10, 6));
-            Transaction tx3 = new Transaction(licensePlate3, "Charlie", "1",
+            Transaction tx3 = new Transaction(licensePlate3, "Charlie", 1,
                     LocalDate.of(2024, 10, 7));
 
             TransactionList.addTx(tx1);

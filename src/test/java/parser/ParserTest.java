@@ -18,7 +18,7 @@ public class ParserTest {
 
         assertFalse(Parser.parse(userInput));
         assertEquals(1, CustomerList.getCustomers().size());
-        assertEquals("user1234", CustomerList.getCustomers().get(0).getUsername());
+        assertEquals("user1234", CustomerList.getCustomers().get(0).getCustomerName());
 
         String userInput1 = "add-car /n Honda Civic /c SGE4966P /p 123";
         CarList.getCarsList().clear();

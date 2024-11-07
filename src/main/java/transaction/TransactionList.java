@@ -15,6 +15,7 @@ public class TransactionList {
         assert transaction != null : "Transaction to add should not be null.";
 
         String licensePlateNumber = transaction.getCarLicensePlate();
+
         // Assert that the license plate number is not null
         assert licensePlateNumber != null : "License plate number should not be null.";
 

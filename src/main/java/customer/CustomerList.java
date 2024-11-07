@@ -19,15 +19,15 @@ public class CustomerList {
         customers.add(customer);
     }
 
-    public static void removeCustomer(String username){
+    public static void removeCustomer(String customerName){
         for(Customer customer : customers){
-            if(customer.getUsername().equals(username)){
+            if(customer.getCustomerName().equals(customerName)){
                 customers.remove(customer);
-                System.out.println("User " + username + " has been removed");
+                System.out.println("User " + customerName + " has been removed");
                 return;
             }
         }
-        System.out.println("User" + username + " was not found");
+        System.out.println("User " + customerName + " was not found");
     }
 
     public static ArrayList<Customer> getCustomers() {
@@ -35,13 +35,25 @@ public class CustomerList {
     }
 
     public static void printCustomers() {
-        System.out.println("_".repeat(60));
-        for (int i = 0 ; i < customers.size(); i++) {
-            System.out.print((i+1) + ") ");
-            Customer customer = customers.get(i);
-            System.out.println(customer.toString());
+        if (CustomerList.getCustomers().isEmpty()) {
+            System.out.println("Customer list is empty.");
+        } else {
+            System.out.println("Here are all the customers: ");
+            for (int i = 0; i < customers.size(); i++) {
+                System.out.print((i + 1) + ") ");
+                Customer customer = customers.get(i);
+                System.out.println(customer.toString());
+            }
         }
-        System.out.println("_".repeat(60));
+    }
+
+    public static boolean isExistingCustomer(String customerName) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equals(customerName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String customerListToFileString(){
