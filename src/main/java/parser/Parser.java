@@ -83,8 +83,7 @@ public class Parser {
         case REMOVE_ALL_CARS_COMMAND:
             try {
                 CarList.removeAllCars();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         case LIST_CARS_COMMAND:
@@ -110,8 +109,7 @@ public class Parser {
         case REMOVE_ALL_TRANSACTIONS_COMMAND:
             try {
                 TransactionList.removeAllTxs();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         case MARK_TRANSACTION_COMMAND:
