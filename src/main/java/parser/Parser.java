@@ -58,6 +58,9 @@ public class Parser {
         case REMOVE_CUSTOMER_COMMAND:
             try {
                 String username = CustomerParser.parseUsernameForRemoval(userInput);
+                if(username == null){
+                    return false;
+                }
                 if (CustomerList.removeCustomer(username)) {
                     System.out.println("Customer " + username + " has been removed.");
                 } else {

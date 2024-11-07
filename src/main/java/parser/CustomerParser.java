@@ -2,7 +2,6 @@ package parser;
 
 import customer.Customer;
 import exceptions.CustomerException;
-import exceptions.CliRentalException;
 
 public class CustomerParser {
 
@@ -73,10 +72,11 @@ public class CustomerParser {
         return true;
     }
 
-    public static String parseUsernameForRemoval(String userInput) throws CliRentalException {
+    public static String parseUsernameForRemoval(String userInput) {
         String[] words = userInput.split(" ");
         if (words.length < 2) {
-            throw new CliRentalException("Please provide the username to remove.");
+            System.out.println("Please provide the username to remove.");
+            return null;
         }
         return words[2];  // assuming input format is: remove-user <username>
     }
