@@ -11,8 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static parser.TransactionParser.dateTimeFormatter;
-
 /**
  * Handles file operation for the transaction.
  */
