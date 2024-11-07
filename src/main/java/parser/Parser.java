@@ -86,6 +86,7 @@ public class Parser {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            return false;
         case LIST_CARS_COMMAND:
             CarList.printCarList();
             return false;
@@ -112,6 +113,7 @@ public class Parser {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            return false;
         case MARK_TRANSACTION_COMMAND:
             TransactionParser.parseMarkCompleted(userInput);
             return false;
