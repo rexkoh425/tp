@@ -34,13 +34,16 @@ public class CustomerList {
     }
 
     public static void printCustomers() {
-        System.out.println("_".repeat(60));
-        for (int i = 0 ; i < customers.size(); i++) {
-            System.out.print((i+1) + ") ");
-            Customer customer = customers.get(i);
-            System.out.println(customer.toString());
+        if (CustomerList.getCustomers().isEmpty()) {
+            System.out.println("Customer list is empty.");
+        } else {
+            System.out.println("Here are all the customers: ");
+            for (int i = 0; i < customers.size(); i++) {
+                System.out.print((i + 1) + ") ");
+                Customer customer = customers.get(i);
+                System.out.println(customer.toString());
+            }
         }
-        System.out.println("_".repeat(60));
     }
 
     public static String customerListToFileString(){
