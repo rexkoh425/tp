@@ -27,7 +27,7 @@ public class CustomerList {
                 return;
             }
         }
-        System.out.println("User" + username + " was not found");
+        System.out.println("User " + username + " was not found");
     }
 
     public static ArrayList<Customer> getCustomers() {

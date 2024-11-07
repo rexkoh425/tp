@@ -20,6 +20,7 @@ public class Parser {
     private static final String LIST_USERS_COMMAND = "list-users";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
+    private static final String REMOVE_ALL_CARS_COMMAND = "remove-all-cars";
     private static final String LIST_CARS_COMMAND = "list-cars";
     private static final String LIST_RENTED_CARS_COMMAND = "list-rented";
     private static final String LIST_AVAILABLE_CARS_COMMAND = "list-available";
@@ -73,6 +74,13 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
             return false;
+        case REMOVE_ALL_CARS_COMMAND:
+            try {
+                CarList.removeAllCars();
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         case LIST_CARS_COMMAND:
             CarList.printCarList();
             return false;

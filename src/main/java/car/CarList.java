@@ -90,6 +90,11 @@ public class CarList {
         }
     }
 
+    public static void removeAllCars() {
+        carsList.clear();
+        System.out.println("All cars removed");
+    }
+
     /**
      * Prints a list of all current cars in the company.
      * <p>
