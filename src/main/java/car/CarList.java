@@ -70,6 +70,9 @@ public class CarList {
 
     public static void addCarWithoutPrintingInfo(Car car) {
         carsList.add(car);
+        sortCarsByPrice();
+        getMedianPrice();
+        markCarAsExpensive();
     }
 
     /**

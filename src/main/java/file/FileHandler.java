@@ -57,7 +57,7 @@ public class FileHandler {
     /**
      * Creates a directory called data to store data files if it does not exist.
      */
-    private static void createFolderIfNotExist(){
+    public static void createFolderIfNotExist(){
 
         if (!DATA_DIR.isDirectory()) {
             System.out.println(DIR_NAME + " does not exist. Creating it now.......");

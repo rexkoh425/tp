@@ -49,9 +49,6 @@ public class CarFile {
             boolean isExpensive = Boolean.parseBoolean(parameters[4]);
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
-            CarList.sortCarsByPrice();
-            CarList.getMedianPrice();
-            CarList.markCarAsExpensive();
         }catch(NumberFormatException e) {
             errorLines.add(line);
         }
@@ -72,6 +69,7 @@ public class CarFile {
     public void createCarFileIfNotExist(){
         if(!carDataFile.exists()){
             FileHandler.createNewFile(carDataFile);
+            System.out.println(carDataFile.getAbsolutePath());
         }
     }
 
