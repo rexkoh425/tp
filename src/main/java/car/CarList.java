@@ -17,6 +17,10 @@ public class CarList {
         return carsList;
     }
 
+    public static void clearCarList(){
+        carsList.clear();
+    }
+
     /**
      * Formats the specified price to 2 d.p.
      *

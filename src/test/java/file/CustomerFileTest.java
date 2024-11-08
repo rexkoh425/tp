@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CustomerFileTest {
 
     @Test
-    void getCustomerDataFilename() {
+    void testGetCustomerDataFilename() {
         CustomerFile customerFile = new CustomerFile();
         assertEquals("customerData.txt", customerFile.getCustomerDataFilename());
     }
 
     @Test
-    void addCustomerWithParameters() {
+    void testAddCustomerWithParameters() {
 
         ArrayList<Integer> errorLines = inputTestCases();
         Customer customer1 = CustomerList.getCustomerList().get(0);

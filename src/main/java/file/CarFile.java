@@ -75,6 +75,14 @@ public class CarFile {
         }
     }
 
+    public void deleteCarFileIfExist(){
+        boolean deleted = false;
+        if(carDataFile.exists()){
+            deleted = carDataFile.delete();
+        }
+        System.out.println("carData.txt deleted: " + deleted);
+    }
+
     /**
      * Reads every line in the carData.txt file and add it to the current car list.
      *

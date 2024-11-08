@@ -10,13 +10,13 @@ import static parser.TransactionParser.dateTimeFormatter;
 class TransactionFileTest {
 
     @Test
-    void getTransactionDataFilename() {
+    void testGetTransactionDataFilename() {
         TransactionFile transactionFile = new TransactionFile();
         assertEquals("transactionData.txt", transactionFile.getTransactionDataFilename());
     }
 
     @Test
-    void addTransactionWithParameters() {
+    void testAddTransactionWithParameters() {
         TransactionFile transactionFile = new TransactionFile("transactionData1.txt");
 
         String[] parameters = {"SBS123B" ,"John" ,"3" ,"17-10-2024" , "false"};
