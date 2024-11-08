@@ -242,47 +242,46 @@ ____________________________________________________________```
 
 ## Command Summary
 
-**`Customer` related commands:**
+### **Customer related commands:**
 
-|         Action         | Format                                                     |
-|:----------------------:|------------------------------------------------------------|
-|    **Add** customer    | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
-|  **Remove** customer   |                                                            |
-| **List all** customers |                                                            |
+| Action                | Format                                                        |
+|:----------------------|---------------------------------------------------------------:|
+| **Add customer**      | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`     |
+| **Remove customer**   | `remove-user /u [CUSTOMER_NAME]`                              |
+| **List all customers**| `list-users`                                                  |
 
+### **Car related commands:**
 
+| Action               | Format                                                        |
+|:---------------------|---------------------------------------------------------------:|
+| **Add car**          | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
+| **Remove car**       | `remove-car`                                                  |
+| **Remove all cars**  | `remove-all-cars`                                            |
+| **List all cars**    | `list-cars`                                                  |
+| **List rented cars** | `list-rented`                                                |
+| **List available cars** | `list-available`                                           |
 
-**`Car` related commands:** 
+### **Transaction related commands:**
 
-|         Action          | Format                                                        |
-|:-----------------------:|---------------------------------------------------------------|
-|       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
-|     **Remove** car      |                                                               |
-|   **Remove all** cars   | `remove-all-cars`                                             |
-|    **List all** cars    | `list-cars`                                                   |
-|  **List rented** cars   | `list-rented`                                                 |
-| **List available** cars | `list-available`                                              |
+| Action                                        | Format                                                       |
+|:---------------------------------------------|-------------------------------------------------------------:|
+| **Add transaction**                          | `add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
+| **Remove transaction**                       | `remove-tx /t [TRANSACTION_ID]`                              |
+| **Remove all transactions**                  | `remove-all-txs`                                             |
+| **List all transactions**                    | `list-tx`                                                    |
+| **Mark transaction as complete**            | `mark-tx /t [TRANSACTION_ID]`                                |
+| **Unmark transaction**                      | `unmark-tx /t [TRANSACTION_ID]`                              |
+| **List completed transactions**              | `list-tx-completed`                                          |
+| **List uncompleted transactions**            | `list-tx-uncompleted`                                        |
+| **Find transactions by customer**            | `find-tx-by-customer /u [CUSTOMER_NAME]`                     |
 
-**`Transaction` related commands:**
+### **Other useful commands:**
 
-|                 Action                  | Format                |
-|:---------------------------------------:|-----------------------|
-|           **Add** transaction           |                       |
-|         **Remove** transaction          |                       |
-|       **Remove all** transactions       | `remove-all-txs`      |
-|        **List all** transactions        | `list-tx`             |
-|  **Mark** transactions as **complete**  |                       |
-| **Mark** transactions as **incomplete** |                       |
-|     **List completed** transactions     | `list-tx-completed`   |
-|    **List uncompleted** transactions    | `list-tx-uncompleted` |
-|  **Find** transactions **by customer**  |                       | 
+| Action               | Format  |
+|:---------------------|---------|
+| Show **help** page    | `help`  |
+| **Exit** program      | `exit`  |
 
-**Other useful commands:**
-
-|       Action       | Format |
-|:------------------:|--------|
-| Show **help** page | `help` |
-|  **Exit** program  | `exit` |
 
 
 
