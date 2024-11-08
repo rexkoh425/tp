@@ -16,6 +16,9 @@ public class CustomerList {
         return customers;
     }
 
+    public static void clearCustomerList(){
+        customers.clear();
+    }
     public static void addCustomerWithoutPrintingInfo(Customer customer){
         customers.add(customer);
     }

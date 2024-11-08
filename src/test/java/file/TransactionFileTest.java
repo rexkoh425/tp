@@ -5,40 +5,204 @@ import org.junit.jupiter.api.Test;
 import transaction.Transaction;
 import transaction.TransactionList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static parser.TransactionParser.dateTimeFormatter;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 class TransactionFileTest {
 
+    private static final ArrayList<String> filenames = new ArrayList<>();
+
+    @BeforeEach
+    void setUp(){
+        TransactionList.clearTransactionList();
+        FileHandler.createFolderIfNotExist();
+    }
+
+    @AfterAll
+    static void tearDown(){
+        for (String filename : filenames) {
+            File file = new File(filename);
+            file.delete();
+        }
+    }
+
     @Test
-    void testGetTransactionDataFilename() {
+    public void testGetTransactionDataFilename() {
         TransactionFile transactionFile = new TransactionFile();
         assertEquals("transactionData.txt", transactionFile.getTransactionDataFilename());
     }
 
+    private static ArrayList<Integer> inputTestCases() {
+        TransactionFile transactionFile = new TransactionFile("transactionData1.txt");
+        int line = 1;
+        ArrayList<Integer> errorLines = new ArrayList<>();
+        String[] parameters = {"XYZ123", "John Doe", "5", "08-11-2024", "false"};
+        transactionFile.addTransactionWithParameters(parameters , errorLines , line);
+        line++;
+        parameters = new String[]{"ABC456", "Jane Doe", "3", "10-10-2024", "true"};
+        transactionFile.addTransactionWithParameters(parameters , errorLines , line);
+        line++;
+        parameters = new String[]{"LMN789", "Alice", "seven", "15-09-2024", "false"};
+        transactionFile.addTransactionWithParameters(parameters , errorLines , line);
+        filenames.add(transactionFile.getAbsolutePath());
+        return errorLines;
+    }
+
     @Test
     void testAddTransactionWithParameters() {
-        TransactionFile transactionFile = new TransactionFile("transactionData1.txt");
+        ArrayList<Integer> errorLines = inputTestCases();
+        assertEquals(2, TransactionList.getTransactionList().size());
 
-        String[] parameters = {"SBS123B" ,"John" ,"3" ,"17-10-2024" , "false"};
-        transactionFile.addTransactionWithParameters(parameters);
-        parameters = new String[]{"SB" ,"Jon" ,"1" ,"17-11-2024" , "false"};
-        transactionFile.addTransactionWithParameters(parameters);
-        parameters = new String[]{"12313" ,"ohn" ,"365" ,"29-10-2024" , "false"};
-        transactionFile.addTransactionWithParameters(parameters);
         Transaction transaction1 = TransactionList.getTransactionList().get(0);
-        assertEquals(transaction1.getCustomer(), "John");
-        assertEquals(transaction1.getCarLicensePlate() , "SBS123B");
-        assertEquals(transaction1.getDuration(), 3);
-        assertEquals(transaction1.getStartDate().format(dateTimeFormatter), "17-10-2024");
+        assertEquals("XYZ123", transaction1.getCarLicensePlate());
+        assertEquals("John Doe", transaction1.getCustomer());
+        assertEquals(5, transaction1.getDuration());
+        assertEquals(LocalDate.of(2024, 11, 8), transaction1.getStartDate());
+        assertFalse(transaction1.isCompleted());
+
         Transaction transaction2 = TransactionList.getTransactionList().get(1);
-        assertEquals(transaction2.getCustomer(), "Jon");
-        assertEquals(transaction2.getCarLicensePlate() , "SB");
-        assertEquals(transaction2.getDuration(), 1);
-        assertEquals(transaction2.getStartDate().format(dateTimeFormatter), "17-11-2024");
+        assertEquals("ABC456", transaction2.getCarLicensePlate());
+        assertEquals("Jane Doe", transaction2.getCustomer());
+        assertEquals(3, transaction2.getDuration());
+        assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
+        assertTrue(transaction2.isCompleted());
+
+        if (errorLines.size() == 1 && errorLines.get(0) == 3) {
+            assertTrue(true);
+        } else {
+            assert false;
+        }
+    }
+
+    @Test
+    void testUpdateTransactionDataFile() {
+        TransactionFile transactionFile = new TransactionFile("transactionData2.txt");
+        File testFile = new File(transactionFile.getAbsolutePath());
+        transactionFile.createTransactionFileIfNotExist();
+        assertTrue(testFile.exists());
+
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("XYZ123", "John", 5, LocalDate.of(2024, 11, 8), false));
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("ABC456", "Jane", 3, LocalDate.of(2024, 10, 10), true));
+
+        try {
+            transactionFile.updateTransactionDataFile();
+        } catch (IOException e) {
+            assert false;
+        }
+
+        String[] lines = {
+                "XYZ123 | John | 5 | 08-11-2024 | false",
+                "ABC456 | Jane | 3 | 10-10-2024 | true"
+        };
+
+        try {
+            Scanner scanner = new Scanner(testFile);
+            int i = 0;
+            while (scanner.hasNext()) {
+                assertEquals(scanner.nextLine(), lines[i]);
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            assert false;
+        }
+
+        filenames.add(transactionFile.getAbsolutePath());
+    }
+
+    @Test
+    void testLoadTransactionDataIfExist() {
+        TransactionFile transactionFile = new TransactionFile("transactionData3.txt");
+        File testFile = new File(transactionFile.getAbsolutePath());
+        transactionFile.createTransactionFileIfNotExist();
+
+        try {
+            FileWriter fw = new FileWriter(testFile);
+            String textToAdd = "XYZ123 | John | 5 | 08-11-2024 | false\n";
+            textToAdd += "ABC456 | Jane | 3 | 10-10-2024 | true\n";
+            textToAdd += "LMN789 | Alice | 7 | 15-09-2024 | false";
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            assert false;
+        }
+
+        transactionFile.loadTransactionDataIfExist();
+        assertEquals(3, TransactionList.getTransactionList().size());
+
+        Transaction transaction1 = TransactionList.getTransactionList().get(0);
+        assertEquals("XYZ123", transaction1.getCarLicensePlate());
+        assertEquals("John", transaction1.getCustomer());
+        assertEquals(5, transaction1.getDuration());
+        assertEquals(LocalDate.of(2024, 11, 8), transaction1.getStartDate());
+        assertFalse(transaction1.isCompleted());
+
+        Transaction transaction2 = TransactionList.getTransactionList().get(1);
+        assertEquals("ABC456", transaction2.getCarLicensePlate());
+        assertEquals("Jane", transaction2.getCustomer());
+        assertEquals(3, transaction2.getDuration());
+        assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
+        assertTrue(transaction2.isCompleted());
+
         Transaction transaction3 = TransactionList.getTransactionList().get(2);
-        assertEquals(transaction3.getCustomer(), "ohn");
-        assertEquals(transaction3.getCarLicensePlate() , "12313");
-        assertEquals(transaction3.getDuration(), 365);
-        assertEquals(transaction3.getStartDate().format(dateTimeFormatter), "29-10-2024");
+        assertEquals("LMN789", transaction3.getCarLicensePlate());
+        assertEquals("Alice", transaction3.getCustomer());
+        assertEquals(7, transaction3.getDuration());
+        assertEquals(LocalDate.of(2024, 9, 15), transaction3.getStartDate());
+        assertFalse(transaction3.isCompleted());
+
+        filenames.add(transactionFile.getAbsolutePath());
+    }
+
+    @Test
+    void testScanLineAndAddTransaction() {
+        TransactionFile transactionFile = new TransactionFile("transactionData4.txt");
+        File testFile = new File(transactionFile.getAbsolutePath());
+        transactionFile.createTransactionFileIfNotExist();
+
+        try {
+            FileWriter fw = new FileWriter(testFile);
+            String textToAdd = "XYZ123 | John | 5 | 08-11-2024 | false";
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            assert false;
+        }
+
+        int line = 1;
+        ArrayList<Integer> errorLines = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(testFile);
+            transactionFile.scanLineAndAddTransaction(scanner, errorLines, line);
+        } catch (FileNotFoundException e) {
+            assert false;
+        }
+
+        Transaction transaction1 = TransactionList.getTransactionList().get(0);
+        assertEquals("XYZ123", transaction1.getCarLicensePlate());
+        assertEquals("John", transaction1.getCustomer());
+        assertEquals(5, transaction1.getDuration());
+        assertEquals(LocalDate.of(2024, 11, 8), transaction1.getStartDate());
+        assertFalse(transaction1.isCompleted());
+
+        filenames.add(transactionFile.getAbsolutePath());
+    }
+
+    @Test
+    void testCreateTransactionFileIfNotExist() {
+        TransactionFile transactionFile = new TransactionFile("transactionData5.txt");
+        File testFile = new File(transactionFile.getAbsolutePath());
+        transactionFile.createTransactionFileIfNotExist();
+
+        assertTrue(testFile.exists());
+        filenames.add(transactionFile.getAbsolutePath());
     }
 }

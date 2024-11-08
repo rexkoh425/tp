@@ -39,6 +39,8 @@ public class CarFile {
      * Add car object to the list according to the parameters.
      *
      * @param parameters parameters of the Car object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this car data is at in carData.txt.
      */
     public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         String model = parameters[0];
@@ -105,8 +107,8 @@ public class CarFile {
     /**
      * Scans the current line and add data to current car list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this car data is at in carData.txt.
      */
     public void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();

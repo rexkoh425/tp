@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -81,8 +82,8 @@ public class TransactionFile {
     /**
      * Scans the current line and add data to current transaction list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this transaction data is at in transactionData.txt.
      */
     public void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
@@ -90,23 +91,29 @@ public class TransactionFile {
         if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
             errorLines.add(line);
         }else{
-            addTransactionWithParameters(parameters);
+            addTransactionWithParameters(parameters , errorLines, line);
         }
     }
 
     /**
      * Add transaction object to the list according to the parameters
      *
-     * @param parameters parameters of the Transaction object
+     * @param parameters parameters of the Transaction object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this transaction data is at in transactionData.txt.
      */
-    public void addTransactionWithParameters(String[] parameters) {
+    public void addTransactionWithParameters(String[] parameters , ArrayList<Integer> errorLines , int line) {
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
-        int duration = Integer.parseInt(parameters[2]);
-        LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
-        boolean isCompleted = Boolean.parseBoolean(parameters[4]);
-        Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate , isCompleted);
-        TransactionList.addTxWithoutPrintingInfo(transaction);
+        try {
+            int duration = Integer.parseInt(parameters[2]);
+            LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
+            boolean isCompleted = Boolean.parseBoolean(parameters[4]);
+            Transaction transaction = new Transaction(carLicensePlate, borrowerName, duration, startDate, isCompleted);
+            TransactionList.addTxWithoutPrintingInfo(transaction);
+        }catch (NumberFormatException | DateTimeParseException e ){
+            errorLines.add(line);
+        }
     }
 
     /**

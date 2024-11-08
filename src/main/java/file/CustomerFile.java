@@ -64,8 +64,8 @@ public class CustomerFile {
     /**
      * Scans the current line and add data to current customer list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this customer data is at in customerData.txt.
      */
     public void scanLineAndAddCustomer(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
@@ -93,6 +93,8 @@ public class CustomerFile {
      * Add customer object to the list according to the parameters.
      *
      * @param parameters parameters of the Customer object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this customer data is at in customerData.txt.
      */
     public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
         assert parameters.length == 3 : "Parameter for customers is wrong";

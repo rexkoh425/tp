@@ -6,7 +6,6 @@ import parser.CarParser;
 import java.util.ArrayList;
 
 public class TransactionList {
-
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
 
@@ -222,6 +221,10 @@ public class TransactionList {
 
     public static ArrayList<Transaction> getTransactionList(){
         return transactionList;
+    }
+
+    public static void clearTransactionList(){
+        transactionList.clear();
     }
 
 }
