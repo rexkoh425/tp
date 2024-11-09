@@ -54,21 +54,24 @@ Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 * `CUSTOMER_NAME` : `STRING`.
 * `AGE` : `INT`
 * `CONTACT_NUMBER` : `STRING`
+  * `+[ANY NUMBER OF DIGITS]`
+  * `No space between + and the first digit`
+  * `E.g. +6595382572`
 * `/u` , `/a` , `/c` must be in sequence.
 
 Example of usage: 
 
-`add-user /u John /a 18 /c +65 95382572`
+`add-user /u John /a 18 /c +6595382572`
 
 Sample Response:
 
 ```
 ____________________________________________________________
-add-user /u John /a 18 /c +65 95382572
+add-user /u John /a 18 /c +6595382572
 Customer added
 Username : John
 Age : 18
-Contact Number :+65 95382572
+Contact Number :+6595382572
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________

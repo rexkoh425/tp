@@ -46,4 +46,9 @@ public class CustomerException extends RuntimeException {
     public static CustomerException missingNameWhenRemoving(){
         return new CustomerException("Please enter customer name for removal.");
     }
+
+    public static CustomerException invalidContactNumberException(){
+        return new CustomerException("invalid contact number. Format for contact number is wrong. Please double check" +
+                "UG formatting guide");
+    }
 }

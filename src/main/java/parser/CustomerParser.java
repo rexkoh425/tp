@@ -3,6 +3,8 @@ package parser;
 import customer.Customer;
 import exceptions.CustomerException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomerParser {
 
@@ -49,13 +51,25 @@ public class CustomerParser {
         int indexOfLastParameter = userInput.indexOf(parameters[parameters.length - 1]);
         int endOfLastParameter = indexOfLastParameter + parameters[parameters.length - 1].length();
         contents[parameters.length - 1] = userInput.substring(endOfLastParameter).trim();
-
+        if(!isValidContactNumber(contents[parameters.length - 1])){
+            throw CustomerException.invalidContactNumberException();
+        }
         for(int i = 0; i < parameters.length; i++) {
             if(contents[i].isEmpty()){
                 throw CustomerException.addCustomerException();
             }
         }
         return contents;
+    }
+
+    /**
+     * Checks if the string is a valid contact number.
+     */
+    public static boolean isValidContactNumber(String contactNumber) {
+        String regex = "^\\+\\d+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(contactNumber);
+        return matcher.matches();
     }
 
     /**
