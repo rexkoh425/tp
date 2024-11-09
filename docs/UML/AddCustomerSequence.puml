@@ -52,8 +52,10 @@ deactivate CustomerParser
 
 Parser -> CustomerList : addCustomer(customer : Customer)
 activate CustomerList
+
     CustomerList -> CustomerArrayList : add(customer : Customer)
     activate CustomerArrayList
+
         CustomerArrayList --> CustomerList : return
     deactivate CustomerArrayList
 
