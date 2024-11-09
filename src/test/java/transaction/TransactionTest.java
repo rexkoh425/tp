@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static parser.TransactionParser.dateTimeFormatter;
 
 class TransactionTest {
-
     private Transaction transaction1;
     private Transaction transaction2;
 
