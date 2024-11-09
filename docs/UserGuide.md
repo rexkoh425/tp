@@ -89,6 +89,32 @@ Car details:
 Honda Civic | SGE1234X | $10000.00 | Available
 ```
 
+
+### Removing a Car: `remove-car`
+
+Removes a car from the fleet based on the car's unique ID.
+
+**Format:** `remove-car /i [CAR_ID]`
+
+- `/i` identifier specifies the car ID to be removed.
+- `CAR_ID` must match an existing car in the database.
+
+**Example:**  
+`remove-car /i SGE1234X`
+
+**Sample output:**
+```
+Car removed from the fleet
+Car details:
+Honda Civic | SGE1234X | $10000.00 | Available
+```
+
+If the `CAR_ID` is not found:
+```
+No car found with license plate [SGE1234X]
+```
+
+
 ### Listing All Cars: `list-cars`
 
 Lists all the cars owned by the company.
@@ -196,38 +222,129 @@ Start Date: 11-05-2025
 ____________________________________________________________
 ```
 
+### Removing a Transaction: `remove-tx`
+
+Removes a specific rental transaction from the system based on the transaction ID.
+
+**Format:** `remove-tx /t [TRANSACTION_ID]`
+
+- `/t` identifier specifies the transaction ID to be removed.
+- `TRANSACTION_ID` must match an existing transaction in the system.
+
+**Example:**  
+`remove-tx /t TX1`
+
+**Sample output:**
+
+Transaction deleted:
+[ ] TX1 | SGE1234X | john | 4day(s)
+Start Date: 11-12-2024
+____________________________________________________________
+
+
+If the `TRANSACTION_ID` is not found:
+```
+Transaction not found
+```
+
+
+### Marking a Transaction as Complete: `mark-tx`
+
+Marks a rental transaction as completed, indicating that the transaction is finalized.
+
+**Format:** `mark-tx /t [TRANSACTION_ID]`
+
+- `/t` identifier specifies the transaction ID to be marked as completed.
+- `TRANSACTION_ID` must match an existing transaction in the system.
+
+**Example:**  
+`mark-tx /t TX1`
+
+**Sample output:**
+```
+Transaction marked as complete:
+[X] TX1 | SGE1234X | john | 4day(s)
+Start Date: 11-12-2024
+____________________________________________________________
+```
+
+If the `TRANSACTION_ID` is not found:
+```
+Transaction with ID TX1 not found.
+```
+
+
+
+### Unmarking a Transaction as Incomplete: `unmark-tx`
+
+Unmarks a rental transaction, indicating it is not yet completed.
+
+**Format:** `unmark-tx /t [TRANSACTION_ID]`
+
+- `/t` identifier specifies the transaction ID to be unmarked.
+- `TRANSACTION_ID` must match an existing transaction in the system.
+
+**Example:**  
+`unmark-tx /t TX1`
+
+**Sample output:**
+```
+Transaction marked as incomplete:
+[ ] TX1 | SGE1234X | john | 4day(s)
+Start Date: 11-12-2024
+____________________________________________________________
+```
+
+If the `TRANSACTION_ID` is not found:
+```
+Transaction with ID TX1 not found.
+```
+
+
 ---
 ## FAQ
 
 **Q**: Is there any file-saving system in place currently?  
 **A**: Unfortunately, no, we are currently working on it. Thank you for your patience.
 
-## Command Summary
+# Command Summary
 
-| Action                                | Format                                                 |
-|---------------------------------------|--------------------------------------------------------|
-| `Customer` related commands           |                                                        |
-| Add customer                          | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
-| Remove customer                       | `remove-user /u [CUSTOMER_NAME]`                       |
-| List all customers                    | `list-users`                                           |
-| `Car` related commands                |                                                        |
-| Add car                               | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
-| Remove car                            | `remove-car`                                           |
-| Remove all cars                       | `remove-all-cars`                                      |
-| List all cars                         | `list-cars`                                            |
-| List rented cars                      | `list-rented`                                          |
-| List available cars                   | `list-available`                                       |
-| `Transaction` related commands        |                                                        |
-| Add transaction                       | `add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
-| Remove transaction                    | `remove-tx /t [TRANSACTION_ID]`                        |
-| Remove all transactions               | `remove-all-txs`                                       |
-| List all transactions                 | `list-tx`                                              |
-| Mark transaction as complete          | `mark-tx /t [TRANSACTION_ID]`                          |
-| Unmark transaction                    | `unmark-tx /t [TRANSACTION_ID]`                        |
-| List completed transactions           | `list-tx-completed`                                    |
-| List uncompleted transactions         | `list-tx-uncompleted`                                  |
-| Find transactions by customer         | `find-tx-by-customer /u [CUSTOMER_NAME]`               |
-| `Other useful commands`               |                                                        |
-| Show help page                        | `help`                                                 |
-| Exit program                          | `exit`                                                 |
-```
+**`Customer` related commands:**
+
+|         Action         | Format                                                     |
+|:----------------------:|------------------------------------------------------------|
+|    **Add** customer    | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
+|  **Remove** customer   | `remove-user /u [CUSTOMER_NAME]`                           |
+| **List all** customers | `list-users`                                               |
+
+**`Car` related commands:**
+
+|         Action          | Format                                                        |
+|:-----------------------:|---------------------------------------------------------------|
+|       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
+|     **Remove** car      | `remove-car /i [CAR_ID]`                                      |
+|   **Remove all** cars   | `remove-all-cars`                                             |
+|    **List all** cars    | `list-cars`                                                   |
+|  **List rented** cars   | `list-rented`                                                 |
+| **List available** cars | `list-available`                                              |
+
+**`Transaction` related commands:**
+
+|                 Action                  | Format                                                                       |
+|:---------------------------------------:|------------------------------------------------------------------------------|
+|           **Add** transaction           | `add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
+|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                              |
+|       **Remove all** transactions       | `remove-all-txs`                                                             |
+|        **List all** transactions        | `list-tx`                                                                    |
+|  **Mark** transactions as **complete**  | `mark-tx /t [TRANSACTION_ID]`                                                |
+| **Mark** transactions as **incomplete** | `unmark-tx /t [TRANSACTION_ID]`                                              |
+|     **List completed** transactions     | `list-tx-completed`                                                          |
+|    **List uncompleted** transactions    | `list-tx-uncompleted`                                                        |
+|  **Find** transactions **by customer**  | `find-tx-by-customer /u [CUSTOMER_NAME]`                                     |
+
+**Other useful commands:**
+
+|       Action       | Format |
+|:------------------:|--------|
+| Show **help** page | `help` |
+|  **Exit** program  | `exit` |
