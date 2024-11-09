@@ -3,73 +3,76 @@
 
 autonumber
 
--> Parser : parse(user input)
+participant ":Parser" as Parser
+participant ":CustomerParser" as CustomerParser
+participant ":CustomerList" as CustomerList
+participant ":System.out" as System.out
+participant "customer \n: ArrayList<Customer>" as CustomerArrayList
+participant ":Customer" as Customer
+participant ":CustomerException" as CustomerException
+
+-> Parser : parse(userInput : String)
 activate Parser
 
-    Parser -> CustomerParser : parseIntoCustomer(user input)
+    Parser -> CustomerParser : parseIntoCustomer(userInput : String)
     activate CustomerParser
-        CustomerParser -> CustomerParser : isValidSequence(parameters, userInput)
+        CustomerParser -> CustomerParser : isValidSequence(parameters : String[], userInput : String)
         activate CustomerParser
             loop parameter of parameters
                 opt userInput does not contain parameter
-                    <-- CustomerParser : false
+                    <-- CustomerParser : return false
                 end opt
             end loop
 
             loop iterate from 1 to (length of parameters - 1)
                 opt parameters not in sequence
-                    <-- CustomerParser : false
+                    <-- CustomerParser : return false
                 end opt
             end loop
 
-            CustomerParser --> CustomerParser : true
+            CustomerParser --> CustomerParser : return true
         deactivate CustomerParser
 
         alt isValidSequence
-            CustomerParser -> CustomerParser : parseParameterContents(parameters, userInput)
+            CustomerParser -> CustomerParser : parseIntoCustomer(userInput : String)
             activate CustomerParser
                 CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
                 activate CustomerParser
-                    CustomerParser -> CustomerParser : contents
+                    CustomerParser --> CustomerParser : return contents
                 deactivate CustomerParser
-                CustomerParser -> CustomerParser : Customer()
+                CustomerParser --> CustomerParser : return new Customer()
             deactivate CustomerParser
         else
-            CustomerParser -> CustomerException : CustomerException()
+            CustomerParser -> CustomerException : addCustomerException()
             activate CustomerException
-                CustomerException -> CustomerException : addCustomerException()
-                activate CustomerException
-                    CustomerException -> CustomerException
-                deactivate CustomerException
-                CustomerException -> CustomerParser
+                CustomerException --> CustomerParser : return new CustomerException()
             deactivate CustomerException
-            <- Parser : CustomerException
+            Parser <-- CustomerParser : throw new CustomerException()
         end alt
-        Parser <- CustomerParser : Customer
+        Parser <-- CustomerParser : return new Customer()
     deactivate CustomerParser
 
-    Parser -> CustomerList : addCustomer(Customer)
+    Parser -> CustomerList : addCustomer(customer : Customer)
     activate CustomerList
-        participant "customer : ArrayList" as CustomerArrayList
-        CustomerList -> CustomerArrayList : add(Customer)
+        CustomerList -> CustomerArrayList : add(customer : Customer)
         activate CustomerArrayList
-            CustomerArrayList -> CustomerList
+            CustomerArrayList --> CustomerList : return
         deactivate CustomerArrayList
 
-        CustomerList -> System.out : println("Customer added")
+        CustomerList -> System.out : println()
         activate System.out
-            System.out <- CustomerList
+            System.out <-- CustomerList : return
         deactivate System.out
-        CustomerList -> System.out : println(Customer)
+        CustomerList -> System.out : println(customer : Customer)
         activate System.out
             System.out -> Customer : toString()
             activate Customer
-                Customer -> System.out
+                Customer --> System.out : return
             deactivate Customer
-        CustomerList <- System.out
+        CustomerList <-- System.out : return
         deactivate System.out
-    Parser <- CustomerList
+    Parser <-- CustomerList : return
     deactivate CustomerList
 deactivate Parser
-<- Parser
+<-- Parser : return
 @enduml
