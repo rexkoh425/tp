@@ -14,15 +14,12 @@ skinparam class {
 BackgroundColor #c27517
 BackgroundColor<<Car>> #2683d4
 BackgroundColor<<Transaction>> #c21717
-BackgroundColor<<Customer>> #c15195
-BackgroundColor<<Exception>> #006400
 }
 
 class CliRental {
 {method}{static} +main(args : String[]) : void
 {method}<font size=30>...
 }
-
 class Parser {
 {method}{static} +parse(userInput : String): boolean
 {method}<font size=30>...
@@ -30,11 +27,9 @@ class Parser {
 class CarParser <<Car>>{
 {method}{static} +parseIntoCar(userInput : String): Car
 }
-
 class TransactionParser <<Transaction>>{
 {method}{static} +parseIntoTransaction(userInput : String): Transaction
 }
-
 class Car <<Car>>{
 {field} -licensePlateNumber : String
 {field} -isRented : boolean
@@ -46,78 +41,26 @@ class Car <<Car>>{
 {method} +getRentedStatus() : String
 {method}<font size=30>...
 }
-
 class Transaction <<Transaction>>{
 {field} -carLicensePlate : String
 <font size=30>...
 {method} +getCarLicensePlate() : String
 {method}<font size=30>...
 }
-
 class CarList <<Car>>{
 {method}{static} +addCar(car : Car) : void
 {method}{static} +markCarAsRented(carLicensePlateNumber : String) : void
 {method}<font size=30>...
 }
-
 class TransactionList <<Transaction>>{
 {method}{static} +addTx(transaction : Transaction) : void
 {method}<font size=30>...
 }
 
-class Customer <<Customer>> {
-    {field}{static} +NUMBER_OF_PARAMETERS : int = 3
-    {field}  -customerName : String
-    {field}  -age : int
-    {field}  -contactNumber : String
-    {method} +getCustomerName() : String
-    {method} +getContactNumber() : String
-    {method} +getAge() : int
-    {method} +setCustomerName(customerName : String) : void
-    {method} +setAge(age : int) : void
-    {method} +setContactNumber(contactNumber : String) : void
-    {method} +toString() : string
-    {method} +toFileString() : string
-}
-
-class CustomerList <<Customer>> {
-    {field}{static}  +customers : ArrayList<Customer>
-    {method}{static} +addCustomer(customer : Customer) : void
-    {method}{static} +getCustomerList() : ArrayList<Customer>
-    {method}{static} +clearCustomerList() : void
-    {method}{static} +addCustomerWithoutPrintingInfo(customer : Customer) : void
-    {method}{static} +removeCustomer(customerName : String) : void
-    {method}{static} +getCustomers() : ArrayList<Customer>
-    {method}{static} +printCustomers() : void
-    {method}{static} +isExistingCustomer(customerName : String) : boolean
-    {method}{static} +customerListToFileString() : String
-}
-
-class CustomerParser <<Customer>> {
-    {field}{static}  +ADD_CUSTOMER_COMMAND : String
-    {field}{static}  +REMOVE_CUSTOMER_FORMAT : String
-    {method}{static} +parseIntoCustomer(userInput : String) : Customer
-    {method}{static} +parseParameterContents(parameters : String[], userInput : String) : String[]
-    {method}{static} +isValidSequence(parameters : String[], userInput : String) : boolean
-    {method}{static} +parseCustomerForRemoval(userInput : String) : String
-}
-
-class CustomerException <<Exception>> {
-    {field}{static} +ADD_FORMAT : String
-    {field}{static} +REMOVE_FORMAT : String
-    {method} +printErrorMessage() : void
-    {method}{static} +addCustomerException() : CustomerException
-    {method}{static} +invalidParameters(errorLines : ArrayList<Integer>) : CustomerException
-    {method}{static} +removeCustomerException() : CustomerException
-    {method}{static} +missingNameWhenRemoving() : CustomerException
-}
-
 CliRental ..> Parser
-CliRental ..> CustomerException
 
 Parser ..> CarParser
 Parser ..> TransactionParser
-Parser ..> CustomerParser
 
 CarParser -- Car: <font color=black>parse into Car object >
 CarParser ..> CarList
@@ -128,8 +71,4 @@ TransactionParser ..> TransactionList
 CarList *-- "<font color=black size=40>*" Car
 TransactionList *-- "<font color=black size=40>*" Transaction
 
-CustomerParser ..> Customer : "creates"
-CustomerParser ..> CustomerException : "throws"
-
-CustomerList  *-- "*" Customer : "contains"
 @enduml
