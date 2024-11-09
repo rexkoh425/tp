@@ -2,77 +2,73 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-
+mainframe sd add-user
 participant ":Parser" as Parser
 participant ":CustomerParser" as CustomerParser
 participant ":CustomerList" as CustomerList
 participant ":System.out" as System.out
-participant "customer \n: ArrayList<Customer>" as CustomerArrayList
+participant "customers \n: ArrayList<Customer>" as CustomerArrayList
 participant ":Customer" as Customer
 participant ":CustomerException" as CustomerException
 
--> Parser : parse(userInput : String)
-activate Parser
-
-    Parser -> CustomerParser : parseIntoCustomer(userInput : String)
+Parser -> CustomerParser : parseIntoCustomer(userInput : String)
+activate CustomerParser
+    CustomerParser -> CustomerParser : isValidSequence(parameters : String[], userInput : String)
     activate CustomerParser
-        CustomerParser -> CustomerParser : isValidSequence(parameters : String[], userInput : String)
-        activate CustomerParser
-            loop parameter of parameters
-                opt userInput does not contain parameter
-                    <-- CustomerParser : return false
-                end opt
-            end loop
+        loop parameter of parameters
+            opt userInput does not contain parameter
+                CustomerParser <-- CustomerParser : return false
+            end opt
+        end loop
 
-            loop iterate from 1 to (length of parameters - 1)
-                opt parameters not in sequence
-                    <-- CustomerParser : return false
-                end opt
-            end loop
+        loop iterate from 1 to (length of parameters - 1)
+            opt parameters not in sequence
+                CustomerParser <-- CustomerParser : return false
+            end opt
+        end loop
 
-            CustomerParser --> CustomerParser : return true
-        deactivate CustomerParser
-
-        alt isValidSequence
-            CustomerParser -> CustomerParser : parseIntoCustomer(userInput : String)
-            activate CustomerParser
-                CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
-                activate CustomerParser
-                    CustomerParser --> CustomerParser : return contents
-                deactivate CustomerParser
-                CustomerParser --> CustomerParser : return new Customer()
-            deactivate CustomerParser
-        else
-            CustomerParser -> CustomerException : addCustomerException()
-            activate CustomerException
-                CustomerException --> CustomerParser : return new CustomerException()
-            deactivate CustomerException
-            Parser <-- CustomerParser : throw new CustomerException()
-        end alt
-        Parser <-- CustomerParser : return new Customer()
+        CustomerParser --> CustomerParser : return true
     deactivate CustomerParser
 
-    Parser -> CustomerList : addCustomer(customer : Customer)
-    activate CustomerList
-        CustomerList -> CustomerArrayList : add(customer : Customer)
-        activate CustomerArrayList
-            CustomerArrayList --> CustomerList : return
-        deactivate CustomerArrayList
+    alt isValidSequence
+        CustomerParser -> CustomerParser : parseIntoCustomer(userInput : String)
+        activate CustomerParser
+            CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
+            activate CustomerParser
+                CustomerParser --> CustomerParser : return contents
+            deactivate CustomerParser
+            CustomerParser --> CustomerParser : return new Customer()
+        deactivate CustomerParser
+    else
+        CustomerParser -> CustomerException : addCustomerException()
+        activate CustomerException
 
-        CustomerList -> System.out : println()
-        activate System.out
-            System.out <-- CustomerList : return
-        deactivate System.out
-        CustomerList -> System.out : println(customer : Customer)
-        activate System.out
-            System.out -> Customer : toString()
-            activate Customer
-                Customer --> System.out : return
-            deactivate Customer
-        CustomerList <-- System.out : return
-        deactivate System.out
-    Parser <-- CustomerList : return
-    deactivate CustomerList
-deactivate Parser
-<-- Parser : return
+            CustomerException --> CustomerParser : return new CustomerException()
+        deactivate CustomerException
+        Parser <-- CustomerParser : throw new CustomerException()
+    end alt
+    Parser <-- CustomerParser : return new Customer()
+deactivate CustomerParser
+
+Parser -> CustomerList : addCustomer(customer : Customer)
+activate CustomerList
+    CustomerList -> CustomerArrayList : add(customer : Customer)
+    activate CustomerArrayList
+        CustomerArrayList --> CustomerList : return
+    deactivate CustomerArrayList
+
+    CustomerList -> System.out : println()
+    activate System.out
+        System.out <-- CustomerList : return
+    deactivate System.out
+    CustomerList -> System.out : println(customer : Customer)
+    activate System.out
+        System.out -> Customer : toString()
+        activate Customer
+            Customer --> System.out : return
+        deactivate Customer
+    CustomerList <-- System.out : return
+    deactivate System.out
+Parser <-- CustomerList : return
+deactivate CustomerList
 @enduml
