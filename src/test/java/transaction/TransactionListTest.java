@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class TransactionListTest {
 
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
