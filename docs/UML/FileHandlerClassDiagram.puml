@@ -4,6 +4,10 @@
 class FileHandler {
     {field}{static} +DIR_NAME : String = "data"
     {field}{static} +DATA_DIR : File
+    {method}{static} +getDataDir() : File
+    {method}{static} +getCarFile() : CarFile
+    {method}{static} +getCustomerFile() : CustomerFile
+    {method}{static} +getTransactionFile() : TransactionFile
     {method}{static} +getDirName() : String
     {method}{static} +createAndLoadFiles() : void
     {method}{static} +createNewFile(filename : File) : void

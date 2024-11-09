@@ -18,6 +18,22 @@ public class FileHandler {
 
     }
 
+    public static CarFile getCarFile() {
+        return carFile;
+    }
+
+    public static CustomerFile getCustomerFile() {
+        return customerFile;
+    }
+
+    public static TransactionFile getTransactionFile() {
+        return transactionFile;
+    }
+
+    public static File getDataDir() {
+        return DATA_DIR;
+    }
+
     public static String getDirName() {
         return DIR_NAME;
     }
