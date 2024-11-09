@@ -15,11 +15,10 @@ to track their customers, cars and rental transactions.
 
 `Customer , Transaction and Car` data will be saved on their respective files under `data` directory. 
 
-`IMPORTANT NOTE : `
+### `IMPORTANT NOTE / DISCLAIMER: `
 
-1. `All wrongly formatted files would not be inputted.` 
-2. `Any additional data added will be up to the user to ensure 
-it is the right format`
+<b>The file saving feature does not include the functionality of being able to add data by editing the text file. 
+Please add data via the command line.</b>
 
 Filenames : 
 
@@ -28,20 +27,20 @@ Filenames :
 * `Transaction data` : `transactionData.txt`
 
 Format : 
-* `Car data` :  `CAR MODEL | CAR ID | PRICE | RENTED`
+* `Car data` :  `CAR MODEL | LICENSE PLATE | PRICE | RENTED | EXPENSIVE`
 * `Customer data` : `NAME | AGE | PHONE NUMBER`
-* `Transaction data` : `CAR ID | NAME | RENTAL DURATION(DAYS) | RENTAL START DATE`
+* `Transaction data` : `LICENSE PLATE | CUSTOMER NAME | RENTAL DURATION(DAYS) | RENTAL START DATE | COMPLETED`
 
 Types :
-* `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN`
+* `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN | BOOLEAN`
 * `Customer data` : `STRING | INT | STRING`
-* `Transaction data` : `STRING | STRING | INT | LOCALDATE`
+* `Transaction data` : `STRING | STRING | INT | LOCALDATE | BOOLEAN`
 
 Example : 
 
-* `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false`
+* `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
 * `Customer data` : `John | 22 | 90907638`
-* `Transaction data` : `SGM4932K | John | 30 | 17-10-2024`
+* `Transaction data` : `SGM4932K | John | 30 | 17-10-2024 | false`
 
 ---
 ## Features
@@ -108,10 +107,10 @@ Format: `list-cars`
 Sample Response:
 
 ```
-____________________________________________________________
 list-cars
-Here are the current cars in the company
-1) Toyota Corolla | SGM4932K | $120.00 | Not Rented
+Here are the current cars in the company:
+1) Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 ```
@@ -236,9 +235,7 @@ ____________________________________________________________```
 
 ## FAQ
 
-**Q**: Is there any file saving system in place currently? 
-
-**A**: Unfortunately no , we are currently working on it. Thank you for your patience.
+`No questions to answer for now!!!`
 
 ## Command Summary
 
