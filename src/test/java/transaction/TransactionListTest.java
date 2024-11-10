@@ -319,7 +319,7 @@ class TransactionListTest {
                 LocalDate.of(2024, 10, 1));
         Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
-        Transaction tx3 = new Transaction(licensePlate3, "John Doe", 2,
+        Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
                 LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
