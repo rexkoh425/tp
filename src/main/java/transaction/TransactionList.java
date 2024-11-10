@@ -1,13 +1,12 @@
 package transaction;
 
 import car.CarList;
-import transaction.Transaction;
+
 import exceptions.CarException;
 import parser.CarParser;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.UUID;
+
 
 public class TransactionList {
 
