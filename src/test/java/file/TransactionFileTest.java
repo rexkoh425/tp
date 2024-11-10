@@ -90,8 +90,10 @@ class TransactionFileTest {
         transactionFile.createTransactionFileIfNotExist();
         assertTrue(testFile.exists());
 
-        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "John", 5, LocalDate.of(2024, 11, 8), false));
-        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "Jane", 3, LocalDate.of(2024, 10, 10), true));
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "John", 5,
+                LocalDate.of(2024, 11, 8), false));
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "Jane", 3,
+                LocalDate.of(2024, 10, 10), true));
 
         try {
             transactionFile.updateTransactionDataFile();

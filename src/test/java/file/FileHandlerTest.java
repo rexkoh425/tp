@@ -37,5 +37,4 @@ class FileHandlerTest {
         FileHandler.createFolderIfNotExist();
         assertTrue(FileHandler.getDataDir().exists());
     }
-
 }
