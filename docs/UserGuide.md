@@ -84,7 +84,7 @@ Example of usage:
 ____________________________________________________________
 add-user /u John /a 18 /c +6595382572
 Customer added
-Username : John
+Customer name : John
 Age : 18
 Contact Number :+6595382572
 ____________________________________________________________
