@@ -191,8 +191,6 @@ public class TransactionList {
     }
 
     public static void markCompletedByTxId(String txId) {
-        // Assert that txId is not null
-        assert txId != null : "Transaction ID to mark as completed should not be null.";
 
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
