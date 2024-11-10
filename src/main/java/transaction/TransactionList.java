@@ -1,20 +1,24 @@
 package transaction;
 
 import car.CarList;
+import transaction.Transaction;
 import exceptions.CarException;
 import parser.CarParser;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class TransactionList {
 
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
-
     public static void addTx(Transaction transaction) {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 
         String licensePlateNumber = transaction.getCarLicensePlate();
+        String customerName = transaction.getCustomer();
 
         // Assert that the license plate number is not null
         assert licensePlateNumber != null : "License plate number should not be null.";
@@ -27,11 +31,30 @@ public class TransactionList {
             throw CarException.licensePlateNumberNotFound();
         }
 
+        for (Transaction tx : transactionList) {
+            if (tx.getCarLicensePlate().equals(licensePlateNumber) &&
+                    datesOverlap(tx.getStartDate(), tx.getEndDate(),
+                            transaction.getStartDate(), transaction.getEndDate())) {
+                System.out.println("Car " + licensePlateNumber +
+                        " is already rented during this period. Transaction not added.");
+                return;
+            }
+
+            if (tx.getCustomer().equalsIgnoreCase(customerName) &&
+                    datesOverlap(tx.getStartDate(), tx.getEndDate(),
+                            transaction.getStartDate(), transaction.getEndDate())) {
+                System.out.println("Customer " + customerName +
+                        " already has a rental during this period. Transaction not added.");
+                return;
+            }
+        }
+
         // Assert that the license plate number is valid and exists before adding
         assert CarParser.isValidLicensePlateNumber(licensePlateNumber)
                 && CarList.isExistingLicensePlateNumber(licensePlateNumber)
                 : "License plate number must be valid and exist in CarList.";
 
+        transaction.setTransactionId(Transaction.generateTransactionId());
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -222,6 +245,12 @@ public class TransactionList {
 
     public static ArrayList<Transaction> getTransactionList(){
         return transactionList;
+    }
+
+    private static boolean datesOverlap(LocalDate start1, LocalDate end1,
+                                        LocalDate start2, LocalDate end2) {
+        return (start1.isBefore(end2) && end1.isAfter(start2)) || start1.equals(start2)
+                || end1.equals(end2);
     }
 
 }
