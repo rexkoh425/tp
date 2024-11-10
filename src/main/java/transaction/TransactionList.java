@@ -52,6 +52,11 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
+    public static void clearTransactionList(){
+        transactionList.clear();
+    }
+    
+
     public static void addTxWithoutPrintingInfo(Transaction transaction) {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
