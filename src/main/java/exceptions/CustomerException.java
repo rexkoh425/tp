@@ -47,7 +47,19 @@ public class CustomerException extends RuntimeException {
         return new CustomerException("Please enter customer name for removal.");
     }
 
+
     public static CustomerException customerAlreadyInTransactionList() {
         return new CustomerException("Customer has rented a car.");
     }
+
+    public static CustomerException invalidContactNumberException(){
+        return new CustomerException("invalid contact number. Format for contact number is wrong. Please double check" +
+                " UG formatting guide");
+    }
+
+    public static CustomerException invalidAgeException(){
+        return new CustomerException("Illegal driver!! Age should be more than 17!!");
+    }
+
+  
 }

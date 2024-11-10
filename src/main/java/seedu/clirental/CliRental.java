@@ -36,7 +36,6 @@ public class CliRental {
                 System.out.println(e.getMessage());
             }
         }
-
         System.out.println("Goodbye!");
     }
 
