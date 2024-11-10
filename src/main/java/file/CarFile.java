@@ -56,7 +56,11 @@ public class CarFile {
             }
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
-        }catch(NumberFormatException | CarException e) {
+            CarList.sortCarsByPrice();
+            CarList.markCarAsExpensive();
+          
+        } catch(NumberFormatException | CarException e) {
+
             errorLines.add(line);
         }
     }
