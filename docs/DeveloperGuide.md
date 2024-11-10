@@ -14,27 +14,68 @@ in diagrams across the team
 
 ## Design & implementation
 
-The following is our overall class diagram for our whole project. To reduce the size of the overall diagram , only class
+The following is our overall architecture diagram for our whole project. To reduce the size of the overall diagram , only class
 names are included.
 
 ![Local Image](images/Overall.png)
 
-### Sequence diagrams
 
-1. `Adding a customer`
+---
+### Adding a customer
 
-The following sequence diagram will explain the sequence of events after the user inputs an add-user command.
+### Implementation:
+The following sequence diagram will illustrate the sequence of events of a **valid** `add-user` operation. Customer 
+details like age and contact number are stored which are useful when the rental company would like to contact 
+the customer and creating transactions.
 
+### Sequence diagram
 ![Local Image](images/AddCustomerSequence.png)
 
-2. `Creating Car file and loading file`
+### High-level steps
 
+1) Parse the input into its parameters and extract the content.
+2) Create the new Customer object if all parameters fit the format.
+3) Add it to the current Customer ArrayList.
+
+---
+### Creating file and loading file at the start of the program
+
+### Implementation:
 The following sequence diagram will explain the sequence of events for loading of the carData.txt which happens at the
-start of the program. The carData.txt will be created if it does not exist at the start of program and its data will be
+start of the program. The operations involved for the other two files are very similar so we will use the example of 
+carData.txt. The carData.txt will be created if it does not exist at the start of program and its data will be
 loaded if the file exist.
 
+### Sequence diagram
 ![Local Image](images/CarFileLoader.png)
 
+### High-level steps 
+
+1) File is created if it does not exist.
+2) Each line in the file is scanned and checked that each parameter is correctly formatted.
+3) The correct data is parsed into a new Car object.
+4) Each Car object is placed into the ArrayList.
+
+### Rationale behind way of implementation:
+
+Similar to real-world applications, data are stored on the computer already and does not require the user to explicitly 
+load data from a specific location. It should be automatic and hassle-free. Preventing the corrupted data from entering 
+the system is also important as it might crash the program thus it is important to check the data before adding.
+
+### Alternatives considered:
+* User can choose which file to load
+  * Cons
+    1) Too complicated as there are too many possible file paths possible and would significant add to the complexity of 
+    the program.
+* User can choose whether to load data file and save when they want to.
+  * Pros
+    1) User has more control over the version control of the data files.
+  * Cons
+    1) User experience might decrease as they constantly have to save files themselves.
+    2) Many important data can be lost if program crashes before saving of file which does not happen with 
+     constant updating.
+    
+---
 ### Auto updating of car rental status feature
 
 ### Implementation:
@@ -124,7 +165,7 @@ Responsibility principle (SRP) or Separation of Concerns principle (SOC).
   - Cons:
     - Possibility that user might forget to update rental status
     - Need to add new commands to update rental status (e.g. `mark-rented`) 
-
+---
 ### Implementation of Transaction Completion Management and Retrieval Features
 
 To enhance the functionality of **CliRental**, we have implemented features that allow users to mark transactions as completed or uncompleted, list transactions based on their completion status, and find transactions by customer name. These features streamline the process of managing rental transactions, ensuring accurate tracking and easy retrieval of relevant data.
@@ -196,7 +237,7 @@ The implementation of these features is encapsulated within the `TransactionList
   - `Maintainability` : When new parameters are introduced, only 3 methods and less than 10 lines of code 
       needs to be updated. 
 
-
+---
 ## Product scope
 ### Target user profile
 
@@ -212,10 +253,15 @@ finding the transaction they are looking for easily with multiple filters.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...                       | I want to ...                  | So that I can ...                     |
+|---------|--------------------------------|--------------------------------|---------------------------------------|
+| v1.0    | car rental frontdesk employee  | know status of all the cars    | inform customers about availability   |
+ v1.0    | car rental frontdesk employee  | add customer details to our database | keep records for future transactions  |
+ v2.0    | car rental frontdesk employee  | save all my data               | ensure information will never be lost |
+ v2.0    | -                              | -                              | -                                     |
+ v2.0    | -                              | -                              | -                                     |
+ v2.0    | -                              | -                              | -                                     |
+| v2.0    | -                              | -                              | -                                     |
 
 ## Non-Functional Requirements
 
@@ -241,4 +287,9 @@ transactionData.txt should be created in the data folder as well if it does not 
 `check` : The command should return an error message saying that the format of contact number is wrong. Using 
 `+6577777777` should allow you to add the user successfully now.
 
+`Test case 3` :
 
+`details` : Adding a user using `add-user /u john /a 16 /c +65 77777777` <br>
+`check` : The command should return an error message saying that the age is illegal to drive which is true 
+for most countries at age of 16. Our legal age is 18 thus changing the age to 18 and above but maximally 100 years old 
+will work now.

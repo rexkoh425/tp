@@ -2,8 +2,8 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-participant ":CarFile" as CarFile
 participant ":FileHandler" as FileHandler
+participant ":CarFile" as CarFile
 participant ":Scanner" as scanner
 participant "errorLines \n: ArrayList<Integer>" as ArrayList
 participant ":Car" as Car
@@ -54,6 +54,7 @@ activate CarFile
                                     deactivate ArrayList
                                 else
                                     CarFile -> CarFile : addCarWithParameters(...)
+                                    opt parameters are correctly formatted
                                     activate CarFile
                                         CarFile -> Car : new Car()
                                         activate Car
@@ -67,6 +68,7 @@ activate CarFile
                                             deactivate CarList
                                         CarList --> CarFile : return
                                         deactivate CarList
+                                    end opt
                                     CarFile --> CarFile : return
                                     deactivate CarFile
                                 end alt
