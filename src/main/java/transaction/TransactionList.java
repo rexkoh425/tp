@@ -7,7 +7,6 @@ import parser.CarParser;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 public class TransactionList {
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
@@ -64,15 +63,18 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
-    public static void addTxWithoutPrintingInfo(Transaction transaction) {
-        // Assert that the transaction is not null
-        assert transaction != null : "Transaction to add should not be null.";
+    public static void addTxWithoutPrintingInfo(Transaction transaction) throws CarException{
+
+        String licensePlateNumber = transaction.getCarLicensePlate();
+
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
 
         transaction.setTransactionId(Transaction.generateTransactionId());
         transactionList.add(transaction);
+        CarList.markCarAsRented(licensePlateNumber);
 
-        // Assert that the transaction was added successfully
-        assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
 
     public static void printAllTransactions() {
@@ -247,6 +249,11 @@ public class TransactionList {
         return transactionList;
     }
 
+
+    public static void clearTransactionList(){
+        transactionList.clear();
+    }
+  
     private static boolean datesOverlap(LocalDate start1, LocalDate end1,
                                         LocalDate start2, LocalDate end2) {
         return (start1.isBefore(end2) && end1.isAfter(start2)) || start1.equals(start2)

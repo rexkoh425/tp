@@ -2,8 +2,9 @@ package parser;
 
 import customer.Customer;
 import exceptions.CustomerException;
-
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomerParser {
 
@@ -26,9 +27,20 @@ public class CustomerParser {
             throw CustomerException.addCustomerException();
         }
 
+        if(!isValidContactNumber(parameterContents[2])){
+            throw CustomerException.invalidContactNumberException();
+        }
+
         String customerName = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
+
+        if(age <= 17 || age > 100){
+            throw CustomerException.invalidAgeException();
+        }
+
         String contactNumber = parameterContents[2];
+        assert !customerName.isEmpty() : "Customer name should not be empty.";
+        assert isValidContactNumber(contactNumber) : "Invalid contact number format.";
         return new Customer(customerName , age, contactNumber );
     }
 
@@ -47,6 +59,7 @@ public class CustomerParser {
             int endOfBeforeParameter = indexOfBeforeParameter + parameters[i].length();
             contents[i] = userInput.substring(endOfBeforeParameter, indexOfAfterParameter).trim();
         }
+
         int indexOfLastParameter = userInput.indexOf(parameters[parameters.length - 1]);
         int endOfLastParameter = indexOfLastParameter + parameters[parameters.length - 1].length();
         contents[parameters.length - 1] = userInput.substring(endOfLastParameter).trim();
@@ -56,7 +69,18 @@ public class CustomerParser {
                 throw CustomerException.addCustomerException();
             }
         }
+
         return contents;
+    }
+
+    /**
+     * Checks if the string is a valid contact number.
+     */
+    public static boolean isValidContactNumber(String contactNumber) {
+        String regex = "^\\+\\d+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(contactNumber);
+        return matcher.matches();
     }
 
     /**
