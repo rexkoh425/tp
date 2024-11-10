@@ -92,7 +92,7 @@ class TransactionFileTest {
 
         TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "John", 5,
                 LocalDate.of(2024, 11, 8), false));
-        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJX1234D", "Jane", 3,
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("SJA9173C", "Jane", 3,
                 LocalDate.of(2024, 10, 10), true));
 
         try {
@@ -103,7 +103,7 @@ class TransactionFileTest {
 
         String[] lines = {
             "SJX1234D | John | 5 | 08-11-2024 | false",
-            "SJX1234D | Jane | 3 | 10-10-2024 | true"
+            "SJA9173C | Jane | 3 | 10-10-2024 | true"
         };
 
         try {
