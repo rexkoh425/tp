@@ -55,7 +55,7 @@ public class TransactionList {
     public static void clearTransactionList(){
         transactionList.clear();
     }
-    
+
 
     public static void addTxWithoutPrintingInfo(Transaction transaction) {
         // Assert that the transaction is not null

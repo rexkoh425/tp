@@ -129,8 +129,8 @@ class TransactionFileTest {
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "SJX1234D | John | 5 | 08-11-2024 | false\n";
-            textToAdd += "SJX1234D | Jane | 3 | 10-10-2024 | true\n";
-            textToAdd += "SJX1234D | Alice | 7 | 15-09-2024 | false";
+            textToAdd += "SJE8720G | Jane | 3 | 10-10-2024 | true\n";
+            textToAdd += "SJA9173C | Alice | 7 | 15-09-2024 | false";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
@@ -148,14 +148,14 @@ class TransactionFileTest {
         assertFalse(transaction1.isCompleted());
 
         Transaction transaction2 = TransactionList.getTransactionList().get(1);
-        assertEquals("SJX1234D", transaction2.getCarLicensePlate());
+        assertEquals("SJE8720G", transaction2.getCarLicensePlate());
         assertEquals("Jane", transaction2.getCustomer());
         assertEquals(3, transaction2.getDuration());
         assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
         assertTrue(transaction2.isCompleted());
 
         Transaction transaction3 = TransactionList.getTransactionList().get(2);
-        assertEquals("SJX1234D", transaction3.getCarLicensePlate());
+        assertEquals("SJA9173C", transaction3.getCarLicensePlate());
         assertEquals("Alice", transaction3.getCustomer());
         assertEquals(7, transaction3.getDuration());
         assertEquals(LocalDate.of(2024, 9, 15), transaction3.getStartDate());
