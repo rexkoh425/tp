@@ -12,13 +12,15 @@ Clirental is a CLI-based application that allows car rental companies to track t
 4. Open your terminal and navigate to the folder the jar file is placed in.
 5. Run java -jar tp.jar and you can start using right away.
 
+## Features
+
 ---
-## File Saving
+### File Saving
 
 `Customer`, `Transaction`, and `Car` data will be saved in their respective files under the `data` directory.
 
 
-### `IMPORTANT NOTE / DISCLAIMER: `
+#### `IMPORTANT NOTE / DISCLAIMER: `
 
 * The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
 Please add/edit data via the command line using the commands given.
@@ -57,7 +59,6 @@ Others :
 * Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
 
 ---
-## Features
 
 ### Adding a User to the Database: `add-user`
 
@@ -69,7 +70,7 @@ Adds a customer to the list of customers tracked by the car rental application.
 * `AGE` : `INT`
   * age should be > 17 and <= 100.
 * `CONTACT_NUMBER` : `STRING`
-  * `+[ANY NUMBER OF DIGITS]`
+  * `+[7 OR MORE DIGITS]`
   * `No space between + and the first digit`
   * `No space between subsequent digits as well`
   * `E.g. +6595382572`
@@ -92,7 +93,7 @@ ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 ```
-
+---
 ### Adding a Car: `add-car`
 
 Adds a car to the car list.
@@ -113,7 +114,7 @@ Car details:
 Honda Civic | SGE1234X | $10000.00 | Available
 ```
 
-
+---
 ### Removing a Car: `remove-car`
 
 Removes a car from the fleet based on the car's unique ID.
@@ -137,7 +138,7 @@ If the `CAR_ID` is not found:
 ```
 No car found with license plate [SGE1234X]
 ```
-
+---
 
 ### Listing All Cars: `list-cars`
 
@@ -154,7 +155,7 @@ ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 ```
-
+---
 ### Listing All Rented Out Cars: `list-rented`
 
 Lists all the cars that are currently rented out.
@@ -173,7 +174,7 @@ If the list is **empty**:
 ```
 No cars currently rented out...
 ```
-
+---
 ### Listing All Available Cars: `list-available`
 
 Lists all available cars in the company.
@@ -191,7 +192,7 @@ If the list is **empty**:
 ```
 There are no available cars at the moment...
 ```
-
+---
 ### Updating Rental Status of Car
 
 There is no need to manually update the rental status of a car. The status will be updated automatically when a transaction record is:
@@ -201,6 +202,7 @@ There is no need to manually update the rental status of a car. The status will 
 - Marked as completed
 - Marked as not completed
 
+---
 ### Listing All Transactions: `list-tx`
 
 Displays all transactions stored in the system.
@@ -222,13 +224,13 @@ If the list is **empty**:
 ```
 No transactions available.
 ```
-
+---
 ### Removing All Transactions: `remove-all-txs`
 
 Removes all transactions from the system.
 
 **Format:** `remove-all-txs`
-
+---
 ### Adding a Transaction: `add-tx`
 
 Adds a new rental transaction to the system.
@@ -245,7 +247,7 @@ Transaction added:
 Start Date: 11-05-2025
 ____________________________________________________________
 ```
-
+---
 ### Removing a Transaction: `remove-tx`
 
 Removes a specific rental transaction from the system based on the transaction ID.
@@ -270,7 +272,7 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction not found
 ```
-
+---
 ### Marking a Transaction as Complete: `mark-tx`
 
 Marks a rental transaction as completed, indicating that the transaction is finalized.
@@ -295,7 +297,7 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction with ID TX1 not found.
 ```
-
+---
 ### Unmarking a Transaction as Incomplete: `unmark-tx`
 
 Unmarks a rental transaction, indicating it is not yet completed.

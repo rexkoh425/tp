@@ -21,6 +21,7 @@ public class CustomerParser {
         userInput = userInput.substring(ADD_CUSTOMER_COMMAND.length()).trim();
         String[] parameters = { "/u" , "/a" , "/c"};
         String[] parameterContents;
+
         if(isValidSequence(parameters, userInput)){
             parameterContents = parseParameterContents(parameters, userInput);
         } else{
@@ -52,7 +53,9 @@ public class CustomerParser {
      * @throws CustomerException when any parameters are empty.
      */
     public static String[] parseParameterContents(String[] parameters, String userInput) throws CustomerException {
+
         String[] contents = new String[parameters.length];
+
         for(int i = 0; i < parameters.length - 1; i++){
             int indexOfBeforeParameter = userInput.indexOf(parameters[i]);
             int indexOfAfterParameter = userInput.indexOf(parameters[i+1]);
@@ -77,7 +80,7 @@ public class CustomerParser {
      * Checks if the string is a valid contact number.
      */
     public static boolean isValidContactNumber(String contactNumber) {
-        String regex = "^\\+\\d+$";
+        String regex = "^\\+\\d{7,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contactNumber);
         return matcher.matches();
@@ -106,6 +109,7 @@ public class CustomerParser {
     }
 
     public static String parseCustomerForRemoval(String userInput) throws CustomerException {
+
         String[] words = userInput.split("\\s+", 3);
         if (words.length < 2 || !Objects.equals(words[1], "/u")) {
             throw CustomerException.removeCustomerException();

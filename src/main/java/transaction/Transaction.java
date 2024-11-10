@@ -45,6 +45,7 @@ public class Transaction {
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
+
     public static String generateTransactionId() {
         return "TX" + transactionCounter++;
     }
@@ -64,7 +65,6 @@ public class Transaction {
     public String getTransactionId() {
         return transactionId;
     }
-
 
     private String durationtoString(){
         if(duration == 1) {

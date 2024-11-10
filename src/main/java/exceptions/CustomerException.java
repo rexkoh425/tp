@@ -32,7 +32,8 @@ public class CustomerException extends RuntimeException {
      * @return Exception with message of which the row of data which are wrong.
      */
     public static CustomerException invalidParameters(ArrayList<Integer> errorLines){
-        String message = "Customer data do not match number of parameters in " + errorLines.size() + " rows of data\n";
+        String message = "Customer data do not match parameters requirements in "
+                + errorLines.size() + " rows of data\n";
         message += "Rows are : ";
         message += errorLines.toString();
         message = message + "\n";
@@ -48,8 +49,7 @@ public class CustomerException extends RuntimeException {
     }
 
     public static CustomerException invalidContactNumberException(){
-        return new CustomerException("invalid contact number. Format for contact number is wrong. Please double check" +
-                " UG formatting guide");
+        return new CustomerException("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]");
     }
 
     public static CustomerException invalidAgeException(){

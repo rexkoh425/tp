@@ -14,7 +14,7 @@ public class TransactionException extends RuntimeException {
      * @return Exception with message of which the row of data which are wrong.
      */
     public static TransactionException invalidParameters(ArrayList<Integer> errorLines){
-        String message = "Transaction data do not match number of parameters in "
+        String message = "Transaction data do not match parameters requirements in "
                 + errorLines.size() + " rows of data" + System.lineSeparator();
         message += "Rows are : ";
         message += errorLines.toString();
