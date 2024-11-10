@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class TransactionList {
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
+
     public static void addTx(Transaction transaction) {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
@@ -237,7 +238,7 @@ public class TransactionList {
 
         StringBuilder transactionData = new StringBuilder();
         for (Transaction transaction : transactionList) {
-            // Assert that each transaction is not null
+
             assert transaction != null : "Transaction in the list should not be null.";
             transactionData.append(transaction.toFileString());
             transactionData.append(System.lineSeparator());

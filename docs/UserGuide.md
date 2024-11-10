@@ -8,7 +8,7 @@ Clirental is a CLI-based application that allows car rental companies to track t
 
 1. Ensure that you have Java 17 or above installed.
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
-3. Copy the jar file into a empty folder.
+3. Copy the jar file into an empty folder.
 4. Open your terminal and navigate to the folder the jar file is placed in.
 5. Run java -jar tp.jar and you can start using right away.
 
@@ -38,18 +38,19 @@ them or the corrupted lines will be flushed from the data files upon the `first 
 Format : 
 * `Car data` :  `CAR MODEL | LICENSE PLATE | PRICE | RENTED | EXPENSIVE`
 * `Customer data` : `NAME | AGE | PHONE NUMBER`
-* `Transaction data` : `LICENSE PLATE | CUSTOMER NAME | RENTAL DURATION(DAYS) | RENTAL START DATE | COMPLETED`
+* `Transaction data` : `TRANSACTION ID | LICENSE PLATE | CUSTOMER NAME | RENTAL DURATION(DAYS) | 
+RENTAL START DATE | COMPLETED`
 
 Types :
 * `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN | BOOLEAN`
 * `Customer data` : `STRING | INT | STRING`
-* `Transaction data` : `STRING | STRING | INT | LOCALDATE | BOOLEAN`
+* `Transaction data` : `STRING | STRING | STRING | INT | LOCALDATE | BOOLEAN`
 
 **Example:**
 
 * `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
 * `Customer data` : `John | 22 | +6590907638`
-* `Transaction data` : `SGM4932K | John | 30 | 17-10-2024 | false`
+* `Transaction data` : `TX1 | SGM4932K | John | 30 | 17-10-2024 | false`
 
 Others : 
 
