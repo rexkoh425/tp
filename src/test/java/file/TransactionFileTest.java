@@ -48,10 +48,10 @@ class TransactionFileTest {
         String[] parameters = {"SJX1234D", "John Doe", "5", "08-11-2024", "false"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         line++;
-        parameters = new String[]{"SJX1234D", "Jane Doe", "3", "10-10-2024", "true"};
+        parameters = new String[]{"SJA9173C", "Jane Doe", "3", "10-10-2024", "true"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         line++;
-        parameters = new String[]{"SJX1234D", "Alice", "seven", "15-09-2024", "false"};
+        parameters = new String[]{"SJE8720G", "Alice", "seven", "15-09-2024", "false"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         filenames.add(transactionFile.getAbsolutePath());
         return errorLines;
@@ -70,7 +70,7 @@ class TransactionFileTest {
         assertFalse(transaction1.isCompleted());
 
         Transaction transaction2 = TransactionList.getTransactionList().get(1);
-        assertEquals("SJX1234D", transaction2.getCarLicensePlate());
+        assertEquals("SJA9173C", transaction2.getCarLicensePlate());
         assertEquals("Jane Doe", transaction2.getCustomer());
         assertEquals(3, transaction2.getDuration());
         assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
