@@ -334,9 +334,14 @@ class TransactionListTest {
         // Find transactions by "John Doe"
         TransactionList.findTxsByCustomer("john doe");
 
-        String expectedOutput = "Transaction(s) by john doe found:" + System.lineSeparator() +
-                tx1 + System.lineSeparator()+
-                tx4 + System.lineSeparator();
+        String expectedOutput =
+                "Transaction completed: [X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                        "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
+                        "Transaction(s) by john doe found:" + System.lineSeparator() +
+                        "[X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                        "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
+                        "[ ] TX4 | SGD4091D | John Doe | 2 days" + System.lineSeparator() +
+                        "Start Date: 03-10-2024 | End Date: 05-10-2024" + System.lineSeparator();
 
         String actualOutput = outContent.toString();
 
@@ -344,9 +349,10 @@ class TransactionListTest {
         assertTrue(actualOutput.contains("Transaction(s) by john doe found:"),
                 "Should indicate transactions found by customer");
         assertTrue(actualOutput.contains(tx1.toString()), "Should contain tx1 details");
-        assertTrue(actualOutput.contains(tx4.toString()), "Should contain tx3 details");
+        assertTrue(actualOutput.contains(tx4.toString()), "Should contain tx4 details");
         assertEquals(expectedOutput, actualOutput, "Printed output should confirm deletion");
     }
+
 
     @Test
     @DisplayName("Test finding transactions by customer with no matches")
