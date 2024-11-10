@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import parser.CarParser;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+import parser.TransactionParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -313,6 +314,7 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
         String licensePlate3 = "SCD9012A";
+        String licensePlate4 = "SGD4091D";
 
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
@@ -321,15 +323,20 @@ class TransactionListTest {
                 LocalDate.of(2024, 10, 2));
         Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
                 LocalDate.of(2024, 10, 3));
+        TransactionList.markCompletedByTxId(tx3.getTransactionId());
+        Transaction tx4 = new Transaction(licensePlate4, "John Doe", 2,
+                LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
         TransactionList.addTxWithoutPrintingInfo(tx3);
+        TransactionList.addTxWithoutPrintingInfo(tx4);
 
         // Find transactions by "John Doe"
         TransactionList.findTxsByCustomer("john doe");
 
         String expectedOutput = "Transaction(s) by john doe found:" + System.lineSeparator() +
-                tx1 + System.lineSeparator();
+                tx1 + System.lineSeparator()+
+                tx4 + System.lineSeparator();
 
         String actualOutput = outContent.toString();
 
@@ -337,7 +344,7 @@ class TransactionListTest {
         assertTrue(actualOutput.contains("Transaction(s) by john doe found:"),
                 "Should indicate transactions found by customer");
         assertTrue(actualOutput.contains(tx1.toString()), "Should contain tx1 details");
-        assertTrue(actualOutput.contains(tx3.toString()), "Should contain tx3 details");
+        assertTrue(actualOutput.contains(tx4.toString()), "Should contain tx3 details");
         assertEquals(expectedOutput, actualOutput, "Printed output should confirm deletion");
     }
 
