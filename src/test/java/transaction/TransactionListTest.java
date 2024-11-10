@@ -329,8 +329,7 @@ class TransactionListTest {
         TransactionList.findTxsByCustomer("john doe");
 
         String expectedOutput = "Transaction(s) by john doe found:" + System.lineSeparator() +
-                tx1 + System.lineSeparator() +
-                tx3 + System.lineSeparator();
+                tx1 + System.lineSeparator();
 
         String actualOutput = outContent.toString();
 
