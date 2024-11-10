@@ -9,6 +9,9 @@ to track their customers, cars and rental transactions.
 
 1. Ensure that you have Java 17 or above installed.
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
+3. Copy the jar file into a empty folder.
+4. Open your terminal and navigate to the folder the jar file is placed in.
+5. Run java -jar tp.jar and you can start using right away.
 
 ---
 ## File saving
