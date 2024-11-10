@@ -220,5 +220,17 @@ finding the transaction they are looking for easily with multiple filters.
 
 ## Instructions for manual testing
 
-1) Download our v2.0 jar file
-2) Check out our user guide and experiment away!!
+`Test case 1` : 
+
+`details` : upon start of program, the data files should be created in your local computer at the same level 
+as your jar file.<br>
+`check` : A folder called data should be created if it did not already exist. carData.txt, customerData.txt, 
+transactionData.txt should be created in the data folder as well if it does not already exist.
+
+`Test case 2` :
+
+`details` : Adding a user using `add-user /u john /a 30 /c +65 77777777` <br>
+`check` : The command should return an error message saying that the format of contact number is wrong. Using 
+`+6577777777` should allow you to add the user successfully now.
+
+
