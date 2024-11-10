@@ -2,7 +2,6 @@ package file;
 
 import customer.Customer;
 import customer.CustomerList;
-import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.CustomerParser;
 import java.io.File;

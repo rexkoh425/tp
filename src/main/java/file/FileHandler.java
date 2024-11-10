@@ -1,7 +1,5 @@
 package file;
 
-import car.Car;
-
 import java.io.IOException;
 import java.io.File;
 
