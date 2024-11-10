@@ -56,6 +56,7 @@ Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 * `CONTACT_NUMBER` : `STRING`
   * `+[ANY NUMBER OF DIGITS]`
   * `No space between + and the first digit`
+  * `No space between subsequent digits as well`
   * `E.g. +6595382572`
 * `/u` , `/a` , `/c` must be in sequence.
 
