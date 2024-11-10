@@ -13,6 +13,7 @@ public class CarParser {
     private static final int ADD_CAR_PARAMETERS_OFFSET = 2;
     private static final int MIN_LICENSE_PLATE_NUMBER_LENGTH = 5;
     private static final int MAX_LICENSE_PLATE_NUMBER_LENGTH = 8;
+    private static final int MAXIMUM_CAR_PRICE = 10000;
 
     /**
      * Parses the <code>add-car</code> user command into a <code>Car</code> object.
