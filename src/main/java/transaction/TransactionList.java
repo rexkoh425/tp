@@ -68,6 +68,7 @@ public class TransactionList {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 
+        transaction.setTransactionId(Transaction.generateTransactionId());
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -191,6 +192,8 @@ public class TransactionList {
     }
 
     public static void markCompletedByTxId(String txId) {
+        // Assert that txId is not null
+        assert txId != null : "Transaction ID to mark as completed should not be null.";
 
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
