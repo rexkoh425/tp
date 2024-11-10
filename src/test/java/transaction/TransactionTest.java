@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static parser.TransactionParser.dateTimeFormatter;
 
 class TransactionTest {
-
     private Transaction transaction1;
     private Transaction transaction2;
 
@@ -21,7 +20,9 @@ class TransactionTest {
         LocalDate startDate1 = LocalDate.parse("01-10-2024", dateTimeFormatter);
         LocalDate startDate2 = LocalDate.parse("02-10-2024", dateTimeFormatter);
         transaction1 = new Transaction("ABC-123", "John Doe", 5, startDate1);
+        transaction1.setTransactionId(Transaction.generateTransactionId());
         transaction2 = new Transaction("XYZ-789", "Jane Smith", 3, startDate2);
+        transaction2.setTransactionId(Transaction.generateTransactionId());
     }
 
     @Test
@@ -96,7 +97,9 @@ class TransactionTest {
         LocalDate startDate3 = LocalDate.parse("03-10-2024", dateTimeFormatter);
         LocalDate startDate4 = LocalDate.parse("04-10-2024", dateTimeFormatter);
         Transaction transaction3 = new Transaction("LMN-456", "Alice Johnson", 2, startDate3);
+        transaction3.setTransactionId(Transaction.generateTransactionId());
         Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", 4, startDate4);
+        transaction4.setTransactionId(Transaction.generateTransactionId());
 
         assertEquals("TX16", transaction3.getTransactionId(), "Third transaction ID should be TX3");
         assertEquals("TX17", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");
