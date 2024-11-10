@@ -39,7 +39,7 @@ Types :
 Example : 
 
 * `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
-* `Customer data` : `John | 22 | 90907638`
+* `Customer data` : `John | 22 | +6590907638`
 * `Transaction data` : `SGM4932K | John | 30 | 17-10-2024 | false`
 
 ---
