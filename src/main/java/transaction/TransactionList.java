@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 
 public class TransactionList {
-
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
     public static void addTx(Transaction transaction) {
@@ -31,17 +30,18 @@ public class TransactionList {
         }
 
         for (Transaction tx : transactionList) {
-            if (tx.getCarLicensePlate().equals(licensePlateNumber) &&
-                    datesOverlap(tx.getStartDate(), tx.getEndDate(),
-                            transaction.getStartDate(), transaction.getEndDate())) {
+            boolean isCarInTxList = tx.getCarLicensePlate().equals(licensePlateNumber);
+            boolean isCustomerInTxList = tx.getCustomer().equalsIgnoreCase(customerName);
+            boolean doDatesOverlap =  datesOverlap(tx.getStartDate(), tx.getEndDate(),
+                    transaction.getStartDate(), transaction.getEndDate());
+
+            if (isCarInTxList && doDatesOverlap) {
                 System.out.println("Car " + licensePlateNumber +
                         " is already rented during this period. Transaction not added.");
                 return;
             }
 
-            if (tx.getCustomer().equalsIgnoreCase(customerName) &&
-                    datesOverlap(tx.getStartDate(), tx.getEndDate(),
-                            transaction.getStartDate(), transaction.getEndDate())) {
+            if (isCustomerInTxList && doDatesOverlap) {
                 System.out.println("Customer " + customerName +
                         " already has a rental during this period. Transaction not added.");
                 return;
