@@ -211,11 +211,12 @@ finding the transaction they are looking for easily with multiple filters.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. User can type fast, and prefer typing to mouse/voice commands.
+2. Program can run on Mainstream OS.
 
 ## Glossary
 
-* *glossary item* - Definition
+* <b>Mainstream OS</b>: Windows, Linux, Unix, MacOS
 
 ## Instructions for manual testing
 

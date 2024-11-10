@@ -47,22 +47,22 @@ Code contributed: https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=rex
 
 ### <u>Project management</u>
 
-Managed releases v1.0 - v2.1 (3 releases) on GitHub
+Managed releases v1.0 - v2.1 (3 releases) on GitHub.
 
 ### <u>Enhancements to existing features:</u>
 
-Updated the GUI color scheme (Pull requests #33, #34)
-Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests #36, #38)
+
 
 ### <u>Documentation:</u>
 #### User Guide:
-Added documentation for the features e.g. add-user and list-cars
+Added documentation for the features e.g. add-user and list-cars.
 Added documentation to inform user of file loading.
 #### Developer Guide:
-1) Added implementation details of the adding customer details e.g. AddCustomerSequence.png
-2) Added implementation details of listing cars e.g. ListCarsSequence.png
+1) Added implementation details of the adding customer details e.g. AddCustomerSequence.png.
+2) Added implementation details of listing cars e.g. ListCarsSequence.png.
 3) Added implementation details of file saving e.g. CarFileLoader.png & FileHandlerClassDiagram.png.
-
+4) Updated NFR.
+5) Added overall class diagram.
 
 ### Community:
 PRs reviewed (with non-trivial review comments): #68, #95, #110.

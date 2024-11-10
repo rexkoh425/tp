@@ -17,8 +17,8 @@ to track their customers, cars and rental transactions.
 
 ### `IMPORTANT NOTE / DISCLAIMER: `
 
-<b>The file saving feature does not include the functionality of being able to add data by editing the text file. 
-Please add data via the command line.</b>
+<b>The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
+Please add/edit data via the command line using the commands given.</b>
 
 Filenames : 
 
