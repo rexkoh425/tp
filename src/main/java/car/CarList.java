@@ -68,11 +68,12 @@ public class CarList {
                 + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
     }
 
-    public static void addCarWithoutPrintingInfo(Car car) {
+    public static void addCarWithoutPrintingInfo(Car car) throws CarException {
+
         carsList.add(car);
-        sortCarsByPrice();
-        getMedianPrice();
-        markCarAsExpensive();
+        CarList.sortCarsByPrice();
+        CarList.getMedianPrice();
+        CarList.markCarAsExpensive();
     }
 
     /**

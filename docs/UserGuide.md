@@ -48,6 +48,10 @@ Example :
 * `Customer data` : `John | 22 | +6590907638`
 * `Transaction data` : `SGM4932K | John | 30 | 17-10-2024 | false`
 
+Others : 
+
+* Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
+
 ---
 ## Features
 

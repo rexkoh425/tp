@@ -41,14 +41,17 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
-    public static void addTxWithoutPrintingInfo(Transaction transaction) {
-        // Assert that the transaction is not null
-        assert transaction != null : "Transaction to add should not be null.";
+    public static void addTxWithoutPrintingInfo(Transaction transaction) throws CarException{
+
+        String licensePlateNumber = transaction.getCarLicensePlate();
+
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
 
         transactionList.add(transaction);
+        CarList.markCarAsRented(licensePlateNumber);
 
-        // Assert that the transaction was added successfully
-        assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
 
     public static void printAllTransactions() {

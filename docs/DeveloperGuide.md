@@ -4,10 +4,18 @@
 
 No reused/adapted ideas, code, documentation, and third-party libraries was used in the project.
 
+## Limitations of PlantUML
+
+1) Class is shown both at the top and bottom for sequence diagram instead of only at the top.
+2) Circle with capitalised first letter is shown in class diagram beside the class name e.g. C when class is 
+called Customer.
+3) Other software might be used by the team if plantUML is unable to display what they want, explaining difference 
+in diagrams across the team
+
 ## Design & implementation
 
 The following is our overall class diagram for our whole project. To reduce the size of the overall diagram , only class
-names are included
+names are included.
 
 ![Local Image](images/Overall.png)
 

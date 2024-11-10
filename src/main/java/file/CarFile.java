@@ -3,6 +3,7 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
+import parser.CarParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -45,14 +46,17 @@ public class CarFile {
     public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         assert parameters.length == Car.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String model = parameters[0];
-        String licensePlateNumber = parameters[1];
         try {
+            String licensePlateNumber = parameters[1];
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
             boolean isExpensive = Boolean.parseBoolean(parameters[4]);
+            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price)){
+                throw new CarException("");
+            }
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
-        }catch(NumberFormatException e) {
+        }catch(NumberFormatException | CarException e) {
             errorLines.add(line);
         }
     }

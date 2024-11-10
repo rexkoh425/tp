@@ -46,10 +46,10 @@ public class CarFileTest {
         String[] parameters = {"Corolla123","SGM1432K" ,"1.0" , "false" , "false"};
         carFile.addCarWithParameters(parameters, errorLines, line);
         line ++;
-        parameters = new String[]{"Toyota", "SGK62080F", "0", "false" , "true"};
+        parameters = new String[]{"Toyota", "SGK6200F", "0", "false" , "true"};
         carFile.addCarWithParameters(parameters, errorLines, line);
         line ++;
-        parameters = new String[]{"Toyota Cor","S4932K" ,"jph", "false" , "true"};
+        parameters = new String[]{"Toyota Cor","SGK4932K" ,"jph", "false" , "true"};
         carFile.addCarWithParameters(parameters, errorLines, line);
         filenames.add(carFile.getAbsolutePath());
         return errorLines;
@@ -63,7 +63,7 @@ public class CarFileTest {
 
         Car car1 = CarList.getCarsList().get(0);
         assertEquals("Toyota",car1.getModel());
-        assertEquals("SGK62080F", car1.getLicensePlateNumber());
+        assertEquals("SGK6200F", car1.getLicensePlateNumber());
         assertEquals(0.0 , car1.getPrice());
         assertFalse(car1.isRented());
         assertFalse(car1.isExpensive());
@@ -125,8 +125,8 @@ public class CarFileTest {
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "Toyota Corolla | SGM4932K | 10 | false | false\n";
-            textToAdd += "Toyota Cor | S4932K | 1 | false | false\n";
-            textToAdd += "Toyota | SGK | 0 | false | false";
+            textToAdd += "Toyota Cor | SDF4932K | 1 | false | false\n";
+            textToAdd += "Toyota | SGK1234F | 0 | false | false";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
@@ -136,14 +136,14 @@ public class CarFileTest {
         carFile.loadCarDataIfExist();
         Car car1 = CarList.getCarsList().get(0);
         assertEquals("Toyota", car1.getModel());
-        assertEquals("SGK", car1.getLicensePlateNumber());
+        assertEquals("SGK1234F", car1.getLicensePlateNumber());
         assertEquals(0.0, car1.getPrice(), 0.01);
         assertFalse(car1.isRented());
         assertFalse(car1.isExpensive());
 
         Car car2 = CarList.getCarsList().get(1);
         assertEquals("Toyota Cor", car2.getModel());
-        assertEquals("S4932K", car2.getLicensePlateNumber());
+        assertEquals("SDF4932K", car2.getLicensePlateNumber());
         assertEquals(1.0, car2.getPrice(), 0.01);
         assertFalse(car2.isRented());
         assertFalse(car2.isExpensive());

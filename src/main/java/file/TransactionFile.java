@@ -1,5 +1,6 @@
 package file;
 
+import exceptions.CarException;
 import exceptions.TransactionException;
 import transaction.Transaction;
 import transaction.TransactionList;
@@ -104,15 +105,16 @@ public class TransactionFile {
      */
     public void addTransactionWithParameters(String[] parameters , ArrayList<Integer> errorLines , int line) {
         assert parameters.length == Transaction.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
-        String carLicensePlate = parameters[0];
-        String borrowerName = parameters[1];
+
         try {
+            String carLicensePlate = parameters[0];
+            String borrowerName = parameters[1];
             int duration = Integer.parseInt(parameters[2]);
             LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
             boolean isCompleted = Boolean.parseBoolean(parameters[4]);
             Transaction transaction = new Transaction(carLicensePlate, borrowerName, duration, startDate, isCompleted);
             TransactionList.addTxWithoutPrintingInfo(transaction);
-        }catch (NumberFormatException | DateTimeParseException e ){
+        }catch (NumberFormatException | DateTimeParseException | CarException e){
             errorLines.add(line);
         }
     }
