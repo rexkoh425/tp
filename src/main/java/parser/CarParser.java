@@ -43,10 +43,15 @@ public class CarParser {
         String carPriceString = extractCarPrice(userInput).trim();
         double carPrice = Double.parseDouble(carPriceString);
         if (!isValidPrice(carPrice)) {
-            throw CarException.invalidPrice();
+            if (carPrice < 0.00) {
+                throw CarException.negativePrice();
+            } else {
+                throw CarException.invalidPrice();
+            }
         }
 
         assert carPrice >= 0.00 : "ERROR.. Car price is negative!!";
+        assert carPrice <= 10000 : "ERROR.. Car price exceeded limit of $10 000!!";
         double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
 
         return new Car(carModel, carLicensePlateNumber, formattedCarPrice);
@@ -136,13 +141,13 @@ public class CarParser {
     /**
      * Checks if price entered by user is valid.
      * <p>
-     * A valid price must be <b>non-negative</b>.
+     * A valid price must be <b>non-negative</b> and <b>less than 10 000</b>.
      *
      * @param price Price of car specified by user.
      * @return <code>true</code> if price is valid, <code>false</code> otherwise.
      */
-    public static boolean isValidPrice(double price) {
-        return !(price < 0.00);
+    public static boolean isValidPrice(double price) throws CarException{
+        return !(price < 0.00 || price > MAXIMUM_CAR_PRICE);
     }
 
     /**
