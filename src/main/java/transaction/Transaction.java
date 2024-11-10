@@ -73,7 +73,7 @@ public class Transaction {
         String formattedEndDate = endDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate 
+                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate
                     + " | End Date: " + formattedEndDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
