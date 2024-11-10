@@ -6,7 +6,6 @@ import static parser.TransactionParser.dateTimeFormatter;
 
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 5;
-    private static int transactionCounter = 1;
     private String transactionId;
     private final String carLicensePlate;
     private final String customer;
@@ -37,9 +36,6 @@ public class Transaction {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
-    }
-    public static String generateTransactionId() {
-        return "TX" + transactionCounter++;
     }
 
     public int getDuration() {

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class TransactionList {
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
+    private static int transactionCounter = 1;
     public static void addTx(Transaction transaction) {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
@@ -53,7 +54,8 @@ public class TransactionList {
                 && CarList.isExistingLicensePlateNumber(licensePlateNumber)
                 : "License plate number must be valid and exist in CarList.";
 
-        transaction.setTransactionId(Transaction.generateTransactionId());
+        String newTransactionId = "TX" + transactionCounter++;
+        transaction.setTransactionId(newTransactionId);
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -68,7 +70,8 @@ public class TransactionList {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 
-        transaction.setTransactionId(Transaction.generateTransactionId());
+        String newTransactionId = "TX" + transactionCounter++;
+        transaction.setTransactionId(newTransactionId);
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -251,6 +254,27 @@ public class TransactionList {
                                         LocalDate start2, LocalDate end2) {
         return (start1.isBefore(end2) && end1.isAfter(start2)) || start1.equals(start2)
                 || end1.equals(end2);
+    }
+
+    public static void initialiseTxCounterFromList() {
+        int maxId = 0;
+
+        for (Transaction transaction : transactionList) {
+            String transactionId = transaction.getTransactionId();
+            if (transactionId != null && transactionId.startsWith("TX")) {
+                try {
+                    int id = Integer.parseInt(transactionId.substring(2));
+                    if (id > maxId) {
+                        maxId = id;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid transactionId format: " + transactionId);
+                }
+            }
+        }
+
+        // Set transactionCounter to maxId + 1, or 1 if maxId is 0 (no transactions found)
+        transactionCounter = (maxId == 0) ? 1 : maxId + 1;
     }
 
 }
