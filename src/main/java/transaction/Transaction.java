@@ -7,7 +7,7 @@ import static parser.TransactionParser.dateTimeFormatter;
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 5;
     private static int transactionCounter = 1;
-    private final String transactionId;
+    private String transactionId;
     private final String carLicensePlate;
     private final String customer;
     private final int duration;
@@ -17,7 +17,6 @@ public class Transaction {
 
     public Transaction(String carLicensePlate, String customer, int duration,
                        LocalDate startDate) {
-        this.transactionId = "TX" + transactionCounter++;
         this.carLicensePlate = carLicensePlate;
         this.customer = customer;
         this.duration = duration;
@@ -28,13 +27,19 @@ public class Transaction {
 
     public Transaction(String carLicensePlate, String customer, int duration, LocalDate startDate
             , boolean isCompleted) {
-        this.transactionId = "TX" + transactionCounter++;
         this.carLicensePlate = carLicensePlate;
         this.customer = customer;
         this.duration = duration;
         this.startDate = startDate;
         this.endDate = startDate.plusDays(duration);
         this.isCompleted = isCompleted;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+    public static String generateTransactionId() {
+        return "TX" + transactionCounter++;
     }
 
     public int getDuration() {
@@ -52,6 +57,7 @@ public class Transaction {
     public String getTransactionId() {
         return transactionId;
     }
+
 
     private String durationtoString(){
         if(duration == 1) {
