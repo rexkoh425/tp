@@ -63,6 +63,7 @@ Added documentation to inform user of file loading.
 3) Added implementation details of file saving e.g. CarFileLoader.png & FileHandlerClassDiagram.png.
 4) Updated NFR.
 5) Added overall class diagram.
+6) Update manual testing.
 
 ### Community:
 PRs reviewed (with non-trivial review comments): #68, #95, #110.

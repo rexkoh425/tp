@@ -3,6 +3,8 @@ package file;
 import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
+import parser.CustomerParser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -102,9 +104,14 @@ public class CustomerFile {
         try {
             int age = Integer.parseInt(parameters[1]);
             String contactNumber = parameters[2];
+
+            if(!CustomerParser.isValidContactNumber(contactNumber) || age <= 17 || age > 100){
+                throw new CustomerException("");
+            }
+
             Customer customer = new Customer(customerName , age , contactNumber);
             CustomerList.addCustomerWithoutPrintingInfo(customer);
-        }catch(NumberFormatException e) {
+        }catch(NumberFormatException | CustomerException e) {
             errorLines.add(line);
         }
     }

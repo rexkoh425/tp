@@ -17,8 +17,14 @@ to track their customers, cars and rental transactions.
 
 ### `IMPORTANT NOTE / DISCLAIMER: `
 
-<b>The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
-Please add/edit data via the command line using the commands given.</b>
+* The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
+Please add/edit data via the command line using the commands given.
+
+`If user do not follow instructions, following additional measures are placed.`
+* Corrupted data will be flagged upon start of program , highlighting the rows of data which are wrong. Please correct 
+them or the corrupted lines will be flushed from the data files upon the `first correct command` given by the user.
+
+
 
 Filenames : 
 
@@ -53,6 +59,7 @@ Format: `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 
 * `CUSTOMER_NAME` : `STRING`.
 * `AGE` : `INT`
+  * age should be > 17 and <= 100.
 * `CONTACT_NUMBER` : `STRING`
   * `+[ANY NUMBER OF DIGITS]`
   * `No space between + and the first digit`
