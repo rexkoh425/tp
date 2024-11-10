@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static parser.TransactionParser.dateTimeFormatter;
 
@@ -107,14 +109,20 @@ public class TransactionFile {
         assert parameters.length == Transaction.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
 
         try {
-            String carLicensePlate = parameters[0];
-            String borrowerName = parameters[1];
-            int duration = Integer.parseInt(parameters[2]);
-            LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
-            boolean isCompleted = Boolean.parseBoolean(parameters[4]);
-            Transaction transaction = new Transaction(carLicensePlate, borrowerName, duration, startDate, isCompleted);
+
+            String transactionId = parameters[0];
+            if(!Transaction.isValidTxId(transactionId)){
+                throw new TransactionException("");
+            }
+            String carLicensePlate = parameters[1];
+            String borrowerName = parameters[2];
+            int duration = Integer.parseInt(parameters[3]);
+            LocalDate startDate = LocalDate.parse(parameters[4], dateTimeFormatter);
+            boolean isCompleted = Boolean.parseBoolean(parameters[5]);
+            Transaction transaction = new Transaction(transactionId , carLicensePlate, borrowerName, duration,
+                    startDate, isCompleted);
             TransactionList.addTxWithoutPrintingInfo(transaction);
-        }catch (NumberFormatException | DateTimeParseException | CarException e){
+        }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException e){
             errorLines.add(line);
         }
     }
