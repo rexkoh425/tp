@@ -323,7 +323,7 @@ class TransactionListTest {
                 LocalDate.of(2024, 10, 2));
         Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
                 LocalDate.of(2024, 10, 3));
-        TransactionList.markCompletedByTxId(tx3.getTransactionId());
+        TransactionList.markCompletedByTxId(tx1.getTransactionId());
         Transaction tx4 = new Transaction(licensePlate4, "John Doe", 2,
                 LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx1);
