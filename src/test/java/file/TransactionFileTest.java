@@ -100,8 +100,8 @@ class TransactionFileTest {
         }
 
         String[] lines = {
-                "SJX1234D | John | 5 | 08-11-2024 | false",
-                "SJX1234D | Jane | 3 | 10-10-2024 | true"
+            "SJX1234D | John | 5 | 08-11-2024 | false",
+            "SJX1234D | Jane | 3 | 10-10-2024 | true"
         };
 
         try {

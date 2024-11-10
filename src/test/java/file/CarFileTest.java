@@ -99,8 +99,8 @@ public class CarFileTest {
         }
 
         String[] lines = {"Toyota | SGK | 0.0 | false | false",
-                "Toyota Cor | S4932K | 1.0 | false | false",
-                "Toyota Corolla | SGM4932K | 10.0 | false | true"};
+            "Toyota Cor | S4932K | 1.0 | false | false",
+            "Toyota Corolla | SGM4932K | 10.0 | false | true"};
         try {
             Scanner scanner = new Scanner(testFile);
             int i = 0;
