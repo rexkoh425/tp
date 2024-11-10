@@ -1,6 +1,5 @@
 package file;
 
-import car.Car;
 import exceptions.TransactionException;
 import transaction.Transaction;
 import transaction.TransactionList;
