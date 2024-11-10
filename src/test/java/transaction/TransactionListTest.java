@@ -319,16 +319,16 @@ class TransactionListTest {
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
+        TransactionList.addTxWithoutPrintingInfo(tx1);
         Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
+        TransactionList.addTxWithoutPrintingInfo(tx2);
         Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
                 LocalDate.of(2024, 10, 3));
+        TransactionList.addTxWithoutPrintingInfo(tx3);
         TransactionList.markCompletedByTxId(tx1.getTransactionId());
         Transaction tx4 = new Transaction(licensePlate4, "John Doe", 2,
                 LocalDate.of(2024, 10, 3));
-        TransactionList.addTxWithoutPrintingInfo(tx1);
-        TransactionList.addTxWithoutPrintingInfo(tx2);
-        TransactionList.addTxWithoutPrintingInfo(tx3);
         TransactionList.addTxWithoutPrintingInfo(tx4);
 
         // Find transactions by "John Doe"
