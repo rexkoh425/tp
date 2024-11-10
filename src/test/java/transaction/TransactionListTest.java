@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import parser.CarParser;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import parser.TransactionParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
