@@ -57,9 +57,6 @@ public class Transaction {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
 
     public String getTransactionId() {
         return transactionId;

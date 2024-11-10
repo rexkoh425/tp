@@ -41,7 +41,7 @@ public class TransactionList {
         assert CarParser.isValidLicensePlateNumber(licensePlateNumber)
                 && CarList.isExistingLicensePlateNumber(licensePlateNumber)
                 : "License plate number must be valid and exist in CarList.";
-
+        transaction.setTransactionId(Transaction.generateTransactionId());
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -71,9 +71,9 @@ public class TransactionList {
         if (isCarInTransactionList(licensePlateNumber)) {
             throw CarException.carAlreadyInTransactionList();
         }
-
+        transaction.setTransactionId(Transaction.generateTransactionId());
         transactionList.add(transaction);
-
+        CarList.markCarAsRented(licensePlateNumber);
         // Assert that the transaction was added successfully
         assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
@@ -178,14 +178,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                System.out.println("Transaction deleted: " + transaction);
-                transactionList.remove(transaction);
-                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    System.out.println("Transaction deleted: " + transaction);
+                    transactionList.remove(transaction);
+                    CarList.markCarAsAvailable(transaction.getCarLicensePlate());
 
-                // Assert that the transaction was removed successfully
-                assert !transactionList.contains(transaction) : "Transaction was not removed from the list.";
-                return;
+                    // Assert that the transaction was removed successfully
+                    assert !transactionList.contains(transaction) : "Transaction was not removed from the list.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
@@ -222,14 +224,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                transaction.setCompleted(true);
-                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
-                System.out.println("Transaction completed: " + transaction);
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    transaction.setCompleted(true);
+                    CarList.markCarAsAvailable(transaction.getCarLicensePlate());
+                    System.out.println("Transaction completed: " + transaction);
 
-                // Assert that the transaction is marked as completed
-                assert transaction.isCompleted() : "Transaction was not marked as completed.";
-                return;
+                    // Assert that the transaction is marked as completed
+                    assert transaction.isCompleted() : "Transaction was not marked as completed.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
@@ -242,14 +246,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                transaction.setCompleted(false);
-                CarList.markCarAsRented(transaction.getCarLicensePlate());
-                System.out.println("Transaction set uncompleted: " + transaction);
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    transaction.setCompleted(false);
+                    CarList.markCarAsRented(transaction.getCarLicensePlate());
+                    System.out.println("Transaction set uncompleted: " + transaction);
 
-                // Assert that the transaction is marked as uncompleted
-                assert !transaction.isCompleted() : "Transaction was not unmarked as completed.";
-                return;
+                    // Assert that the transaction is marked as uncompleted
+                    assert !transaction.isCompleted() : "Transaction was not unmarked as completed.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
