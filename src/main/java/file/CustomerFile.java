@@ -1,5 +1,6 @@
 package file;
 
+import car.Car;
 import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
@@ -97,7 +98,7 @@ public class CustomerFile {
      * @param line current line number which this customer data is at in customerData.txt.
      */
     public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
-        assert parameters.length == 3 : "Parameter for customers is wrong";
+        assert parameters.length == Customer.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String customerName = parameters[0];
         try {
             int age = Integer.parseInt(parameters[1]);
@@ -120,6 +121,10 @@ public class CustomerFile {
         } catch (CustomerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean isFileExist(){
+        return customerDataFile.exists();
     }
 
     public String getAbsolutePath(){

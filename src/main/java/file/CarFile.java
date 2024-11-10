@@ -43,6 +43,7 @@ public class CarFile {
      * @param line current line number which this car data is at in carData.txt.
      */
     public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
+        assert parameters.length == Car.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String model = parameters[0];
         String licensePlateNumber = parameters[1];
         try {
@@ -131,6 +132,10 @@ public class CarFile {
         } catch (CarException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean isFileExist(){
+        return carDataFile.exists();
     }
 
     public String getAbsolutePath(){

@@ -1,5 +1,6 @@
 package file;
 
+import car.Car;
 import exceptions.TransactionException;
 import transaction.Transaction;
 import transaction.TransactionList;
@@ -103,6 +104,7 @@ public class TransactionFile {
      * @param line current line number which this transaction data is at in transactionData.txt.
      */
     public void addTransactionWithParameters(String[] parameters , ArrayList<Integer> errorLines , int line) {
+        assert parameters.length == Transaction.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String carLicensePlate = parameters[0];
         String borrowerName = parameters[1];
         try {
@@ -130,5 +132,9 @@ public class TransactionFile {
 
     public String getAbsolutePath(){
         return transactionDataFile.getAbsolutePath();
+    }
+
+    public boolean isFileExist(){
+        return transactionDataFile.exists();
     }
 }

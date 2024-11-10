@@ -30,6 +30,9 @@ public class CustomerParser {
         String customerName = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
         String contactNumber = parameterContents[2];
+        assert !customerName.isEmpty() : "Customer name should not be empty.";
+        //assert age >= 18 : "Age should be greater than 18.";
+        assert isValidContactNumber(contactNumber) : "Invalid contact number format.";
         return new Customer(customerName , age, contactNumber );
     }
 
@@ -48,9 +51,11 @@ public class CustomerParser {
             int endOfBeforeParameter = indexOfBeforeParameter + parameters[i].length();
             contents[i] = userInput.substring(endOfBeforeParameter, indexOfAfterParameter).trim();
         }
+
         int indexOfLastParameter = userInput.indexOf(parameters[parameters.length - 1]);
         int endOfLastParameter = indexOfLastParameter + parameters[parameters.length - 1].length();
         contents[parameters.length - 1] = userInput.substring(endOfLastParameter).trim();
+
         if(!isValidContactNumber(contents[parameters.length - 1])){
             throw CustomerException.invalidContactNumberException();
         }
@@ -59,6 +64,7 @@ public class CustomerParser {
                 throw CustomerException.addCustomerException();
             }
         }
+
         return contents;
     }
 
