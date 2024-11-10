@@ -62,6 +62,8 @@ public class TransactionFile {
             if(!errorLines.isEmpty()) {
                 throw TransactionException.invalidParameters(errorLines);
             }
+
+            TransactionList.initialiseTxCounterFromList();
         }
     }
 
