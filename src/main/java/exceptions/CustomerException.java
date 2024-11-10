@@ -46,4 +46,8 @@ public class CustomerException extends RuntimeException {
     public static CustomerException missingNameWhenRemoving(){
         return new CustomerException("Please enter customer name for removal.");
     }
+
+    public static CustomerException customerAlreadyInTransactionList() {
+        return new CustomerException("Customer has rented a car.");
+    }
 }

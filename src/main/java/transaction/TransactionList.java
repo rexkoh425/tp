@@ -2,6 +2,7 @@ package transaction;
 
 import car.CarList;
 import exceptions.CarException;
+import exceptions.CustomerException;
 import parser.CarParser;
 import java.util.ArrayList;
 
@@ -15,16 +16,25 @@ public class TransactionList {
         assert transaction != null : "Transaction to add should not be null.";
 
         String licensePlateNumber = transaction.getCarLicensePlate();
-
-        // Assert that the license plate number is not null
+        String uniqueCustomer = transaction.getCustomer();
+        // Assert that the license plate number and customer are not null
         assert licensePlateNumber != null : "License plate number should not be null.";
+        assert uniqueCustomer != null: "Customer should not be null.";
 
         if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
             throw CarException.invalidLicensePlateNumber();
         }
 
-        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)){
+        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)) {
             throw CarException.licensePlateNumberNotFound();
+        }
+
+        if (isCustomerInTransactionList(uniqueCustomer)) {
+            throw CustomerException.customerAlreadyInTransactionList();
+        }
+
+        if (isCarInTransactionList(licensePlateNumber)) {
+            throw CarException.carAlreadyInTransactionList();
         }
 
         // Assert that the license plate number is valid and exists before adding
@@ -46,11 +56,43 @@ public class TransactionList {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 
+        String licensePlateNumber = transaction.getCarLicensePlate();
+        String uniqueCustomer = transaction.getCustomer();
+
+        if (isCustomerInTransactionList(uniqueCustomer)) {
+            throw CustomerException.customerAlreadyInTransactionList();
+        }
+
+        if (isCarInTransactionList(licensePlateNumber)) {
+            throw CarException.carAlreadyInTransactionList();
+        }
+
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
         assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
+
+    // Helper method to check if a customer already exists in the transaction list
+    private static boolean isCustomerInTransactionList(String customer) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCustomer().equalsIgnoreCase(customer) && !transaction.isCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Helper method to check if a car with a specific license plate already exists in the transaction list
+    private static boolean isCarInTransactionList(String licensePlateNumber) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCarLicensePlate().equalsIgnoreCase(licensePlateNumber) && !transaction.isCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void printAllTransactions() {
         int index = 1;

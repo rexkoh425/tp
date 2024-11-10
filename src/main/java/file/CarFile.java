@@ -50,7 +50,6 @@ public class CarFile {
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
             CarList.sortCarsByPrice();
-            CarList.getMedianPrice();
             CarList.markCarAsExpensive();
         }catch(NumberFormatException e) {
             errorLines.add(line);
