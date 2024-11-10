@@ -1,11 +1,13 @@
 package transaction;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static parser.TransactionParser.dateTimeFormatter;
 
 public class Transaction {
-    public static final int NUMBER_OF_PARAMETERS = 5;
+    public static final int NUMBER_OF_PARAMETERS = 6;
     private static int transactionCounter = 1;
     private String transactionId;
     private final String carLicensePlate;
@@ -25,14 +27,19 @@ public class Transaction {
         this.isCompleted = false;
     }
 
-    public Transaction(String carLicensePlate, String customer, int duration, LocalDate startDate
+    public Transaction(String transactionId ,String carLicensePlate, String customer, int duration, LocalDate startDate
             , boolean isCompleted) {
+        this.transactionId = transactionId;
         this.carLicensePlate = carLicensePlate;
         this.customer = customer;
         this.duration = duration;
         this.startDate = startDate;
         this.endDate = startDate.plusDays(duration);
         this.isCompleted = isCompleted;
+    }
+
+    public static void clearTransactionCounter() {
+        transactionCounter = 1;
     }
 
     public void setTransactionId(String transactionId) {
@@ -67,13 +74,20 @@ public class Transaction {
         }
     }
 
+    public static boolean isValidTxId(String transactionId) {
+        String regex = "TX([1-9]\\d*)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(transactionId);
+        return matcher.matches();
+    }
+
     @Override
     public String toString() {
         String formattedDate = startDate.format(dateTimeFormatter);
         String formattedEndDate = endDate.format(dateTimeFormatter);
         if (this.isCompleted) {
             return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate 
+                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate
                     + " | End Date: " + formattedEndDate;
         } else {
             return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
@@ -99,7 +113,8 @@ public class Transaction {
     }
 
     public String toFileString(){
-        return this.getCarLicensePlate() + " | " + this.getCustomer() + " | " + this.getDuration() + " | "
-                + this.getStartDate().format(dateTimeFormatter) + " | " + this.isCompleted();
+        return this.getTransactionId() + " | " + this.getCarLicensePlate() + " | " + this.getCustomer() + " | " +
+                this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter) + " | "
+                + this.isCompleted();
     }
 }

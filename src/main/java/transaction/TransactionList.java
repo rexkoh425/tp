@@ -259,7 +259,7 @@ public class TransactionList {
 
         StringBuilder transactionData = new StringBuilder();
         for (Transaction transaction : transactionList) {
-            // Assert that each transaction is not null
+
             assert transaction != null : "Transaction in the list should not be null.";
             transactionData.append(transaction.toFileString());
             transactionData.append(System.lineSeparator());
