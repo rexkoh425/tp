@@ -1,9 +1,17 @@
 package customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import file.FileHandler;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CustomerListTest {
+
+    @BeforeEach
+    void setUp() {
+        CustomerList.clearCustomerList();
+    }
 
     @Test
     public void testAddCustomer() {
