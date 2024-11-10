@@ -5,9 +5,6 @@ autonumber
 mainframe sd add-user
 participant ":Parser" as Parser
 participant ":CustomerParser" as CustomerParser
-participant ":CustomerList" as CustomerList
-participant ":System.out" as System.out
-participant "customers \n: ArrayList<Customer>" as CustomerArrayList
 participant ":Customer" as Customer
 participant ":CustomerException" as CustomerException
 
@@ -38,42 +35,36 @@ activate CustomerParser
             activate CustomerParser
                 CustomerParser --> CustomerParser : return contents
             deactivate CustomerParser
-            CustomerParser --> CustomerParser : return new Customer()
+            create Customer
+
+            CustomerParser -> Customer :
+            activate Customer
+            CustomerParser <-- Customer : return
+            deactivate Customer
+            CustomerParser --> CustomerParser : return new Customer
         deactivate CustomerParser
     else
         CustomerParser -> CustomerException : addCustomerException()
         activate CustomerException
-
-            CustomerException --> CustomerParser : return new CustomerException()
+            note right of CustomerException
+                The static method creates
+                a new CustomerException
+            end note
+            CustomerException --> CustomerParser : return new CustomerException
         deactivate CustomerException
-        Parser <-- CustomerParser : throw new CustomerException()
+        Parser <-- CustomerParser : throw new CustomerException
     end alt
-    Parser <-- CustomerParser : return new Customer()
+    Parser <-- CustomerParser : return new Customer
 
 deactivate CustomerParser
 
 Parser -> CustomerList : addCustomer(customer : Customer)
+note right of CustomerList
+    Adds the new Customer to a ArrayList
+    and prints information to the user
+end note
 activate CustomerList
-
-    CustomerList -> CustomerArrayList : add(customer : Customer)
-    activate CustomerArrayList
-
-        CustomerArrayList --> CustomerList : return
-    deactivate CustomerArrayList
-
-    CustomerList -> System.out : println()
-    activate System.out
-        System.out <-- CustomerList : return
-    deactivate System.out
-    CustomerList -> System.out : println(customer : Customer)
-    activate System.out
-        System.out -> Customer : toString()
-        activate Customer
-            Customer --> System.out : return
-        deactivate Customer
-    CustomerList <-- System.out : return
-    deactivate System.out
-Parser <-- CustomerList : return
+    Parser <-- CustomerList : return
 deactivate CustomerList
 deactivate Parser
 @enduml
