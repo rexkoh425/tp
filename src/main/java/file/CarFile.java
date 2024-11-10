@@ -76,7 +76,6 @@ public class CarFile {
     public void createCarFileIfNotExist(){
         if(!carDataFile.exists()){
             FileHandler.createNewFile(carDataFile);
-            System.out.println(carDataFile.getAbsolutePath());
         }
     }
 

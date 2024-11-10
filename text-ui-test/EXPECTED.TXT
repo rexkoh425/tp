@@ -29,7 +29,6 @@ ____________________________________________________________
 data does not exist. Creating it now.......
 data directory created successfully.
 File created successfully: carData.txt
-C:\NUS\CS2113\tp\data\carData.txt
 File created successfully: customerData.txt
 File created successfully: transactionData.txt
 What would you like to do?
