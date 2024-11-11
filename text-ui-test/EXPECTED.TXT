@@ -11,19 +11,20 @@ help - Provides a list of all commands and their descriptions.
 add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER] - Adds a new customer to the system.
 remove-user /u [CUSTOMER_NAME] - Removes a customer from the system.
 list-users - Lists all customers.
+remove-all-users - Remove all customers.
 add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE] - Adds a new car to the fleet.
 remove-car - Removes a car from the fleet.
 list-cars - Lists all rented-out cars.
 remove-all-cars - Remove all existing cars in the cars list.
 add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: <dd-MM-yyyy>] - Adds a new rental transaction.
 mark-tx /t [TRANSACTION_ID] - Marks a rental transaction completed.
-unmark-tx /t [TRANSACTION_ID] - Unmarks a rental transaction.
+unmark-tx /t [TRANSACTION_ID] - Unmark a rental transaction.
 remove-tx /t [TRANSACTION_ID] - Removes an existing rental transaction.
 remove-all-txs - Removes transactions history
-list-tx - Lists all transactions.
-list-tx-completed - Lists all completed transactions.
-list-tx-uncompleted - Lists all uncompleted transactions.
-find-tx-by-customer /u [CUSTOMER_NAME] - Finds transactions by a customer's name.
+list-txs - Lists all transactions.
+list-txs-completed - Lists all completed transactions.
+list-txs-uncompleted - Lists all uncompleted transactions.
+find-txs-by-customer /u [CUSTOMER_NAME] - Finds transactions by a customer's name.
 exit - Exits the program.
 ____________________________________________________________
 data does not exist. Creating it now.......
