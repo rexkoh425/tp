@@ -106,11 +106,11 @@ public class CarParser {
      * @param userInput Full command entered by user.
      * @return Price of car.
      */
-    private static String extractCarPrice(String userInput) {
+    private static String extractCarPrice(String userInput) throws NumberFormatException{
         int startIndexOfPrice = userInput.indexOf(ADD_CAR_PARAMETERS[2]) + ADD_CAR_PARAMETERS_OFFSET;
 
-        String carPrice = userInput.substring(startIndexOfPrice);
-        if (carPrice.trim().isEmpty()) {
+        String carPrice = userInput.substring(startIndexOfPrice).trim();
+        if (carPrice.isEmpty()) {
             throw new CarException("Car price missing!!");
         }
 
@@ -186,6 +186,8 @@ public class CarParser {
      * @return <code>true</code> if license plate number is valid, <code>false</code> otherwise.
      */
     public static boolean isValidLicensePlateNumber(String licensePlateNumber) {
+        licensePlateNumber = licensePlateNumber.toUpperCase();
+
         if (!licensePlateNumber.startsWith("S") ||
             licensePlateNumber.length() < MIN_LICENSE_PLATE_NUMBER_LENGTH ||
                 licensePlateNumber.length() > MAX_LICENSE_PLATE_NUMBER_LENGTH) {
@@ -223,18 +225,26 @@ public class CarParser {
         userInput = userInput.trim();
 
         String licensePlateNumber = extractLicensePlateForRemoval(userInput).trim();
-        if (licensePlateNumber.isEmpty()) {
-            throw new CarException("License plate number missing!!");
+
+        if (!isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
         }
 
         return licensePlateNumber;
     }
 
-    private static String extractLicensePlateForRemoval(String userInput) {
+    private static String extractLicensePlateForRemoval(String userInput) throws CarException{
         String[] splitInput = userInput.split(" ");
-        if (splitInput.length < 2) {
-            throw new CarException("Invalid format for removing a car. Use: remove-car /i [CAR_ID]");
+
+        if (splitInput.length != 3) {
+            throw new CarException("Invalid format for removing a car. Use: remove-car /i [LICENSE_PLATE_NUMBER]");
         }
+
+        String licensePlateNumberIdentifier = splitInput[1];
+        if (!licensePlateNumberIdentifier.equals("/i")) {
+            throw new CarException("Invalid parameter identifier. Use: remove-car /i [LICENSE_PLATE_NUMBER]");
+        }
+
         return splitInput[2];  // Expecting the license plate number to be the second argument
     }
 }
