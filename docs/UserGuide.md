@@ -82,6 +82,7 @@ Others :
 * Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
 
 ---
+## Features
 
 ### Adding a User to the Database: `add-user`
 
@@ -139,7 +140,6 @@ Car added to list
 Car details:
 Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
 ```
-
 ---
 ### Removing a Car: `remove-car`
 
@@ -273,6 +273,7 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction not found
 ```
+---
 
 ### Removing All Transactions: `remove-all-txs`
 
