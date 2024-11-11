@@ -4,7 +4,6 @@ import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
 import parser.CustomerParser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -100,8 +99,12 @@ public class CustomerFile {
      */
     public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
         assert parameters.length == Customer.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
-        String customerName = parameters[0];
+
         try {
+            if (FileHandler.containEmptyParameter(parameters)) {
+                throw new CustomerException("");
+            }
+            String customerName = parameters[0];
             int age = Integer.parseInt(parameters[1]);
             String contactNumber = parameters[2];
 

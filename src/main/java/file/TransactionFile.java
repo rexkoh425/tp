@@ -57,11 +57,13 @@ public class TransactionFile {
             Scanner scanner = new Scanner(transactionDataFile);
             ArrayList<Integer> errorLines = new ArrayList<>();
             int line = 1;
+
             while (scanner.hasNext()) {
                 scanLineAndAddTransaction(scanner, errorLines, line);
                 line ++;
             }
-            if(!errorLines.isEmpty()) {
+
+            if (!errorLines.isEmpty()) {
                 throw TransactionException.invalidParameters(errorLines);
             }
         }
@@ -89,7 +91,8 @@ public class TransactionFile {
     public void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
-        if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
+
+        if (parameters.length != Transaction.NUMBER_OF_PARAMETERS) {
             errorLines.add(line);
         }else{
             addTransactionWithParameters(parameters , errorLines, line);
@@ -109,9 +112,11 @@ public class TransactionFile {
         try {
 
             String transactionId = parameters[0];
-            if(!Transaction.isValidTxId(transactionId)){
+
+            if (!Transaction.isValidTxId(transactionId) || FileHandler.containEmptyParameter(parameters)) {
                 throw new TransactionException("");
             }
+
             int idNumber = Integer.parseInt(transactionId.substring(2));
             TransactionList.setTxCounter(idNumber);
             String carLicensePlate = parameters[1];
@@ -121,7 +126,9 @@ public class TransactionFile {
             boolean isCompleted = Boolean.parseBoolean(parameters[5]);
             Transaction transaction = new Transaction(transactionId , carLicensePlate, borrowerName, duration,
                     startDate, isCompleted);
+
             TransactionList.addTxWithoutPrintingInfo(transaction);
+
         }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException e){
             errorLines.add(line);
         }

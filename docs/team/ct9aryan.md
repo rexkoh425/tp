@@ -88,9 +88,10 @@ for easy navigation.
 
 ### Developer Guide (DG) Contributions
 - Added implementation details for auto updating of car rental status feature.
+- Added `removeCar` UML Sequence diagram.
 - Added `addCar` UML Sequence diagram.
 - Added `addTx` UML Sequence diagram.
-- Added Class diagram for Car and Transaction classes.
+- Added UML Class diagram for Car and Transaction classes.
 
 ___
 ## Community

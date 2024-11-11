@@ -207,6 +207,7 @@ public class TransactionList {
             CarList.markCarAsAvailable(licensePlateNumber);
         }
         transactionList.clear();
+        clearTxCounter();
         System.out.println("All transactions removed!!!");
     }
 
