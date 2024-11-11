@@ -31,6 +31,14 @@ public class CustomerList {
         System.out.println("User " + customerName + " was not found");
     }
 
+    public static void clearCustomerList(){
+        customers.clear();
+    }
+    public static void removeAllCustomers() {
+        clearCustomerList();
+        System.out.println("All customers removed!!!");
+    }
+
     public static ArrayList<Customer> getCustomers() {
         return customers;
     }

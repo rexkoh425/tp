@@ -18,6 +18,22 @@ public class FileHandler {
 
     }
 
+    public static CarFile getCarFile() {
+        return carFile;
+    }
+
+    public static CustomerFile getCustomerFile() {
+        return customerFile;
+    }
+
+    public static TransactionFile getTransactionFile() {
+        return transactionFile;
+    }
+
+    public static File getDataDir() {
+        return DATA_DIR;
+    }
+
     public static String getDirName() {
         return DIR_NAME;
     }
@@ -33,6 +49,9 @@ public class FileHandler {
         carFile.loadCarDataIfExist();
         customerFile.loadCustomerDataIfExist();
         transactionFile.loadTransactionDataIfExist();
+        assert carFile.isFileExist() : "Car file does not exist.";
+        assert customerFile.isFileExist() : "Customer file does not exist.";
+        assert transactionFile.isFileExist() : "Transaction file does not exist.";
     }
 
     /**
@@ -57,12 +76,13 @@ public class FileHandler {
     /**
      * Creates a directory called data to store data files if it does not exist.
      */
-    private static void createFolderIfNotExist(){
+    public static void createFolderIfNotExist(){
 
         if (!DATA_DIR.isDirectory()) {
             System.out.println(DIR_NAME + " does not exist. Creating it now.......");
             createFolder();
         }
+        assert DATA_DIR.isDirectory() : "Data directory was not created successfully.";
     }
 
     /**

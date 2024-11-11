@@ -3,6 +3,7 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
+import parser.CarParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,20 +40,27 @@ public class CarFile {
      * Add car object to the list according to the parameters.
      *
      * @param parameters parameters of the Car object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this car data is at in carData.txt.
      */
     public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
+        assert parameters.length == Car.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String model = parameters[0];
-        String licensePlateNumber = parameters[1];
         try {
+            String licensePlateNumber = parameters[1];
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
             boolean isExpensive = Boolean.parseBoolean(parameters[4]);
+            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price)){
+                throw new CarException("");
+            }
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
             CarList.addCarWithoutPrintingInfo(car);
             CarList.sortCarsByPrice();
-            CarList.getMedianPrice();
             CarList.markCarAsExpensive();
-        }catch(NumberFormatException e) {
+          
+        } catch(NumberFormatException | CarException e) {
+
             errorLines.add(line);
         }
     }
@@ -73,6 +81,14 @@ public class CarFile {
         if(!carDataFile.exists()){
             FileHandler.createNewFile(carDataFile);
         }
+    }
+
+    public void deleteCarFileIfExist(){
+        boolean deleted = false;
+        if(carDataFile.exists()){
+            deleted = carDataFile.delete();
+        }
+        System.out.println("carData.txt deleted: " + deleted);
     }
 
     /**
@@ -99,8 +115,8 @@ public class CarFile {
     /**
      * Scans the current line and add data to current car list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this car data is at in carData.txt.
      */
     public void scanLineAndAddCar(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
@@ -123,6 +139,10 @@ public class CarFile {
         } catch (CarException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean isFileExist(){
+        return carDataFile.exists();
     }
 
     public String getAbsolutePath(){

@@ -1,0 +1,120 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class CliRental {
+   {field}...
+   {method}...
+}
+
+class Parser {
+    {field}...
+    {method}...
+}
+class CarParser <<Car>>{
+   {field}...
+   {method}...
+}
+
+class TransactionParser <<Transaction>>{
+   {field}...
+   {method}...
+}
+
+class Car <<Car>>{
+   {field}...
+   {method}...
+}
+
+class Transaction <<Transaction>>{
+   {field}...
+   {method}...
+}
+
+class CarList <<Car>>{
+   {field}...
+   {method}...
+}
+
+class TransactionList <<Transaction>>{
+   {field}...
+   {method}...
+}
+
+class Customer <<Customer>> {
+   {field}...
+   {method}...
+}
+
+class CustomerList <<Customer>> {
+   {field}...
+   {method}...
+}
+
+class CustomerParser <<Customer>> {
+   {field}...
+   {method}...
+}
+
+class CustomerException <<Exception>> {
+   {field}...
+   {method}...
+}
+
+class FileHandler {
+   {field}...
+   {method}...
+}
+
+class CarFile {
+  {field}...
+  {method}...
+}
+
+class CustomerFile {
+    {field}...
+    {method}...
+}
+
+class TransactionFile {
+   {field}...
+   {method}...
+}
+
+FileHandler --> "1" CarFile : "create"
+FileHandler --> "1" CustomerFile : "create"
+FileHandler --> "1" TransactionFile : "create"
+
+CarFile ..> CarList : "edit"
+CarFile ..> Car : "create"
+CarFile ..> FileHandler : "uses"
+
+CustomerFile ..> CustomerList : "edit"
+CustomerFile ..> FileHandler : "uses"
+CustomerFile ..> Customer : "create"
+
+TransactionFile ..> TransactionList : "edit"
+TransactionFile ..> Transaction : "create"
+TransactionFile ..> FileHandler : "uses"
+
+CliRental ..> Parser
+CliRental ..> CustomerException
+
+Parser ..> CarParser
+Parser ..> TransactionParser
+Parser ..> CustomerParser
+
+CarParser -- Car: <font color=black>parse into Car object >
+CarParser ..> CarList
+
+TransactionParser -- Transaction : parse into Transaction object >
+TransactionParser ..> TransactionList
+
+CarList *-- "<font color=black size=40>*" Car
+TransactionList *-- "<font color=black size=40>*" Transaction
+
+CustomerParser ..> Customer : "creates"
+CustomerParser ..> CustomerException : "throws"
+
+CustomerList  *-- "*" Customer : "contains"
+@enduml

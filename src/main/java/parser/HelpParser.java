@@ -12,6 +12,7 @@ public class HelpParser {
         commands.put("help", "Provides a list of all commands and their descriptions.");
         commands.put("add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]", "Adds a new customer to the system.");
         commands.put("remove-user /u [CUSTOMER_NAME]", "Removes a customer from the system.");
+        commands.put("remove-all-users", "Remove all customers.");
         commands.put("list-users", "Lists all customers.");
         commands.put("add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]", "Adds a new car to the fleet.");
         commands.put("remove-car /i [LICENSE_PLATE_NUMBER]", "Removes a car from the fleet.");
@@ -20,13 +21,13 @@ public class HelpParser {
         commands.put("add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: <dd-MM-yyyy>]",
                 "Adds a new rental transaction.");
         commands.put("mark-tx /t [TRANSACTION_ID]", "Marks a rental transaction completed.");
-        commands.put("unmark-tx /t [TRANSACTION_ID]", "Unmarks a rental transaction.");
+        commands.put("unmark-tx /t [TRANSACTION_ID]", "Unmark a rental transaction.");
         commands.put("remove-tx /t [TRANSACTION_ID]", "Removes an existing rental transaction.");
         commands.put("remove-all-txs", "Removes transactions history");
-        commands.put("list-tx", "Lists all transactions.");
-        commands.put("list-tx-completed", "Lists all completed transactions.");
-        commands.put("list-tx-uncompleted", "Lists all uncompleted transactions.");
-        commands.put("find-tx-by-customer /u [CUSTOMER_NAME]", "Finds transactions by a customer's name.");
+        commands.put("list-txs", "Lists all transactions.");
+        commands.put("list-txs-completed", "Lists all completed transactions.");
+        commands.put("list-txs-uncompleted", "Lists all uncompleted transactions.");
+        commands.put("find-txs-by-customer /u [CUSTOMER_NAME]", "Finds transactions by a customer's name.");
         commands.put("exit", "Exits the program.");
     }
 

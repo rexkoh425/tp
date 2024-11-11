@@ -18,6 +18,7 @@ public class Parser {
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
     private static final String REMOVE_CUSTOMER_COMMAND = "remove-user";
     private static final String LIST_USERS_COMMAND = "list-users";
+    private static final String REMOVE_ALL_CUSTOMERS_COMMAND = "remove-all-users";
     private static final String ADD_CAR_COMMAND = "add-car";
     private static final String REMOVE_CAR_COMMAND = "remove-car";
     private static final String REMOVE_ALL_CARS_COMMAND = "remove-all-cars";
@@ -28,10 +29,10 @@ public class Parser {
     private static final String REMOVE_ALL_TRANSACTIONS_COMMAND = "remove-all-txs";
     private static final String MARK_TRANSACTION_COMMAND = "mark-tx";
     private static final String UNMARK_TRANSACTION_COMMAND = "unmark-tx";
-    private static final String LIST_ALL_TRANSACTIONS = "list-tx";
-    private static final String LIST_COMPLETED_TRANSACTIONS = "list-tx-completed";
-    private static final String LIST_UNCOMPLETED_TRANSACTIONS = "list-tx-uncompleted";
-    private static final String FIND_TRANSACTION_BY_CUSTOMER_COMMAND = "find-tx-by-customer";
+    private static final String LIST_ALL_TRANSACTIONS = "list-txs";
+    private static final String LIST_COMPLETED_TRANSACTIONS = "list-txs-completed";
+    private static final String LIST_UNCOMPLETED_TRANSACTIONS = "list-txs-uncompleted";
+    private static final String FIND_TRANSACTIONS_BY_CUSTOMER_COMMAND = "find-txs-by-customer";
     private static final String EXIT_COMMAND = "exit";
 
     public static void printDividerLine() {
@@ -67,6 +68,9 @@ public class Parser {
             return false;
         case LIST_USERS_COMMAND:
             CustomerList.printCustomers();
+            return false;
+        case REMOVE_ALL_CUSTOMERS_COMMAND:
+            CustomerList.removeAllCustomers();
             return false;
         case ADD_CAR_COMMAND:
             try {
@@ -133,7 +137,7 @@ public class Parser {
         case LIST_UNCOMPLETED_TRANSACTIONS:
             TransactionList.printUncompletedTransactions();
             return false;
-        case FIND_TRANSACTION_BY_CUSTOMER_COMMAND:
+        case FIND_TRANSACTIONS_BY_CUSTOMER_COMMAND:
             TransactionParser.parseFindTxsByCustomer(userInput);
             return false;
         case EXIT_COMMAND:

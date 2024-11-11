@@ -51,7 +51,7 @@ public class Customer {
     }
 
     public String toDisplayString(){
-        return "Username : " + getCustomerName() + "\nAge : " + getAge() + "\nContact Number :"
+        return "Customer name : " + getCustomerName() + "\nAge : " + getAge() + "\nContact Number : "
                 + getContactNumber();
     }
 }

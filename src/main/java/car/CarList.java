@@ -17,6 +17,10 @@ public class CarList {
         return carsList;
     }
 
+    public static void clearCarList(){
+        carsList.clear();
+    }
+
     /**
      * Formats the specified price to 2 d.p.
      *
@@ -55,7 +59,6 @@ public class CarList {
                 "ERROR.. Cannot add car with same license plate number";
         carsList.add(car);
         CarList.sortCarsByPrice();
-        CarList.getMedianPrice();
         CarList.markCarAsExpensive();
         System.out.println("Car added to list");
         System.out.println("Car details:");
@@ -64,8 +67,12 @@ public class CarList {
                 + " | " + car.getExpensiveStatus() + " | " + "Median price: " + getMedianPrice());
     }
 
-    public static void addCarWithoutPrintingInfo(Car car) {
+    public static void addCarWithoutPrintingInfo(Car car) throws CarException {
+
         carsList.add(car);
+        CarList.sortCarsByPrice();
+        CarList.getMedianPrice();
+        CarList.markCarAsExpensive();
     }
 
     /**

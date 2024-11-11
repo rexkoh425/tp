@@ -121,8 +121,8 @@ public class CarParser {
      * Checks if car price can be parsed to a double type value.
      *
      * @param carPriceString String representation of car price.
-     * @return <code>true</code> if <b>String</b> can be parsed to
-     * a <b>double</b> type, <code>false</code> otherwise.
+     * @return <code>true</code> if <b>String</b> can be parsed
+     *     to a <b>double</b> type, <code>false</code> otherwise.
      */
     private static boolean isParseableToDouble(String carPriceString) {
         try{
