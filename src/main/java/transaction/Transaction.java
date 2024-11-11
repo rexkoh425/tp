@@ -37,9 +37,6 @@ public class Transaction {
         this.isCompleted = isCompleted;
     }
 
-   // public static void clearTransactionCounter() {
-        //transactionCounter = 1;
-   // }
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;

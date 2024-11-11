@@ -270,4 +270,7 @@ public class TransactionList {
                 || end1.equals(end2);
     }
 
+    public static void clearTxCounter() {
+        txCounter = 1;
+    }
 }
