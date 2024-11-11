@@ -45,6 +45,8 @@ public class TransactionParser {
         String customerName = parameterContents[1];
         if (!CustomerList.isExistingCustomer(customerName)) {
             throw new IllegalArgumentException("Customer " + customerName + " does not exist.");
+        } else {
+            customerName = CustomerList.getCustomerNameifExist(customerName);
         }
 
         int duration;

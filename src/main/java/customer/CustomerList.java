@@ -105,8 +105,19 @@ public class CustomerList {
         return customerData.toString();
     }
 
+    public static String getCustomerNameifExist(String inputName) {
+        for (Customer customer : customers) {
+            String customerName = customer.getCustomerName();
+            if (customer.getCustomerName().equalsIgnoreCase(inputName)) {
+                return customerName;
+            }
+        }
+        return inputName;
+    }
+
     // Helper method to validate the customer's name
     private static boolean isValidName(String name) {
         return VALID_NAME_PATTERN.matcher(name).matches();
     }
 }
+
