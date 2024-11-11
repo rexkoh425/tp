@@ -145,6 +145,10 @@ public class TransactionList {
     }
 
     public static void removeAllTxs() {
+        for (Transaction transaction : transactionList) {
+            String licensePlateNumber = transaction.getCarLicensePlate();
+            CarList.markCarAsAvailable(licensePlateNumber);
+        }
         transactionList.clear();
         System.out.println("All transactions removed!!!");
     }
