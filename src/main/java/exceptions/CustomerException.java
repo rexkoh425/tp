@@ -53,7 +53,7 @@ public class CustomerException extends RuntimeException {
     }
 
     public static CustomerException invalidContactNumberException(){
-        return new CustomerException("invalid contact number. Format for contact number is wrong. Please double check" +
+        return new CustomerException("Invalid contact number. Format for contact number is wrong. Please double check" +
                 " UG formatting guide");
     }
 
