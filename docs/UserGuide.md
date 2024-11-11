@@ -44,13 +44,15 @@ Summary of Contents:
 4. Open your terminal and navigate to the folder the jar file is placed in.
 5. Run java -jar CliRental.jar and you can start using right away.
 
+## Features
+
 ---
-## File Saving
+### File Saving
 
 `Customer`, `Transaction`, and `Car` data will be saved in their respective files under the `data` directory.
 
 
-### `IMPORTANT NOTE / DISCLAIMER: `
+#### `IMPORTANT NOTE / DISCLAIMER: `
 
 * The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
 Please add/edit data via the command line using the commands given.
@@ -81,7 +83,7 @@ Types :
 **Example:**
 
 * `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
-* `Customer data` : `John | 22 | +6590907638`
+* `Customer data` : `John | 22 | 90907638`
 * `Transaction data` : `TX1 | SGM4932K | John | 30 | 17-10-2024 | false`
 
 Others : 
@@ -101,10 +103,9 @@ Adds a customer to the list of customers tracked by the car rental application.
 * `AGE` : `INT`
   * age should be > 17 and <= 100.
 * `CONTACT_NUMBER` : `STRING`
-  * `+[ANY NUMBER OF DIGITS]`
-  * `No space between + and the first digit`
-  * `No space between subsequent digits as well`
-  * `E.g. +6595382572`
+  * `[8 DIGITS AND STARTS WITH 8 or 9]`
+  * `No space between digits`
+  * `E.g. 95382572`
 * `/u` , `/a` , `/c` must be in sequence.
 
 **Example of usage:**
@@ -117,6 +118,7 @@ Customer added
 Customer name : John
 Age : 18
 Contact Number : 95382572
+
 ```
 
 ### Removing a User from the Database: `remove-user`
@@ -165,8 +167,9 @@ If the list is **empty**:
 ``` 
 list-users
 Customer list is empty.
-```
 
+```
+---
 ### Adding a Car: `add-car`
 
 Adds a car to the car list.
@@ -191,7 +194,7 @@ Car added to list
 Car details:
 Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
 ```
-
+---
 ### Removing a Car: `remove-car`
 
 Removes a car from the fleet based on the car's unique ID.
@@ -213,7 +216,7 @@ If the `LICENSE_PLATE_NUMBER` is not found:
 ```
 No car found with license plate [SGE1234X]
 ```
-
+---
 ### Removing all Cars: `remove-all-cars`
 
 Removes all cars from the fleet.
@@ -244,7 +247,7 @@ If the list is **empty**:
 Oops!! Car list is empty...
 Use command <add-car> to add a new car.
 ```
-
+---
 ### Listing All Rented Out Cars: `list-rented`
 
 Lists all the cars that are currently rented out.
@@ -263,7 +266,7 @@ If the list is **empty**:
 ```
 No cars currently rented out...
 ```
-
+---
 ### Listing All Available Cars: `list-available`
 
 Lists all available cars in the company.
@@ -281,7 +284,7 @@ If the list is **empty**:
 ```
 There are no available cars at the moment...
 ```
-
+---
 ### Updating Rental Status of Car
 
 There is no need to manually update the rental status of a car. 
@@ -307,7 +310,7 @@ Transaction added:
 [ ] TX2 | SZZ1579D | John | 15 days
 Start Date: 11-05-2025 | End Date: 26-05-2025
 ```
-
+---
 ### Removing a Transaction: `remove-tx`
 
 Removes a specific rental transaction from the system based on the transaction ID.
@@ -332,6 +335,7 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction not found
 ```
+---
 
 ### Removing All Transactions: `remove-all-txs`
 
@@ -364,6 +368,7 @@ If the list is **empty**:
 No transaction available.
 ```
 
+---
 ### Listing All Completed Transactions: `list-txs-completed`
 
 Displays all transactions that are marked as completed list in this format for each transaction:  
@@ -432,7 +437,7 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction not found
 ```
-
+---
 ### Unmarking a Transaction as Incomplete: `unmark-tx`
 
 Unmarks a rental transaction, indicating it is not yet completed.
