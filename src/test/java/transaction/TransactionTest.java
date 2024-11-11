@@ -1,6 +1,6 @@
 package transaction;
 
-import file.FileHandler;
+//import file.FileHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ class TransactionTest {
 
     @BeforeEach
     void setUp() {
-        TransactionList.clearTransactionList();
-        FileHandler.createFolderIfNotExist();
+//        TransactionList.clearTransactionList();
+//        FileHandler.createFolderIfNotExist();
         // Initialize two Transaction instances before each test
         LocalDate startDate1 = LocalDate.parse("01-10-2024", dateTimeFormatter);
         LocalDate startDate2 = LocalDate.parse("02-10-2024", dateTimeFormatter);
