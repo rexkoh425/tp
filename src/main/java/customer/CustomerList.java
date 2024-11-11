@@ -58,7 +58,7 @@ public class CustomerList {
 
     public static boolean isExistingCustomer(String customerName) {
         for (Customer customer : customers) {
-            if (customer.getCustomerName().equals(customerName)) {
+            if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
                 return true;
             }
         }
@@ -73,5 +73,16 @@ public class CustomerList {
         }
         return customerData.toString();
     }
+
+    public static String getCustomerNameifExist(String inputName) {
+        for (Customer customer : customers) {
+            String customerName = customer.getCustomerName();
+            if (customer.getCustomerName().equalsIgnoreCase(inputName)) {
+                return customerName;
+            }
+        }
+        return inputName;
+    }
 }
+
 
