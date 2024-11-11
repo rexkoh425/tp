@@ -123,7 +123,7 @@ Adds a car to the car list.
 - `/n`, `/c` and `/p` identifiers **must be** in the correct order.
 - `LICENSE_PLATE_NUMBER` **must be** in the following format: `SXX####X`, where
     - `X` is any letter from **A to Z**.
-    - `####` is any number from **1 to 9999**.
+    - `####` is any number from **1 to 9999**, **without any leading zeroes**.
     - Starts with the letter **S**.
 - `PRICE` must be a **non-negative, numeric value**.
 - `PRICE` cannot exceed **10000**.
