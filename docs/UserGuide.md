@@ -4,13 +4,19 @@
 
 Clirental is a CLI-based application that allows car rental companies to track their customers, cars, and rental transactions.
 
+This application is useful to car rental companies that provide day-to-day rental service to their customers in helping them to manage their car fleet, customer information and rental transactions.
+
 Summary of Contents:
 - [Quick start](#quick-start)
 - [File Saving](#file-saving)
 - [Features](#features)
   - [Adding a user: `add-user`](#adding-a-user-to-the-database-add-user)
   - [Adding a car: `add-car`](#adding-a-car-add-car)
+  - [Removing a user: `remove-user`](#removing-a-user-from-the-database-remove-user)
+  - [Removing all users: `remove-all-users`](#removing-all-users-from-the-database-remove-all-users)
   - [Removing a car: `remove-car`](#removing-a-car-remove-car)
+  - [Removing all cars: `remove-all-cars`](#removing-all-cars-remove-all-cars)
+  - [Listing all users: `list-users`](#listing-all-cars-list-cars)
   - [Listing all cars: `list-cars`](#listing-all-cars-list-cars)
   - [Listing all rented-out cars: `list-rented`](#listing-all-rented-out-cars-list-rented)
   - [Listing all available cars: `list-available`](#listing-all-available-cars-list-available)
@@ -19,8 +25,11 @@ Summary of Contents:
   - [Removing a transaction: `remove-tx`](#removing-a-transaction-remove-tx)
   - [Removing all transactions: `remove-all-txs`](#removing-all-transactions-remove-all-txs)
   - [Listing all transactions: `list-txs`](#listing-all-transactions-list-txs)
+  - [Listing all completed transactions: `list-txs-completed`](#listing-all-completed-transactions-list-txs-completed)
+  - [Listing all uncompleted transactions: `list-txs-uncompleted`](#listing-all-uncompleted-transactions-list-txs-uncompleted)
   - [Marking a transaction as complete: `mark-tx`](#marking-a-transaction-as-complete-mark-tx)
-  - [Unmarking a transaction as incomplete: `unmark-tx`](#unmarking-a-transaction-as-incomplete-unmark-tx)
+  - [Unmarking a transaction as incomplete: `unmark-tx`](#unmarking-a-transaction-as-incomplete-unmark-tx)\
+  - [Finding transactions under a Customer: `find-txs-by-customer`](#find-transactions-under-a-customer-find-txs-by-customer)
   - [Displaying the help page: `help`](#displaying-the-help-page-help)
   - [Exiting the program: `exit`](#exiting-the-program-exit)
 - [FAQ](#faq)
@@ -33,7 +42,7 @@ Summary of Contents:
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
 3. Copy the jar file into an empty folder.
 4. Open your terminal and navigate to the folder the jar file is placed in.
-5. Run java -jar tp.jar and you can start using right away.
+5. Run java -jar CliRental.jar and you can start using right away.
 
 ---
 ## File Saving
@@ -103,15 +112,59 @@ Adds a customer to the list of customers tracked by the car rental application.
 
 **Sample Response:**
 ```
-____________________________________________________________
-add-user /u John /a 18 /c +6595382572
+add-user /u John /a 18 /c 95382572
 Customer added
 Customer name : John
 Age : 18
-Contact Number :+6595382572
-____________________________________________________________
-What would you like to do?
-____________________________________________________________
+Contact Number : 95382572
+```
+
+### Removing a User from the Database: `remove-user`
+
+Removes a customer from the customer list.
+
+**Format:** `remove-user /u [CUSTOMER_NAME]`
+
+* `CUSTOMER_NAME` : `STRING`.
+
+**Example of usage:**
+`remove-user /u John`
+
+**Sample Response:**
+```
+User John has been removed
+```
+### Removing all Users from the Database: `remove-all-users`
+
+Removes all customers from the customer list. 
+
+**Format:** `remove-all-users`
+
+**Example of usage:**
+`remove-all-user`
+
+**Sample Response:**
+```
+All customers removed!!!
+```
+### Listing All Users: `list-users`
+
+Lists all customers in the customer list in this format for each customer:  
+Customer Name | Age | Contact Number
+
+**Format:** `list-users`
+
+**Sample Output:**
+```
+Here are all the customers: 
+1) John | 18 | 95382572
+2) Alice | 25 | 81234567
+```
+If the list is **empty**:
+
+``` 
+list-users
+Customer list is empty.
 ```
 
 ### Adding a Car: `add-car`
@@ -161,18 +214,29 @@ If the `LICENSE_PLATE_NUMBER` is not found:
 No car found with license plate [SGE1234X]
 ```
 
+### Removing all Cars: `remove-all-cars`
 
+Removes all cars from the fleet.
+
+**Format:** `remove-all-cars`
+
+**Sample output:**
+```
+All cars removed!!!
+```
 ### Listing All Cars: `list-cars`
 
-Lists all the cars owned by the company.
+Lists all the cars owned by the company, sorted according to the price of renting the car for a day.  
+The format for the each car in the list is:  
+Car Model | License PLate Number | Price (Per Day of Rental) | Availability (for Rental) | Price Category | Median Price of Cars in Fleet
 
 **Format:** `list-cars`
 
 **Sample Output:**
 ```
 Here are the current cars in the company:
-1) civic | SGE1234X | $1000.00 | Available | Affordable | Median price: 1000.0
-2) vios | SKP890C | $2000.00 | Available | Expensive | Median price: 1000.0
+1) Honda Civic | SGE1234X | $1000.00 | Available | Affordable | Median price: 1000.0
+2) Toyota Vios | SKP890C | $2000.00 | Available | Expensive | Median price: 1000.0
 ```
 If the list is **empty**:
 
@@ -239,10 +303,9 @@ Adds a new rental transaction to the system.
 
 **Sample Response:**
 ```
-Transaction added:
-[ ] TX2 | SZZ1579D | John | 15day(s)
-Start Date: 11-05-2025
-____________________________________________________________
+Transaction added: 
+[ ] TX2 | SZZ1579D | John | 15 days
+Start Date: 11-05-2025 | End Date: 26-05-2025
 ```
 
 ### Removing a Transaction: `remove-tx`
@@ -260,10 +323,8 @@ Removes a specific rental transaction from the system based on the transaction I
 **Sample output:**
 
 ```
-Transaction deleted:
-[ ] TX1 | SGE1234X | john | 4day(s)
-Start Date: 11-12-2024
-____________________________________________________________
+Transaction deleted: [ ] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
 ```
 
 
@@ -280,19 +341,22 @@ Removes all transactions from the system.
 
 ### Listing All Transactions: `list-txs`
 
-Displays all transactions stored in the system.
+Displays all transactions stored in the system in this format for each transaction:  
+[ ] Transaction ID | License Plate Number | Customer Name | Duration of Rental (in day(s))  
+Start Date | End Date  
+where  
+[ ] indicates that the transaction is ongoing or has been marked as uncompleted or
+[X] indicates that the transaction is completed or has been marked as completed
 
 **Format:** `list-txs`
 
 **Sample output:**
 ```
-Here are all the transactions:
-1) [ ] TX1 | SGE1234X | john | 4day(s)
-   Start Date: 11-12-2024
-2) [ ] TX2 | SKL4567M | thomas | 6day(s)
-   Start Date: 11-12-2024
-3) [ ] TX3 | SFT1190A | matthew | 8day(s)
-   Start Date: 11-12-2024
+Here are all the transactions: 
+1) [ ] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
+2) [ ] TX2 | SZZ1579D | John | 15 days
+Start Date: 11-05-2025 | End Date: 26-05-2025
 ```
 
 If the list is **empty**:
@@ -300,6 +364,52 @@ If the list is **empty**:
 No transaction available.
 ```
 
+### Listing All Completed Transactions: `list-txs-completed`
+
+Displays all transactions that are marked as completed list in this format for each transaction:  
+[X] Transaction ID | License Plate Number | Customer Name | Duration of Rental (in day(s))  
+Start Date | End Date  
+where [X] indicates that the transaction is completed or has been marked as completed
+
+**Format:** `list-txs-completed`
+
+**Sample output:**
+```
+Here are all the transactions: 
+1) [X] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
+2) [X] TX2 | SZZ1579D | John | 15 days
+Start Date: 11-05-2025 | End Date: 26-05-2025
+```
+
+If the list is **empty**:
+```
+Here are all the completed transactions: 
+No completed transaction available.
+```
+### Listing All Uncompleted Transactions: `list-txs-uncompleted`
+
+Displays all transactions that are ongoing or are marked as uncompleted list in this format for each transaction:  
+[ ] Transaction ID | License Plate Number | Customer Name | Duration of Rental (in day(s))  
+Start Date | End Date 
+where [ ] indicates that the transaction is ongoing or has been marked as uncompleted
+
+**Format:** `list-txs-uncompleted`
+
+**Sample output:**
+```
+Here are all the transactions: 
+1) [ ] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
+2) [ ] TX2 | SZZ1579D | John | 15 days
+Start Date: 11-05-2025 | End Date: 26-05-2025
+```
+
+If the list is **empty**:
+```
+Here are all the uncompleted transactions: 
+No uncompleted transaction available.
+```
 ### Marking a Transaction as Complete: `mark-tx`
 
 Marks a rental transaction as completed, indicating that the transaction is finalized.
@@ -314,15 +424,13 @@ Marks a rental transaction as completed, indicating that the transaction is fina
 
 **Sample output:**
 ```
-Transaction marked as complete:
-[X] TX1 | SGE1234X | john | 4day(s)
-Start Date: 11-12-2024
-____________________________________________________________
+Transaction completed: [X] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
 ```
 
 If the `TRANSACTION_ID` is not found:
 ```
-Transaction with ID TX1 not found.
+Transaction not found
 ```
 
 ### Unmarking a Transaction as Incomplete: `unmark-tx`
@@ -339,17 +447,41 @@ Unmarks a rental transaction, indicating it is not yet completed.
 
 **Sample output:**
 ```
-Transaction marked as incomplete:
-[ ] TX1 | SGE1234X | john | 4day(s)
-Start Date: 11-12-2024
-____________________________________________________________
+Transaction set uncompleted: [ ] TX1 | SKL4567M | Alice | 7 days
+Start Date: 15-12-2024 | End Date: 22-12-2024
 ```
 
 If the `TRANSACTION_ID` is not found:
 ```
-Transaction with ID TX1 not found.
+Transaction not found
+```
+### Find Transactions under a Customer: `find-txs-by-customer`
+
+Finds all the transactions under a customer using the customer name as the search term.
+The transactions are displayed in the same format as list-txs.
+
+**Format:** `find-txs-by-customer /u [CUSTOMER_NAME]`
+
+- `/u` identifier specifies the Customer Name.
+- `CUSTOMER_NAME` must match an existing customer in the customer list. This is not case sensitive, 'john' and 'John' is the same.
+
+**Example:**  
+`find-txs-by-customer /u John`
+
+**Sample output:**
+```
+Transaction(s) by John found:
+[X] TX2 | SZZ1579D | John | 15 days
+Start Date: 11-05-2025 | End Date: 26-05-2025
+[ ] TX3 | SFT1190A | John | 4 days
+Start Date: 22-12-2024 | End Date: 26-12-2024
 ```
 
+If the customer has no rental transaction:
+```
+Transaction(s) by John found:
+None
+```
 ### Displaying the help page: `help`
 
 Displays a help page containing all the commands, together with
@@ -392,17 +524,17 @@ Format: `exit`
 
 **`Transaction` related commands:**
 
-|                 Action                  | Format                                                                                          |
-|:---------------------------------------:|-------------------------------------------------------------------------------------------------|
-|           **Add** transaction           | `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
-|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                                                 |
-|       **Remove all** transactions       | `remove-all-txs`                                                                                |
-|        **List all** transactions        | `list-txs`                                                                                      |
-|  **Mark** transactions as **complete**  | `mark-txs /t [TRANSACTION_ID]`                                                                  |
-| **Mark** transactions as **incomplete** | `unmark-txs /t [TRANSACTION_ID]`                                                                |
-|     **List completed** transactions     | `list-txs-completed`                                                                            |
-|    **List uncompleted** transactions    | `list-txs-uncompleted`                                                                          |
-|  **Find** transactions **by customer**  | `find-txs-by-customer /u [CUSTOMER_NAME]`                                                       |
+|                 Action                 | Format                                                                                          |
+|:--------------------------------------:|-------------------------------------------------------------------------------------------------|
+|          **Add** transaction           | `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
+|         **Remove** transaction         | `remove-tx /t [TRANSACTION_ID]`                                                                 |
+|      **Remove all** transactions       | `remove-all-txs`                                                                                |
+|       **List all** transactions        | `list-txs`                                                                                      |
+|  **Mark** transaction as **complete**  | `mark-tx /t [TRANSACTION_ID]`                                                                   |
+| **Mark** transaction as **incomplete** | `unmark-tx /t [TRANSACTION_ID]`                                                                 |
+|    **List completed** transactions     | `list-txs-completed`                                                                            |
+|   **List uncompleted** transactions    | `list-txs-uncompleted`                                                                          |
+| **Find** transactions **by customer**  | `find-txs-by-customer /u [CUSTOMER_NAME]`                                                       |
 
 **Other useful commands:**
 
