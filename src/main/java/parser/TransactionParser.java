@@ -13,7 +13,7 @@ import static parser.Parser.ADD_TRANSACTION_COMMAND;
 
 public class TransactionParser {
     public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    public static final String ADD_TRANSACTION_FORMAT = "add-tx /c [CAR_ID]" +
+    public static final String ADD_TRANSACTION_FORMAT = "add-tx /c [CAR_ID] " +
             "/u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy]";
     public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-tx-by-customer /u [CUSTOMER_NAME]";
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
@@ -75,15 +75,25 @@ public class TransactionParser {
     }
 
     private static boolean isValidSequence(String[] parameters, String userInput) {
-        int lastIndex = -1;
-        for (String parameter : parameters) {
-            int currentIndex = userInput.indexOf(parameter);
-            if (currentIndex == -1 || currentIndex < lastIndex) {
-                return false;  // Parameter missing or out of order
+        StringBuilder patternBuilder = new StringBuilder();
+
+        for (int i = 0; i < parameters.length; i++) {
+            patternBuilder.append(parameters[i]).append("\\s+"); // Parameter followed by space(s)
+
+            if (i < parameters.length - 1) {
+                // Match content with spaces until the next parameter
+                patternBuilder.append("([^/]+?)\\s+"); // Non-empty content until the next parameter
+            } else {
+                // Last parameter, capture until the end without requiring trailing space
+                patternBuilder.append("(.+)$");
             }
-            lastIndex = currentIndex;
         }
-        return true;
+
+        // Build the final regex pattern
+        String pattern = patternBuilder.toString();
+
+        // Match userInput against the generated regex pattern
+        return userInput.matches(pattern);
     }
 
     private static String[] parseParameterContents(String[] parameters, String userInput) {

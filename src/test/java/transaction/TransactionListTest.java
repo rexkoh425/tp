@@ -35,7 +35,7 @@ class TransactionListTest {
 
         // Reset the transaction counter using reflection to ensure predictable transaction IDs
         try {
-            java.lang.reflect.Field counterField = Transaction.class.getDeclaredField("transactionCounter");
+            java.lang.reflect.Field counterField = TransactionList.class.getDeclaredField("txCounter");
             counterField.setAccessible(true);
             counterField.setInt(null, 1);
         } catch (NoSuchFieldException | IllegalAccessException e) {

@@ -4,12 +4,20 @@ import car.CarList;
 import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.CarParser;
+
 import java.util.ArrayList;
 
 public class TransactionList {
 
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
+    private static int txCounter = 1;
+
+    public static void setTxCounter(int counter) {
+        if (counter > txCounter) {
+            txCounter = counter;
+        }
+    }
 
     public static void addTx(Transaction transaction) {
         // Assert that the transaction is not null
@@ -19,7 +27,7 @@ public class TransactionList {
         String uniqueCustomer = transaction.getCustomer();
         // Assert that the license plate number and customer are not null
         assert licensePlateNumber != null : "License plate number should not be null.";
-        assert uniqueCustomer != null: "Customer should not be null.";
+        assert uniqueCustomer != null : "Customer should not be null.";
 
         if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
             throw CarException.invalidLicensePlateNumber();
@@ -41,7 +49,9 @@ public class TransactionList {
         assert CarParser.isValidLicensePlateNumber(licensePlateNumber)
                 && CarList.isExistingLicensePlateNumber(licensePlateNumber)
                 : "License plate number must be valid and exist in CarList.";
-        transaction.setTransactionId(Transaction.generateTransactionId());
+
+        String newTransactionId = "TX" + txCounter++;
+        transaction.setTransactionId(newTransactionId);
         transactionList.add(transaction);
 
         // Assert that the transaction was added successfully
@@ -51,11 +61,6 @@ public class TransactionList {
         System.out.println("Transaction added: ");
         System.out.println(transaction);
     }
-
-    public static void clearTransactionList(){
-        transactionList.clear();
-    }
-
 
     public static void addTxWithoutPrintingInfo(Transaction transaction) {
         // Assert that the transaction is not null
@@ -68,10 +73,13 @@ public class TransactionList {
             throw CustomerException.customerAlreadyInTransactionList();
         }
 
+        String newTransactionId = "TX" + txCounter++;
+        transaction.setTransactionId(newTransactionId);
+
         if (isCarInTransactionList(licensePlateNumber)) {
             throw CarException.carAlreadyInTransactionList();
         }
-        transaction.setTransactionId(Transaction.generateTransactionId());
+
         transactionList.add(transaction);
         CarList.markCarAsRented(licensePlateNumber);
         // Assert that the transaction was added successfully
@@ -132,7 +140,7 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if(transaction.isCompleted()) {
+            if (transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
                 containsCompletedTx = true;
@@ -159,7 +167,7 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if(!transaction.isCompleted()) {
+            if (!transaction.isCompleted()) {
                 System.out.println(index + ") " + transaction);
                 index++;
                 containsUncompletedTx = true;
@@ -212,7 +220,7 @@ public class TransactionList {
                 System.out.println(transaction);
             }
         }
-        if(!found) {
+        if (!found) {
             System.out.println("none");
         }
     }
@@ -261,7 +269,7 @@ public class TransactionList {
         System.out.println("Transaction not found");
     }
 
-    public static String transactionListToFileString(){
+    public static String transactionListToFileString() {
 
         StringBuilder transactionData = new StringBuilder();
         for (Transaction transaction : transactionList) {
@@ -273,8 +281,15 @@ public class TransactionList {
         return transactionData.toString();
     }
 
-    public static ArrayList<Transaction> getTransactionList(){
+    public static ArrayList<Transaction> getTransactionList() {
         return transactionList;
     }
 
+    public static void clearTransactionList() {
+        transactionList.clear();
+    }
+
+    public static void clearTxCounter() {
+        txCounter = 1;
+    }
 }
