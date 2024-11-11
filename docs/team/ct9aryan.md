@@ -59,3 +59,16 @@ any number from 1 to 9999.
 - This feature omits the need for extra commands and implementation like `mark-rented`
   and `mark-available` for instance, hence improving efficiency and effectiveness. (E & E)
 
+### User Guide (UG) Contributions
+- Added documentation for features:
+    - `add-car`
+    - `list-cars`
+    - `list-rented`
+    - `list-available`
+    - `list-tx`
+    - `Updating rental status of car`
+    - `help`
+    - `exit`
+- Created **Command Summary section** and **Command Summary Tables** and
+  filled in tables based on assigned commands listed above.
+
