@@ -63,7 +63,7 @@ public class TransactionFile {
                 line ++;
             }
 
-            if(!errorLines.isEmpty()) {
+            if (!errorLines.isEmpty()) {
                 throw TransactionException.invalidParameters(errorLines);
             }
         }
@@ -92,7 +92,7 @@ public class TransactionFile {
         String input = scanner.nextLine();
         String[] parameters = input.split(" \\| ");
 
-        if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
+        if (parameters.length != Transaction.NUMBER_OF_PARAMETERS) {
             errorLines.add(line);
         }else{
             addTransactionWithParameters(parameters , errorLines, line);
@@ -113,7 +113,7 @@ public class TransactionFile {
 
             String transactionId = parameters[0];
 
-            if(!Transaction.isValidTxId(transactionId) || FileHandler.containEmptyParameter(parameters)){
+            if (!Transaction.isValidTxId(transactionId) || FileHandler.containEmptyParameter(parameters)) {
                 throw new TransactionException("");
             }
 
@@ -128,6 +128,7 @@ public class TransactionFile {
                     startDate, isCompleted);
 
             TransactionList.addTxWithoutPrintingInfo(transaction);
+
         }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException e){
             errorLines.add(line);
         }

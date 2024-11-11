@@ -101,8 +101,8 @@ public class FileHandler {
     }
 
     public static boolean containEmptyParameter(String[] parameters){
-        for(int i = 0; i < parameters.length ; i++){
-            if(parameters[i].trim().isEmpty()){
+        for (int i = 0; i < parameters.length ; i++) {
+            if (parameters[i].trim().isEmpty()) {
                 return true;
             }
         }

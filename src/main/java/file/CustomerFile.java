@@ -101,7 +101,7 @@ public class CustomerFile {
         assert parameters.length == Customer.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
 
         try {
-            if(FileHandler.containEmptyParameter(parameters)){
+            if (FileHandler.containEmptyParameter(parameters)) {
                 throw new CustomerException("");
             }
             String customerName = parameters[0];
