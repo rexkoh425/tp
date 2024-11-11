@@ -19,7 +19,7 @@ public class TransactionList {
         }
     }
 
-    public static void addTx(Transaction transaction) {
+    public static void addTx(Transaction transaction) throws CarException {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 
@@ -62,7 +62,7 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
-    public static void addTxWithoutPrintingInfo(Transaction transaction) {
+    public static void addTxWithoutPrintingInfo(Transaction transaction) throws CustomerException , CarException{
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
 

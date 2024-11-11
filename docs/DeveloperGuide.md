@@ -13,10 +13,12 @@ in diagrams across the team
 
 ## Design & implementation
 
+### Architecture diagram
+
 The following is our overall architecture diagram for our whole project. To reduce the size of the overall diagram , only class
 names are included.
 
-![Local Image](images/Overall.png)
+![Local Image](images/ArchitectureDiagram.drawio.png)
 
 
 ---

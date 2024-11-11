@@ -88,6 +88,7 @@ class TransactionFileTest {
 
     @Test
     void testUpdateTransactionDataFile() {
+
         TransactionFile transactionFile = new TransactionFile("transactionData2.txt");
         File testFile = new File(transactionFile.getAbsolutePath());
         transactionFile.createTransactionFileIfNotExist();
@@ -134,7 +135,25 @@ class TransactionFileTest {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "TX1 | SJX1234D | John | 5 | 08-11-2024 | false\n";
             textToAdd += "TX2 | SJE8720G | Jane | 3 | 10-10-2024 | true\n";
-            textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false";
+            textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX | SGM4932K | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | -2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 12 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 17-13-2024 | fale\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | | fale\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | fale\n";
+            textToAdd += "SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 10-10-2024\n";
+            textToAdd += "idk1 | SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "idk1 | SGM4932 | John | 30 | 10-10-2024 | false\n";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {

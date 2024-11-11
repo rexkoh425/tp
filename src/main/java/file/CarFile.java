@@ -3,6 +3,8 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
+import exceptions.CustomerException;
+import exceptions.TransactionException;
 import parser.CarParser;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,7 +65,7 @@ public class CarFile {
             CarList.sortCarsByPrice();
             CarList.markCarAsExpensive();
           
-        } catch(NumberFormatException | CarException e) {
+        } catch(NumberFormatException | CarException | CustomerException | TransactionException e) {
 
             errorLines.add(line);
         }

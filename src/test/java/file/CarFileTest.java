@@ -126,7 +126,16 @@ public class CarFileTest {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "Toyota Corolla | SGM4932K | 10 | false | false\n";
             textToAdd += "Toyota Cor | SDF4932K | 1 | false | false\n";
-            textToAdd += "Toyota | SGK1234F | 0 | false | false";
+            textToAdd += "Toyota | SGK1234F | 0 | false | false\n";
+            textToAdd += "  |  |  |  |  \n";
+            textToAdd += "SGE1234X | 10000.0 | false | false\n";
+            textToAdd += "  | SGE1234X | 10000.0 | false | false\n";
+            textToAdd += "Honda Civic |  | 10000.0 | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X |  | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 |  | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 | false |\n";
+            textToAdd += "Honda Civic | SGE1234X | -10000.0 | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 | false |\n";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
@@ -134,6 +143,7 @@ public class CarFileTest {
         }
 
         carFile.loadCarDataIfExist();
+        assertEquals(3, CarList.getCarsList().size());
         Car car1 = CarList.getCarsList().get(0);
         assertEquals("Toyota", car1.getModel());
         assertEquals("SGK1234F", car1.getLicensePlateNumber());
