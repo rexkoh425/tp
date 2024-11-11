@@ -43,11 +43,11 @@ class CustomerFileTest {
         int line = 1;
         ArrayList<Integer> errorLines = new ArrayList<>();
 
-        String[] parameters = {"John Doe", "30", "+123456789"};
+        String[] parameters = {"John Doe", "30", "83456789"};
         customerFile.addCustomerWithParameters(parameters, errorLines, line);
         line++;
 
-        parameters = new String[]{"Jane Doe", "abc", "+987654321"};
+        parameters = new String[]{"Jane Doe", "abc", "87654321"};
         customerFile.addCustomerWithParameters(parameters, errorLines, line);
 
         assertEquals(1, CustomerList.getCustomerList().size());
@@ -69,8 +69,8 @@ class CustomerFileTest {
 
         assertTrue(testFile.exists());
 
-        CustomerList.addCustomerWithoutPrintingInfo(new Customer("John Doe", 30, "+123456789"));
-        CustomerList.addCustomerWithoutPrintingInfo(new Customer("Jane Smith", 25, "+987654321"));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("John Doe", 30, "83456789"));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("Jane Smith", 25, "87654321"));
 
         try {
             customerFile.updateCustomerDataFile();
@@ -79,8 +79,8 @@ class CustomerFileTest {
         }
 
         String[] expectedLines = {
-            "John Doe | 30 | +123456789",
-            "Jane Smith | 25 | +987654321"
+            "John Doe | 30 | 83456789",
+            "Jane Smith | 25 | 87654321"
         };
 
         try (Scanner scanner = new Scanner(testFile)) {
@@ -103,8 +103,8 @@ class CustomerFileTest {
         customerFile.createCustomerFileIfNotExist();
 
         try (FileWriter fw = new FileWriter(testFile)) {
-            String data = "John Doe | 30 | +123456789\n";
-            data += "Jane Smith | 25 | +987654321";
+            String data = "John Doe | 30 | 83456789\n";
+            data += "Jane Smith | 25 | 87654321";
             fw.write(data);
         } catch (IOException e) {
             assert false;
@@ -115,12 +115,12 @@ class CustomerFileTest {
         Customer customer1 = CustomerList.getCustomerList().get(0);
         assertEquals("John Doe", customer1.getCustomerName());
         assertEquals(30, customer1.getAge());
-        assertEquals("+123456789", customer1.getContactNumber());
+        assertEquals("83456789", customer1.getContactNumber());
 
         Customer customer2 = CustomerList.getCustomerList().get(1);
         assertEquals("Jane Smith", customer2.getCustomerName());
         assertEquals(25, customer2.getAge());
-        assertEquals("+987654321", customer2.getContactNumber());
+        assertEquals("87654321", customer2.getContactNumber());
 
         filenames.add(customerFile.getAbsolutePath());
     }
@@ -141,7 +141,7 @@ class CustomerFileTest {
         customerFile.createCustomerFileIfNotExist();
 
         try (FileWriter fw = new FileWriter(testFile)) {
-            String customerData = "John Doe | 30 | +123456789";
+            String customerData = "John Doe | 30 | 83456789";
             fw.write(customerData);
         } catch (IOException e) {
             assert false;
@@ -158,7 +158,7 @@ class CustomerFileTest {
         Customer customer = CustomerList.getCustomerList().get(0);
         assertEquals("John Doe", customer.getCustomerName());
         assertEquals(30, customer.getAge());
-        assertEquals("+123456789", customer.getContactNumber());
+        assertEquals("83456789", customer.getContactNumber());
 
         filenames.add(customerFile.getAbsolutePath());
     }
