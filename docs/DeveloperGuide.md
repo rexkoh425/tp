@@ -27,7 +27,6 @@ The following sequence diagram will explain the sequence of events after the use
 
 ![Local Image](images/AddCustomerSequence.png)
 
-2. `Creating Car file and loading file`
 2. `Removing a car`
 
 The following sequence diagram illustrates the sequence of events after the user executes
@@ -67,8 +66,6 @@ The following sequence diagram illustrates a **valid** `add-car` operation:
 Step 2: The user enters the `list-cars` command to verify that the car has been successfully added
 to the car list.
 
--> show code output
-
 Example:
 
 ![](./images/list-cars-output-before.png)
@@ -97,8 +94,6 @@ Step 5: **Optionally**, the user can also execute
 the `list-cars` command to view the rental status of all
 the cars. By doing so, the rental status of the car that was just rented out,
 should now have a rental status of **'Rented'** instead of **'Available'**.
-
--> show code output
 
 Example:
 
