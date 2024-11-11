@@ -78,7 +78,7 @@ public class CarList {
 
         // Iterate through the list of cars to find the one with the given license plate
         for (Car car : carsList) {
-            if (car.getLicensePlateNumber().equals(carLicensePlateNumber)) {
+            if (car.getLicensePlateNumber().equalsIgnoreCase(carLicensePlateNumber)) {
                 carToRemove = car;
                 break;
             }
@@ -87,9 +87,9 @@ public class CarList {
         // Remove the car if it exists
         if (carToRemove != null) {
             carsList.remove(carToRemove);
-            System.out.println("Car with license plate " + carLicensePlateNumber + " removed from list.");
+            System.out.println("Car with license plate " + carLicensePlateNumber.toUpperCase() + " removed from list.");
         } else {
-            System.out.println("No car found with license plate " + carLicensePlateNumber);
+            System.out.println("No car found with license plate " + carLicensePlateNumber.toUpperCase());
         }
     }
 
@@ -198,7 +198,7 @@ public class CarList {
      */
     public static boolean isExistingLicensePlateNumber(String licensePlateNumber) {
         for (Car car : carsList) {
-            if (car.getLicensePlateNumber().equals(licensePlateNumber)) {
+            if (car.getLicensePlateNumber().equalsIgnoreCase(licensePlateNumber)) {
                 return true;
             }
         }
