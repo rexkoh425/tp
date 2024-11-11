@@ -13,7 +13,7 @@ public class ParserTest {
 
     @Test
     public void parse_validUserInput_commandActionExecuted() throws CliRentalException {
-        String userInput = "add-user /u user1234 /a 18 /c 92750174";
+        String userInput = "add-user /u user1234 /a 18 /c +92750174";
         CustomerList.getCustomers().clear();
 
         assertFalse(Parser.parse(userInput));

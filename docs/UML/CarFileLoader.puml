@@ -2,6 +2,12 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+participant ":CarFile" as CarFile
+participant ":FileHandler" as FileHandler
+participant ":Scanner" as scanner
+participant "errorLines \n: ArrayList<Integer>" as ArrayList
+participant ":Car" as Car
+participant ":CarList" as CarList
 
  -> FileHandler: createAndLoadFiles()
 activate FileHandler
@@ -9,9 +15,9 @@ activate FileHandler
     activate CarFile
         opt File does not exist
             CarFile -> FileHandler : createNewFile()
-            FileHandler -> CarFile
+            FileHandler --> CarFile : return
         end opt
-    CarFile -> FileHandler
+    CarFile --> FileHandler : return
     deactivate CarFile
 
 FileHandler -> CarFile: loadCarDataIfExist()
@@ -20,14 +26,17 @@ activate CarFile
         CarFile -> CarFile : loadCarData()
         activate CarFile
 
-            CarFile -> scanner : scanner()
+
+            create scanner
+            CarFile -> scanner : new scanner()
             activate scanner
-                scanner -> CarFile
+                scanner --> CarFile : return
             deactivate scanner
 
-            CarFile -> ArrayList: ArrayList<>()
+            create ArrayList
+            CarFile -> ArrayList: new ArrayList<Integer>()
             activate ArrayList
-                ArrayList -> CarFile
+                ArrayList --> CarFile : return
             deactivate ArrayList
 
             loop For each line in file
@@ -39,43 +48,43 @@ activate CarFile
                             CarFile -> scanner : nextLine()
                             activate scanner
                                 alt parameters.length != Car.NUMBER_OF_PARAMETER
-                                    CarFile -> ArrayList : add(line)
+                                    CarFile -> ArrayList : add(line : int)
                                     activate ArrayList
-                                    ArrayList -> CarFile
+                                    ArrayList --> CarFile : return
                                     deactivate ArrayList
                                 else
-                                    CarFile -> CarFile : addCarWithParameters()
+                                    CarFile -> CarFile : addCarWithParameters(...)
                                     activate CarFile
-                                        CarFile -> Car : Car()
+                                        CarFile -> Car : new Car()
                                         activate Car
-                                        Car -> CarFile
+                                        Car --> CarFile : return
                                         deactivate Car
-                                        CarFile -> CarList : addCarWithoutPrintingInfo()
+                                        CarFile -> CarList : addCarWithoutPrintingInfo(car : Car)
                                         activate CarList
-                                            CarList -> CarList : add()
+                                            CarList -> CarList : add(car : Car)
                                             activate CarList
-                                                CarList -> CarList
+                                                CarList --> CarList : return
                                             deactivate CarList
-                                        CarList -> CarFile
+                                        CarList --> CarFile : return
                                         deactivate CarList
-                                    CarFile -> CarFile
+                                    CarFile --> CarFile : return
                                     deactivate CarFile
                                 end alt
-                            scanner -> CarFile
+                            scanner --> CarFile : return
                             deactivate scanner
-                        CarFile -> CarFile
+                        CarFile --> CarFile : return
                         deactivate CarFile
                     end opt
-                scanner -> CarFile
+                scanner --> CarFile : return
                 deactivate scanner
             end loop
 
-        CarFile -> CarFile
+        CarFile --> CarFile : return
         deactivate CarFile
     end opt
-CarFile -> FileHandler
+CarFile --> FileHandler : return
 deactivate CarFile
 
-<- FileHandler
+<-- FileHandler : return
 deactivate FileHandler
 @enduml

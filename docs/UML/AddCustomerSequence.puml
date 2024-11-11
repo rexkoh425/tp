@@ -2,74 +2,69 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+mainframe sd add-user
+participant ":Parser" as Parser
+participant ":CustomerParser" as CustomerParser
+participant ":Customer" as Customer
+participant ":CustomerException" as CustomerException
 
--> Parser : parse(user input)
 activate Parser
-
-    Parser -> CustomerParser : parseIntoCustomer(user input)
+Parser -> CustomerParser : parseIntoCustomer(userInput : String)
+activate CustomerParser
+    CustomerParser -> CustomerParser : isValidSequence(parameters : String[], userInput : String)
     activate CustomerParser
-        CustomerParser -> CustomerParser : isValidSequence(parameters, userInput)
-        activate CustomerParser
-            loop parameter of parameters
-                opt userInput does not contain parameter
-                    <-- CustomerParser : false
-                end opt
-            end loop
+        loop parameter of parameters
+            opt userInput does not contain parameter
+                CustomerParser <-- CustomerParser : return false
+            end opt
+        end loop
 
-            loop iterate from 1 to (length of parameters - 1)
-                opt parameters not in sequence
-                    <-- CustomerParser : false
-                end opt
-            end loop
+        loop iterate from 1 to (length of parameters - 1)
+            opt parameters not in sequence
+                CustomerParser <-- CustomerParser : return false
+            end opt
+        end loop
 
-            CustomerParser --> CustomerParser : true
-        deactivate CustomerParser
-
-        alt isValidSequence
-            CustomerParser -> CustomerParser : parseParameterContents(parameters, userInput)
-            activate CustomerParser
-                CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
-                activate CustomerParser
-                    CustomerParser -> CustomerParser : contents
-                deactivate CustomerParser
-                CustomerParser -> CustomerParser : Customer()
-            deactivate CustomerParser
-        else
-            CustomerParser -> CustomerException : CustomerException()
-            activate CustomerException
-                CustomerException -> CustomerException : addCustomerException()
-                activate CustomerException
-                    CustomerException -> CustomerException
-                deactivate CustomerException
-                CustomerException -> CustomerParser
-            deactivate CustomerException
-            <- Parser : CustomerException
-        end alt
-        Parser <- CustomerParser : Customer
+        CustomerParser --> CustomerParser : return true
     deactivate CustomerParser
 
-    Parser -> CustomerList : addCustomer(Customer)
-    activate CustomerList
-        participant "customer : ArrayList" as CustomerArrayList
-        CustomerList -> CustomerArrayList : add(Customer)
-        activate CustomerArrayList
-            CustomerArrayList -> CustomerList
-        deactivate CustomerArrayList
+    alt isValidSequence
+        CustomerParser -> CustomerParser : parseIntoCustomer(userInput : String)
+        activate CustomerParser
+            CustomerParser -> CustomerParser :parseParameterContents(String[] parameters, String userInput)
+            activate CustomerParser
+                CustomerParser --> CustomerParser : return contents
+            deactivate CustomerParser
+            create Customer
 
-        CustomerList -> System.out : println("Customer added")
-        activate System.out
-            System.out <- CustomerList
-        deactivate System.out
-        CustomerList -> System.out : println(Customer)
-        activate System.out
-            System.out -> Customer : toString()
+            CustomerParser -> Customer :
             activate Customer
-                Customer -> System.out
+            CustomerParser <-- Customer : return
             deactivate Customer
-        CustomerList <- System.out
-        deactivate System.out
-    Parser <- CustomerList
-    deactivate CustomerList
+            CustomerParser --> CustomerParser : return new Customer
+        deactivate CustomerParser
+    else
+        CustomerParser -> CustomerException : addCustomerException()
+        activate CustomerException
+            note right of CustomerException
+                The static method creates
+                a new CustomerException
+            end note
+            CustomerException --> CustomerParser : return new CustomerException
+        deactivate CustomerException
+        Parser <-- CustomerParser : throw new CustomerException
+    end alt
+    Parser <-- CustomerParser : return new Customer
+
+deactivate CustomerParser
+
+Parser -> CustomerList : addCustomer(customer : Customer)
+note right of CustomerList
+    Adds the new Customer to a ArrayList
+    and prints information to the user
+end note
+activate CustomerList
+    Parser <-- CustomerList : return
+deactivate CustomerList
 deactivate Parser
-<- Parser
 @enduml

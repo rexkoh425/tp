@@ -1,5 +1,6 @@
 package file;
 
+import exceptions.CarException;
 import exceptions.TransactionException;
 import transaction.Transaction;
 import transaction.TransactionList;
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,8 +64,6 @@ public class TransactionFile {
             if(!errorLines.isEmpty()) {
                 throw TransactionException.invalidParameters(errorLines);
             }
-
-            TransactionList.initialiseTxCounterFromList();
         }
     }
 
@@ -83,8 +83,8 @@ public class TransactionFile {
     /**
      * Scans the current line and add data to current transaction list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this transaction data is at in transactionData.txt.
      */
     public void scanLineAndAddTransaction(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
@@ -92,23 +92,39 @@ public class TransactionFile {
         if(parameters.length != Transaction.NUMBER_OF_PARAMETERS){
             errorLines.add(line);
         }else{
-            addTransactionWithParameters(parameters);
+            addTransactionWithParameters(parameters , errorLines, line);
         }
     }
 
     /**
      * Add transaction object to the list according to the parameters
      *
-     * @param parameters parameters of the Transaction object
+     * @param parameters parameters of the Transaction object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this transaction data is at in transactionData.txt.
      */
-    public void addTransactionWithParameters(String[] parameters) {
-        String carLicensePlate = parameters[0];
-        String borrowerName = parameters[1];
-        int duration = Integer.parseInt(parameters[2]);
-        LocalDate startDate = LocalDate.parse(parameters[3], dateTimeFormatter);
-        boolean isCompleted = Boolean.parseBoolean(parameters[4]);
-        Transaction transaction = new Transaction(carLicensePlate , borrowerName , duration , startDate , isCompleted);
-        TransactionList.addTxWithoutPrintingInfo(transaction);
+    public void addTransactionWithParameters(String[] parameters , ArrayList<Integer> errorLines , int line) {
+        assert parameters.length == Transaction.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
+
+        try {
+
+            String transactionId = parameters[0];
+            if(!Transaction.isValidTxId(transactionId)){
+                throw new TransactionException("");
+            }
+            int idNumber = Integer.parseInt(transactionId.substring(2));
+            TransactionList.setTxCounter(idNumber);
+            String carLicensePlate = parameters[1];
+            String borrowerName = parameters[2];
+            int duration = Integer.parseInt(parameters[3]);
+            LocalDate startDate = LocalDate.parse(parameters[4], dateTimeFormatter);
+            boolean isCompleted = Boolean.parseBoolean(parameters[5]);
+            Transaction transaction = new Transaction(transactionId , carLicensePlate, borrowerName, duration,
+                    startDate, isCompleted);
+            TransactionList.addTxWithoutPrintingInfo(transaction);
+        }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException e){
+            errorLines.add(line);
+        }
     }
 
     /**
@@ -125,5 +141,9 @@ public class TransactionFile {
 
     public String getAbsolutePath(){
         return transactionDataFile.getAbsolutePath();
+    }
+
+    public boolean isFileExist(){
+        return transactionDataFile.exists();
     }
 }

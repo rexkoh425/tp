@@ -7,11 +7,17 @@ import parser.CarParser;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 public class TransactionList {
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
-    private static int transactionCounter = 1;
+    private static int txCounter = 1;
+
+    public static void setTxCounter(int counter) {
+        if (counter > txCounter) {
+            txCounter = counter;
+        }
+    }
+
     public static void addTx(Transaction transaction) {
         // Assert that the transaction is not null
         assert transaction != null : "Transaction to add should not be null.";
@@ -54,7 +60,7 @@ public class TransactionList {
                 && CarList.isExistingLicensePlateNumber(licensePlateNumber)
                 : "License plate number must be valid and exist in CarList.";
 
-        String newTransactionId = "TX" + transactionCounter++;
+        String newTransactionId = "TX" + txCounter++;
         transaction.setTransactionId(newTransactionId);
         transactionList.add(transaction);
 
@@ -66,16 +72,19 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
-    public static void addTxWithoutPrintingInfo(Transaction transaction) {
-        // Assert that the transaction is not null
-        assert transaction != null : "Transaction to add should not be null.";
+    public static void addTxWithoutPrintingInfo(Transaction transaction) throws CarException{
 
-        String newTransactionId = "TX" + transactionCounter++;
+        String licensePlateNumber = transaction.getCarLicensePlate();
+
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
+
+        String newTransactionId = "TX" + txCounter++;
         transaction.setTransactionId(newTransactionId);
         transactionList.add(transaction);
+        CarList.markCarAsRented(licensePlateNumber);
 
-        // Assert that the transaction was added successfully
-        assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
 
     public static void printAllTransactions() {
@@ -238,7 +247,7 @@ public class TransactionList {
 
         StringBuilder transactionData = new StringBuilder();
         for (Transaction transaction : transactionList) {
-            // Assert that each transaction is not null
+
             assert transaction != null : "Transaction in the list should not be null.";
             transactionData.append(transaction.toFileString());
             transactionData.append(System.lineSeparator());
@@ -250,31 +259,15 @@ public class TransactionList {
         return transactionList;
     }
 
+
+    public static void clearTransactionList(){
+        transactionList.clear();
+    }
+  
     private static boolean datesOverlap(LocalDate start1, LocalDate end1,
                                         LocalDate start2, LocalDate end2) {
         return (start1.isBefore(end2) && end1.isAfter(start2)) || start1.equals(start2)
                 || end1.equals(end2);
-    }
-
-    public static void initialiseTxCounterFromList() {
-        int maxId = 0;
-
-        for (Transaction transaction : transactionList) {
-            String transactionId = transaction.getTransactionId();
-            if (transactionId != null && transactionId.startsWith("TX")) {
-                try {
-                    int id = Integer.parseInt(transactionId.substring(2));
-                    if (id > maxId) {
-                        maxId = id;
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid transactionId format: " + transactionId);
-                }
-            }
-        }
-
-        // Set transactionCounter to maxId + 1, or 1 if maxId is 0 (no transactions found)
-        transactionCounter = (maxId == 0) ? 1 : maxId + 1;
     }
 
 }

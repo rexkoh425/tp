@@ -8,16 +8,26 @@ Clirental is a CLI-based application that allows car rental companies to track t
 
 1. Ensure that you have Java 17 or above installed.
 2. Download the latest version of `CliRental` from [here](https://github.com/AY2425S1-CS2113-T11-3/tp/releases).
+3. Copy the jar file into an empty folder.
+4. Open your terminal and navigate to the folder the jar file is placed in.
+5. Run java -jar tp.jar and you can start using right away.
 
 ---
 ## File Saving
 
 `Customer`, `Transaction`, and `Car` data will be saved in their respective files under the `data` directory.
 
-**IMPORTANT NOTE:**
 
-1. All wrongly formatted files will not be processed.
-2. Users must ensure any additional data follows the correct format.
+### `IMPORTANT NOTE / DISCLAIMER: `
+
+* The file saving feature does not include the functionality of being able to add/edit data by editing the text files. 
+Please add/edit data via the command line using the commands given.
+* Users must ensure any additional data follows the correct format.
+
+`If user do not follow instructions, following additional measures are placed.`
+* Corrupted data will be flagged upon start of program , highlighting the rows of data which are wrong. Please correct 
+them or the corrupted lines will be flushed from the data files upon the `first correct command` given by the user.
+
 
 **Filenames:**
 
@@ -25,21 +35,26 @@ Clirental is a CLI-based application that allows car rental companies to track t
 * `Customer data`: `customerData.txt`
 * `Transaction data`: `transactionData.txt`
 
-**Format:**
-* `Car data`: `CAR MODEL | CAR ID | PRICE | RENTED`
-* `Customer data`: `NAME | AGE | PHONE NUMBER`
-* `Transaction data`: `CAR ID | NAME | RENTAL DURATION(DAYS) | RENTAL START DATE`
+Format : 
+* `Car data` :  `CAR MODEL | LICENSE PLATE | PRICE | RENTED | EXPENSIVE`
+* `Customer data` : `NAME | AGE | PHONE NUMBER`
+* `Transaction data` : `TRANSACTION ID | LICENSE PLATE | CUSTOMER NAME | RENTAL DURATION(DAYS) | 
+RENTAL START DATE | COMPLETED`
 
-**Types:**
-* `Car data`: `STRING | STRING | DOUBLE | BOOLEAN`
-* `Customer data`: `STRING | INT | STRING`
-* `Transaction data`: `STRING | STRING | INT | LOCALDATE`
+Types :
+* `Car data` :  `STRING | STRING | DOUBLE | BOOLEAN | BOOLEAN`
+* `Customer data` : `STRING | INT | STRING`
+* `Transaction data` : `STRING | STRING | STRING | INT | LOCALDATE | BOOLEAN`
 
 **Example:**
 
-* `Car data`: `Toyota Corolla | SGM4932K | 120.0 | false`
-* `Customer data`: `John | 22 | 90907638`
-* `Transaction data`: `SGM4932K | John | 30 | 17-10-2024`
+* `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
+* `Customer data` : `John | 22 | +6590907638`
+* `Transaction data` : `TX1 | SGM4932K | John | 30 | 17-10-2024 | false`
+
+Others : 
+
+* Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
 
 ---
 ## Features
@@ -50,20 +65,29 @@ Adds a customer to the list of customers tracked by the car rental application.
 
 **Format:** `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]`
 
-* `CUSTOMER_NAME`: `STRING`.
-* `AGE`: `INT`
-* `CONTACT_NUMBER`: `INT`
-* `/u`, `/a`, `/c` must be in sequence.
+* `CUSTOMER_NAME` : `STRING`.
+* `AGE` : `INT`
+  * age should be > 17 and <= 100.
+* `CONTACT_NUMBER` : `STRING`
+  * `+[ANY NUMBER OF DIGITS]`
+  * `No space between + and the first digit`
+  * `No space between subsequent digits as well`
+  * `E.g. +6595382572`
+* `/u` , `/a` , `/c` must be in sequence.
 
-**Example of usage:**  
-`add-user /u John /a 18 /c 95382572`
+Example of usage: 
+
+`add-user /u John /a 18 /c +6595382572`
+
 
 **Sample Response:**
 ```
 ____________________________________________________________
-add-user /u John /a 18 /c 95382572
+add-user /u John /a 18 /c +6595382572
 Customer added
-John | 18 | 95382572
+Customer name : John
+Age : 18
+Contact Number :+6595382572
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
@@ -123,11 +147,11 @@ Lists all the cars owned by the company.
 
 **Sample Response:**
 ```
-____________________________________________________________
 list-cars
-Here are the current cars in the company
-1) Toyota Corolla | SGM4932K | $120.00 | Not Rented
-   What would you like to do?
+Here are the current cars in the company:
+1) Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
+____________________________________________________________
+What would you like to do?
 ____________________________________________________________
 ```
 
@@ -247,7 +271,6 @@ If the `TRANSACTION_ID` is not found:
 Transaction not found
 ```
 
-
 ### Marking a Transaction as Complete: `mark-tx`
 
 Marks a rental transaction as completed, indicating that the transaction is finalized.
@@ -272,8 +295,6 @@ If the `TRANSACTION_ID` is not found:
 ```
 Transaction with ID TX1 not found.
 ```
-
-
 
 ### Unmarking a Transaction as Incomplete: `unmark-tx`
 
@@ -304,8 +325,7 @@ Transaction with ID TX1 not found.
 ---
 ## FAQ
 
-**Q**: Is there any file-saving system in place currently?  
-**A**: Unfortunately, no, we are currently working on it. Thank you for your patience.
+`No questions to answer for now!!!`
 
 # Command Summary
 

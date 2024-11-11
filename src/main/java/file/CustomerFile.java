@@ -3,6 +3,8 @@ package file;
 import customer.Customer;
 import customer.CustomerList;
 import exceptions.CustomerException;
+import parser.CustomerParser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -64,8 +66,8 @@ public class CustomerFile {
     /**
      * Scans the current line and add data to current customer list.
      *
-     * @param errorLines List of line number which the data were wrongly formatted.
-     * @param line the current line number.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this customer data is at in customerData.txt.
      */
     public void scanLineAndAddCustomer(Scanner scanner, ArrayList<Integer> errorLines, int line) {
         String input = scanner.nextLine();
@@ -93,16 +95,23 @@ public class CustomerFile {
      * Add customer object to the list according to the parameters.
      *
      * @param parameters parameters of the Customer object.
+     * @param errorLines list of rows of data which are wrong so far.
+     * @param line current line number which this customer data is at in customerData.txt.
      */
     public void addCustomerWithParameters(String[] parameters, ArrayList<Integer> errorLines , int line) {
-        assert parameters.length == 3 : "Parameter for customers is wrong";
+        assert parameters.length == Customer.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
         String customerName = parameters[0];
         try {
             int age = Integer.parseInt(parameters[1]);
             String contactNumber = parameters[2];
+
+            if(!CustomerParser.isValidContactNumber(contactNumber) || age <= 17 || age > 100){
+                throw new CustomerException("");
+            }
+
             Customer customer = new Customer(customerName , age , contactNumber);
             CustomerList.addCustomerWithoutPrintingInfo(customer);
-        }catch(NumberFormatException e) {
+        }catch(NumberFormatException | CustomerException e) {
             errorLines.add(line);
         }
     }
@@ -118,6 +127,10 @@ public class CustomerFile {
         } catch (CustomerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean isFileExist(){
+        return customerDataFile.exists();
     }
 
     public String getAbsolutePath(){
