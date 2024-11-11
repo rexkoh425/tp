@@ -27,6 +27,8 @@ to view my code contributions for this project!! :)
 - `list-rented`: **Lists** out all currently **rented out** cars.
 - `list-available`: **Lists** out all currently **available** cars.
 
+<div style="page-break-after: always;"></div>
+
 ### Feature 2: Modelled the validity check of license plate number after the real world.
 
 **<u>Background:</u>**
@@ -68,6 +70,8 @@ and `mark-available` for instance, hence improving efficiency and effectiveness 
 of the application.
 
 ___
+
+<div style="page-break-after: always;"></div>
 
 ## Documentation
 
