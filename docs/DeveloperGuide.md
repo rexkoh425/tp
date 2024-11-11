@@ -28,6 +28,14 @@ The following sequence diagram will explain the sequence of events after the use
 ![Local Image](images/AddCustomerSequence.png)
 
 2. `Creating Car file and loading file`
+2. `Removing a car`
+
+The following sequence diagram illustrates the sequence of events after the user executes
+the `remove-car` command. 
+
+![](./images/RyanRemoveCarDiagram.png)
+
+3. `Creating Car file and loading file`
 
 The following sequence diagram will explain the sequence of events for loading of the carData.txt which happens at the
 start of the program. The carData.txt will be created if it does not exist at the start of program and its data will be
