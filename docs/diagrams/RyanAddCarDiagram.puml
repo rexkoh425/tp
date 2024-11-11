@@ -1,16 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-!define ADD_CAR_COLOR #759bc7
+!define BOX_COLOR #FFFFFF
 
 hide footbox
 skinparam sequenceMessageAlign center
-skinparam sequence {
-ParticipantBackgroundColor #1e4a7d
-ParticipantFontColor white
-}
 
-box <font size=14>add-car\n ADD_CAR_COLOR
+box <font size=14>add-car\n BOX_COLOR
 participant "CliRental" as CliRental
 participant "<<class>>\nParser" as Parser
 participant "<<class>>\nCarParser" as CarParser
