@@ -361,9 +361,11 @@ class TransactionListTest {
                         "Transaction completed: [X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
                         "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
                         "Transaction(s) by John Doe found:" + System.lineSeparator() +
-                        "[X] " + tx1.getTransactionId() + " | " + licensePlate1 + " | John Doe | 5 days" + System.lineSeparator() +
+                        "[X] " + tx1.getTransactionId() + " | " + licensePlate1 +
+                        " | John Doe | 5 days" + System.lineSeparator() +
                         "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
-                        "[ ] " + tx4.getTransactionId() + " | " + licensePlate4 + " | John Doe | 2 days" + System.lineSeparator() +
+                        "[ ] " + tx4.getTransactionId() + " | " + licensePlate4 +
+                        " | John Doe | 2 days" + System.lineSeparator() +
                         "Start Date: 03-10-2024 | End Date: 05-10-2024";
 
         String actualOutput = outContent.toString();
