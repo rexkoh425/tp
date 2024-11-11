@@ -14,7 +14,9 @@ remove-all-users - Remove all customers.
 list-users - Lists all customers.
 add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE] - Adds a new car to the fleet.
 remove-car /i [LICENSE_PLATE_NUMBER] - Removes a car from the fleet.
-list-cars - Lists all rented-out cars.
+list-cars - Lists all cars.
+list-rented - Lists all rented-out cars.
+list-available - Lists all available cars.
 remove-all-cars - Remove all existing cars in the cars list.
 add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: <dd-MM-yyyy>] - Adds a new rental transaction.
 mark-tx /t [TRANSACTION_ID] - Marks a rental transaction completed.
