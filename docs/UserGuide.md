@@ -28,7 +28,7 @@ Summary of Contents:
   - [Listing all completed transactions: `list-txs-completed`](#listing-all-completed-transactions-list-txs-completed)
   - [Listing all uncompleted transactions: `list-txs-uncompleted`](#listing-all-uncompleted-transactions-list-txs-uncompleted)
   - [Marking a transaction as complete: `mark-tx`](#marking-a-transaction-as-complete-mark-tx)
-  - [Unmarking a transaction as incomplete: `unmark-tx`](#unmarking-a-transaction-as-incomplete-unmark-tx)\
+  - [Unmarking a transaction as incomplete: `unmark-tx`](#unmarking-a-transaction-as-incomplete-unmark-tx)
   - [Finding transactions under a Customer: `find-txs-by-customer`](#find-transactions-under-a-customer-find-txs-by-customer)
   - [Displaying the help page: `help`](#displaying-the-help-page-help)
   - [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -319,7 +319,7 @@ Removes a specific rental transaction from the system based on the transaction I
 **Format:** `remove-tx /t [TRANSACTION_ID]`
 
 - `/t` identifier specifies the transaction ID to be removed.
-- `TRANSACTION_ID` must match an existing transaction in the system.
+- `TRANSACTION_ID` must begin with "TX" and match an existing transaction in the system.
 
 **Example:**  
 `remove-tx /t TX1`
