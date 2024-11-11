@@ -19,7 +19,7 @@ class CustomerFileTest {
 
     @BeforeEach
     void setUp() {
-        CustomerList.clearCustomerList();
+        CustomerList.removeAllCustomers();
         FileHandler.createFolderIfNotExist();
     }
 

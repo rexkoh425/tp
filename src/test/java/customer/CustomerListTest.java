@@ -8,7 +8,7 @@ public class CustomerListTest {
 
     @BeforeEach
     void setUp() {
-        CustomerList.clearCustomerList();
+        CustomerList.removeAllCustomers();
     }
 
     @Test

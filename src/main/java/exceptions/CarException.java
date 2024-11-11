@@ -87,7 +87,7 @@ public class CarException extends RuntimeException{
     }
 
     public static CarException carAlreadyInTransactionList() {
-        String message = "This car has been purchased!";
+        String message = "This car has been rented!";
         return new CarException(message);
     }
 
