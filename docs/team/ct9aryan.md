@@ -1,3 +1,6 @@
+# Ryan Fong - Project Portfolio Page
+
+---
 ## Overview
 
 **CliRental** is a **CLI-based application** designed to facilitate operations of car rental
@@ -72,3 +75,19 @@ any number from 1 to 9999.
 - Created **Command Summary section** and **Command Summary Tables** and
   filled in tables based on assigned commands listed above.
 
+### Developer Guide (DG) Contributions
+- Added implementation details for auto updating of car rental status feature.
+- Added `addCar` UML Sequence diagram.
+- Added `addTx` UML Sequence diagram.
+- Added Class diagram for Car and Transaction classes.
+
+### Team-Based Tasks Contributions
+- General code enhancements, tidying up the format and
+  neatness of the output. (e.g. adding divider lines after each output)
+- Helping to review teammates' PR and give meaningful feedback and
+  comments whenever possible.
+- Helping to approve teammate's PR whenever necessary.
+- Pointed out bugs and provided suggestions for improvements for
+  other teams' DG during the peer review exercise.
+
+---
