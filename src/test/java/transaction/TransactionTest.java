@@ -1,5 +1,7 @@
 package transaction;
 
+import customer.Customer;
+import customer.CustomerList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,26 +23,27 @@ class TransactionTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize two Transaction instances before each test
+        CustomerList.removeAllCustomers(); // Clear customers list before each test
+        CustomerList.addCustomer(new Customer("John Doe", 25, "92345678"));
+        CustomerList.addCustomer(new Customer("Jane Smith", 30, "93456789"));
         LocalDate startDate1 = LocalDate.parse("01-10-2024", dateTimeFormatter);
         LocalDate startDate2 = LocalDate.parse("02-10-2024", dateTimeFormatter);
-        transaction1 = new Transaction("ABC-123", "John Doe", 5, startDate1);
+        transaction1 = new Transaction("SGA1234A", "John Doe", 5, startDate1);
         transaction1.setTransactionId(generateTransactionId());
-        transaction2 = new Transaction("XYZ-789", "Jane Smith", 3, startDate2);
+        transaction2 = new Transaction("SGZ5678B", "Jane Smith", 3, startDate2);
         transaction2.setTransactionId(generateTransactionId());
     }
 
     @Test
     void testTransactionIdGeneration() {
-        // Assuming the transactionCounter starts at 1 and increments by 1 for each new Transaction
         assertEquals("TX1", transaction1.getTransactionId());
         assertEquals("TX2", transaction2.getTransactionId());
     }
 
     @Test
     void testGetCarLicensePlate() {
-        assertEquals("ABC-123", transaction1.getCarLicensePlate(), "Car license plate should match");
-        assertEquals("XYZ-789", transaction2.getCarLicensePlate(), "Car license plate should match");
+        assertEquals("SGA1234A", transaction1.getCarLicensePlate(), "Car license plate should match");
+        assertEquals("SGZ5678B", transaction2.getCarLicensePlate(), "Car license plate should match");
     }
 
     @Test
@@ -70,10 +73,10 @@ class TransactionTest {
     @Test
     void testToStringWhenNotCompleted() {
         String expected1 = "[ ] " + transaction1.getTransactionId() +
-                " | ABC-123 | John Doe | 5 days" + System.lineSeparator() + "Start Date: 01-10-2024"
+                " | SGA1234A | John Doe | 5 days" + System.lineSeparator() + "Start Date: 01-10-2024"
                 + " | End Date: 06-10-2024";
         String expected2 = "[ ] " + transaction2.getTransactionId() +
-                " | XYZ-789 | Jane Smith | 3 days" + System.lineSeparator() + "Start Date: 02-10-2024"
+                " | SGZ5678B | Jane Smith | 3 days" + System.lineSeparator() + "Start Date: 02-10-2024"
                 + " | End Date: 05-10-2024";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when not completed");
@@ -86,10 +89,10 @@ class TransactionTest {
         transaction2.setCompleted(true);
 
         String expected1 = "[X] " + transaction1.getTransactionId() +
-                " | ABC-123 | John Doe | 5 days" + System.lineSeparator() + "Start Date: 01-10-2024"
+                " | SGA1234A | John Doe | 5 days" + System.lineSeparator() + "Start Date: 01-10-2024"
                 + " | End Date: 06-10-2024";
         String expected2 = "[X] " + transaction2.getTransactionId() +
-                " | XYZ-789 | Jane Smith | 3 days" + System.lineSeparator() + "Start Date: 02-10-2024"
+                " | SGZ5678B | Jane Smith | 3 days" + System.lineSeparator() + "Start Date: 02-10-2024"
                 + " | End Date: 05-10-2024";
 
         assertEquals(expected1, transaction1.toString(), "toString should match expected format when completed");
@@ -98,12 +101,11 @@ class TransactionTest {
 
     @Test
     void testMultipleTransactionIds() {
-        // Create additional transactions to test transactionCounter increments correctly
         LocalDate startDate3 = LocalDate.parse("03-10-2024", dateTimeFormatter);
         LocalDate startDate4 = LocalDate.parse("04-10-2024", dateTimeFormatter);
-        Transaction transaction3 = new Transaction("LMN-456", "Alice Johnson", 2, startDate3);
+        Transaction transaction3 = new Transaction("SGB4321C", "Alice Johnson", 2, startDate3);
         transaction3.setTransactionId(generateTransactionId());
-        Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", 4, startDate4);
+        Transaction transaction4 = new Transaction("SGD8765D", "Bob Brown", 4, startDate4);
         transaction4.setTransactionId(generateTransactionId());
 
         assertEquals("TX3", transaction3.getTransactionId(), "Third transaction ID should be TX3");
