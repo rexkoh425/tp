@@ -47,8 +47,8 @@ Each of these contributions enhances the system's functionality, usability, and 
 
 ### <u>Code Contributions</u>
 
-- Click [tkhahns Contributions](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=ct9aryan&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=CT9ARyan&tabRepo=AY2425S1-CS2113-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-  to view my code contributions!
+- Click [tkhahns Contributions](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=tkhahns&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=tkhahns&tabRepo=AY2425S1-CS2113-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false) 
+to view my code contributions!
 
 ### <u>Project management</u>
 - Generate the project idea and come up with the initial project plan diagram
