@@ -33,8 +33,19 @@ public class CarException extends RuntimeException{
      *
      * @return Exception with error message.
      */
-    public static CarException invalidPrice() {
+    public static CarException negativePrice() {
         String message = "Price cannot be negative!! Try again...";
+        return new CarException(message);
+    }
+
+    /**
+     * Returns an exception when the specified price exceeds the price limit.
+     * The price limit is set to 10000.
+     *
+     * @return Exception with error message.
+     */
+    public static CarException invalidPrice() {
+        String message = "Price exceeded limit of $10 000!! Try again...";
         return new CarException(message);
     }
 
@@ -83,6 +94,11 @@ public class CarException extends RuntimeException{
         message += "Rows are : ";
         message += errorLines.toString();
         message = message + "\n";
+        return new CarException(message);
+    }
+
+    public static CarException carAlreadyInTransactionList() {
+        String message = "This car has been rented!";
         return new CarException(message);
     }
 

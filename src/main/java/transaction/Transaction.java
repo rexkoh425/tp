@@ -8,7 +8,6 @@ import static parser.TransactionParser.dateTimeFormatter;
 
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 6;
-    private static int transactionCounter = 1;
     private String transactionId;
     private final String carLicensePlate;
     private final String customer;
@@ -38,16 +37,9 @@ public class Transaction {
         this.isCompleted = isCompleted;
     }
 
-    public static void clearTransactionCounter() {
-        transactionCounter = 1;
-    }
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
-    }
-
-    public static String generateTransactionId() {
-        return "TX" + transactionCounter++;
     }
 
     public int getDuration() {
@@ -58,9 +50,6 @@ public class Transaction {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
 
     public String getTransactionId() {
         return transactionId;
@@ -68,7 +57,7 @@ public class Transaction {
 
     private String durationtoString(){
         if(duration == 1) {
-            return " day";
+            return "1 day";
         } else {
             return duration + " days";
         }

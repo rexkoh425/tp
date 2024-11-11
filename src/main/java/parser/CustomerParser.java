@@ -80,7 +80,7 @@ public class CustomerParser {
      * Checks if the string is a valid contact number.
      */
     public static boolean isValidContactNumber(String contactNumber) {
-        String regex = "^\\+\\d{7,}$";
+        String regex = "^[89]\\d{7}$"; // Singapore phone number
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contactNumber);
         return matcher.matches();
