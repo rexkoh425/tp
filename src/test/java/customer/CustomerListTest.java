@@ -70,7 +70,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "12345");
         });
 
-        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]",
+        assertEquals("Invalid contact number. Format for contact number is [8 DIGITS AND STARTS WITH 8 OR 9]",
                 exception.getMessage());
     }
 
@@ -80,7 +80,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "12345678901");
         });
 
-        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]",
+        assertEquals("Invalid contact number. Format for contact number is [8 DIGITS AND STARTS WITH 8 OR 9]",
                 exception.getMessage());
     }
 
@@ -90,7 +90,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "71234567");
         });
 
-        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]",
+        assertEquals("Invalid contact number. Format for contact number is [8 DIGITS AND STARTS WITH 8 OR 9]",
                 exception.getMessage());
     }
 

@@ -53,7 +53,8 @@ public class CustomerException extends RuntimeException {
     }
 
     public static CustomerException invalidContactNumberException(){
-        return new CustomerException("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]");
+        return new CustomerException("Invalid contact number. Format for contact number is [8 DIGITS AND " +
+                "STARTS WITH 8 OR 9]");
     }
 
     public static CustomerException invalidAgeException(){

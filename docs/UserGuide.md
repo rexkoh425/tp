@@ -74,7 +74,7 @@ Types :
 **Example:**
 
 * `Car data` :  `Toyota Corolla | SGM4932K | 120.0 | false | false`
-* `Customer data` : `John | 22 | +6590907638`
+* `Customer data` : `John | 22 | 90907638`
 * `Transaction data` : `TX1 | SGM4932K | John | 30 | 17-10-2024 | false`
 
 Others : 
@@ -94,10 +94,9 @@ Adds a customer to the list of customers tracked by the car rental application.
 * `AGE` : `INT`
   * age should be > 17 and <= 100.
 * `CONTACT_NUMBER` : `STRING`
-  * `[8 DIGITS AND START WITH 8 or 9]`
-  * `No space between + and the first digit`
-  * `No space between subsequent digits as well`
-  * `E.g. +6595382572`
+  * `[8 DIGITS AND STARTS WITH 8 or 9]`
+  * `No space between digits`
+  * `E.g. 95382572`
 * `/u` , `/a` , `/c` must be in sequence.
 
 **Example of usage:**
@@ -105,15 +104,11 @@ Adds a customer to the list of customers tracked by the car rental application.
 
 **Sample Response:**
 ```
-____________________________________________________________
-add-user /u John /a 18 /c +6595382572
+add-user /u John /a 18 /c 95382572
 Customer added
 Customer name : John
 Age : 18
-Contact Number :+6595382572
-____________________________________________________________
-What would you like to do?
-____________________________________________________________
+Contact Number : 95382572
 ```
 ---
 ### Adding a Car: `add-car`

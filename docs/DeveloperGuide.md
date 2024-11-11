@@ -282,9 +282,9 @@ transactionData.txt should be created in the data folder as well if it does not 
 
 `Test case 2` :
 
-`details` : Adding a user using `add-user /u john /a 30 /c +65 77777777` <br>
+`details` : Adding a user using `add-user /u john /a 30 /c 12345678` <br>
 `check` : The command should return an error message saying that the format of contact number is wrong. Using 
-`+6577777777` should allow you to add the user successfully now.
+`87777777` for the contact number should allow you to add the user successfully now.
 
 `Test case 3` :
 
