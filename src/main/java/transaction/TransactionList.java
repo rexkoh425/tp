@@ -226,7 +226,7 @@ public class TransactionList {
             }
         }
         if (!found) {
-            System.out.println("None");
+            System.out.println("User " + customer + " was not found");
         }
     }
 
