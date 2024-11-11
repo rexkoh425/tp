@@ -88,8 +88,12 @@ any number from 1 to 9999.
   neatness of the output. (e.g. adding divider lines after each output)
 - Helping to review teammates' PR and give meaningful feedback and
   comments whenever possible.
+(Pull requests [#54](https://github.com/AY2425S1-CS2113-T11-3/tp/pull/54),
+[#64](https://github.com/AY2425S1-CS2113-T11-3/tp/pull/64),
+[#110](https://github.com/AY2425S1-CS2113-T11-3/tp/pull/110))
 - Helping to approve teammate's PR whenever necessary.
 - Pointed out bugs and provided suggestions for improvements for
   other teams' DG during the peer review exercise.
+(Pull request [#10](https://github.com/nus-cs2113-AY2425S1/tp/pull/10))
 
 ---
