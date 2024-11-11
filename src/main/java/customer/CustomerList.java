@@ -49,7 +49,7 @@ public class CustomerList {
 
         customers.add(customer);
     }
-
+    
     public static void removeCustomer(String customerName) {
         for (Customer customer : customers) {
             if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
@@ -58,7 +58,7 @@ public class CustomerList {
                 return;
             }
         }
-        System.out.println("User " + customerName + " was not found");
+        System.out.println(customerName + " is not in the customer list. No removal done");
     }
 
     public static void clearCustomerList() {
