@@ -3,6 +3,8 @@ package file;
 import car.Car;
 import car.CarList;
 import exceptions.CarException;
+import exceptions.CustomerException;
+import exceptions.TransactionException;
 import parser.CarParser;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +57,8 @@ public class CarFile {
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
             boolean isExpensive = Boolean.parseBoolean(parameters[4]);
-            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price)){
+            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price) ||
+                    CarList.isExistingLicensePlateNumber(licensePlateNumber)){
                 throw new CarException("");
             }
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
@@ -63,7 +66,7 @@ public class CarFile {
             CarList.sortCarsByPrice();
             CarList.markCarAsExpensive();
           
-        } catch(NumberFormatException | CarException e) {
+        } catch(NumberFormatException | CarException | CustomerException | TransactionException e) {
 
             errorLines.add(line);
         }
@@ -85,14 +88,6 @@ public class CarFile {
         if(!carDataFile.exists()){
             FileHandler.createNewFile(carDataFile);
         }
-    }
-
-    public void deleteCarFileIfExist() {
-        boolean deleted = false;
-        if (carDataFile.exists()) {
-            deleted = carDataFile.delete();
-        }
-        System.out.println("carData.txt deleted: " + deleted);
     }
 
     /**

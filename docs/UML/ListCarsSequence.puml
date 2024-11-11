@@ -3,7 +3,13 @@
 
 autonumber
 
--> CarList : printCarList()
+participant ":Parser" as Parser
+participant ":CarList" as CarList
+participant ":Car" as Car
+
+activate Parser
+Parser -> CarList : printCarList()
+activate CarList
 alt carsList is not empty
     loop For each Car in CarList
         CarList -> Car : getModel()
@@ -32,10 +38,12 @@ alt carsList is not empty
         deactivate Car
         CarList -> CarList : getMedianPrice()
         activate CarList
-            CarList -> CarList : return median car price
+            CarList --> CarList : return median car price
         deactivate CarList
     end loop
 end alt
-<-- CarList : return
+Parser <-- CarList : return
+deactivate CarList
+deactivate Parser
 hide footbox
 @enduml

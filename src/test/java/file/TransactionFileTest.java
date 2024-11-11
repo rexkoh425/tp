@@ -1,6 +1,10 @@
 package file;
 
 
+import car.Car;
+import car.CarList;
+import customer.Customer;
+import customer.CustomerList;
 import org.junit.jupiter.api.Test;
 import transaction.Transaction;
 import transaction.TransactionList;
@@ -26,6 +30,8 @@ class TransactionFileTest {
         TransactionList.clearTransactionList();
         FileHandler.createFolderIfNotExist();
         TransactionList.clearTxCounter();
+        CarList.clearCarList();
+        CustomerList.clearCustomerList();
     }
 
     @AfterAll
@@ -45,16 +51,27 @@ class TransactionFileTest {
     private static ArrayList<Integer> inputTestCases() {
         TransactionFile transactionFile = new TransactionFile("transactionData1.txt");
         int line = 1;
+
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJA9173C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJX1234D" , 0.01));
+
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("John Doe" ,
+                18 , "83468393"));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("Jane me" ,
+                18 , "83468393"));
+
         ArrayList<Integer> errorLines = new ArrayList<>();
         String[] parameters = {"TX1" , "SJA9173C", "John Doe", "5", "08-11-2024", "false"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         line++;
-        parameters = new String[]{"TX2" , "SJX1234D", "Jane Doe", "3", "10-10-2024", "true"};
+        parameters = new String[]{"TX2" , "SJX1234D", "Jane me", "3", "10-10-2024", "true"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         line++;
         parameters = new String[]{"TX3" , "SJE8720G", "Alice", "seven", "15-09-2024", "false"};
         transactionFile.addTransactionWithParameters(parameters , errorLines , line);
         filenames.add(transactionFile.getAbsolutePath());
+
+
         return errorLines;
     }
 
@@ -74,7 +91,7 @@ class TransactionFileTest {
         Transaction transaction2 = TransactionList.getTransactionList().get(1);
         assertEquals("TX2" , transaction2.getTransactionId());
         assertEquals("SJX1234D", transaction2.getCarLicensePlate());
-        assertEquals("Jane Doe", transaction2.getCustomer());
+        assertEquals("Jane me", transaction2.getCustomer());
         assertEquals(3, transaction2.getDuration());
         assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
         assertTrue(transaction2.isCompleted());
@@ -88,6 +105,7 @@ class TransactionFileTest {
 
     @Test
     void testUpdateTransactionDataFile() {
+
         TransactionFile transactionFile = new TransactionFile("transactionData2.txt");
         File testFile = new File(transactionFile.getAbsolutePath());
         transactionFile.createTransactionFileIfNotExist();
@@ -129,12 +147,39 @@ class TransactionFileTest {
         TransactionFile transactionFile = new TransactionFile("transactionData3.txt");
         File testFile = new File(transactionFile.getAbsolutePath());
         transactionFile.createTransactionFileIfNotExist();
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJX1234D" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJE8720G" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJA9173C" , 0.01));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("John" ,
+                18 , "83468393"));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("Jane" ,
+                18 , "83468393"));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("Alice" ,
+                18 , "83468393"));
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "TX1 | SJX1234D | John | 5 | 08-11-2024 | false\n";
             textToAdd += "TX2 | SJE8720G | Jane | 3 | 10-10-2024 | true\n";
-            textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false";
+            textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX3 | SJK9173C | Alice | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX3 | SJA9173C | Ale | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX | SGM4932K | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | -2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 12 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM | John | 30 | 17-13-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 17-13-2024 | fale\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | | fale\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | fale\n";
+            textToAdd += "SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | 30 | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 10-10-2024 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | false\n";
+            textToAdd += "TX1 | SGM4932K | John | 30 | 10-10-2024\n";
+            textToAdd += "idk1 | SGM4932K | John | 30 | 10-10-2024 | false\n";
+            textToAdd += "idk1 | SGM4932 | John | 30 | 10-10-2024 | false\n";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
@@ -176,7 +221,9 @@ class TransactionFileTest {
         TransactionFile transactionFile = new TransactionFile("transactionData4.txt");
         File testFile = new File(transactionFile.getAbsolutePath());
         transactionFile.createTransactionFileIfNotExist();
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJX1234D" , 0.01));
+        CustomerList.addCustomerWithoutPrintingInfo(new Customer("John" ,
+                18 , "83468393"));
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "TX1 | SJX1234D | John | 5 | 08-11-2024 | false";

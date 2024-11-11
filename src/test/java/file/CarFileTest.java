@@ -125,8 +125,19 @@ public class CarFileTest {
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "Toyota Corolla | SGM4932K | 10 | false | false\n";
-            textToAdd += "Toyota Cor | SDF4932K | 1 | false | false\n";
-            textToAdd += "Toyota | SGK1234F | 0 | false | false";
+            textToAdd += "Toyota Cor | SGM4933K | 1 | false | false\n";
+            textToAdd += "Toyota Corolla | SGM4933K | 10 | false | false\n";
+            textToAdd += "Toyota | SGK1234F | 0 | false | false\n";
+            textToAdd += "Toyota | SGK1234F | 0 | false | false\n";
+            textToAdd += "  |  |  |  |  \n";
+            textToAdd += "SGE1234X | 10000.0 | false | false\n";
+            textToAdd += "  | SGE1234X | 10000.0 | false | false\n";
+            textToAdd += "Honda Civic |  | 10000.0 | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X |  | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 |  | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 | false |\n";
+            textToAdd += "Honda Civic | SGE1234X | -10000.0 | false | false\n";
+            textToAdd += "Honda Civic | SGE1234X | 10000.0 | false |\n";
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
@@ -134,6 +145,7 @@ public class CarFileTest {
         }
 
         carFile.loadCarDataIfExist();
+        assertEquals(3, CarList.getCarsList().size());
         Car car1 = CarList.getCarsList().get(0);
         assertEquals("Toyota", car1.getModel());
         assertEquals("SGK1234F", car1.getLicensePlateNumber());
@@ -143,7 +155,7 @@ public class CarFileTest {
 
         Car car2 = CarList.getCarsList().get(1);
         assertEquals("Toyota Cor", car2.getModel());
-        assertEquals("SDF4932K", car2.getLicensePlateNumber());
+        assertEquals("SGM4933K", car2.getLicensePlateNumber());
         assertEquals(1.0, car2.getPrice(), 0.01);
         assertFalse(car2.isRented());
         assertFalse(car2.isExpensive());

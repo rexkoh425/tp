@@ -104,14 +104,23 @@ class CustomerFileTest {
 
         try (FileWriter fw = new FileWriter(testFile)) {
             String data = "John Doe | 30 | 83456789\n";
-            data += "Jane Smith | 25 | 87654321";
+            data += "Jane Smith | 25 | 87654321\n";
+            data += "Jane Smith | 25 | 87654321\n";
+            data += "john | 10 | +151519515\n";
+            data += "john | 18 | 851519515\n";
+            data += "john | 18 | 75151915\n";
+            data += "john | 18 | +515\n";
+            data += "john | 8575715\n";
+            data += "john | 18\n";
+            data += "  | 18 | 151519515\n";
+            data +=  "  |  |  \n";
             fw.write(data);
         } catch (IOException e) {
             assert false;
         }
 
         customerFile.loadCustomerDataIfExist();
-
+        assertEquals(2, CustomerList.getCustomerList().size());
         Customer customer1 = CustomerList.getCustomerList().get(0);
         assertEquals("John Doe", customer1.getCustomerName());
         assertEquals(30, customer1.getAge());

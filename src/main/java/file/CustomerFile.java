@@ -2,7 +2,9 @@ package file;
 
 import customer.Customer;
 import customer.CustomerList;
+import exceptions.CarException;
 import exceptions.CustomerException;
+import exceptions.TransactionException;
 import parser.CustomerParser;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -114,7 +116,7 @@ public class CustomerFile {
 
             Customer customer = new Customer(customerName , age , contactNumber);
             CustomerList.addCustomerWithoutPrintingInfo(customer);
-        }catch(NumberFormatException | CustomerException e) {
+        }catch(NumberFormatException | CustomerException | TransactionException | CarException e) {
             errorLines.add(line);
         }
     }

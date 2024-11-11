@@ -2,8 +2,8 @@
 'https://plantuml.com/class-diagram
 
 class FileHandler {
-    {field}{static} +DIR_NAME : String = "data"
-    {field}{static} +DATA_DIR : File
+    {field}{static} -DIR_NAME : String = "data"
+    {field}{static} -DATA_DIR : File
     {method}{static} +getDataDir() : File
     {method}{static} +getCarFile() : CarFile
     {method}{static} +getCustomerFile() : CustomerFile
@@ -14,6 +14,7 @@ class FileHandler {
     {method}{static} +createFolderIfNotExist() : void
     {method}{static} +updateFiles() : void
     {method}{static} -createFolder() : void
+    {method}{static} +containEmptyParameter(parameters : String[]) : boolean
 }
 
 class CarFile {
@@ -59,21 +60,21 @@ class TransactionFile {
     {method} +getAbsolutePath() : String
 }
 
-FileHandler --> "1" CarFile : "create"
-FileHandler --> "1" CustomerFile : "create"
-FileHandler --> "1" TransactionFile : "create"
+FileHandler --> "1" CarFile : "creates"
+FileHandler --> "1" CustomerFile : "creates"
+FileHandler --> "1" TransactionFile : "creates"
 
-CarFile ..> CarList : "edit"
-CarFile ..> Car : "create"
-CarFile ..> FileHandler : "uses"
+CarFile ..> CarList : "edits"
+CarFile ..> Car : "creates"
+CarFile ..> FileHandler
 
-CustomerFile ..> CustomerList : "edit"
-CustomerFile ..> FileHandler : "uses"
-CustomerFile ..> Customer : "create"
+CustomerFile ..> CustomerList : "edits"
+CustomerFile ..> FileHandler
+CustomerFile ..> Customer : "creates"
 
-TransactionFile ..> TransactionList : "edit"
-TransactionFile ..> Transaction : "create"
-TransactionFile ..> FileHandler : "uses"
+TransactionFile ..> TransactionList : "edits"
+TransactionFile ..> Transaction : "creates"
+TransactionFile ..> FileHandler
 
 note right of FileHandler
     All classes other than FileHandler , TransactionFile ,

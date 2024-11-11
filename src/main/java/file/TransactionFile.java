@@ -1,7 +1,11 @@
 package file;
 
+import car.CarList;
+import customer.CustomerList;
 import exceptions.CarException;
+import exceptions.CustomerException;
 import exceptions.TransactionException;
+import parser.CarParser;
 import transaction.Transaction;
 import transaction.TransactionList;
 import java.io.File;
@@ -121,6 +125,16 @@ public class TransactionFile {
             TransactionList.setTxCounter(idNumber);
             String carLicensePlate = parameters[1];
             String borrowerName = parameters[2];
+
+            if(!CarParser.isValidLicensePlateNumber(carLicensePlate) ||
+                    !CarList.isExistingLicensePlateNumber(carLicensePlate)){
+                throw new CarException("");
+            }
+
+            if(!CustomerList.isExistingCustomer(borrowerName)){
+                throw new CustomerException("");
+            }
+
             int duration = Integer.parseInt(parameters[3]);
             LocalDate startDate = LocalDate.parse(parameters[4], dateTimeFormatter);
             boolean isCompleted = Boolean.parseBoolean(parameters[5]);
@@ -129,7 +143,8 @@ public class TransactionFile {
 
             TransactionList.addTxWithoutPrintingInfo(transaction);
 
-        }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException e){
+        }catch (NumberFormatException | DateTimeParseException | CarException | TransactionException |
+                CustomerException e){
             errorLines.add(line);
         }
     }
