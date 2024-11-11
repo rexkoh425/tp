@@ -25,7 +25,7 @@ class TransactionFileTest {
     void setUp(){
         TransactionList.clearTransactionList();
         FileHandler.createFolderIfNotExist();
-        Transaction.clearTransactionCounter();
+        TransactionList.clearTxCounter();
     }
 
     @AfterAll
