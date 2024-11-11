@@ -1,6 +1,5 @@
 package file;
 
-import car.CarList;
 import exceptions.CarException;
 import exceptions.CustomerException;
 import exceptions.TransactionException;
