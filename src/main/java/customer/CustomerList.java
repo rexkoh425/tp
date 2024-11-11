@@ -22,13 +22,13 @@ public class CustomerList {
 
     public static void removeCustomer(String customerName){
         for(Customer customer : customers){
-            if(customer.getCustomerName().equals(customerName)){
+            if(customer.getCustomerName().equalsIgnoreCase(customerName)){
                 customers.remove(customer);
-                System.out.println("User " + customerName + " has been removed");
+                System.out.println(customerName + " has been removed from customer list");
                 return;
             }
         }
-        System.out.println("User " + customerName + " was not found");
+        System.out.println(customerName + " is not in the customer list. No removal done");
     }
 
     public static void clearCustomerList(){
