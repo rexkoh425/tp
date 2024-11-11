@@ -105,13 +105,14 @@ class CustomerFileTest {
         try (FileWriter fw = new FileWriter(testFile)) {
             String data = "John Doe | 30 | 83456789\n";
             data += "Jane Smith | 25 | 87654321\n";
+            data += "Jane Smith | 25 | 87654321\n";
             data += "john | 10 | +151519515\n";
             data += "john | 18 | 851519515\n";
             data += "john | 18 | 75151915\n";
             data += "john | 18 | +515\n";
             data += "john | 8575715\n";
             data += "john | 18\n";
-            data += "18 | 151519515\n";
+            data += "  | 18 | 151519515\n";
             data +=  "  |  |  \n";
             fw.write(data);
         } catch (IOException e) {

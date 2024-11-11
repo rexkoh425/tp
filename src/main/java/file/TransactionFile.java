@@ -1,5 +1,7 @@
 package file;
 
+import car.CarList;
+import customer.CustomerList;
 import exceptions.CarException;
 import exceptions.CustomerException;
 import exceptions.TransactionException;
@@ -124,9 +126,15 @@ public class TransactionFile {
             String carLicensePlate = parameters[1];
             String borrowerName = parameters[2];
 
-            if(!CarParser.isValidLicensePlateNumber(carLicensePlate)){
+            if(!CarParser.isValidLicensePlateNumber(carLicensePlate) ||
+                    !CarList.isExistingLicensePlateNumber(carLicensePlate)){
                 throw new CarException("");
             }
+
+            if(!CustomerList.isExistingCustomer(borrowerName)){
+                throw new CustomerException("");
+            }
+
             int duration = Integer.parseInt(parameters[3]);
             LocalDate startDate = LocalDate.parse(parameters[4], dateTimeFormatter);
             boolean isCompleted = Boolean.parseBoolean(parameters[5]);

@@ -57,7 +57,8 @@ public class CarFile {
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
             boolean isExpensive = Boolean.parseBoolean(parameters[4]);
-            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price)){
+            if(!CarParser.isValidLicensePlateNumber(licensePlateNumber) || !CarParser.isValidPrice(price) ||
+                    CarList.isExistingLicensePlateNumber(licensePlateNumber)){
                 throw new CarException("");
             }
             Car car = new Car(model, licensePlateNumber, price, isRented , isExpensive);
