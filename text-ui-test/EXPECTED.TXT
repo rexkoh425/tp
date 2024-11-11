@@ -27,6 +27,11 @@ list-txs-uncompleted - Lists all uncompleted transactions.
 find-txs-by-customer /u [CUSTOMER_NAME] - Finds transactions by a customer's name.
 exit - Exits the program.
 ____________________________________________________________
+data does not exist. Creating it now.......
+data directory created successfully.
+File created successfully: carData.txt
+File created successfully: customerData.txt
+File created successfully: transactionData.txt
 What would you like to do?
 ____________________________________________________________
 ____________________________________________________________
