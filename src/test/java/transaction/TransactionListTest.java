@@ -35,7 +35,7 @@ class TransactionListTest {
 
         // Reset the transaction counter using reflection to ensure predictable transaction IDs
         try {
-            java.lang.reflect.Field counterField = Transaction.class.getDeclaredField("transactionCounter");
+            java.lang.reflect.Field counterField = TransactionList.class.getDeclaredField("txCounter");
             counterField.setAccessible(true);
             counterField.setInt(null, 1);
         } catch (NoSuchFieldException | IllegalAccessException e) {
@@ -313,24 +313,34 @@ class TransactionListTest {
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
         String licensePlate3 = "SCD9012A";
+        String licensePlate4 = "SGD4091D";
 
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
+        TransactionList.addTxWithoutPrintingInfo(tx1);
         Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
-        Transaction tx3 = new Transaction(licensePlate3, "John Doe", 2,
-                LocalDate.of(2024, 10, 3));
-        TransactionList.addTxWithoutPrintingInfo(tx1);
         TransactionList.addTxWithoutPrintingInfo(tx2);
+        Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
+                LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx3);
+        TransactionList.markCompletedByTxId(tx1.getTransactionId());
+        Transaction tx4 = new Transaction(licensePlate4, "John Doe", 2,
+                LocalDate.of(2024, 10, 3));
+        TransactionList.addTxWithoutPrintingInfo(tx4);
 
         // Find transactions by "John Doe"
         TransactionList.findTxsByCustomer("john doe");
 
-        String expectedOutput = "Transaction(s) by john doe found:" + System.lineSeparator() +
-                tx1 + System.lineSeparator() +
-                tx3 + System.lineSeparator();
+        String expectedOutput =
+                "Transaction completed: [X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                        "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
+                        "Transaction(s) by john doe found:" + System.lineSeparator() +
+                        "[X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                        "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
+                        "[ ] TX4 | SGD4091D | John Doe | 2 days" + System.lineSeparator() +
+                        "Start Date: 03-10-2024 | End Date: 05-10-2024" + System.lineSeparator();
 
         String actualOutput = outContent.toString();
 
@@ -338,9 +348,10 @@ class TransactionListTest {
         assertTrue(actualOutput.contains("Transaction(s) by john doe found:"),
                 "Should indicate transactions found by customer");
         assertTrue(actualOutput.contains(tx1.toString()), "Should contain tx1 details");
-        assertTrue(actualOutput.contains(tx3.toString()), "Should contain tx3 details");
+        assertTrue(actualOutput.contains(tx4.toString()), "Should contain tx4 details");
         assertEquals(expectedOutput, actualOutput, "Printed output should confirm deletion");
     }
+
 
     @Test
     @DisplayName("Test finding transactions by customer with no matches")
@@ -357,7 +368,7 @@ class TransactionListTest {
         TransactionList.findTxsByCustomer("Alice Johnson");
 
         String expectedOutput = "Transaction(s) by Alice Johnson found:" + System.lineSeparator() +
-                "none" + System.lineSeparator();
+                "None" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that no transactions was found");
     }
 

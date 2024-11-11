@@ -1,37 +1,73 @@
 package customer;
 
+import exceptions.CustomerException;
+
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class CustomerList {
 
     public static ArrayList<Customer> customers = new ArrayList<>();
 
-    public static void addCustomer(Customer customer){
+    // Regex pattern to allow only alphabetic characters and spaces
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("^[a-zA-Z ]+$");
+
+    public static void addCustomer(Customer customer) {
+        String customerName = customer.getCustomerName();
+
+        // Check for valid characters in the name
+        if (!isValidName(customerName)) {
+            throw CustomerException.invalidCustomerNameException(customerName);
+        }
+
+        // Check for duplicate customer name (case-insensitive)
+        if (isExistingCustomer(customerName)) {
+            throw CustomerException.duplicateCustomerNameException(customerName);
+        }
+
         customers.add(customer);
         System.out.println("Customer added");
         System.out.println(customer.toDisplayString());
     }
 
-    public static ArrayList<Customer> getCustomerList(){
+    public static ArrayList<Customer> getCustomerList() {
         return customers;
     }
 
-    public static void clearCustomerList(){
-        customers.clear();
-    }
-    public static void addCustomerWithoutPrintingInfo(Customer customer){
+    public static void addCustomerWithoutPrintingInfo(Customer customer) {
+        String customerName = customer.getCustomerName();
+
+        // Check for valid characters in the name
+        if (!isValidName(customerName)) {
+            throw CustomerException.invalidCustomerNameException(customerName);
+        }
+
+        // Check for duplicate customer name (case-insensitive)
+        if (isExistingCustomer(customerName)) {
+            throw CustomerException.duplicateCustomerNameException(customerName);
+        }
+
         customers.add(customer);
     }
 
-    public static void removeCustomer(String customerName){
-        for(Customer customer : customers){
-            if(customer.getCustomerName().equals(customerName)){
+    public static void removeCustomer(String customerName) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
                 customers.remove(customer);
                 System.out.println("User " + customerName + " has been removed");
                 return;
             }
         }
         System.out.println("User " + customerName + " was not found");
+    }
+
+    public static void clearCustomerList() {
+        customers.clear();
+    }
+
+    public static void removeAllCustomers() {
+        clearCustomerList();
+        System.out.println("All customers removed!!!");
     }
 
     public static ArrayList<Customer> getCustomers() {
@@ -53,14 +89,14 @@ public class CustomerList {
 
     public static boolean isExistingCustomer(String customerName) {
         for (Customer customer : customers) {
-            if (customer.getCustomerName().equals(customerName)) {
+            if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static String customerListToFileString(){
+    public static String customerListToFileString() {
         StringBuilder customerData = new StringBuilder();
         for (Customer customer : customers) {
             customerData.append(customer.toFileString());
@@ -68,5 +104,9 @@ public class CustomerList {
         }
         return customerData.toString();
     }
-}
 
+    // Helper method to validate the customer's name
+    private static boolean isValidName(String name) {
+        return VALID_NAME_PATTERN.matcher(name).matches();
+    }
+}

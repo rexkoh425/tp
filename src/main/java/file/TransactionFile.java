@@ -117,6 +117,8 @@ public class TransactionFile {
                 throw new TransactionException("");
             }
 
+            int idNumber = Integer.parseInt(transactionId.substring(2));
+            TransactionList.setTxCounter(idNumber);
             String carLicensePlate = parameters[1];
             String borrowerName = parameters[2];
             int duration = Integer.parseInt(parameters[3]);
