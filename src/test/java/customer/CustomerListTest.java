@@ -70,8 +70,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "12345");
         });
 
-        assertEquals("Invalid contact number. Format for contact number is wrong. " +
-                "Please double-check UG formatting guide.", exception.getMessage());
+        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]", exception.getMessage());
     }
 
     @Test
@@ -80,8 +79,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "12345678901");
         });
 
-        assertEquals("Invalid contact number. Format for contact number is wrong. " +
-                "Please double-check UG formatting guide.", exception.getMessage());
+        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]", exception.getMessage());
     }
 
     @Test
@@ -90,8 +88,7 @@ public class CustomerListTest {
             new Customer("John Doe", 25, "71234567");
         });
 
-        assertEquals("Invalid contact number. Format for contact number is wrong. " +
-                "Please double-check UG formatting guide.", exception.getMessage());
+        assertEquals("invalid contact number. Format for contact number is +[7 OR MORE DIGITS]", exception.getMessage());
     }
 
     @Test
