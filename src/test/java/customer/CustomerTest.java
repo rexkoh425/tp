@@ -45,7 +45,7 @@ public class CustomerTest {
         Customer customer = new Customer("Jane Doe", 18, "92345678");  // Minimum valid age
         assertEquals(18, customer.getAge());
     }
-    
+
     @Test
     public void testCustomerGetters() {
         Customer customer = new Customer("John", 18, "97193723");
