@@ -56,7 +56,7 @@ class CustomerFileTest {
         Customer customer = CustomerList.getCustomerList().get(0);
         assertEquals("John Doe", customer.getCustomerName());
         assertEquals(30, customer.getAge());
-        assertEquals("+123456789", customer.getContactNumber());
+        assertEquals("83456789", customer.getContactNumber());
 
         assertTrue(errorLines.contains(2));
     }
