@@ -55,7 +55,7 @@ Adds a customer to the list of customers tracked by the car rental application.
 * `CONTACT_NUMBER`: `INT`
 * `/u`, `/a`, `/c` must be in sequence.
 
-**Example of usage:**  
+**Example of usage:**
 `add-user /u John /a 18 /c 95382572`
 
 **Sample Response:**
@@ -73,43 +73,45 @@ ____________________________________________________________
 
 Adds a car to the car list.
 
-**Format:** `add-car /n [CAR_MODEL] /c [CAR_ID] /p [PRICE]`
+**Format:** `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]`
 
-- `/n`, `/c`, and `/p` identifiers must be in the correct order.
-- `CAR_ID` must be unique and follow the format `SXX####X`.
-- `PRICE` must be a non-negative, numeric value.
+- `/n`, `/c` and `/p` identifiers **must be** in the correct order.
+- `LICENSE_PLATE_NUMBER` **must be** in the following format: `SXX####X`, where
+    - `X` is any letter from **A to Z**.
+    - `####` is any number from **1 to 9999**.
+    - Starts with the letter **S**.
+- `PRICE` must be a **non-negative, numeric value**.
+- `PRICE` cannot exceed **10000**.
+- `$` character not required for `PRICE`.
 
-**Example:**  
+**Example:** 
 `add-car /n Honda Civic /c SGE1234X /p 10000`
 
 **Sample output:**
 ``` 
 Car added to list
 Car details:
-Honda Civic | SGE1234X | $10000.00 | Available
+Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
 ```
-
 
 ### Removing a Car: `remove-car`
 
 Removes a car from the fleet based on the car's unique ID.
 
-**Format:** `remove-car /i [CAR_ID]`
+**Format:** `remove-car /i [LICENSE_PLATE_NUMBER]`
 
 - `/i` identifier specifies the car ID to be removed.
-- `CAR_ID` must match an existing car in the database.
+- `LICENSE_PLATE_NUMBER` must match an existing car in the database.
 
-**Example:**  
+**Example:** 
 `remove-car /i SGE1234X`
 
 **Sample output:**
 ```
-Car removed from the fleet
-Car details:
-Honda Civic | SGE1234X | $10000.00 | Available
+Car with license plate SGE1234X removed from list.
 ```
 
-If the `CAR_ID` is not found:
+If the `LICENSE_PLATE_NUMBER` is not found:
 ```
 No car found with license plate [SGE1234X]
 ```
@@ -121,14 +123,17 @@ Lists all the cars owned by the company.
 
 **Format:** `list-cars`
 
-**Sample Response:**
+**Sample Output:**
 ```
-____________________________________________________________
-list-cars
-Here are the current cars in the company
-1) Toyota Corolla | SGM4932K | $120.00 | Not Rented
-   What would you like to do?
-____________________________________________________________
+Here are the current cars in the company:
+1) civic | SGE1234X | $1000.00 | Available | Affordable | Median price: 1000.0
+2) vios | SKP890C | $2000.00 | Available | Expensive | Median price: 1000.0
+```
+If the list is **empty**:
+
+``` 
+Oops!! Car list is empty...
+Use command <add-car> to add a new car.
 ```
 
 ### Listing All Rented Out Cars: `list-rented`
@@ -170,7 +175,8 @@ There are no available cars at the moment...
 
 ### Updating Rental Status of Car
 
-There is no need to manually update the rental status of a car. The status will be updated automatically when a transaction record is:
+There is no need to manually update the rental status of a car. 
+The status will be updated automatically when a transaction record is:
 
 - Added
 - Removed
@@ -196,7 +202,7 @@ Here are all the transactions:
 
 If the list is **empty**:
 ```
-No transactions available.
+No transaction available.
 ```
 
 ### Removing All Transactions: `remove-all-txs`
@@ -209,7 +215,7 @@ Removes all transactions from the system.
 
 Adds a new rental transaction to the system.
 
-**Format:** `add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]`
+**Format:** `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]`
 
 **Example:**  
 `add-tx /c SZZ1579D /u John /d 15 /s 11-05-2025`
@@ -236,10 +242,12 @@ Removes a specific rental transaction from the system based on the transaction I
 
 **Sample output:**
 
+```
 Transaction deleted:
 [ ] TX1 | SGE1234X | john | 4day(s)
 Start Date: 11-12-2024
 ____________________________________________________________
+```
 
 
 If the `TRANSACTION_ID` is not found:
@@ -300,6 +308,18 @@ If the `TRANSACTION_ID` is not found:
 Transaction with ID TX1 not found.
 ```
 
+### Displaying the help page: `help`
+
+Displays a help page containing all the commands, together with
+its respective format and description. 
+
+Format: `help`
+
+### Exiting the program: `exit`
+
+Exits the program and saves all data to the respective data text files.
+
+Format: `exit`
 
 ---
 ## FAQ
@@ -319,28 +339,28 @@ Transaction with ID TX1 not found.
 
 **`Car` related commands:**
 
-|         Action          | Format                                                        |
-|:-----------------------:|---------------------------------------------------------------|
+|         Action          | Format                                                  |
+|:-----------------------:|---------------------------------------------------------|
 |       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
-|     **Remove** car      | `remove-car /i [CAR_ID]`                                      |
-|   **Remove all** cars   | `remove-all-cars`                                             |
-|    **List all** cars    | `list-cars`                                                   |
-|  **List rented** cars   | `list-rented`                                                 |
-| **List available** cars | `list-available`                                              |
+|     **Remove** car      | `remove-car /i [LICENSE_PLATE_NUMBER]`                                      |
+|   **Remove all** cars   | `remove-all-cars`                                       |
+|    **List all** cars    | `list-cars`                                             |
+|  **List rented** cars   | `list-rented`                                           |
+| **List available** cars | `list-available`                                        |
 
 **`Transaction` related commands:**
 
-|                 Action                  | Format                                                                       |
-|:---------------------------------------:|------------------------------------------------------------------------------|
-|           **Add** transaction           | `add-tx /c [CAR_ID] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
-|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                              |
-|       **Remove all** transactions       | `remove-all-txs`                                                             |
-|        **List all** transactions        | `list-tx`                                                                    |
-|  **Mark** transactions as **complete**  | `mark-tx /t [TRANSACTION_ID]`                                                |
-| **Mark** transactions as **incomplete** | `unmark-tx /t [TRANSACTION_ID]`                                              |
-|     **List completed** transactions     | `list-tx-completed`                                                          |
-|    **List uncompleted** transactions    | `list-tx-uncompleted`                                                        |
-|  **Find** transactions **by customer**  | `find-tx-by-customer /u [CUSTOMER_NAME]`                                     |
+|                 Action                  | Format                                                                      |
+|:---------------------------------------:|-----------------------------------------------------------------------------|
+|           **Add** transaction           | `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
+|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                             |
+|       **Remove all** transactions       | `remove-all-txs`                                                            |
+|        **List all** transactions        | `list-tx`                                                                   |
+|  **Mark** transactions as **complete**  | `mark-tx /t [TRANSACTION_ID]`                                               |
+| **Mark** transactions as **incomplete** | `unmark-tx /t [TRANSACTION_ID]`                                             |
+|     **List completed** transactions     | `list-tx-completed`                                                         |
+|    **List uncompleted** transactions    | `list-tx-uncompleted`                                                       |
+|  **Find** transactions **by customer**  | `find-tx-by-customer /u [CUSTOMER_NAME]`                                    |
 
 **Other useful commands:**
 
