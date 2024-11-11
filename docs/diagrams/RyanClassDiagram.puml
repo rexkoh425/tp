@@ -3,17 +3,8 @@
 
 skinparam {
 classAttributeIconSize 0
-defaultFontColor white
 defaultFontSize 25
-backgroundColor PowderBlue
 ArrowFontSize 25
-ArrowFontColor black
-}
-
-skinparam class {
-BackgroundColor #c27517
-BackgroundColor<<Car>> #2683d4
-BackgroundColor<<Transaction>> #c21717
 }
 
 class CliRental {
