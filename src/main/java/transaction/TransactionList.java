@@ -215,13 +215,13 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getCustomer().toLowerCase().contains(customer)) {
+            if (transaction.getCustomer().toLowerCase().contains(customer.toLowerCase())) {
                 found = true;
                 System.out.println(transaction);
             }
         }
         if (!found) {
-            System.out.println("none");
+            System.out.println("None");
         }
     }
 

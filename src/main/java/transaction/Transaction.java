@@ -58,7 +58,7 @@ public class Transaction {
 
     private String durationtoString(){
         if(duration == 1) {
-            return " day";
+            return "1 day";
         } else {
             return duration + " days";
         }
