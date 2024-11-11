@@ -89,4 +89,5 @@ deactivate CarFile
 
 <-- FileHandler : return
 deactivate FileHandler
+hide footbox
 @enduml

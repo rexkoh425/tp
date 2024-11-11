@@ -101,4 +101,5 @@ CustomerParser ..> Customer : "creates"
 CustomerParser ..> CustomerException : "throws"
 
 CustomerList  *-- "*" Customer : "contains"
+
 @enduml

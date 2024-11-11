@@ -34,5 +34,5 @@ class CustomerList{
         printCustomers() : void
         customerListToFileString() : string
 }
-
+hide footbox
 @enduml
