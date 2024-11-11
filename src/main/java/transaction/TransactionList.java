@@ -1,13 +1,13 @@
 package transaction;
 
 import car.CarList;
-
 import exceptions.CarException;
+import exceptions.CustomerException;
 import parser.CarParser;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TransactionList {
+
     // Ensure the transaction list is initialized properly
     private static final ArrayList<Transaction> transactionList = new ArrayList<>();
     private static int txCounter = 1;
@@ -23,36 +23,25 @@ public class TransactionList {
         assert transaction != null : "Transaction to add should not be null.";
 
         String licensePlateNumber = transaction.getCarLicensePlate();
-        String customerName = transaction.getCustomer();
-
-        // Assert that the license plate number is not null
+        String uniqueCustomer = transaction.getCustomer();
+        // Assert that the license plate number and customer are not null
         assert licensePlateNumber != null : "License plate number should not be null.";
+        assert uniqueCustomer != null: "Customer should not be null.";
 
         if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
             throw CarException.invalidLicensePlateNumber();
         }
 
-        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)){
+        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)) {
             throw CarException.licensePlateNumberNotFound();
         }
 
-        for (Transaction tx : transactionList) {
-            boolean isCarInTxList = tx.getCarLicensePlate().equals(licensePlateNumber);
-            boolean isCustomerInTxList = tx.getCustomer().equalsIgnoreCase(customerName);
-            boolean doDatesOverlap =  datesOverlap(tx.getStartDate(), tx.getEndDate(),
-                    transaction.getStartDate(), transaction.getEndDate());
+        if (isCustomerInTransactionList(uniqueCustomer)) {
+            throw CustomerException.customerAlreadyInTransactionList();
+        }
 
-            if (isCarInTxList && doDatesOverlap) {
-                System.out.println("Car " + licensePlateNumber +
-                        " is already rented during this period. Transaction not added.");
-                return;
-            }
-
-            if (isCustomerInTxList && doDatesOverlap) {
-                System.out.println("Customer " + customerName +
-                        " already has a rental during this period. Transaction not added.");
-                return;
-            }
+        if (isCarInTransactionList(licensePlateNumber)) {
+            throw CarException.carAlreadyInTransactionList();
         }
 
         // Assert that the license plate number is valid and exists before adding
@@ -72,20 +61,55 @@ public class TransactionList {
         System.out.println(transaction);
     }
 
-    public static void addTxWithoutPrintingInfo(Transaction transaction) throws CarException{
+    public static void clearTransactionList(){
+        transactionList.clear();
+    }
+
+
+    public static void addTxWithoutPrintingInfo(Transaction transaction) {
+        // Assert that the transaction is not null
+        assert transaction != null : "Transaction to add should not be null.";
 
         String licensePlateNumber = transaction.getCarLicensePlate();
+        String uniqueCustomer = transaction.getCustomer();
 
-        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
-            throw CarException.invalidLicensePlateNumber();
+        if (isCustomerInTransactionList(uniqueCustomer)) {
+            throw CustomerException.customerAlreadyInTransactionList();
         }
 
         String newTransactionId = "TX" + txCounter++;
         transaction.setTransactionId(newTransactionId);
+
+        if (isCarInTransactionList(licensePlateNumber)) {
+            throw CarException.carAlreadyInTransactionList();
+        }
+      
         transactionList.add(transaction);
         CarList.markCarAsRented(licensePlateNumber);
-
+        // Assert that the transaction was added successfully
+        assert transactionList.contains(transaction) : "Transaction was not added to the list.";
     }
+
+    // Helper method to check if a customer already exists in the transaction list
+    private static boolean isCustomerInTransactionList(String customer) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCustomer().equalsIgnoreCase(customer) && !transaction.isCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Helper method to check if a car with a specific license plate already exists in the transaction list
+    private static boolean isCarInTransactionList(String licensePlateNumber) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getCarLicensePlate().equalsIgnoreCase(licensePlateNumber) && !transaction.isCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void printAllTransactions() {
         int index = 1;
@@ -166,14 +190,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                System.out.println("Transaction deleted: " + transaction);
-                transactionList.remove(transaction);
-                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    System.out.println("Transaction deleted: " + transaction);
+                    transactionList.remove(transaction);
+                    CarList.markCarAsAvailable(transaction.getCarLicensePlate());
 
-                // Assert that the transaction was removed successfully
-                assert !transactionList.contains(transaction) : "Transaction was not removed from the list.";
-                return;
+                    // Assert that the transaction was removed successfully
+                    assert !transactionList.contains(transaction) : "Transaction was not removed from the list.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
@@ -210,14 +236,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                transaction.setCompleted(true);
-                CarList.markCarAsAvailable(transaction.getCarLicensePlate());
-                System.out.println("Transaction completed: " + transaction);
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    transaction.setCompleted(true);
+                    CarList.markCarAsAvailable(transaction.getCarLicensePlate());
+                    System.out.println("Transaction completed: " + transaction);
 
-                // Assert that the transaction is marked as completed
-                assert transaction.isCompleted() : "Transaction was not marked as completed.";
-                return;
+                    // Assert that the transaction is marked as completed
+                    assert transaction.isCompleted() : "Transaction was not marked as completed.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
@@ -230,14 +258,16 @@ public class TransactionList {
         for (Transaction transaction : transactionList) {
             // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
-            if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
-                transaction.setCompleted(false);
-                CarList.markCarAsRented(transaction.getCarLicensePlate());
-                System.out.println("Transaction set uncompleted: " + transaction);
+            if (transaction.getTransactionId() != null) {
+                if (transaction.getTransactionId().equalsIgnoreCase(txId)) {
+                    transaction.setCompleted(false);
+                    CarList.markCarAsRented(transaction.getCarLicensePlate());
+                    System.out.println("Transaction set uncompleted: " + transaction);
 
-                // Assert that the transaction is marked as uncompleted
-                assert !transaction.isCompleted() : "Transaction was not unmarked as completed.";
-                return;
+                    // Assert that the transaction is marked as uncompleted
+                    assert !transaction.isCompleted() : "Transaction was not unmarked as completed.";
+                    return;
+                }
             }
         }
         System.out.println("Transaction not found");
@@ -257,17 +287,6 @@ public class TransactionList {
 
     public static ArrayList<Transaction> getTransactionList(){
         return transactionList;
-    }
-
-
-    public static void clearTransactionList(){
-        transactionList.clear();
-    }
-  
-    private static boolean datesOverlap(LocalDate start1, LocalDate end1,
-                                        LocalDate start2, LocalDate end2) {
-        return (start1.isBefore(end2) && end1.isAfter(start2)) || start1.equals(start2)
-                || end1.equals(end2);
     }
 
 }
