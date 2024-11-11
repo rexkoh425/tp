@@ -16,7 +16,9 @@ public class HelpParser {
         commands.put("list-users", "Lists all customers.");
         commands.put("add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]", "Adds a new car to the fleet.");
         commands.put("remove-car /i [LICENSE_PLATE_NUMBER]", "Removes a car from the fleet.");
-        commands.put("list-cars", "Lists all rented-out cars.");
+        commands.put("list-cars", "Lists all cars.");
+        commands.put("list-rented", "Lists all rented-out cars.");
+        commands.put("list-available", "Lists all available cars.");
         commands.put("remove-all-cars", "Remove all existing cars in the cars list.");
         commands.put("add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: <dd-MM-yyyy>]",
                 "Adds a new rental transaction.");

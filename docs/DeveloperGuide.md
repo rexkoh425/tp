@@ -30,6 +30,15 @@ the customer and creating transactions.
 ### Sequence diagram
 ![Local Image](images/AddCustomerSequence.png)
 
+### Removing a car
+
+The following sequence diagram illustrates the sequence of events after the user executes
+the `remove-car` command. 
+
+![](./images/RyanRemoveCarDiagram.png)
+
+### Creating Car file and loading file
+
 ### High-level steps
 
 1) Parse the input into its parameters and extract the content.
@@ -99,8 +108,6 @@ The following sequence diagram illustrates a **valid** `add-car` operation:
 Step 2: The user enters the `list-cars` command to verify that the car has been successfully added
 to the car list.
 
--> show code output
-
 Example:
 
 ![](./images/list-cars-output-before.png)
@@ -129,8 +136,6 @@ Step 5: **Optionally**, the user can also execute
 the `list-cars` command to view the rental status of all
 the cars. By doing so, the rental status of the car that was just rented out,
 should now have a rental status of **'Rented'** instead of **'Available'**.
-
--> show code output
 
 Example:
 
@@ -252,15 +257,18 @@ finding the transaction they are looking for easily with multiple filters.
 
 ## User Stories
 
-| Version | As a ...                       | I want to ...                  | So that I can ...                     |
-|---------|--------------------------------|--------------------------------|---------------------------------------|
-| v1.0    | car rental frontdesk employee  | know status of all the cars    | inform customers about availability   |
- v1.0    | car rental frontdesk employee  | add customer details to our database | keep records for future transactions  |
- v2.0    | car rental frontdesk employee  | save all my data               | ensure information will never be lost |
- v2.0    | -                              | -                              | -                                     |
- v2.0    | -                              | -                              | -                                     |
- v2.0    | -                              | -                              | -                                     |
-| v2.0    | -                              | -                              | -                                     |
+| Version | As a ...                       | I want to ...                                | So that I can ...                                |
+|---------|--------------------------------|----------------------------------------------|--------------------------------------------------|
+| v1.0    | car rental front-desk employee | know status of all the cars                  | inform customers about availability              |
+| v1.0    | car rental front-desk employee | add customer details to our database         | keep records for future transactions             |
+| v1.0    | car rental company manager     | get an overview of all transactions          | gauge how well the company is doing              |
+| v1.0    | car rental front-desk employee | add a new transaction record to the database | keep track of the transaction details            |
+| v1.0    | car rental front-desk employee | add new cars to the car database             | have a wider range of cars to offer to customers |
+| v2.0    | car rental front-desk employee | save all my data                             | ensure information will never be lost            |
+| v2.0    | forgetful car rental employee  | view a help page containing all the commands | refer to it whenever I forget any commands       |
+|         |                                |                                              |                                                  |
+|         |                                |                                              |                                                  |
+
 
 ## Non-Functional Requirements
 
