@@ -48,6 +48,10 @@ loaded if the file exist.
 ### Sequence diagram
 ![Local Image](images/CarFileLoader.png)
 
+### Class diagram for All File-related Classes
+
+![Local Image](images/FileHandlerClassDiagram.png)
+
 ### High-level steps 
 
 1) File is created if it does not exist.
