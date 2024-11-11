@@ -130,7 +130,7 @@ public class TransactionParser {
             System.out.println(FIND_TRANSACTION_BY_CUSTOMER_FORMAT);
             return;
         }
-        TransactionList.findTxsByCustomer(words[2].toLowerCase());
+        TransactionList.findTxsByCustomer(words[2]);
     }
 
     public static void parseRemoveTx(String userInput){
