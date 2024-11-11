@@ -1,6 +1,8 @@
 package transaction;
 
 import car.CarList;
+import customer.Customer;
+import customer.CustomerList;
 import exceptions.CarException;
 import exceptions.CustomerException;
 import parser.CarParser;
@@ -215,18 +217,36 @@ public class TransactionList {
         // Assert that customer is not null
         assert customer != null : "Customer name to find transactions should not be null.";
 
+        // Check if the customer exists in CustomerList
+        boolean customerExists = false;
+        String foundCustomer = "";
+        for (Customer cust : CustomerList.getCustomerList()) {
+            assert cust != null : "Customer in the list should not be null.";
+            if (cust.getCustomerName().toLowerCase().contains(customer.toLowerCase())) {
+                customerExists = true;
+                foundCustomer = cust.getCustomerName();
+                break;
+            }
+        }
+
+        if (!customerExists) {
+            System.out.println("User " + customer + " was not found");
+            return;
+        }
+
+        // Search for transactions by the specified customer
         boolean found = false;
-        System.out.println("Transaction(s) by " + customer + " found:");
+        System.out.println("Transaction(s) by " + foundCustomer + " found:");
         for (Transaction transaction : transactionList) {
-            // Assert that each transaction is not null
             assert transaction != null : "Transaction in the list should not be null.";
             if (transaction.getCustomer().toLowerCase().contains(customer.toLowerCase())) {
                 found = true;
                 System.out.println(transaction);
             }
         }
+
         if (!found) {
-            System.out.println("User " + customer + " was not found");
+            System.out.println("None");
         }
     }
 
