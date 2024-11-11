@@ -3,82 +3,66 @@
 
 
 class CliRental {
-   {field}...
-   {method}...
+
 }
 
 class Parser {
-    {field}...
-    {method}...
+
 }
-class CarParser <<Car>>{
-   {field}...
-   {method}...
+class CarParser{
+
 }
 
-class TransactionParser <<Transaction>>{
-   {field}...
-   {method}...
+class TransactionParser{
+
 }
 
-class Car <<Car>>{
-   {field}...
-   {method}...
+class Car {
+
 }
 
-class Transaction <<Transaction>>{
-   {field}...
-   {method}...
+class Transaction {
+
 }
 
-class CarList <<Car>>{
-   {field}...
-   {method}...
+class CarList {
+
 }
 
-class TransactionList <<Transaction>>{
-   {field}...
-   {method}...
+class TransactionList {
+
 }
 
-class Customer <<Customer>> {
-   {field}...
-   {method}...
+class Customer  {
+
 }
 
-class CustomerList <<Customer>> {
-   {field}...
-   {method}...
+class CustomerList {
+
 }
 
-class CustomerParser <<Customer>> {
-   {field}...
-   {method}...
+class CustomerParser  {
+
 }
 
-class CustomerException <<Exception>> {
-   {field}...
-   {method}...
+class CustomerException {
+
 }
 
 class FileHandler {
-   {field}...
-   {method}...
+
 }
 
 class CarFile {
-  {field}...
-  {method}...
+
 }
 
 class CustomerFile {
-    {field}...
-    {method}...
+
 }
 
 class TransactionFile {
-   {field}...
-   {method}...
+
 }
 
 FileHandler --> "1" CarFile : "create"
@@ -117,4 +101,5 @@ CustomerParser ..> Customer : "creates"
 CustomerParser ..> CustomerException : "throws"
 
 CustomerList  *-- "*" Customer : "contains"
+
 @enduml

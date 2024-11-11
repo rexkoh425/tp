@@ -55,7 +55,6 @@ public class Transaction {
         return transactionId;
     }
 
-
     private String durationtoString(){
         if(duration == 1) {
             return "1 day";

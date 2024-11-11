@@ -66,6 +66,46 @@ public class CustomerParserTest {
     }
 
     @Test
+    void parseWithPhoneNumberStartingWith6() {
+        String userInput = "add-user /u invalidUser /a 22 /c 61234567";
+        assertThrows(CustomerException.class, () -> {
+            CustomerParser.parseIntoCustomer(userInput);
+        });
+    }
+
+    @Test
+    void parseWithPhoneNumberStartingWith0() {
+        String userInput = "add-user /u invalidUser /a 22 /c 01234567";
+        assertThrows(CustomerException.class, () -> {
+            CustomerParser.parseIntoCustomer(userInput);
+        });
+    }
+
+    @Test
+    void parseWithPhoneNumberContainingLetters() {
+        String userInput = "add-user /u invalidUser /a 22 /c 9ABC5678";
+        assertThrows(CustomerException.class, () -> {
+            CustomerParser.parseIntoCustomer(userInput);
+        });
+    }
+
+    @Test
+    void parseWithPhoneNumberContainingSpecialCharacters() {
+        String userInput = "add-user /u invalidUser /a 22 /c 9234@678";
+        assertThrows(CustomerException.class, () -> {
+            CustomerParser.parseIntoCustomer(userInput);
+        });
+    }
+
+    @Test
+    void parseWithPhoneNumberContainingSpace() {
+        String userInput = "add-user /u invalidUser /a 22 /c 9234 5678";
+        assertThrows(CustomerException.class, () -> {
+            CustomerParser.parseIntoCustomer(userInput);
+        });
+    }
+
+    @Test
     void parseWithValidPhoneNumberEightDigitsOnly() {
         String userInput = "add-user /u validUser /a 28 /c 98765432";
         Customer customer = CustomerParser.parseIntoCustomer(userInput);

@@ -67,4 +67,5 @@ activate CustomerList
     Parser <-- CustomerList : return
 deactivate CustomerList
 deactivate Parser
+hide footbox
 @enduml

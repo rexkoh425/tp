@@ -90,7 +90,7 @@ public class CarException extends RuntimeException{
      * @return Exception with message of which the row of data which are wrong.
      */
     public static CarException invalidParameters(ArrayList<Integer> errorLines){
-        String message = "Car data do not match number of parameters in " + errorLines.size() + " rows of data\n";
+        String message = "Car data do not match parameters requirements in " + errorLines.size() + " rows of data\n";
         message += "Rows are : ";
         message += errorLines.toString();
         message = message + "\n";

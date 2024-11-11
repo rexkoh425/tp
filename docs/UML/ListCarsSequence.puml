@@ -37,4 +37,5 @@ alt carsList is not empty
     end loop
 end alt
 <-- CarList : return
+hide footbox
 @enduml
