@@ -26,7 +26,7 @@ public class CarParser {
      * @throws CarException If <b>license plate number</b> or <b>price</b> of <code>Car</code> is invalid.
      * @throws NumberFormatException If <b>price</b> is not a numeric value.
      */
-    public static Car parseIntoCar(String userInput) throws CarException, NumberFormatException {
+    public static Car parseIntoCar(String userInput) throws CarException, NumberFormatException{
         userInput = userInput.trim();
 
         if (!isValidFormat(userInput)) {
@@ -41,6 +41,10 @@ public class CarParser {
         }
 
         String carPriceString = extractCarPrice(userInput).trim();
+        if (!isParseableToDouble(carPriceString)) {
+            throw new NumberFormatException("Price must be a numeric value!!");
+        }
+
         double carPrice = Double.parseDouble(carPriceString);
         if (!isValidPrice(carPrice)) {
             if (carPrice < 0.00) {
