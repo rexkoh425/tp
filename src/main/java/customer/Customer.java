@@ -1,16 +1,35 @@
 package customer;
 
+import exceptions.CustomerException;
+import java.util.regex.Pattern;
+
 /**
  * Represents customers of CliRental
  */
 public class Customer {
 
     public static final int NUMBER_OF_PARAMETERS = 3;
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("^[a-zA-Z ]+$");
+    private static final Pattern VALID_CONTACT_PATTERN = Pattern.compile("^[89]\\d{7}$");  // 8 digits, starts with 8 or 9
+
     private String customerName;
     private int age;
     private String contactNumber;
 
-    public Customer(String customerName, int age, String contactNumber){
+    public Customer(String customerName, int age, String contactNumber) {
+        // Validate name format
+        if (!isValidName(customerName)) {
+            throw CustomerException.invalidCustomerNameException(customerName);
+        }
+        // Validate age
+        if (age <= 17) {
+            throw CustomerException.invalidAgeException();
+        }
+        // Validate contact number format
+        if (!isValidContactNumber(contactNumber)) {
+            throw CustomerException.invalidContactNumberException();
+        }
+
         this.customerName = customerName;
         this.age = age;
         this.contactNumber = contactNumber;
@@ -29,29 +48,46 @@ public class Customer {
     }
 
     public void setCustomerName(String customerName) {
+        if (!isValidName(customerName)) {
+            throw CustomerException.invalidCustomerNameException(customerName);
+        }
         this.customerName = customerName;
     }
 
     public void setAge(int age) {
+        if (age <= 17) {
+            throw CustomerException.invalidAgeException();
+        }
         this.age = age;
     }
 
     public void setContactNumber(String contactNumber) {
+        if (!isValidContactNumber(contactNumber)) {
+            throw CustomerException.invalidContactNumberException();
+        }
         this.contactNumber = contactNumber;
     }
 
-    public String toString(){
+    public String toString() {
         return this.getCustomerName() + " | "
                 + this.getAge() + " | "
                 + this.getContactNumber();
     }
 
-    public String toFileString(){
+    public String toFileString() {
         return this.getCustomerName() + " | " + this.getAge() + " | " + this.getContactNumber();
     }
 
-    public String toDisplayString(){
-        return "Customer name : " + getCustomerName() + "\nAge : " + getAge() + "\nContact Number : "
+    public String toDisplayString() {
+        return "Customer name: " + getCustomerName() + "\nAge: " + getAge() + "\nContact Number: "
                 + getContactNumber();
+    }
+
+    private static boolean isValidName(String name) {
+        return VALID_NAME_PATTERN.matcher(name).matches();
+    }
+
+    private static boolean isValidContactNumber(String contactNumber) {
+        return VALID_CONTACT_PATTERN.matcher(contactNumber).matches();
     }
 }
