@@ -15,7 +15,7 @@ public class TransactionParser {
     public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String ADD_TRANSACTION_FORMAT = "add-tx /c [CAR_ID] " +
             "/u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy]";
-    public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-tx-by-customer /u [CUSTOMER_NAME]";
+    public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-txs-by-customer /u [CUSTOMER_NAME]";
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
     public static final String MARK_TRANSACTION_FORMAT = "mark-tx /t [TRANSACTION_ID]";
     public static final String UNMARK_TRANSACTION_FORMAT = "unmark-tx /t [TRANSACTION_ID]";
