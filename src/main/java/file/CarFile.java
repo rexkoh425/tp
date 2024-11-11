@@ -45,8 +45,12 @@ public class CarFile {
      */
     public void addCarWithParameters(String[] parameters, ArrayList<Integer> errorLines, int line) {
         assert parameters.length == Car.NUMBER_OF_PARAMETERS : "wrong no. of parameter";
-        String model = parameters[0];
+
         try {
+            if(FileHandler.containEmptyParameter(parameters)){
+                throw new CarException("");
+            }
+            String model = parameters[0];
             String licensePlateNumber = parameters[1];
             double price = Double.parseDouble(parameters[2]);
             boolean isRented = Boolean.parseBoolean(parameters[3]);
@@ -83,9 +87,9 @@ public class CarFile {
         }
     }
 
-    public void deleteCarFileIfExist(){
+    public void deleteCarFileIfExist() {
         boolean deleted = false;
-        if(carDataFile.exists()){
+        if (carDataFile.exists()) {
             deleted = carDataFile.delete();
         }
         System.out.println("carData.txt deleted: " + deleted);

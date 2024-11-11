@@ -49,6 +49,7 @@ public class FileHandler {
         carFile.loadCarDataIfExist();
         customerFile.loadCustomerDataIfExist();
         transactionFile.loadTransactionDataIfExist();
+
         assert carFile.isFileExist() : "Car file does not exist.";
         assert customerFile.isFileExist() : "Customer file does not exist.";
         assert transactionFile.isFileExist() : "Transaction file does not exist.";
@@ -97,6 +98,15 @@ public class FileHandler {
         } else {
             System.out.println(DIR_NAME + " directory already exists or failed to create.");
         }
+    }
+
+    public static boolean containEmptyParameter(String[] parameters){
+        for (int i = 0; i < parameters.length ; i++) {
+            if (parameters[i].trim().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
