@@ -1,4 +1,6 @@
-# Ryan Fong - Project Portfolio Page
+# Ryan Fong's Project Portfolio Page
+
+## Project: CLIRental
 
 ---
 ## Overview
