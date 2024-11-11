@@ -73,8 +73,12 @@ public class Parser {
             CustomerList.removeAllCustomers();
             return false;
         case ADD_CAR_COMMAND:
-            Car car = CarParser.parseIntoCar(userInput);
-            CarList.addCar(car);
+            try {
+                Car car = CarParser.parseIntoCar(userInput);
+                CarList.addCar(car);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
             return false;
         case REMOVE_CAR_COMMAND:
             try {

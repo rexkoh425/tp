@@ -115,21 +115,23 @@ public class CarParserTest {
     @Test
     public void parseIntoCar_boundaryPriceValue_carObjectCreated() {
         String userInput = "add-car /n civic /c SCT6677K /p 0"; // Minimum price
-        String userInput1 = "add-car /n civic /c SPL9773R /p 99999"; // Maximum valid price
+        String userInput1 = "add-car /n civic /c SPL9773R /p 10000"; // Maximum valid price
 
         Car car = CarParser.parseIntoCar(userInput);
         assertEquals(0, car.getPrice());
 
         Car car1 = CarParser.parseIntoCar(userInput1);
-        assertEquals(99999, car1.getPrice());
+        assertEquals(10000, car1.getPrice());
     }
 
     @Test
     public void parseIntoCar_invalidPrice_expectCarException() {
         String userInput = "add-car /n civic /c SCT1234N /p -100"; // Negative price
         String userInput1 = "add-car /n civic /c SBE678L /p abc"; // Non-numeric price
+        String userInput2 = "add-car /n civic /c SBE678L /p 99999999999999999999"; // Price exceeding limit
 
         assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput));
         assertThrows(NumberFormatException.class, () -> CarParser.parseIntoCar(userInput1));
+        assertThrows(CarException.class, () -> CarParser.parseIntoCar(userInput2));
     }
 }

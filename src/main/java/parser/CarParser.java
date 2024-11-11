@@ -13,6 +13,7 @@ public class CarParser {
     private static final int ADD_CAR_PARAMETERS_OFFSET = 2;
     private static final int MIN_LICENSE_PLATE_NUMBER_LENGTH = 5;
     private static final int MAX_LICENSE_PLATE_NUMBER_LENGTH = 8;
+    private static final int MAXIMUM_CAR_PRICE = 10000;
 
     /**
      * Parses the <code>add-car</code> user command into a <code>Car</code> object.
@@ -25,7 +26,7 @@ public class CarParser {
      * @throws CarException If <b>license plate number</b> or <b>price</b> of <code>Car</code> is invalid.
      * @throws NumberFormatException If <b>price</b> is not a numeric value.
      */
-    public static Car parseIntoCar(String userInput) throws CarException, NumberFormatException {
+    public static Car parseIntoCar(String userInput) throws CarException, NumberFormatException{
         userInput = userInput.trim();
 
         if (!isValidFormat(userInput)) {
@@ -40,12 +41,21 @@ public class CarParser {
         }
 
         String carPriceString = extractCarPrice(userInput).trim();
+        if (!isParseableToDouble(carPriceString)) {
+            throw new NumberFormatException("Price must be a numeric value!!");
+        }
+
         double carPrice = Double.parseDouble(carPriceString);
         if (!isValidPrice(carPrice)) {
-            throw CarException.invalidPrice();
+            if (carPrice < 0.00) {
+                throw CarException.negativePrice();
+            } else {
+                throw CarException.invalidPrice();
+            }
         }
 
         assert carPrice >= 0.00 : "ERROR.. Car price is negative!!";
+        assert carPrice <= 10000 : "ERROR.. Car price exceeded limit of $10 000!!";
         double formattedCarPrice = Double.parseDouble(String.format("%.2f", carPrice));
 
         return new Car(carModel, carLicensePlateNumber, formattedCarPrice);
@@ -96,15 +106,32 @@ public class CarParser {
      * @param userInput Full command entered by user.
      * @return Price of car.
      */
-    private static String extractCarPrice(String userInput) {
+    private static String extractCarPrice(String userInput) throws NumberFormatException{
         int startIndexOfPrice = userInput.indexOf(ADD_CAR_PARAMETERS[2]) + ADD_CAR_PARAMETERS_OFFSET;
 
-        String carPrice = userInput.substring(startIndexOfPrice);
-        if (carPrice.trim().isEmpty()) {
+        String carPrice = userInput.substring(startIndexOfPrice).trim();
+        if (carPrice.isEmpty()) {
             throw new CarException("Car price missing!!");
         }
 
         return carPrice;
+    }
+
+    /**
+     * Checks if car price can be parsed to a double type value.
+     *
+     * @param carPriceString String representation of car price.
+     * @return <code>true</code> if <b>String</b> can be parsed
+     *     to a <b>double</b> type, <code>false</code> otherwise.
+     */
+    private static boolean isParseableToDouble(String carPriceString) {
+        try{
+            Double.parseDouble(carPriceString);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -135,13 +162,13 @@ public class CarParser {
     /**
      * Checks if price entered by user is valid.
      * <p>
-     * A valid price must be <b>non-negative</b>.
+     * A valid price must be <b>non-negative</b> and <b>less than 10 000</b>.
      *
      * @param price Price of car specified by user.
      * @return <code>true</code> if price is valid, <code>false</code> otherwise.
      */
-    public static boolean isValidPrice(double price) {
-        return !(price < 0.00);
+    public static boolean isValidPrice(double price) throws CarException{
+        return !(price < 0.00 || price > MAXIMUM_CAR_PRICE);
     }
 
     /**
@@ -159,6 +186,8 @@ public class CarParser {
      * @return <code>true</code> if license plate number is valid, <code>false</code> otherwise.
      */
     public static boolean isValidLicensePlateNumber(String licensePlateNumber) {
+        licensePlateNumber = licensePlateNumber.toUpperCase();
+
         if (!licensePlateNumber.startsWith("S") ||
             licensePlateNumber.length() < MIN_LICENSE_PLATE_NUMBER_LENGTH ||
                 licensePlateNumber.length() > MAX_LICENSE_PLATE_NUMBER_LENGTH) {
@@ -196,18 +225,26 @@ public class CarParser {
         userInput = userInput.trim();
 
         String licensePlateNumber = extractLicensePlateForRemoval(userInput).trim();
-        if (licensePlateNumber.isEmpty()) {
-            throw new CarException("License plate number missing!!");
+
+        if (!isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
         }
 
         return licensePlateNumber;
     }
 
-    private static String extractLicensePlateForRemoval(String userInput) {
+    private static String extractLicensePlateForRemoval(String userInput) throws CarException{
         String[] splitInput = userInput.split(" ");
-        if (splitInput.length < 2) {
-            throw new CarException("Invalid format for removing a car. Use: remove-car /i [CAR_ID]");
+
+        if (splitInput.length != 3) {
+            throw new CarException("Invalid format for removing a car. Use: remove-car /i [LICENSE_PLATE_NUMBER]");
         }
+
+        String licensePlateNumberIdentifier = splitInput[1];
+        if (!licensePlateNumberIdentifier.equals("/i")) {
+            throw new CarException("Invalid parameter identifier. Use: remove-car /i [LICENSE_PLATE_NUMBER]");
+        }
+
         return splitInput[2];  // Expecting the license plate number to be the second argument
     }
 }
