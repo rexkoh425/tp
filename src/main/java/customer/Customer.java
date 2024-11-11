@@ -10,7 +10,8 @@ public class Customer {
 
     public static final int NUMBER_OF_PARAMETERS = 3;
     private static final Pattern VALID_NAME_PATTERN = Pattern.compile("^[a-zA-Z ]+$");
-    private static final Pattern VALID_CONTACT_PATTERN = Pattern.compile("^[89]\\d{7}$");  // 8 digits, starts with 8 or 9
+    private static final Pattern VALID_CONTACT_PATTERN = Pattern.compile("^[89]\\d{7}$");
+    // 8 digits, starts with 8 or 9
 
     private String customerName;
     private int age;
