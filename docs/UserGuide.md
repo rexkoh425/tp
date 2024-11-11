@@ -4,6 +4,29 @@
 
 Clirental is a CLI-based application that allows car rental companies to track their customers, cars, and rental transactions.
 
+Summary of Contents:
+- [Quick start](#quick-start)
+- [File Saving](#file-saving)
+- [Features](#features)
+  - [Adding a user: `add-user`](#adding-a-user-to-the-database-add-user)
+  - [Adding a car: `add-car`](#adding-a-car-add-car)
+  - [Removing a car: `remove-car`](#removing-a-car-remove-car)
+  - [Listing all cars: `list-cars`](#listing-all-cars-list-cars)
+  - [Listing all rented-out cars: `list-rented`](#listing-all-rented-out-cars-list-rented)
+  - [Listing all available cars: `list-available`](#listing-all-available-cars-list-available)
+  - [Updating rental status of cars](#updating-rental-status-of-car)
+  - [Adding a transaction: `add-tx`](#adding-a-transaction-add-tx)
+  - [Removing a transaction: `remove-tx`](#removing-a-transaction-remove-tx)
+  - [Removing all transactions: `remove-all-txs`](#removing-all-transactions-remove-all-txs)
+  - [Listing all transactions: `list-txs`](#listing-all-transactions-list-txs)
+  - [Marking a transaction as complete: `mark-tx`](#marking-a-transaction-as-complete-mark-tx)
+  - [Unmarking a transaction as incomplete: `unmark-tx`](#unmarking-a-transaction-as-incomplete-unmark-tx)
+  - [Displaying the help page: `help`](#displaying-the-help-page-help)
+  - [Exiting the program: `exit`](#exiting-the-program-exit)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
+
 ## Quick Start
 
 1. Ensure that you have Java 17 or above installed.
@@ -147,7 +170,6 @@ Lists all the cars owned by the company.
 
 **Sample Output:**
 ```
-<<<<<<< HEAD
 Here are the current cars in the company:
 1) civic | SGE1234X | $1000.00 | Available | Affordable | Median price: 1000.0
 2) vios | SKP890C | $2000.00 | Available | Expensive | Median price: 1000.0
@@ -157,14 +179,6 @@ If the list is **empty**:
 ``` 
 Oops!! Car list is empty...
 Use command <add-car> to add a new car.
-=======
-list-cars
-Here are the current cars in the company:
-1) Honda Civic | SGE1234X | $10000.00 | Available | Affordable | Median price: 10000.0
-____________________________________________________________
-What would you like to do?
-____________________________________________________________
->>>>>>> master
 ```
 
 ### Listing All Rented Out Cars: `list-rented`
@@ -264,11 +278,11 @@ Removes all transactions from the system.
 
 **Format:** `remove-all-txs`
 
-### Listing All Transactions: `list-tx`
+### Listing All Transactions: `list-txs`
 
 Displays all transactions stored in the system.
 
-**Format:** `list-tx`
+**Format:** `list-txs`
 
 **Sample output:**
 ```
@@ -358,36 +372,37 @@ Format: `exit`
 
 **`Customer` related commands:**
 
-|         Action         | Format                                                     |
-|:----------------------:|------------------------------------------------------------|
-|    **Add** customer    | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
-|  **Remove** customer   | `remove-user /u [CUSTOMER_NAME]`                           |
-| **List all** customers | `list-users`                                               |
+|          Action           | Format                                                     |
+|:-------------------------:|------------------------------------------------------------|
+|     **Add** customer      | `add-user /u [CUSTOMER_NAME] /a [AGE] /c [CONTACT_NUMBER]` |
+|    **Remove** customer    | `remove-user /u [CUSTOMER_NAME]`                           |
+| **Remove all** customers  | `remove-all-users`                                         |
+|  **List all** customers   | `list-users`                                               |
 
 **`Car` related commands:**
 
-|         Action          | Format                                                  |
-|:-----------------------:|---------------------------------------------------------|
-|       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]` |
-|     **Remove** car      | `remove-car /i [LICENSE_PLATE_NUMBER]`                                      |
-|   **Remove all** cars   | `remove-all-cars`                                       |
-|    **List all** cars    | `list-cars`                                             |
-|  **List rented** cars   | `list-rented`                                           |
-| **List available** cars | `list-available`                                        |
+|         Action          | Format                                                         |
+|:-----------------------:|----------------------------------------------------------------|
+|       **Add** car       | `add-car /n [CAR_MODEL] /c [LICENSE_PLATE_NUMBER] /p [PRICE]`  |
+|     **Remove** car      | `remove-car /i [LICENSE_PLATE_NUMBER]`                         |
+|   **Remove all** cars   | `remove-all-cars`                                              |
+|    **List all** cars    | `list-cars`                                                    |
+|  **List rented** cars   | `list-rented`                                                  |
+| **List available** cars | `list-available`                                               |
 
 **`Transaction` related commands:**
 
-|                 Action                  | Format                                                                      |
-|:---------------------------------------:|-----------------------------------------------------------------------------|
+|                 Action                  | Format                                                                                          |
+|:---------------------------------------:|-------------------------------------------------------------------------------------------------|
 |           **Add** transaction           | `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]` |
-|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                             |
-|       **Remove all** transactions       | `remove-all-txs`                                                            |
-|        **List all** transactions        | `list-tx`                                                                   |
-|  **Mark** transactions as **complete**  | `mark-tx /t [TRANSACTION_ID]`                                               |
-| **Mark** transactions as **incomplete** | `unmark-tx /t [TRANSACTION_ID]`                                             |
-|     **List completed** transactions     | `list-tx-completed`                                                         |
-|    **List uncompleted** transactions    | `list-tx-uncompleted`                                                       |
-|  **Find** transactions **by customer**  | `find-tx-by-customer /u [CUSTOMER_NAME]`                                    |
+|         **Remove** transaction          | `remove-tx /t [TRANSACTION_ID]`                                                                 |
+|       **Remove all** transactions       | `remove-all-txs`                                                                                |
+|        **List all** transactions        | `list-txs`                                                                                      |
+|  **Mark** transactions as **complete**  | `mark-txs /t [TRANSACTION_ID]`                                                                  |
+| **Mark** transactions as **incomplete** | `unmark-txs /t [TRANSACTION_ID]`                                                                |
+|     **List completed** transactions     | `list-txs-completed`                                                                            |
+|    **List uncompleted** transactions    | `list-txs-uncompleted`                                                                          |
+|  **Find** transactions **by customer**  | `find-txs-by-customer /u [CUSTOMER_NAME]`                                                       |
 
 **Other useful commands:**
 
