@@ -33,8 +33,8 @@ class TransactionTest {
     @Test
     void testTransactionIdGeneration() {
         // Assuming the transactionCounter starts at 1 and increments by 1 for each new Transaction
-        assertEquals("TX6", transaction1.getTransactionId());
-        assertEquals("TX7", transaction2.getTransactionId());
+        assertEquals("TX1", transaction1.getTransactionId());
+        assertEquals("TX2", transaction2.getTransactionId());
     }
 
     @Test
@@ -106,7 +106,7 @@ class TransactionTest {
         Transaction transaction4 = new Transaction("DEF-321", "Bob Brown", 4, startDate4);
         transaction4.setTransactionId(generateTransactionId());
 
-        assertEquals("TX16", transaction3.getTransactionId(), "Third transaction ID should be TX3");
-        assertEquals("TX17", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");
+        assertEquals("TX3", transaction3.getTransactionId(), "Third transaction ID should be TX3");
+        assertEquals("TX4", transaction4.getTransactionId(), "Fourth transaction ID should be TX4");
     }
 }
