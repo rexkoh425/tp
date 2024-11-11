@@ -99,7 +99,7 @@ Adds a customer to the list of customers tracked by the car rental application.
 
 * `CUSTOMER_NAME` : `STRING`.
 * `AGE` : `INT`
-  * age should be > 17 and <= 100.
+  * age should be >= 18 and <= 100.
 * `CONTACT_NUMBER` : `STRING`
   * `+[ANY NUMBER OF DIGITS]`
   * `No space between + and the first digit`
@@ -163,7 +163,6 @@ Here are all the customers:
 If the list is **empty**:
 
 ``` 
-list-users
 Customer list is empty.
 ```
 
@@ -228,7 +227,7 @@ All cars removed!!!
 
 Lists all the cars owned by the company, sorted according to the price of renting the car for a day.  
 The format for the each car in the list is:  
-Car Model | License PLate Number | Price (Per Day of Rental) | Availability (for Rental) | Price Category | Median Price of Cars in Fleet
+Car Model | License PLate Number | Price of Rental (Per Day) | Availability (for Rental) | Price Category | Median Price of Cars in Fleet
 
 **Format:** `list-cars`
 
@@ -247,7 +246,8 @@ Use command <add-car> to add a new car.
 
 ### Listing All Rented Out Cars: `list-rented`
 
-Lists all the cars that are currently rented out.
+Lists all the cars that are currently rented out in this format for each car:  
+Car Model | License Plate Number | Price of Rental (Per day)
 
 **Format:** `list-rented`
 
@@ -266,7 +266,8 @@ No cars currently rented out...
 
 ### Listing All Available Cars: `list-available`
 
-Lists all available cars in the company.
+Lists all available cars in the company in this format for each car:  
+Car Model | License Plate Number | Price of Rental (Per day)
 
 **Format:** `list-available`
 
@@ -339,13 +340,18 @@ Removes all transactions from the system.
 
 **Format:** `remove-all-txs`
 
+**Sample output:**
+```
+All transactions removed!!!
+```
+
 ### Listing All Transactions: `list-txs`
 
 Displays all transactions stored in the system in this format for each transaction:  
 [ ] Transaction ID | License Plate Number | Customer Name | Duration of Rental (in day(s))  
 Start Date | End Date  
 where  
-[ ] indicates that the transaction is ongoing or has been marked as uncompleted or
+[ ] indicates that the transaction is ongoing or has been marked as uncompleted or  
 [X] indicates that the transaction is completed or has been marked as completed
 
 **Format:** `list-txs`
@@ -355,7 +361,7 @@ where
 Here are all the transactions: 
 1) [ ] TX1 | SKL4567M | Alice | 7 days
 Start Date: 15-12-2024 | End Date: 22-12-2024
-2) [ ] TX2 | SZZ1579D | John | 15 days
+2) [X] TX2 | SZZ1579D | John | 15 days
 Start Date: 11-05-2025 | End Date: 26-05-2025
 ```
 
@@ -391,7 +397,7 @@ No completed transaction available.
 
 Displays all transactions that are ongoing or are marked as uncompleted list in this format for each transaction:  
 [ ] Transaction ID | License Plate Number | Customer Name | Duration of Rental (in day(s))  
-Start Date | End Date 
+Start Date | End Date  
 where [ ] indicates that the transaction is ongoing or has been marked as uncompleted
 
 **Format:** `list-txs-uncompleted`
