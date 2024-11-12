@@ -62,7 +62,8 @@ public class CustomerList {
             Customer customer = customers.get(i);
             if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
                 customers.remove(i);
-                System.out.println("Customer Name: " + customer.getCustomerName() + " has been removed from the customer list");
+                System.out.println("Customer Name: " + customer.getCustomerName()
+                        + " has been removed from the customer list");
                 customerFound = true;
                 break;
             }
