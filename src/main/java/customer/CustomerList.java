@@ -51,16 +51,28 @@ public class CustomerList {
     }
 
     public static void removeCustomer(String customerName) {
-        for (Customer customer : customers) {
+        if (customers.isEmpty()) {
+            System.out.println("Customer list is empty. Nothing to remove");
+            return;
+        }
+
+        boolean customerFound = false;
+
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
             if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
-                customers.remove(customer);
-                System.out.println("Customer Name: " + customer.getCustomerName() +
-                        " has been removed from the customer list");
-                return;
+                customers.remove(i);
+                System.out.println("Customer Name: " + customer.getCustomerName() + " has been removed from the customer list");
+                customerFound = true;
+                break;
             }
         }
-        System.out.println(customerName + " is not in the customer list. No removal done");
+
+        if (!customerFound) {
+            System.out.println(customerName + " is not in the customer list. No removal done");
+        }
     }
+
 
     public static void clearCustomerList() {
         customers.clear();
