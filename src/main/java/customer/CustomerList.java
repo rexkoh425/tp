@@ -16,7 +16,7 @@ public class CustomerList {
         String customerName = customer.getCustomerName();
 
         // Check for valid characters in the name
-        if (!isValidName(customerName)) {
+        if (isInvalidName(customerName)) {
             throw CustomerException.invalidCustomerNameException(customerName);
         }
 
@@ -38,7 +38,7 @@ public class CustomerList {
         String customerName = customer.getCustomerName();
 
         // Check for valid characters in the name
-        if (!isValidName(customerName)) {
+        if (isInvalidName(customerName)) {
             throw CustomerException.invalidCustomerNameException(customerName);
         }
 
@@ -105,7 +105,7 @@ public class CustomerList {
         return customerData.toString();
     }
 
-    public static String getCustomerNameifExist(String inputName) {
+    public static String getCustomerNameIfExist(String inputName) {
         for (Customer customer : customers) {
             String customerName = customer.getCustomerName();
             if (customer.getCustomerName().equalsIgnoreCase(inputName)) {
@@ -116,8 +116,8 @@ public class CustomerList {
     }
 
     // Helper method to validate the customer's name
-    private static boolean isValidName(String name) {
-        return VALID_NAME_PATTERN.matcher(name).matches();
+    private static boolean isInvalidName(String name) {
+        return !VALID_NAME_PATTERN.matcher(name).matches();
     }
 }
 

@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 public class CustomerParser {
 
     private static final String ADD_CUSTOMER_COMMAND = "add-user";
-    private static final String REMOVE_CUSTOMER_FORMAT = "remove-user /u [CUSTOMER_NAME]";
 
     /**
      * Creates new customer object based on user input.
