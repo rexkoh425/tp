@@ -34,8 +34,10 @@ public class CustomerParser {
         String customerName = parameterContents[0];
         int age = Integer.parseInt(parameterContents[1]);
 
-        if(age <= 17 || age > 100){
+        if(age <= 17){
             throw CustomerException.invalidAgeException();
+        }else if(age > 100){
+            throw CustomerException.invalidMaxAgeException();
         }
 
         String contactNumber = parameterContents[2];
