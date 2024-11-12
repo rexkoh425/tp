@@ -5,6 +5,9 @@ cd ..
 call gradlew.bat clean shadowJar
 
 cd text-ui-test
+type nul > data\carData.txt
+type nul > data\customerData.txt
+type nul > data\transactionData.txt
 
 for /f "delims=" %%a in ('dir /b /a-d "..\build\libs\*.jar"') do (
     set "JAR_FILE=%%a"
