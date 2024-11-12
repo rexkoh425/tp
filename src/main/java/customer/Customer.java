@@ -19,7 +19,7 @@ public class Customer {
 
     public Customer(String customerName, int age, String contactNumber) {
         // Validate name format
-        if (!isValidName(customerName)) {
+        if (isInvalidName(customerName)) {
             throw CustomerException.invalidCustomerNameException(customerName);
         }
         // Validate age
@@ -27,7 +27,7 @@ public class Customer {
             throw CustomerException.invalidAgeException();
         }
         // Validate contact number format
-        if (!isValidContactNumber(contactNumber)) {
+        if (isInvalidContactNumber(contactNumber)) {
             throw CustomerException.invalidContactNumberException();
         }
 
@@ -49,7 +49,7 @@ public class Customer {
     }
 
     public void setCustomerName(String customerName) {
-        if (!isValidName(customerName)) {
+        if (isInvalidName(customerName)) {
             throw CustomerException.invalidCustomerNameException(customerName);
         }
         this.customerName = customerName;
@@ -63,7 +63,7 @@ public class Customer {
     }
 
     public void setContactNumber(String contactNumber) {
-        if (!isValidContactNumber(contactNumber)) {
+        if (isInvalidContactNumber(contactNumber)) {
             throw CustomerException.invalidContactNumberException();
         }
         this.contactNumber = contactNumber;
@@ -84,11 +84,11 @@ public class Customer {
                 + getContactNumber();
     }
 
-    private static boolean isValidName(String name) {
-        return VALID_NAME_PATTERN.matcher(name).matches();
+    private static boolean isInvalidName(String name) {
+        return !VALID_NAME_PATTERN.matcher(name).matches();
     }
 
-    private static boolean isValidContactNumber(String contactNumber) {
-        return VALID_CONTACT_PATTERN.matcher(contactNumber).matches();
+    private static boolean isInvalidContactNumber(String contactNumber) {
+        return !VALID_CONTACT_PATTERN.matcher(contactNumber).matches();
     }
 }

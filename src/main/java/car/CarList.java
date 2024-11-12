@@ -3,7 +3,6 @@ package car;
 import exceptions.CarException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -250,12 +249,12 @@ public class CarList {
     }
 
     public static void sortCarsByPrice() {
-        Collections.sort(carsList, Comparator.comparingDouble(Car::getPrice));
+        carsList.sort(Comparator.comparingDouble(Car::getPrice));
     }
 
     public static double getMedianPrice() {
         if (carsList.isEmpty()) {
-            return Integer.parseInt(null);
+            return 0;
         }
 
         int middleIndex = carsList.size() / 2;
