@@ -16,6 +16,7 @@ in one place. Targeted specifically at **car rental managers**, it provides them
 
 Click [here](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=ct9aryan&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=CT9ARyan&tabRepo=AY2425S1-CS2113-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 to view my code contributions for this project!! :)
+---
 
 ## Features implemented
 

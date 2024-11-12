@@ -14,34 +14,34 @@ enabling managers to perform quick data entries and track essential business ope
 ### <u>Features additions and enhancements</u>
 
 #### 1. Help Command Implementation
-- Develop a user-friendly `help` command that provides a complete list of available commands with descriptions.
-- This feature improves usability, especially for new users or those needing a quick reference to the system’s capabilities.
+- **What it does**: Provides a user-friendly `help` command that displays a complete list of available commands along with descriptions.  
+- **Justification**: This feature improves usability significantly by giving new users or those unfamiliar with the commands a quick reference guide, enhancing user efficiency and reducing the learning curve.  
+- **Highlights**: This feature is foundational for user support, making the system intuitive and accessible without external documentation.
 
 #### 2. Remove a Car
-- Implement the feature to remove a car from the system, streamlining the process of updating the car inventory.
-- Allows front-desk employees and managers to maintain an accurate fleet, ensuring only available cars are listed.
+- **What it does**: Enables users to remove a specific car from the system, keeping the fleet information up-to-date and reflecting only available vehicles.  
+- **Justification**: This feature is essential for inventory management, allowing the business to accurately represent current fleet availability and prevent outdated or unavailable cars from being rented.  
+- **Highlights**: The feature was designed to streamline car management processes, particularly focusing on ease of use for front-desk employees who manage car listings daily.
 
 #### 3. Add Car with Statistical Calculations
-- Enhance the `add-car` feature with additional statistical capabilities:
-  - **Median Price Calculation**: After adding a car, the system calculates the median price of all available cars, offering insights into the pricing distribution.
-  - **Price Category Listing**: Lists cars based on predefined price categories (e.g., affordable, expensive), allowing customers and employees to filter and select cars based on budget preferences.
+- **What it does**: Enhances the `add-car` functionality by calculating the median price of all available cars and categorizing them based on predefined price ranges (e.g., affordable, expensive).  
+- **Justification**: This feature provides valuable insights into the pricing structure, allowing employees to offer budget-aligned options to customers and helping managers analyze pricing distribution.  
+- **Highlights**: This enhancement required integrating statistical calculations and data filtering into the `add-car` feature, expanding its functionality while maintaining simplicity for end-users.
 
 #### 4. Enhanced Transaction Constraints
-- Modifies the Customer, Car, and Transaction classes to enforce strict constraints:
-  - **1-1 Relationship**: Ensured each customer can only rent one car at a time, forming a one-to-one relationship in each transaction.
-  - **Transaction Validation**: Added checks to prevent adding new transactions involving either a customer or car already engaged in an active rental. New transactions can only be added if the previous one is marked as complete or deleted.
-- This enhancement provides better data integrity and prevents conflicts, ensuring smooth transaction management and minimizing errors.
+- **What it does**: Modifies the Customer, Car, and Transaction classes to enforce a strict one-to-one relationship between customers and cars in each transaction. Prevents additional transactions involving the same customer or car unless the previous transaction is marked complete or deleted.  
+- **Justification**: Ensuring each customer can only rent one car at a time prevents conflicts and errors in transaction management, improving data integrity and operational accuracy.  
+- **Highlights**: This enhancement introduced transaction constraints across multiple classes, requiring in-depth changes to existing data handling and validation processes. This improvement affects future features that rely on transaction data consistency.
 
 #### 5. Remove-All Commands
-- Implement `remove-all` commands for various data entities, including customers, cars, and transactions:
-  - **Remove All Customers**: Clears all customer records, useful for data resets or cleanup.
-  - **Remove All Cars**: Deletes all cars from the inventory, streamlining fleet management when a complete update is needed.
-  - **Remove All Transactions**: Wipes the transaction history, allowing administrators to clear old data or prepare for a new cycle.
-- These commands enhance administrative control over data management, making it simple to clear outdated or unnecessary records efficiently.
+- **What it does**: Adds `remove-all` commands for clearing all customer, car, and transaction records, providing an efficient means for data reset or cleanup.  
+- **Justification**: This feature enhances administrative control by allowing bulk deletion of outdated or unnecessary records, improving data management efficiency.  
+- **Highlights**: Implementing `remove-all` commands required handling data dependencies and ensuring complete data clearance across related classes without impacting system stability.
 
 #### 6. Comprehensive Test Coverage
-- Update and expand test cases for each implemented feature, aiming for high coverage.
-- These tests validate the reliability of each feature under various conditions, ensuring edge cases are accounted for and the system performs as expected in real-world scenarios.
+- **What it does**: Expands test cases for all implemented features, aiming for high test coverage to validate feature reliability and accuracy under various conditions.  
+- **Justification**: Comprehensive testing improves system stability, reduces bugs, and ensures that each feature performs as expected, even in edge cases.  
+- **Highlights**: This required extensive testing and coverage analysis, ensuring the implemented features integrate seamlessly and handle diverse user inputs effectively.
 
 Each of these contributions enhances the system's functionality, usability, and reliability, providing significant value to both users and administrators.
 
