@@ -11,11 +11,11 @@ Display |   Name   |             Github Profile             | Portfolio
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](//docs/team/) | Ryan Fong | [Github](https://github.com/CT9ARyan) | [Portfolio](./team/ct9aryan.md)
+![](//docs/team/Ryan.jpg) | Ryan Fong | [Github](https://github.com/CT9ARyan) | [Portfolio](./team/ct9aryan.md)
 
 Display |  Name   |             Github Profile             | Portfolio 
 --------|:-------:|:--------------------------------------:|:---------:
-![](https://avatars.githubusercontent.com/u/94769848?v=4) | Liu Hao | [Github](https://github.com/AaronZZ10) | [Portfolio](./team/aaronzz10.md)
+![](//docs/team/Aaron.jpg) | Liu Hao | [Github](https://github.com/AaronZZ10) | [Portfolio](./team/aaronzz10.md)
 
 Display |    Name     |             Github Profile             | Portfolio 
 --------|:-----------:|:--------------------------------------:|:---------:
