@@ -61,6 +61,10 @@ public class CustomerException extends RuntimeException {
         return new CustomerException("Illegal driver!! Age should be more than 17!!");
     }
 
+    public static CustomerException invalidMaxAgeException(){
+        return new CustomerException("This age is not safe to drive!! Too old!!");
+    }
+
     /**
      * Exception thrown when the customer name already exists (case-insensitive).
      *
