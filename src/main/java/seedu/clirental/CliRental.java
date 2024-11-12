@@ -42,11 +42,11 @@ public class CliRental {
     public static void printGreetings(){
         String logo =
                 """
-                ____ _ _ ____            _        _
-                / ___| (_)  _ \\ ___ _ __ | |_ __ _| |
-                | |   | | | |_) / _ \\ '_ \\| __/ _` | |
-                | |___| | |  _ <  __/ | | | || (_| | |
-                \\____|_|_|_| \\_\\___|_| |_|\\__\\__,_|_|
+                       ______    __    _     ____                  __             __
+                      / ____/   / /   (_)   / __ \\  ___    ____   / /_  ____ _   / /
+                     / /       / /   / /   / /_/ / / _ \\  / __ \\ / __/ / __ `/  / /
+                    / /___    / /   / /   / _, _/ /  __/ / / / // /_  / /_/ /  / /
+                    \\____/   /_/   /_/   /_/ |_|  \\___/ /_/ /_/ \\__/  \\__,_/  /_/     
                 """;
         System.out.println(logo);
         System.out.println("Hello, thank you for choosing our car rental management program CliRental");

@@ -89,6 +89,7 @@ Types :
 Others : 
 
 * Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
+* Loading of data follows constraints mentioned in the respective `add` commands.
 
 ---
 ## Features
@@ -118,7 +119,6 @@ Customer added
 Customer name : John
 Age : 18
 Contact Number : 95382572
-
 ```
 
 ### Removing a User from the Database: `remove-user`
@@ -128,13 +128,15 @@ Removes a customer from the customer list.
 **Format:** `remove-user /u [CUSTOMER_NAME]`
 
 * `CUSTOMER_NAME` : `STRING`.
+* `CUSTOMER_NAME` must match an existing customer in the database.
+* `CUSTOMER_NAME` is not case sensitive. 'John' and 'john' mean the same customer.
 
 **Example of usage:**
 `remove-user /u John`
 
 **Sample Response:**
 ```
-User John has been removed
+John has been removed from customer list
 ```
 ### Removing all Users from the Database: `remove-all-users`
 
@@ -200,7 +202,7 @@ Removes a car from the fleet based on the car's unique ID.
 
 **Format:** `remove-car /i [LICENSE_PLATE_NUMBER]`
 
-- `/i` identifier specifies the car ID to be removed.
+- `/i` identifier specifies the license plate number belonging to the car that is to be removed.
 - `LICENSE_PLATE_NUMBER` must match an existing car in the database.
 
 **Example:** 
@@ -300,7 +302,24 @@ The status will be updated automatically when a transaction record is:
 
 Adds a new rental transaction to the system.
 
+To add transaction bearing either an existing license plate number and/or customer name, all previous transactions containing either both or one of the parameter must be either marked as completed or be removed from the transaction list.
+
 **Format:** `add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE: dd-MM-yyyy]`
+
+- `/c` identifier specifies the license plate number of the car the customer wants to rent.
+- `LICENSE_PLATE_NUMBER` must match an existing car in the database. This is unique as the program will not allow 2 cars to have the same license plate number.
+
+
+- `/u` identifier specifies the name of the customer. 
+- `CUSTOMER_NAME` must match an existing customer in the database. This is unique as the program will not allow 2 customers to have the same name.
+
+
+- `/d` identifier specifies the duration of the rental in days.
+- `DURATION` must be an integer between 1 to 365 (inclusive). This allows the rental companies to handle rental transactions from 1 day to 365 days (a year). 
+
+
+- `/s` identifier specifies the start date of the rental.
+- `START_DATE` is in the format of [dd-MM-yyyy], accepting integers input only. It must be a valid date in the calender.
 
 **Example:**  
 `add-tx /c SZZ1579D /u John /d 15 /s 11-05-2025`

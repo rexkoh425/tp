@@ -51,13 +51,16 @@ Managed releases v1.0 - v2.1 (3 releases) on GitHub.
 
 ### <u>Enhancements to existing features:</u>
 
-Improved Junit test for CarFile , CustomerFile and TransactionFile.
-1) Achieve at least 80% coverage for Class, Method , Line and Branch for each class mentioned above.
+1) Improved Junit test for CarFile , CustomerFile and TransactionFile. 
+   * Achieve at least 80% coverage for Class, Method , Line and Branch for each class mentioned above.
+2) Improved error handling of loading data from file to prevent malicious data from crashing the program.
+3) Data loaded from file follows constraints as if the user had added the command through the command line.
 
 ### <u>Documentation:</u>
 #### User Guide:
 Added documentation for the features e.g. add-user and list-cars.
 Added documentation to inform user of file loading.
+Added user stories for add-user , list-cars
 
 #### Developer Guide:
 1) Added implementation details of the adding customer details e.g. AddCustomerSequence.png.
