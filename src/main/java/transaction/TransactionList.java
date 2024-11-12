@@ -68,7 +68,7 @@ public class TransactionList {
         assert transactionList.contains(transaction) : "Transaction was not added to the list.";
 
         CarList.markCarAsRented(licensePlateNumber);
-        System.out.println("Transaction added: ");
+        System.out.println("Transaction added:");
         System.out.println(transaction);
     }
 
@@ -150,7 +150,7 @@ public class TransactionList {
             return;
         }
 
-        System.out.println("Here are all the transactions: ");
+        System.out.println("Here are all the transactions:");
 
         for (Transaction transaction : transactionList) {
             assert transaction != null : "Transaction in the list should not be null.";
@@ -170,7 +170,7 @@ public class TransactionList {
             return;
         }
 
-        System.out.println("Here are all the completed transactions: ");
+        System.out.println("Here are all the completed transactions:");
 
         boolean containsCompletedTx = false;
 
@@ -201,7 +201,7 @@ public class TransactionList {
 
         boolean containsUncompletedTx = false;
 
-        System.out.println("Here are all the uncompleted transactions: ");
+        System.out.println("Here are all the uncompleted transactions:");
 
         for (Transaction transaction : transactionList) {
             assert transaction != null : "Transaction in the list should not be null.";

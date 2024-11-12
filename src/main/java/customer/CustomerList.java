@@ -92,7 +92,7 @@ public class CustomerList {
         if (CustomerList.getCustomers().isEmpty()) {
             System.out.println("Customer list is empty.");
         } else {
-            System.out.println("Here are all the customers: ");
+            System.out.println("Here are all the customers:");
             for (int i = 0; i < customers.size(); i++) {
                 System.out.print((i + 1) + ") ");
                 Customer customer = customers.get(i);

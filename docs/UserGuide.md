@@ -326,7 +326,7 @@ To add transaction bearing either an existing license plate number and/or custom
 
 **Sample Response:**
 ```
-Transaction added: 
+Transaction added:
 [ ] TX2 | SZZ1579D | John | 15 days
 Start Date: 11-05-2025 | End Date: 26-05-2025
 ```

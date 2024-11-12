@@ -84,7 +84,7 @@ class TransactionListTest {
                     Mockito.times(1));
 
             // Verify the printed output
-            String expectedOutput = "Transaction added: " + System.lineSeparator() + transaction +
+            String expectedOutput = "Transaction added:" + System.lineSeparator() + transaction +
                     System.lineSeparator();
             assertEquals(expectedOutput, outContent.toString(), "Printed output should match expected");
         }
@@ -205,7 +205,7 @@ class TransactionListTest {
 
         TransactionList.printAllTransactions();
 
-        String expectedOutput = "Here are all the transactions: " + System.lineSeparator() +
+        String expectedOutput = "Here are all the transactions:" + System.lineSeparator() +
                 "1) " + tx1 + System.lineSeparator() +
                 "2) " + tx2 + System.lineSeparator();
 
@@ -231,7 +231,7 @@ class TransactionListTest {
 
         TransactionList.printCompletedTransactions();
 
-        String expectedOutput = "Here are all the completed transactions: " + System.lineSeparator() +
+        String expectedOutput = "Here are all the completed transactions:" + System.lineSeparator() +
                 "1) " + tx1 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed completed transactions should match");
@@ -256,7 +256,7 @@ class TransactionListTest {
 
         TransactionList.printUncompletedTransactions();
 
-        String expectedOutput = "Here are all the uncompleted transactions: " + System.lineSeparator() +
+        String expectedOutput = "Here are all the uncompleted transactions:" + System.lineSeparator() +
                 "1) " + tx1 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed uncompleted transactions should match");
