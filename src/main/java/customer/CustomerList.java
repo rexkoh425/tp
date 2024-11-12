@@ -49,7 +49,7 @@ public class CustomerList {
 
         customers.add(customer);
     }
-    
+
     public static void removeCustomer(String customerName) {
         for (Customer customer : customers) {
             if (customer.getCustomerName().equalsIgnoreCase(customerName)) {
