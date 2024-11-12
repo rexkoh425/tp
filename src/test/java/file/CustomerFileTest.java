@@ -31,6 +31,12 @@ class CustomerFileTest {
         }
     }
 
+    private void validateCustomer(Customer customer, String expectedName, int expectedAge, String expectedContact) {
+        assertEquals(expectedName, customer.getCustomerName());
+        assertEquals(expectedAge, customer.getAge());
+        assertEquals(expectedContact, customer.getContactNumber());
+    }
+
     @Test
     public void testGetCustomerDataFilename() {
         CustomerFile customerFile = new CustomerFile();
@@ -53,10 +59,9 @@ class CustomerFileTest {
         assertEquals(1, CustomerList.getCustomerList().size());
         assertEquals(1, errorLines.size());
 
+
         Customer customer = CustomerList.getCustomerList().get(0);
-        assertEquals("John Doe", customer.getCustomerName());
-        assertEquals(30, customer.getAge());
-        assertEquals("83456789", customer.getContactNumber());
+        validateCustomer(customer, "John Doe", 30, "83456789");
 
         assertTrue(errorLines.contains(2));
     }
@@ -66,7 +71,6 @@ class CustomerFileTest {
         CustomerFile customerFile = new CustomerFile("customerData2.txt");
         File testFile = new File(customerFile.getAbsolutePath());
         customerFile.createCustomerFileIfNotExist();
-
         assertTrue(testFile.exists());
 
         CustomerList.addCustomerWithoutPrintingInfo(new Customer("John Doe", 30, "83456789"));
@@ -121,15 +125,12 @@ class CustomerFileTest {
 
         customerFile.loadCustomerDataIfExist();
         assertEquals(2, CustomerList.getCustomerList().size());
+
         Customer customer1 = CustomerList.getCustomerList().get(0);
-        assertEquals("John Doe", customer1.getCustomerName());
-        assertEquals(30, customer1.getAge());
-        assertEquals("83456789", customer1.getContactNumber());
+        validateCustomer(customer1, "John Doe", 30, "83456789");
 
         Customer customer2 = CustomerList.getCustomerList().get(1);
-        assertEquals("Jane Smith", customer2.getCustomerName());
-        assertEquals(25, customer2.getAge());
-        assertEquals("87654321", customer2.getContactNumber());
+        validateCustomer(customer2, "Jane Smith", 25, "87654321");
 
         filenames.add(customerFile.getAbsolutePath());
     }
@@ -165,9 +166,7 @@ class CustomerFileTest {
         }
 
         Customer customer = CustomerList.getCustomerList().get(0);
-        assertEquals("John Doe", customer.getCustomerName());
-        assertEquals(30, customer.getAge());
-        assertEquals("83456789", customer.getContactNumber());
+        validateCustomer(customer, "John Doe", 30, "83456789");
 
         filenames.add(customerFile.getAbsolutePath());
     }
