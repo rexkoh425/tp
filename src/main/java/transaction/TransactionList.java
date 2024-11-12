@@ -140,7 +140,7 @@ public class TransactionList {
             return;
         }
 
-        System.out.println("Here are all the transactions: ");
+        System.out.println("Here are all the transactions:");
 
         for (Transaction transaction : transactionList) {
             assert transaction != null : "Transaction in the list should not be null.";
