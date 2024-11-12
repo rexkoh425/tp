@@ -89,6 +89,7 @@ Types :
 Others : 
 
 * Any string `not "true"` will be treated as `false` when it is placed in a BOOLEAN section.
+* Loading of data follows constraints mentioned in the respective `add` commands.
 
 ---
 ## Features
@@ -118,7 +119,6 @@ Customer added
 Customer name : John
 Age : 18
 Contact Number : 95382572
-
 ```
 
 ### Removing a User from the Database: `remove-user`
