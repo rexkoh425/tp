@@ -22,8 +22,18 @@ call gradlew clean shadowJar
 
 cd text-ui-test
 
+REM Find the JAR file in the build/libs directory
+for %%f in ("..\build\libs\*.jar") do set JAR_FILE=%%f
+
+REM Check if the JAR file was found
+if not defined JAR_FILE (
+    echo Error: No jar file found in ..\build\libs
+    echo Test failed!
+    exit /b 1
+)
+
 REM Run the Java application and redirect input/output
-java -jar ..\build\libs\*.jar < input.txt > ACTUAL.TXT
+java -jar "%JAR_FILE%" < input.txt > ACTUAL.TXT
 
 REM Convert line endings to Unix format for comparison
 powershell -Command "(Get-Content -Path 'EXPECTED.TXT') | Set-Content -NoNewline -Path 'EXPECTED-UNIX.TXT'"
