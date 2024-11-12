@@ -68,6 +68,10 @@ public class CarList {
 
     public static void addCarWithoutPrintingInfo(Car car) throws CarException {
 
+        if (isExistingLicensePlateNumber(car.getLicensePlateNumber())) {
+            throw CarException.duplicateLicensePlateNumber();
+        }
+
         carsList.add(car);
         CarList.sortCarsByPrice();
         CarList.getMedianPrice();

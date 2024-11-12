@@ -1,5 +1,6 @@
 package transaction;
 
+import car.Car;
 import car.CarList;
 import customer.Customer;
 import customer.CustomerList;
@@ -34,7 +35,7 @@ class TransactionListTest {
 
         // Clear the transaction list before each test
         TransactionList.getTransactionList().clear();
-
+        CarList.clearCarList();
         // Reset the transaction counter using reflection to ensure predictable transaction IDs
         try {
             java.lang.reflect.Field counterField = TransactionList.class.getDeclaredField("txCounter");
@@ -60,7 +61,7 @@ class TransactionListTest {
 
             // Define a valid license plate adhering to SXX####X format
             String validLicensePlate = "SAB1234C";
-
+            CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
             // Mock the static methods
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(validLicensePlate)).thenReturn(true);
             carListMock.when(() -> CarList.isExistingLicensePlateNumber(validLicensePlate)).thenReturn(true);
@@ -128,7 +129,7 @@ class TransactionListTest {
 
             // Define a valid license plate format but not existing in CarList
             String validButNonExistingLicensePlate = "SCD5678Z";
-
+            CarList.addCarWithoutPrintingInfo(new Car("1" , "SCD5678Z" , 0.01));
             // Mock the static methods
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(validButNonExistingLicensePlate)).
                     thenReturn(true);
@@ -157,6 +158,7 @@ class TransactionListTest {
     void testAddTxWithoutPrintingInfo() {
         // Define a valid license plate adhering to SXX####X format
         String validLicensePlate = "SXY9012A";
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY9012A" , 0.01));
 
         // Create a transaction
         Transaction transaction = new Transaction(validLicensePlate, "Bob Brown", 4,
@@ -191,7 +193,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -215,7 +218,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -239,7 +243,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -263,7 +268,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -290,7 +296,7 @@ class TransactionListTest {
     void testRemoveTxByTxIdNotFound() {
         // Define a valid license plate adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -321,6 +327,10 @@ class TransactionListTest {
         String licensePlate2 = "SXY5678Z";
         String licensePlate3 = "SCD9012A";
         String licensePlate4 = "SGD4091D";
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SCD9012A" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SGD4091D" , 0.01));
 
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
@@ -384,7 +394,7 @@ class TransactionListTest {
     void testFindTxsByCustomerNoMatches() {
         // Define a valid license plate adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -401,7 +411,7 @@ class TransactionListTest {
     @DisplayName("Test marking a transaction as completed by transaction ID")
     void testMarkCompletedByTxId() {
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -423,7 +433,7 @@ class TransactionListTest {
     void testMarkCompletedByTxIdNotFound() {
         // Define a valid license plate adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -445,7 +455,7 @@ class TransactionListTest {
     void testUnmarkCompletedByTxId() {
         // Define a valid license plate adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction and mark it as completed
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -468,7 +478,7 @@ class TransactionListTest {
     void testUnmarkCompletedByTxIdNotFound() {
         // Define a valid license plate adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
         // Add a transaction
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -491,7 +501,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -514,7 +525,8 @@ class TransactionListTest {
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
-
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
         // Add transactions without printing info
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
@@ -541,6 +553,9 @@ class TransactionListTest {
             String licensePlate2 = "SXY5678Z";
             String licensePlate3 = "SCD9012A";
 
+            CarList.addCarWithoutPrintingInfo(new Car("1" , "SAB1234C" , 0.01));
+            CarList.addCarWithoutPrintingInfo(new Car("1" , "SXY5678Z" , 0.01));
+            CarList.addCarWithoutPrintingInfo(new Car("1" , "SCD9012A" , 0.01));
             // Mock the static methods to always return valid
             carParserMock.when(() -> CarParser.isValidLicensePlateNumber(Mockito.anyString())).
                     thenAnswer(invocation -> {
