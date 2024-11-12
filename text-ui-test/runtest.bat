@@ -1,32 +1,36 @@
 @echo off
+
+REM Ensure we're in the script's directory
 cd /d "%~dp0"
 
+REM Check if data directory and required files exist, create if necessary
+if not exist "data" (
+    echo data does not exist. Creating it now.......
+    mkdir data
+    echo. > data\carData.txt
+    echo. > data\customerData.txt
+    echo. > data\transactionData.txt
+    echo data directory and files created successfully.
+) else (
+    echo. > data\carData.txt
+    echo. > data\customerData.txt
+    echo. > data\transactionData.txt
+)
+
 cd ..
-call gradlew.bat clean shadowJar
+call gradlew clean shadowJar
 
 cd text-ui-test
-type nul > data\carData.txt
-type nul > data\customerData.txt
-type nul > data\transactionData.txt
 
-for /f "delims=" %%a in ('dir /b /a-d "..\build\libs\*.jar"') do (
-    set "JAR_FILE=%%a"
-    goto :found
-)
-:found
+REM Run the Java application and redirect input/output
+java -jar ..\build\libs\*.jar < input.txt > ACTUAL.TXT
 
-if not defined JAR_FILE (
-    echo No JAR file found in ..\build\libs\.
-    exit /b 1
-)
+REM Convert line endings to Unix format for comparison
+powershell -Command "(Get-Content -Path 'EXPECTED.TXT') | Set-Content -NoNewline -Path 'EXPECTED-UNIX.TXT'"
+powershell -Command "(Get-Content -Path 'ACTUAL.TXT') | Set-Content -NoNewline -Path 'ACTUAL.TXT'"
 
-java -jar "..\build\libs\%JAR_FILE%" < input.txt > ACTUAL.TXT
-
-copy /Y EXPECTED.TXT EXPECTED-UNIX.TXT >nul
-
-dos2unix.exe EXPECTED-UNIX.TXT ACTUAL.TXT
-
-fc /b EXPECTED-UNIX.TXT ACTUAL.TXT >nul
+REM Compare the output files
+fc /w EXPECTED-UNIX.TXT ACTUAL.TXT >nul
 if %errorlevel% equ 0 (
     echo Test passed!
     exit /b 0
