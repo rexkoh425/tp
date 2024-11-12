@@ -1,10 +1,13 @@
 package customer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import exceptions.CustomerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CustomerListTest {
 
@@ -100,5 +103,51 @@ public class CustomerListTest {
         CustomerList.addCustomer(customer);
         assertEquals(1, CustomerList.getCustomers().size());
         assertEquals("John Doe", CustomerList.getCustomers().get(0).getCustomerName());
+    }
+
+    @Test
+    public void testRemoveCustomer_existingCustomer() {
+        Customer customer = new Customer("John Doe", 30, "91234567");
+        CustomerList.addCustomerWithoutPrintingInfo(customer);
+
+        CustomerList.removeCustomer("John Doe");
+
+        int customerListLength = CustomerList.getCustomers().size();
+        assertFalse(CustomerList.isExistingCustomer("John Doe"));
+        assertEquals(0, customerListLength, "Customer list should be empty after removal.");
+    }
+
+    @Test
+    public void testRemoveCustomer_nonExistingCustomer() {
+        Customer customer = new Customer("Jane Doe", 28, "81234567");
+        CustomerList.addCustomerWithoutPrintingInfo(customer);
+
+        CustomerList.removeCustomer("John Smith");
+
+        int customerListLength = CustomerList.getCustomers().size();
+        assertTrue(CustomerList.isExistingCustomer("Jane Doe"));
+        assertFalse(CustomerList.isExistingCustomer("John Smith"));
+        assertEquals(1, customerListLength, "Customer list should contain 1 customer after non-existent removal.");
+    }
+
+    @Test
+    public void testRemoveCustomer_caseInsensitive() {
+        Customer customer = new Customer("Alice Smith", 35, "91234567");
+        CustomerList.addCustomerWithoutPrintingInfo(customer);
+
+        CustomerList.removeCustomer("alice smith");
+
+        int customerListLength = CustomerList.getCustomers().size();
+        assertFalse(CustomerList.isExistingCustomer("Alice Smith"));
+        assertEquals(0, customerListLength, "Customer list should be empty after removal.");
+    }
+
+
+
+    @Test
+    public void testRemoveCustomer_emptyList() {
+        CustomerList.removeCustomer("Non Existent Customer");
+        int customerListLength = CustomerList.getCustomers().size();
+        assertEquals(0, customerListLength, "Customer list should remain empty when there is no customer.");
     }
 }
