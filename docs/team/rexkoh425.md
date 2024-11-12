@@ -53,9 +53,9 @@ Managed releases v1.0 - v2.1 (3 releases) on GitHub.<br>
 ### <u>Enhancements to existing features:</u>
 
 1) Improved Junit test for CarFile , CustomerFile and TransactionFile. <br>
-   * Achieve at least 80% coverage for Class, Method , Line and Branch for each class mentioned above.<br>
-2) Improved error handling of loading data from file to prevent malicious data from crashing the program.<br>
-3) Data loaded from file follows constraints as if the user had added the command through the command line.<br>
+2) Achieve at least 80% coverage for Class, Method , Line and Branch for each class mentioned above.<br>
+3) Improved error handling of loading data from file to prevent malicious data from crashing the program.<br>
+4) Data loaded from file follows constraints as if the user had added the command through the command line.<br>
 
 ### <u>Documentation:</u>
 #### User Guide:
