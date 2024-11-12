@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 import static parser.TransactionParser.dateTimeFormatter;
 
+/**
+ * Represents a transaction associated with a car rental.
+ */
 public class Transaction {
     public static final int NUMBER_OF_PARAMETERS = 6;
     private String transactionId;
@@ -16,18 +19,30 @@ public class Transaction {
     private final LocalDate endDate;
     private boolean isCompleted;
 
-    public Transaction(String carLicensePlate, String customer, int duration,
-                       LocalDate startDate) {
-        this.carLicensePlate = carLicensePlate;
-        this.customer = customer;
-        this.duration = duration;
-        this.startDate = startDate;
-        this.endDate = startDate.plusDays(duration);
-        this.isCompleted = false;
+    /**
+     * Constructor for creating a new transaction.
+     *
+     * @param carLicensePlate the license plate of the car
+     * @param customer the customer associated with the transaction
+     * @param duration the rental duration in days
+     * @param startDate the start date of the rental period
+     */
+    public Transaction(String carLicensePlate, String customer, int duration, LocalDate startDate) {
+        this(null, carLicensePlate, customer, duration, startDate, false);
     }
 
-    public Transaction(String transactionId ,String carLicensePlate, String customer, int duration, LocalDate startDate
-            , boolean isCompleted) {
+    /**
+     * Constructor for loading an existing transaction.
+     *
+     * @param transactionId the unique identifier for the transaction
+     * @param carLicensePlate the license plate of the car
+     * @param customer the customer associated with the transaction
+     * @param duration the rental duration in days
+     * @param startDate the start date of the rental period
+     * @param isCompleted the completion status of the transaction
+     */
+    public Transaction(String transactionId, String carLicensePlate, String customer, int duration,
+                       LocalDate startDate, boolean isCompleted) {
         this.transactionId = transactionId;
         this.carLicensePlate = carLicensePlate;
         this.customer = customer;
@@ -36,7 +51,6 @@ public class Transaction {
         this.endDate = startDate.plusDays(duration);
         this.isCompleted = isCompleted;
     }
-
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
@@ -50,43 +64,8 @@ public class Transaction {
         return startDate;
     }
 
-
     public String getTransactionId() {
         return transactionId;
-    }
-
-    private String durationtoString(){
-        if(duration == 1) {
-            return "1 day";
-        } else {
-            return duration + " days";
-        }
-    }
-
-    public static boolean isValidTxId(String transactionId) {
-        String regex = "TX([1-9]\\d*)";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(transactionId);
-        return matcher.matches();
-    }
-
-    @Override
-    public String toString() {
-        String formattedDate = startDate.format(dateTimeFormatter);
-        String formattedEndDate = endDate.format(dateTimeFormatter);
-        if (this.isCompleted) {
-            return "[X] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate
-                    + " | End Date: " + formattedEndDate;
-        } else {
-            return "[ ] " + transactionId + " | " + carLicensePlate + " | " + customer + " | " +
-                    durationtoString() + System.lineSeparator() + "Start Date: " + formattedDate
-                    + " | End Date: " + formattedEndDate;
-        }
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
     }
 
     public String getCustomer() {
@@ -101,9 +80,56 @@ public class Transaction {
         return isCompleted;
     }
 
-    public String toFileString(){
-        return this.getTransactionId() + " | " + this.getCarLicensePlate() + " | " + this.getCustomer() + " | " +
-                this.getDuration() + " | " + this.getStartDate().format(dateTimeFormatter) + " | "
-                + this.isCompleted();
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    /**
+     * Converts the duration to a human-readable string.
+     *
+     * @return formatted duration as a string
+     */
+    private String formatDuration() {
+        return duration == 1 ? "1 day" : duration + " days";
+    }
+
+    /**
+     * Validates the format of a transaction ID.
+     *
+     * @param transactionId the transaction ID to validate
+     * @return true if the transaction ID is valid, false otherwise
+     */
+    public static boolean isValidTxId(String transactionId) {
+        String regex = "TX([1-9]\\d*)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(transactionId);
+        return matcher.matches();
+    }
+
+    /**
+     * Provides a string representation of the transaction.
+     *
+     * @return the string representation
+     */
+    @Override
+    public String toString() {
+        String formattedStartDate = startDate.format(dateTimeFormatter);
+        String formattedEndDate = endDate.format(dateTimeFormatter);
+        String status = isCompleted ? "[X]" : "[ ]";
+
+        return String.format("%s %s | %s | %s | %s%nStart Date: %s | End Date: %s",
+                status, transactionId, carLicensePlate, customer, formatDuration(),
+                formattedStartDate, formattedEndDate);
+    }
+
+    /**
+     * Returns a string representation of the transaction formatted for file storage.
+     *
+     * @return formatted string for file storage
+     */
+    public String toFileString() {
+        return String.format("%s | %s | %s | %d | %s | %b",
+                transactionId, carLicensePlate, customer, duration,
+                startDate.format(dateTimeFormatter), isCompleted);
     }
 }
