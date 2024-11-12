@@ -1,6 +1,8 @@
 package transaction;
 
 import car.CarList;
+import customer.Customer;
+import customer.CustomerList;
 import exceptions.CarException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -309,6 +311,11 @@ class TransactionListTest {
     @Test
     @DisplayName("Test finding transactions by customer")
     void testFindTxsByCustomer() {
+        // Add users to CustomerList
+        CustomerList.addCustomer(new Customer("John Doe", 25, "92345678"));
+        CustomerList.addCustomer(new Customer("Jane Smith", 30, "93456789"));
+        CustomerList.addCustomer(new Customer("Mike Johnson", 28, "91234567"));
+
         // Define valid license plates adhering to SXX####X format
         String licensePlate1 = "SAB1234C";
         String licensePlate2 = "SXY5678Z";
@@ -319,13 +326,18 @@ class TransactionListTest {
         Transaction tx1 = new Transaction(licensePlate1, "John Doe", 5,
                 LocalDate.of(2024, 10, 1));
         TransactionList.addTxWithoutPrintingInfo(tx1);
+
         Transaction tx2 = new Transaction(licensePlate2, "Jane Smith", 3,
                 LocalDate.of(2024, 10, 2));
         TransactionList.addTxWithoutPrintingInfo(tx2);
+
         Transaction tx3 = new Transaction(licensePlate3, "Mike Johnson", 2,
                 LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx3);
+
+        // Mark tx1 as completed
         TransactionList.markCompletedByTxId(tx1.getTransactionId());
+
         Transaction tx4 = new Transaction(licensePlate4, "John Doe", 2,
                 LocalDate.of(2024, 10, 3));
         TransactionList.addTxWithoutPrintingInfo(tx4);
@@ -334,22 +346,36 @@ class TransactionListTest {
         TransactionList.findTxsByCustomer("john doe");
 
         String expectedOutput =
-                "Transaction completed: [X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                "Customer added" + System.lineSeparator() +
+                        "Customer name: John Doe\n" +
+                        "Age: 25\n" +
+                        "Contact Number: 92345678" + System.lineSeparator() +
+                        "Customer added" + System.lineSeparator() +
+                        "Customer name: Jane Smith\n" +
+                        "Age: 30\n" +
+                        "Contact Number: 93456789" + System.lineSeparator() +
+                        "Customer added" + System.lineSeparator() +
+                        "Customer name: Mike Johnson\n" +
+                        "Age: 28\n" +
+                        "Contact Number: 91234567" + System.lineSeparator() +
+                        "Transaction completed: [X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
                         "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
-                        "Transaction(s) by john doe found:" + System.lineSeparator() +
-                        "[X] TX1 | SAB1234C | John Doe | 5 days" + System.lineSeparator() +
+                        "Transaction(s) by John Doe found:" + System.lineSeparator() +
+                        "[X] " + tx1.getTransactionId() + " | " + licensePlate1 +
+                        " | John Doe | 5 days" + System.lineSeparator() +
                         "Start Date: 01-10-2024 | End Date: 06-10-2024" + System.lineSeparator() +
-                        "[ ] TX4 | SGD4091D | John Doe | 2 days" + System.lineSeparator() +
-                        "Start Date: 03-10-2024 | End Date: 05-10-2024" + System.lineSeparator();
+                        "[ ] " + tx4.getTransactionId() + " | " + licensePlate4 +
+                        " | John Doe | 2 days" + System.lineSeparator() +
+                        "Start Date: 03-10-2024 | End Date: 05-10-2024";
 
         String actualOutput = outContent.toString();
 
         // Check that the found transactions are printed
-        assertTrue(actualOutput.contains("Transaction(s) by john doe found:"),
+        assertTrue(actualOutput.contains("Transaction(s) by John Doe found:"),
                 "Should indicate transactions found by customer");
         assertTrue(actualOutput.contains(tx1.toString()), "Should contain tx1 details");
         assertTrue(actualOutput.contains(tx4.toString()), "Should contain tx4 details");
-        assertEquals(expectedOutput, actualOutput, "Printed output should confirm deletion");
+        assertEquals(expectedOutput, actualOutput.trim(), "Printed output should confirm deletion");
     }
 
 
@@ -367,8 +393,7 @@ class TransactionListTest {
         // Attempt to find transactions by a non-existing customer
         TransactionList.findTxsByCustomer("Alice Johnson");
 
-        String expectedOutput = "Transaction(s) by Alice Johnson found:" + System.lineSeparator() +
-                "User Alice Johnson was not found" + System.lineSeparator();
+        String expectedOutput = "User Alice Johnson was not found" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that no transactions was found");
     }
 
