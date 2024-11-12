@@ -227,7 +227,7 @@ class TransactionListTest {
 
         TransactionList.printCompletedTransactions();
 
-        String expectedOutput = "Here are all the completed transactions:" + System.lineSeparator() +
+                        String expectedOutput = "Here are all the completed transactions:" + System.lineSeparator() +
                 "1) " + tx1 + System.lineSeparator();
 
         assertEquals(expectedOutput, outContent.toString(), "Printed completed transactions should match");
