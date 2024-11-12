@@ -68,7 +68,7 @@ public class TransactionList {
         assert transactionList.contains(transaction) : "Transaction was not added to the list.";
 
         CarList.markCarAsRented(licensePlateNumber);
-        System.out.println("Transaction added: ");
+        System.out.println("Transaction added:");
         System.out.println(transaction);
     }
 

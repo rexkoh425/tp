@@ -83,7 +83,7 @@ class TransactionListTest {
                     Mockito.times(1));
 
             // Verify the printed output
-            String expectedOutput = "Transaction added: " + System.lineSeparator() + transaction +
+            String expectedOutput = "Transaction added:" + System.lineSeparator() + transaction +
                     System.lineSeparator();
             assertEquals(expectedOutput, outContent.toString(), "Printed output should match expected");
         }

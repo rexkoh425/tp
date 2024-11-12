@@ -31,21 +31,35 @@ exit - Exits the program.
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-The customer name "Obama" already exists. Customer names must be unique and are case-insensitive.
+Customer added
+Customer name: Obama
+Age: 42
+Contact Number: 80009000
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-The customer name "Trump" already exists. Customer names must be unique and are case-insensitive.
+Customer added
+Customer name: Trump
+Age: 78
+Contact Number: 89965443
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-Unable to add car.. License Plate number already exists!!
+Car added to list
+Car details:
+Audi A4 | SZX789C | $248.00 | Available | Affordable | Median price: 248.0
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-Unable to add car.. License Plate number already exists!!
+Car added to list
+Car details:
+Ford F150 | STV968Z | $348.00 | Available | Expensive | Median price: 248.0
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 Here are the current cars in the company:
-1) Audi A4 | SZX789C | $248.00 | Rented | Affordable | Median price: 248.0
-2) Ford F150 | STV968Z | $348.00 | Rented | Expensive | Median price: 248.0
+1) Audi A4 | SZX789C | $248.00 | Available | Affordable | Median price: 248.0
+2) Ford F150 | STV968Z | $348.00 | Available | Expensive | Median price: 248.0
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
@@ -80,13 +94,19 @@ exit - Exits the program.
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-Customer has rented a car.
+Transaction added:
+[ ] TX1 | SZX789C | Trump | 21 days
+Start Date: 12-11-2024 | End Date: 03-12-2024
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-Customer has rented a car.
+This car has been rented!
 What would you like to do?
 ____________________________________________________________
-Customer has rented a car.
+Transaction added:
+[ ] TX2 | STV968Z | Obama | 20 days
+Start Date: 13-11-2024 | End Date: 03-12-2024
+____________________________________________________________
 What would you like to do?
 ____________________________________________________________
 Here are all the transactions:
@@ -123,7 +143,7 @@ Start Date: 13-11-2024 | End Date: 03-12-2024
 ____________________________________________________________
 What would you like to do?
 ____________________________________________________________
-Transaction(s) by obama found:
+Transaction(s) by Obama found:
 [ ] TX2 | STV968Z | Obama | 20 days
 Start Date: 13-11-2024 | End Date: 03-12-2024
 ____________________________________________________________
