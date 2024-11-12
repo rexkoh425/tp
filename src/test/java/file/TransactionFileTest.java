@@ -111,10 +111,12 @@ class TransactionFileTest {
         transactionFile.createTransactionFileIfNotExist();
         assertTrue(testFile.exists());
 
-        TransactionList.addTxWithoutPrintingInfo(new Transaction("TX1" , "SJX1234D", "John", 5,
-                LocalDate.of(2024, 11, 8), false));
-        TransactionList.addTxWithoutPrintingInfo(new Transaction("TX2" , "SJA9173C", "Jane", 3,
-                LocalDate.of(2024, 10, 10), true));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJA9173C" , 0.01));
+        CarList.addCarWithoutPrintingInfo(new Car("1" , "SJX1234D" , 0.01));
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("TX1" , "SJX1234D",
+                "John", 5, LocalDate.of(2024, 11, 8), false));
+        TransactionList.addTxWithoutPrintingInfo(new Transaction("TX2" , "SJA9173C",
+                "Jane", 3, LocalDate.of(2024, 10, 10), true));
 
         try {
             transactionFile.updateTransactionDataFile();
@@ -159,8 +161,10 @@ class TransactionFileTest {
         try {
             FileWriter fw = new FileWriter(testFile);
             String textToAdd = "TX1 | SJX1234D | John | 5 | 08-11-2024 | false\n";
-            textToAdd += "TX2 | SJE8720G | Jane | 3 | 10-10-2024 | true\n";
+            textToAdd += "TX2 | SJE8720G | Jane | 3 | 10-10-2024 | false\n";
+            textToAdd += "TX3 | SJA9173C | Jane | 3 | 10-10-2024 | true\n";
             textToAdd += "TX3 | SJA9173C | Alice | 7 | 15-09-2024 | false\n";
+            textToAdd += "TX3 | SJA91C | Alice | 7 | 15-09-2024 | false\n";
             textToAdd += "TX3 | SJK9173C | Alice | 7 | 15-09-2024 | false\n";
             textToAdd += "TX3 | SJA9173C | Ale | 7 | 15-09-2024 | false\n";
             textToAdd += "TX1 | SGM4932K | John | 30 | 10-10-2024 | false\n";
@@ -203,7 +207,7 @@ class TransactionFileTest {
         assertEquals("Jane", transaction2.getCustomer());
         assertEquals(3, transaction2.getDuration());
         assertEquals(LocalDate.of(2024, 10, 10), transaction2.getStartDate());
-        assertTrue(transaction2.isCompleted());
+        assertTrue(!transaction2.isCompleted());
 
         Transaction transaction3 = TransactionList.getTransactionList().get(2);
         assertEquals("TX3" , transaction3.getTransactionId());

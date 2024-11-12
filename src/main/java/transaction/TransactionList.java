@@ -89,6 +89,14 @@ public class TransactionList {
             throw CustomerException.customerAlreadyInTransactionList();
         }
 
+        if (!CarParser.isValidLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.invalidLicensePlateNumber();
+        }
+
+        if (!CarList.isExistingLicensePlateNumber(licensePlateNumber)) {
+            throw CarException.licensePlateNumberNotFound();
+        }
+
         String newTransactionId = "TX" + txCounter++;
         transaction.setTransactionId(newTransactionId);
 
