@@ -23,9 +23,12 @@ public class Customer {
             throw CustomerException.invalidCustomerNameException(customerName);
         }
         // Validate age
-        if (age <= 17) {
+        if(age <= 17){
             throw CustomerException.invalidAgeException();
+        }else if(age > 100){
+            throw CustomerException.invalidMaxAgeException();
         }
+
         // Validate contact number format
         if (isInvalidContactNumber(contactNumber)) {
             throw CustomerException.invalidContactNumberException();
@@ -56,9 +59,12 @@ public class Customer {
     }
 
     public void setAge(int age) {
-        if (age <= 17) {
+        if(age <= 17){
             throw CustomerException.invalidAgeException();
+        }else if(age > 100){
+            throw CustomerException.invalidMaxAgeException();
         }
+
         this.age = age;
     }
 
