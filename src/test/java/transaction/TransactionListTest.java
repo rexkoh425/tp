@@ -368,7 +368,7 @@ class TransactionListTest {
         TransactionList.findTxsByCustomer("Alice Johnson");
 
         String expectedOutput = "Transaction(s) by Alice Johnson found:" + System.lineSeparator() +
-                "None" + System.lineSeparator();
+                "User Alice Johnson was not found" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString(), "Should indicate that no transactions was found");
     }
 
