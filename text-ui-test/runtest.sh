@@ -10,6 +10,9 @@ if [ ! -d "data" ]; then
     touch data/transactionData.txt
     echo "data directory and files created successfully."
 fi
+> data/carData.txt
+> data/customerData.txt
+> data/transactionData.txt
 
 cd ..
 ./gradlew clean shadowJar
