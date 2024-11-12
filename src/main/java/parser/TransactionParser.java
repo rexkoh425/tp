@@ -19,7 +19,8 @@ public class TransactionParser {
 
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public static final String ADD_TRANSACTION_FORMAT = "add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] /d [DURATION] /s [START_DATE dd-MM-yyyy]";
+    public static final String ADD_TRANSACTION_FORMAT = "add-tx /c [LICENSE_PLATE_NUMBER] /u [CUSTOMER_NAME] " +
+            "/d [DURATION] /s [START_DATE dd-MM-yyyy]";
     public static final String FIND_TRANSACTION_BY_CUSTOMER_FORMAT = "find-txs-by-customer /u [CUSTOMER_NAME]";
     public static final String REMOVE_TRANSACTION_FORMAT = "remove-tx /t [TRANSACTION_ID]";
     public static final String MARK_TRANSACTION_FORMAT = "mark-tx /t [TRANSACTION_ID]";
@@ -44,7 +45,8 @@ public class TransactionParser {
         String[] parameterContents;
 
         if (!isValidSequence(parameters, userInput)) {
-            throw new IllegalArgumentException("Invalid command format for adding a transaction. Refer to the format: " + ADD_TRANSACTION_FORMAT);
+            throw new IllegalArgumentException("Invalid command format for adding a transaction. Refer to the format: "
+                    + ADD_TRANSACTION_FORMAT);
         }
 
         parameterContents = parseParameterContents(parameters, userInput);
@@ -140,7 +142,8 @@ public class TransactionParser {
     public static void parseFindTxsByCustomer(String userInput) {
         String[] words = userInput.split(" ", 3);
         if (words.length < 3 || !words[1].equals(CUSTOMER_NAME_PARAM)) {
-            System.out.println("Unable to search for transaction. Refer to correct format: " + FIND_TRANSACTION_BY_CUSTOMER_FORMAT);
+            System.out.println("Unable to search for transaction. Refer to correct format: "
+                    + FIND_TRANSACTION_BY_CUSTOMER_FORMAT);
             return;
         }
         TransactionList.findTxsByCustomer(words[2]);
