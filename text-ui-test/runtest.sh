@@ -2,9 +2,9 @@
 
 # change to script directory
 cd "${0%/*}"
-> carData.txt
-> customerData.txt
-> transactionData.txt
+> data/carData.txt
+> data/customerData.txt
+> data/transactionData.txt
 
 cd ..
 ./gradlew clean shadowJar
