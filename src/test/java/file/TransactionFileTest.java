@@ -40,7 +40,9 @@ class TransactionFileTest {
         }
     }
 
-    private void validateTransaction(Transaction transaction, String expectedId, String expectedCarPlate, String expectedCustomer, int expectedDuration, LocalDate expectedStartDate, boolean expectedCompletionStatus) {
+    private void validateTransaction(Transaction transaction, String expectedId, String expectedCarPlate
+            , String expectedCustomer, int expectedDuration, LocalDate expectedStartDate
+            , boolean expectedCompletionStatus) {
         assertEquals(expectedId, transaction.getTransactionId());
         assertEquals(expectedCarPlate, transaction.getCarLicensePlate());
         assertEquals(expectedCustomer, transaction.getCustomer());
@@ -121,8 +123,8 @@ class TransactionFileTest {
         }
 
         String[] expectedLines = {
-                "TX1 | SJX1234D | John | 5 | 08-11-2024 | false",
-                "TX2 | SJA9173C | Jane | 3 | 10-10-2024 | true"
+            "TX1 | SJX1234D | John | 5 | 08-11-2024 | false",
+            "TX2 | SJA9173C | Jane | 3 | 10-10-2024 | true"
         };
 
         try (Scanner scanner = new Scanner(testFile)) {

@@ -83,8 +83,8 @@ class CustomerFileTest {
         }
 
         String[] expectedLines = {
-                "John Doe | 30 | 83456789",
-                "Jane Smith | 25 | 87654321"
+            "John Doe | 30 | 83456789",
+            "Jane Smith | 25 | 87654321"
         };
 
         try (Scanner scanner = new Scanner(testFile)) {
